@@ -13,7 +13,7 @@
     NSManagedObjectContext *managedObjectContext;	    
     NSPersistentStoreCoordinator *persistentStoreCoordinator;
     MainMenuViewController * mainMenu;
-
+    
     UIWindow *window;
 }
 

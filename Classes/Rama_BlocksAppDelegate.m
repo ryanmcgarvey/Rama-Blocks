@@ -21,6 +21,7 @@
     
     // Override point for customization after app launch    
     mainMenu = [[MainMenuViewController alloc] initWithNibName:@"MainMenuViewController" bundle:nil];
+    [[UIApplication sharedApplication] setStatusBarHidden:YES animated:NO];
     [window addSubview:mainMenu.view];
 	[window makeKeyAndVisible];
 }

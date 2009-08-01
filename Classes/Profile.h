@@ -14,7 +14,6 @@
 @interface Profile : UIViewController <UIPickerViewDataSource, UIPickerViewDelegate>{
 	IBOutlet UIPickerView		*profilePicker;
 	NSMutableArray				*profiles;
-	
 }
 
 @property(readwrite, assign) IBOutlet UIPickerView		*profilePicker;

@@ -15,8 +15,12 @@
 @public;
 	ShapeType  shapeType;
 	ColorType  colorType;
-
 }
+
+@property ShapeType shapeType;
+@property ColorType colorType;
+
+
 - (id)initWithInfo:(CGRect)frame : (ColorType)cType : (ShapeType) sType;
 - (BOOL)ChangeColorAndShape: (ColorType)cType : (ShapeType) sType;
 - (BOOL)TransForm;

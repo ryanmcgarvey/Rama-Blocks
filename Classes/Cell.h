@@ -21,6 +21,11 @@
     
     BOOL IsTransforming;
 }
+@property (readwrite, retain) GameItem * ItemInCell;
+@property int Row;
+@property int Column;
+@property CGPoint Center;
+@property BOOL IsTransforming;
 
 - (id)initWithData : (CGPoint)center : (int) row: (int) column;
 

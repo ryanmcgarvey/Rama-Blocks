@@ -16,6 +16,11 @@
 	GameItem * ItemB;
 	int Orientation;
 }
+
+@property (readwrite, retain) GameItem * ItemA;
+@property (readwrite, retain) GameItem * ItemB;
+@property int Orientation;
+
 - (void)rotate:(CGPoint)location :(GameItem *)touched;
 - (void)moveShape:(CGPoint)location:(GameItem *)touched;
 - (BOOL)checkBounds;

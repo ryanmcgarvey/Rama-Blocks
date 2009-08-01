@@ -18,5 +18,11 @@
 	int Column;
 }
 
+@property (readwrite, assign) UIImageView * ItemView;
+@property int tapped;
+@property BOOL IsPaired;
+@property int Row;
+@property int Column;
+
 -(void)SnapShape:(int)newRow : (int)newColumn;
 @end

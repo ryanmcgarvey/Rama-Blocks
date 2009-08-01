@@ -10,13 +10,12 @@
 
 
 @implementation ItemPair
+@synthesize ItemA, ItemB, Orientation;
 
 - (void)rotate:(CGPoint)location :(GameItem *)touched{
     Orientation = ++Orientation % 4;
 	[self moveShape:location :touched];
 }
-
-
 
 - (void)moveShape:(CGPoint)location:(GameItem *)touched{
     GameItem* moving;

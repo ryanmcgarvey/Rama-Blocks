@@ -10,18 +10,17 @@
 
 
 @implementation Cell
-
+@synthesize ItemInCell, Row, Column, Center, IsTransforming;
 
 - (id)initWithData :(CGPoint)center : (int) row: (int) column{
-	if ((self = [super init])) {	
+	if ((self = [super init])) 
+    {	
 		ItemInCell = nil;
 		Row = row;
 		Column = column;
 		Center = center;
         IsTransforming = FALSE;
 	}
-	
 	return self;
 }
-
 @end

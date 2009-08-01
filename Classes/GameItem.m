@@ -10,7 +10,7 @@
 
 
 @implementation GameItem
-
+@synthesize ItemView, tapped, IsPaired, Row, Column;
 
 - (id)initWithFrame:(CGRect)frame {
     if (self = [super initWithFrame:frame]) {

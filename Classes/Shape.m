@@ -11,9 +11,9 @@
 
 @implementation Shape
 
+@synthesize shapeType, colorType;
 
-- (id)initWithInfo:(CGRect)frame : (ColorType)cType : (ShapeType) sType{
-    
+- (id)initWithInfo:(CGRect)frame : (ColorType)cType : (ShapeType) sType{    
     if (self = [super initWithFrame:frame]) 
     {
         ItemView = [[UIImageView alloc] initWithFrame:CGRectMake(0.0f, 0.0f, SHAPE_WIDTH, SHAPE_WIDTH)];
@@ -30,7 +30,6 @@
 	self.backgroundColor = [UIColor clearColor];
 	return TRUE;
 }
-
 
 -(BOOL)TransForm{
 	shapeType = shapeType ++ % NUMBER_OF_SHAPES;

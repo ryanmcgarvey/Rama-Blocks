@@ -29,15 +29,14 @@ GameBoard Behavior
     SpawnedPair->ItemA = [[Shape alloc] initWithInfo:CGRectMake(SPAWN_LOCATION_X, SPAWN_LOCATION_Y, 30.0f, 30.0f)  : (uint)arc4random() % NUMBER_OF_COLORS :(uint)arc4random() % NUMBER_OF_SHAPES];
     [ self.view addSubview:SpawnedPair->ItemA];
     
-    
     [SpawnedPair->ItemB release];
     SpawnedPair->ItemB = [[Shape alloc] initWithInfo:CGRectMake((SPAWN_LOCATION_X + SHAPE_WIDTH), SPAWN_LOCATION_Y, 30.0f, 30.0f)  : (uint)arc4random() % NUMBER_OF_COLORS :(uint)arc4random() % NUMBER_OF_SHAPES];
-    [ self.view addSubview:SpawnedPair->ItemB];		
-	
+    [ self.view addSubview:SpawnedPair->ItemB];
 }
 
 
-- (void)resetTap:(NSTimer *)tapTimer {
+- (void)resetTap:(NSTimer *)tapTimer 
+{
 	GameItem *tappedShape = (GameItem *)[tapTimer userInfo];
 	tappedShape->tapped = 0;
 }
@@ -72,12 +71,8 @@ UIController Delegates
     
 	//[ view addObject:flip]; 
     [self didRotate:nil];
-	
 	[self SpawnShapes];
     [super viewDidLoad];
-
-	
-	
 }
 
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
@@ -86,16 +81,14 @@ UIController Delegates
 	if([[touch view] isKindOfClass: [GameItem class]])
 	{
 		GameItem * touchedItem = (GameItem *)[touch view];
-		if(touchedItem->IsPaired)
+		if(touchedItem.IsPaired)
 		{
 			[TouchTimer invalidate];
-			touchedItem->tapped++;
+			touchedItem.tapped++;
 			TouchTimer = [[NSTimer scheduledTimerWithTimeInterval:TAP_WAIT_TIME target:self selector:@selector(resetTap:) userInfo:touchedItem repeats:NO] retain];
-		}
-		else{
+		}else{
 			[itemCollection TransformItem:touchedItem];
 		}
-			
 	}
 }
 
@@ -108,24 +101,22 @@ UIController Delegates
 		
 		if(item->IsPaired)
 		{
-			if (item->tapped == 1) {
-				item->tapped = 0;
+			if (item.tapped == 1) 
+            {
+				item.tapped = 0;
 				[SpawnedPair rotate:[touch locationInView: self.view] : item];
 			}
-			if(item.center.y > GRID_Y){
-				
-				if([itemCollection AddItemPair:SpawnedPair]){
+			if(item.center.y > GRID_Y)
+            {
+				if([itemCollection AddItemPair:SpawnedPair])
+                {
 					[self SpawnShapes];
 				}else{
 					[self ResetShapePair:SpawnedPair];
 				}
 			}
 		}
-		
-
 	}
-
-
 }
 
 - (void)touchesMoved:(NSSet *)touches withEvent:(UIEvent *)event {
@@ -133,9 +124,10 @@ UIController Delegates
 	if([[touch view] isKindOfClass: [GameItem class]])
 	{
 		GameItem * item = (GameItem *)[touch view];
-		
 		if(item->IsPaired)
+        {
 			[SpawnedPair moveShape:[touch locationInView: self.view] :item];
+        }
 	}
 }
 
