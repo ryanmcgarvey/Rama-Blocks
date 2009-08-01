@@ -1,0 +1,553 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 45;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		1D3623260D0F684500981E51 /* Rama_BlocksAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D3623250D0F684500981E51 /* Rama_BlocksAppDelegate.m */; };
+		1D60589B0D05DD56006BFB54 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 29B97316FDCFA39411CA2CEA /* main.m */; };
+		1D60589F0D05DD5A006BFB54 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1D30AB110D05D00D00671497 /* Foundation.framework */; };
+		1DF5F4E00D08C38300B7A737 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1DF5F4DF0D08C38300B7A737 /* UIKit.framework */; };
+		288765A50DF7441C002DB57D /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 288765A40DF7441C002DB57D /* CoreGraphics.framework */; };
+		28AD733F0D9D9553002E5188 /* MainWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 28AD733E0D9D9553002E5188 /* MainWindow.xib */; };
+		28C3AD8A0F43EF2300507BA6 /* Rama_Blocks.xcdatamodel in Sources */ = {isa = PBXBuildFile; fileRef = 28C3AD890F43EF2300507BA6 /* Rama_Blocks.xcdatamodel */; };
+		28D801B40F44B63D00FB423F /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 28D801B30F44B63D00FB423F /* CoreData.framework */; };
+		FCEF155A102118A800A71C1C /* GameItem.m in Sources */ = {isa = PBXBuildFile; fileRef = FCEF1559102118A800A71C1C /* GameItem.m */; };
+		FCEF155D102118F200A71C1C /* Shape.m in Sources */ = {isa = PBXBuildFile; fileRef = FCEF155C102118F200A71C1C /* Shape.m */; };
+		FCEF15601021195F00A71C1C /* PowerItem.m in Sources */ = {isa = PBXBuildFile; fileRef = FCEF155F1021195F00A71C1C /* PowerItem.m */; };
+		FCEF156C102128AF00A71C1C /* ItemPair.m in Sources */ = {isa = PBXBuildFile; fileRef = FCEF156B102128AF00A71C1C /* ItemPair.m */; };
+		FCEF15711021291300A71C1C /* UIImage+Shapes.m in Sources */ = {isa = PBXBuildFile; fileRef = FCEF156F1021291300A71C1C /* UIImage+Shapes.m */; };
+		FCEF157F10212AB300A71C1C /* Cell.m in Sources */ = {isa = PBXBuildFile; fileRef = FCEF157E10212AB300A71C1C /* Cell.m */; };
+		FCEF16E810214EE100A71C1C /* GameBoardViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = FCEF16E110214EE100A71C1C /* GameBoardViewController.xib */; };
+		FCEF16E910214EE100A71C1C /* Profile.xib in Resources */ = {isa = PBXBuildFile; fileRef = FCEF16E210214EE100A71C1C /* Profile.xib */; };
+		FCEF16EA10214EE100A71C1C /* AddProfile.xib in Resources */ = {isa = PBXBuildFile; fileRef = FCEF16E310214EE100A71C1C /* AddProfile.xib */; };
+		FCEF16EB10214EE100A71C1C /* Tutorial.xib in Resources */ = {isa = PBXBuildFile; fileRef = FCEF16E410214EE100A71C1C /* Tutorial.xib */; };
+		FCEF16EC10214EE100A71C1C /* Purchase.xib in Resources */ = {isa = PBXBuildFile; fileRef = FCEF16E510214EE100A71C1C /* Purchase.xib */; };
+		FCEF16ED10214EE100A71C1C /* Options.xib in Resources */ = {isa = PBXBuildFile; fileRef = FCEF16E610214EE100A71C1C /* Options.xib */; };
+		FCEF16EE10214EE100A71C1C /* MainMenuViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = FCEF16E710214EE100A71C1C /* MainMenuViewController.xib */; };
+		FCEF16FF10214F0400A71C1C /* Profile.m in Sources */ = {isa = PBXBuildFile; fileRef = FCEF16F010214F0400A71C1C /* Profile.m */; };
+		FCEF170010214F0400A71C1C /* AddProfile.m in Sources */ = {isa = PBXBuildFile; fileRef = FCEF16F210214F0400A71C1C /* AddProfile.m */; };
+		FCEF170110214F0400A71C1C /* Purchase.m in Sources */ = {isa = PBXBuildFile; fileRef = FCEF16F410214F0400A71C1C /* Purchase.m */; };
+		FCEF170210214F0400A71C1C /* Tutorial.m in Sources */ = {isa = PBXBuildFile; fileRef = FCEF16F610214F0400A71C1C /* Tutorial.m */; };
+		FCEF170310214F0400A71C1C /* Options.m in Sources */ = {isa = PBXBuildFile; fileRef = FCEF16F810214F0400A71C1C /* Options.m */; };
+		FCEF170410214F0400A71C1C /* MainMenuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FCEF16FA10214F0400A71C1C /* MainMenuViewController.m */; };
+		FCEF170510214F0400A71C1C /* GameBoardViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FCEF16FC10214F0400A71C1C /* GameBoardViewController.m */; };
+		FCEF176610215A7400A71C1C /* ItemCollection.m in Sources */ = {isa = PBXBuildFile; fileRef = FCEF157410212A8800A71C1C /* ItemCollection.m */; };
+		FCEF17EF1021648300A71C1C /* BackGround.png in Resources */ = {isa = PBXBuildFile; fileRef = FCEF17D51021648300A71C1C /* BackGround.png */; };
+		FCEF17F01021648300A71C1C /* bluecircle.png in Resources */ = {isa = PBXBuildFile; fileRef = FCEF17D61021648300A71C1C /* bluecircle.png */; };
+		FCEF17F11021648300A71C1C /* bluehexagon.png in Resources */ = {isa = PBXBuildFile; fileRef = FCEF17D71021648300A71C1C /* bluehexagon.png */; };
+		FCEF17F21021648300A71C1C /* bluepentagon.png in Resources */ = {isa = PBXBuildFile; fileRef = FCEF17D81021648300A71C1C /* bluepentagon.png */; };
+		FCEF17F31021648300A71C1C /* bluesquare.png in Resources */ = {isa = PBXBuildFile; fileRef = FCEF17D91021648300A71C1C /* bluesquare.png */; };
+		FCEF17F41021648300A71C1C /* bluetriangle.png in Resources */ = {isa = PBXBuildFile; fileRef = FCEF17DA1021648300A71C1C /* bluetriangle.png */; };
+		FCEF17F51021648300A71C1C /* greencircle.png in Resources */ = {isa = PBXBuildFile; fileRef = FCEF17DB1021648300A71C1C /* greencircle.png */; };
+		FCEF17F61021648300A71C1C /* greenhexagon.png in Resources */ = {isa = PBXBuildFile; fileRef = FCEF17DC1021648300A71C1C /* greenhexagon.png */; };
+		FCEF17F71021648300A71C1C /* greenpentagon.png in Resources */ = {isa = PBXBuildFile; fileRef = FCEF17DD1021648300A71C1C /* greenpentagon.png */; };
+		FCEF17F81021648300A71C1C /* greensquare.png in Resources */ = {isa = PBXBuildFile; fileRef = FCEF17DE1021648300A71C1C /* greensquare.png */; };
+		FCEF17F91021648300A71C1C /* greentriangle.png in Resources */ = {isa = PBXBuildFile; fileRef = FCEF17DF1021648300A71C1C /* greentriangle.png */; };
+		FCEF17FA1021648300A71C1C /* orangecircle.png in Resources */ = {isa = PBXBuildFile; fileRef = FCEF17E01021648300A71C1C /* orangecircle.png */; };
+		FCEF17FB1021648300A71C1C /* orangehexagon.png in Resources */ = {isa = PBXBuildFile; fileRef = FCEF17E11021648300A71C1C /* orangehexagon.png */; };
+		FCEF17FC1021648300A71C1C /* orangepentagon.png in Resources */ = {isa = PBXBuildFile; fileRef = FCEF17E21021648300A71C1C /* orangepentagon.png */; };
+		FCEF17FD1021648300A71C1C /* orangesquare.png in Resources */ = {isa = PBXBuildFile; fileRef = FCEF17E31021648300A71C1C /* orangesquare.png */; };
+		FCEF17FE1021648300A71C1C /* orangetriangle.png in Resources */ = {isa = PBXBuildFile; fileRef = FCEF17E41021648300A71C1C /* orangetriangle.png */; };
+		FCEF17FF1021648300A71C1C /* redcircle.png in Resources */ = {isa = PBXBuildFile; fileRef = FCEF17E51021648300A71C1C /* redcircle.png */; };
+		FCEF18001021648300A71C1C /* redhexagon.png in Resources */ = {isa = PBXBuildFile; fileRef = FCEF17E61021648300A71C1C /* redhexagon.png */; };
+		FCEF18011021648300A71C1C /* redpentagon.png in Resources */ = {isa = PBXBuildFile; fileRef = FCEF17E71021648300A71C1C /* redpentagon.png */; };
+		FCEF18021021648300A71C1C /* redsquare.png in Resources */ = {isa = PBXBuildFile; fileRef = FCEF17E81021648300A71C1C /* redsquare.png */; };
+		FCEF18031021648300A71C1C /* redtriangle.png in Resources */ = {isa = PBXBuildFile; fileRef = FCEF17E91021648300A71C1C /* redtriangle.png */; };
+		FCEF18041021648300A71C1C /* yellowcircle.png in Resources */ = {isa = PBXBuildFile; fileRef = FCEF17EA1021648300A71C1C /* yellowcircle.png */; };
+		FCEF18051021648300A71C1C /* yellowhexagon.png in Resources */ = {isa = PBXBuildFile; fileRef = FCEF17EB1021648300A71C1C /* yellowhexagon.png */; };
+		FCEF18061021648300A71C1C /* yellowpentagon.png in Resources */ = {isa = PBXBuildFile; fileRef = FCEF17EC1021648300A71C1C /* yellowpentagon.png */; };
+		FCEF18071021648300A71C1C /* yellowsquare.png in Resources */ = {isa = PBXBuildFile; fileRef = FCEF17ED1021648300A71C1C /* yellowsquare.png */; };
+		FCEF18081021648300A71C1C /* yellowtriangle.png in Resources */ = {isa = PBXBuildFile; fileRef = FCEF17EE1021648300A71C1C /* yellowtriangle.png */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		1D30AB110D05D00D00671497 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		1D3623240D0F684500981E51 /* Rama_BlocksAppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Rama_BlocksAppDelegate.h; sourceTree = "<group>"; };
+		1D3623250D0F684500981E51 /* Rama_BlocksAppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Rama_BlocksAppDelegate.m; sourceTree = "<group>"; };
+		1D6058910D05DD3D006BFB54 /* Rama Blocks.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Rama Blocks.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		1DF5F4DF0D08C38300B7A737 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		288765A40DF7441C002DB57D /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		28AD733E0D9D9553002E5188 /* MainWindow.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MainWindow.xib; sourceTree = "<group>"; };
+		28C3AD890F43EF2300507BA6 /* Rama_Blocks.xcdatamodel */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = wrapper.xcdatamodel; path = Rama_Blocks.xcdatamodel; sourceTree = "<group>"; };
+		28D801B30F44B63D00FB423F /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
+		29B97316FDCFA39411CA2CEA /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		32CA4F630368D1EE00C91783 /* Rama_Blocks_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Rama_Blocks_Prefix.pch; sourceTree = "<group>"; };
+		8D1107310486CEB800E47090 /* Rama_Blocks-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "Rama_Blocks-Info.plist"; sourceTree = "<group>"; };
+		FCEF1558102118A800A71C1C /* GameItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GameItem.h; sourceTree = "<group>"; };
+		FCEF1559102118A800A71C1C /* GameItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GameItem.m; sourceTree = "<group>"; };
+		FCEF155B102118F200A71C1C /* Shape.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Shape.h; sourceTree = "<group>"; };
+		FCEF155C102118F200A71C1C /* Shape.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Shape.m; sourceTree = "<group>"; };
+		FCEF155E1021195F00A71C1C /* PowerItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PowerItem.h; sourceTree = "<group>"; };
+		FCEF155F1021195F00A71C1C /* PowerItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PowerItem.m; sourceTree = "<group>"; };
+		FCEF156A102128AF00A71C1C /* ItemPair.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ItemPair.h; sourceTree = "<group>"; };
+		FCEF156B102128AF00A71C1C /* ItemPair.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ItemPair.m; sourceTree = "<group>"; };
+		FCEF156E1021291300A71C1C /* UIImage+Shapes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIImage+Shapes.h"; path = "../../../Downloads/Rama-Blocks-5/UIImage+Shapes.h"; sourceTree = SOURCE_ROOT; };
+		FCEF156F1021291300A71C1C /* UIImage+Shapes.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIImage+Shapes.m"; path = "../../../Downloads/Rama-Blocks-5/UIImage+Shapes.m"; sourceTree = SOURCE_ROOT; };
+		FCEF15701021291300A71C1C /* GlobalDefines.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GlobalDefines.h; path = "../../../Downloads/Rama-Blocks-5/GlobalDefines.h"; sourceTree = SOURCE_ROOT; };
+		FCEF157310212A8800A71C1C /* ItemCollection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ItemCollection.h; sourceTree = "<group>"; };
+		FCEF157410212A8800A71C1C /* ItemCollection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ItemCollection.m; sourceTree = "<group>"; };
+		FCEF157D10212AB300A71C1C /* Cell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Cell.h; sourceTree = "<group>"; };
+		FCEF157E10212AB300A71C1C /* Cell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Cell.m; sourceTree = "<group>"; };
+		FCEF16E110214EE100A71C1C /* GameBoardViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = GameBoardViewController.xib; path = Classes/GameBoardViewController.xib; sourceTree = "<group>"; };
+		FCEF16E210214EE100A71C1C /* Profile.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Profile.xib; path = Classes/Profile.xib; sourceTree = "<group>"; };
+		FCEF16E310214EE100A71C1C /* AddProfile.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = AddProfile.xib; path = Classes/AddProfile.xib; sourceTree = "<group>"; };
+		FCEF16E410214EE100A71C1C /* Tutorial.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Tutorial.xib; path = Classes/Tutorial.xib; sourceTree = "<group>"; };
+		FCEF16E510214EE100A71C1C /* Purchase.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Purchase.xib; path = Classes/Purchase.xib; sourceTree = "<group>"; };
+		FCEF16E610214EE100A71C1C /* Options.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Options.xib; path = Classes/Options.xib; sourceTree = "<group>"; };
+		FCEF16E710214EE100A71C1C /* MainMenuViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = MainMenuViewController.xib; path = Classes/MainMenuViewController.xib; sourceTree = "<group>"; };
+		FCEF16EF10214F0400A71C1C /* Profile.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Profile.h; sourceTree = "<group>"; };
+		FCEF16F010214F0400A71C1C /* Profile.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Profile.m; sourceTree = "<group>"; };
+		FCEF16F110214F0400A71C1C /* AddProfile.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddProfile.h; sourceTree = "<group>"; };
+		FCEF16F210214F0400A71C1C /* AddProfile.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddProfile.m; sourceTree = "<group>"; };
+		FCEF16F310214F0400A71C1C /* Purchase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Purchase.h; sourceTree = "<group>"; };
+		FCEF16F410214F0400A71C1C /* Purchase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Purchase.m; sourceTree = "<group>"; };
+		FCEF16F510214F0400A71C1C /* Tutorial.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Tutorial.h; sourceTree = "<group>"; };
+		FCEF16F610214F0400A71C1C /* Tutorial.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Tutorial.m; sourceTree = "<group>"; };
+		FCEF16F710214F0400A71C1C /* Options.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Options.h; sourceTree = "<group>"; };
+		FCEF16F810214F0400A71C1C /* Options.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Options.m; sourceTree = "<group>"; };
+		FCEF16F910214F0400A71C1C /* MainMenuViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainMenuViewController.h; sourceTree = "<group>"; };
+		FCEF16FA10214F0400A71C1C /* MainMenuViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainMenuViewController.m; sourceTree = "<group>"; };
+		FCEF16FB10214F0400A71C1C /* GameBoardViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GameBoardViewController.h; sourceTree = "<group>"; };
+		FCEF16FC10214F0400A71C1C /* GameBoardViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GameBoardViewController.m; sourceTree = "<group>"; };
+		FCEF17D51021648300A71C1C /* BackGround.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = BackGround.png; path = "../../../Downloads/Rama-Blocks-5/BackGround.png"; sourceTree = SOURCE_ROOT; };
+		FCEF17D61021648300A71C1C /* bluecircle.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = bluecircle.png; path = "../../../Downloads/Rama-Blocks-5/bluecircle.png"; sourceTree = SOURCE_ROOT; };
+		FCEF17D71021648300A71C1C /* bluehexagon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = bluehexagon.png; path = "../../../Downloads/Rama-Blocks-5/bluehexagon.png"; sourceTree = SOURCE_ROOT; };
+		FCEF17D81021648300A71C1C /* bluepentagon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = bluepentagon.png; path = "../../../Downloads/Rama-Blocks-5/bluepentagon.png"; sourceTree = SOURCE_ROOT; };
+		FCEF17D91021648300A71C1C /* bluesquare.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = bluesquare.png; path = "../../../Downloads/Rama-Blocks-5/bluesquare.png"; sourceTree = SOURCE_ROOT; };
+		FCEF17DA1021648300A71C1C /* bluetriangle.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = bluetriangle.png; path = "../../../Downloads/Rama-Blocks-5/bluetriangle.png"; sourceTree = SOURCE_ROOT; };
+		FCEF17DB1021648300A71C1C /* greencircle.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = greencircle.png; path = "../../../Downloads/Rama-Blocks-5/greencircle.png"; sourceTree = SOURCE_ROOT; };
+		FCEF17DC1021648300A71C1C /* greenhexagon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = greenhexagon.png; path = "../../../Downloads/Rama-Blocks-5/greenhexagon.png"; sourceTree = SOURCE_ROOT; };
+		FCEF17DD1021648300A71C1C /* greenpentagon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = greenpentagon.png; path = "../../../Downloads/Rama-Blocks-5/greenpentagon.png"; sourceTree = SOURCE_ROOT; };
+		FCEF17DE1021648300A71C1C /* greensquare.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = greensquare.png; path = "../../../Downloads/Rama-Blocks-5/greensquare.png"; sourceTree = SOURCE_ROOT; };
+		FCEF17DF1021648300A71C1C /* greentriangle.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = greentriangle.png; path = "../../../Downloads/Rama-Blocks-5/greentriangle.png"; sourceTree = SOURCE_ROOT; };
+		FCEF17E01021648300A71C1C /* orangecircle.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = orangecircle.png; path = "../../../Downloads/Rama-Blocks-5/orangecircle.png"; sourceTree = SOURCE_ROOT; };
+		FCEF17E11021648300A71C1C /* orangehexagon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = orangehexagon.png; path = "../../../Downloads/Rama-Blocks-5/orangehexagon.png"; sourceTree = SOURCE_ROOT; };
+		FCEF17E21021648300A71C1C /* orangepentagon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = orangepentagon.png; path = "../../../Downloads/Rama-Blocks-5/orangepentagon.png"; sourceTree = SOURCE_ROOT; };
+		FCEF17E31021648300A71C1C /* orangesquare.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = orangesquare.png; path = "../../../Downloads/Rama-Blocks-5/orangesquare.png"; sourceTree = SOURCE_ROOT; };
+		FCEF17E41021648300A71C1C /* orangetriangle.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = orangetriangle.png; path = "../../../Downloads/Rama-Blocks-5/orangetriangle.png"; sourceTree = SOURCE_ROOT; };
+		FCEF17E51021648300A71C1C /* redcircle.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = redcircle.png; path = "../../../Downloads/Rama-Blocks-5/redcircle.png"; sourceTree = SOURCE_ROOT; };
+		FCEF17E61021648300A71C1C /* redhexagon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = redhexagon.png; path = "../../../Downloads/Rama-Blocks-5/redhexagon.png"; sourceTree = SOURCE_ROOT; };
+		FCEF17E71021648300A71C1C /* redpentagon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = redpentagon.png; path = "../../../Downloads/Rama-Blocks-5/redpentagon.png"; sourceTree = SOURCE_ROOT; };
+		FCEF17E81021648300A71C1C /* redsquare.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = redsquare.png; path = "../../../Downloads/Rama-Blocks-5/redsquare.png"; sourceTree = SOURCE_ROOT; };
+		FCEF17E91021648300A71C1C /* redtriangle.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = redtriangle.png; path = "../../../Downloads/Rama-Blocks-5/redtriangle.png"; sourceTree = SOURCE_ROOT; };
+		FCEF17EA1021648300A71C1C /* yellowcircle.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = yellowcircle.png; path = "../../../Downloads/Rama-Blocks-5/yellowcircle.png"; sourceTree = SOURCE_ROOT; };
+		FCEF17EB1021648300A71C1C /* yellowhexagon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = yellowhexagon.png; path = "../../../Downloads/Rama-Blocks-5/yellowhexagon.png"; sourceTree = SOURCE_ROOT; };
+		FCEF17EC1021648300A71C1C /* yellowpentagon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = yellowpentagon.png; path = "../../../Downloads/Rama-Blocks-5/yellowpentagon.png"; sourceTree = SOURCE_ROOT; };
+		FCEF17ED1021648300A71C1C /* yellowsquare.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = yellowsquare.png; path = "../../../Downloads/Rama-Blocks-5/yellowsquare.png"; sourceTree = SOURCE_ROOT; };
+		FCEF17EE1021648300A71C1C /* yellowtriangle.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = yellowtriangle.png; path = "../../../Downloads/Rama-Blocks-5/yellowtriangle.png"; sourceTree = SOURCE_ROOT; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		1D60588F0D05DD3D006BFB54 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				1D60589F0D05DD5A006BFB54 /* Foundation.framework in Frameworks */,
+				1DF5F4E00D08C38300B7A737 /* UIKit.framework in Frameworks */,
+				288765A50DF7441C002DB57D /* CoreGraphics.framework in Frameworks */,
+				28D801B40F44B63D00FB423F /* CoreData.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		080E96DDFE201D6D7F000001 /* Classes */ = {
+			isa = PBXGroup;
+			children = (
+				FCEF156810211DDF00A71C1C /* Delegates */,
+				FCEF1572102129E800A71C1C /* Frameworks */,
+				FCEF156D102128C700A71C1C /* Helpers */,
+				FCEF1556102117BC00A71C1C /* Controllers */,
+				FCEF1555102117B200A71C1C /* Models */,
+			);
+			path = Classes;
+			sourceTree = "<group>";
+		};
+		19C28FACFE9D520D11CA2CBB /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				1D6058910D05DD3D006BFB54 /* Rama Blocks.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		29B97314FDCFA39411CA2CEA /* CustomTemplate */ = {
+			isa = PBXGroup;
+			children = (
+				080E96DDFE201D6D7F000001 /* Classes */,
+				29B97317FDCFA39411CA2CEA /* Resources */,
+				29B97315FDCFA39411CA2CEA /* Other Sources */,
+				29B97323FDCFA39411CA2CEA /* Frameworks */,
+				19C28FACFE9D520D11CA2CBB /* Products */,
+			);
+			name = CustomTemplate;
+			sourceTree = "<group>";
+		};
+		29B97315FDCFA39411CA2CEA /* Other Sources */ = {
+			isa = PBXGroup;
+			children = (
+				32CA4F630368D1EE00C91783 /* Rama_Blocks_Prefix.pch */,
+				29B97316FDCFA39411CA2CEA /* main.m */,
+			);
+			name = "Other Sources";
+			sourceTree = "<group>";
+		};
+		29B97317FDCFA39411CA2CEA /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				FCEF17D41021645900A71C1C /* Nibs */,
+				FCEF17D31021644E00A71C1C /* Images */,
+				28C3AD890F43EF2300507BA6 /* Rama_Blocks.xcdatamodel */,
+				8D1107310486CEB800E47090 /* Rama_Blocks-Info.plist */,
+			);
+			name = Resources;
+			sourceTree = "<group>";
+		};
+		29B97323FDCFA39411CA2CEA /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				1DF5F4DF0D08C38300B7A737 /* UIKit.framework */,
+				1D30AB110D05D00D00671497 /* Foundation.framework */,
+				288765A40DF7441C002DB57D /* CoreGraphics.framework */,
+				28D801B30F44B63D00FB423F /* CoreData.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		FCEF1555102117B200A71C1C /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				FCEF156710211DC900A71C1C /* Items */,
+				FCEF156910211DEA00A71C1C /* Collections */,
+			);
+			name = Models;
+			sourceTree = "<group>";
+		};
+		FCEF1556102117BC00A71C1C /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				FCEF16EF10214F0400A71C1C /* Profile.h */,
+				FCEF16F010214F0400A71C1C /* Profile.m */,
+				FCEF16F110214F0400A71C1C /* AddProfile.h */,
+				FCEF16F210214F0400A71C1C /* AddProfile.m */,
+				FCEF16F310214F0400A71C1C /* Purchase.h */,
+				FCEF16F410214F0400A71C1C /* Purchase.m */,
+				FCEF16F510214F0400A71C1C /* Tutorial.h */,
+				FCEF16F610214F0400A71C1C /* Tutorial.m */,
+				FCEF16F710214F0400A71C1C /* Options.h */,
+				FCEF16F810214F0400A71C1C /* Options.m */,
+				FCEF16F910214F0400A71C1C /* MainMenuViewController.h */,
+				FCEF16FA10214F0400A71C1C /* MainMenuViewController.m */,
+				FCEF16FB10214F0400A71C1C /* GameBoardViewController.h */,
+				FCEF16FC10214F0400A71C1C /* GameBoardViewController.m */,
+				FCEF15A11021429600A71C1C /* MainMenu */,
+			);
+			name = Controllers;
+			sourceTree = "<group>";
+		};
+		FCEF156710211DC900A71C1C /* Items */ = {
+			isa = PBXGroup;
+			children = (
+				FCEF1558102118A800A71C1C /* GameItem.h */,
+				FCEF1559102118A800A71C1C /* GameItem.m */,
+				FCEF155B102118F200A71C1C /* Shape.h */,
+				FCEF155C102118F200A71C1C /* Shape.m */,
+				FCEF155E1021195F00A71C1C /* PowerItem.h */,
+				FCEF155F1021195F00A71C1C /* PowerItem.m */,
+				FCEF156A102128AF00A71C1C /* ItemPair.h */,
+				FCEF156B102128AF00A71C1C /* ItemPair.m */,
+			);
+			name = Items;
+			sourceTree = "<group>";
+		};
+		FCEF156810211DDF00A71C1C /* Delegates */ = {
+			isa = PBXGroup;
+			children = (
+				1D3623240D0F684500981E51 /* Rama_BlocksAppDelegate.h */,
+				1D3623250D0F684500981E51 /* Rama_BlocksAppDelegate.m */,
+			);
+			name = Delegates;
+			sourceTree = "<group>";
+		};
+		FCEF156910211DEA00A71C1C /* Collections */ = {
+			isa = PBXGroup;
+			children = (
+				FCEF157310212A8800A71C1C /* ItemCollection.h */,
+				FCEF157410212A8800A71C1C /* ItemCollection.m */,
+				FCEF157D10212AB300A71C1C /* Cell.h */,
+				FCEF157E10212AB300A71C1C /* Cell.m */,
+			);
+			name = Collections;
+			sourceTree = "<group>";
+		};
+		FCEF156D102128C700A71C1C /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				FCEF156E1021291300A71C1C /* UIImage+Shapes.h */,
+				FCEF156F1021291300A71C1C /* UIImage+Shapes.m */,
+				FCEF15701021291300A71C1C /* GlobalDefines.h */,
+			);
+			name = Helpers;
+			sourceTree = "<group>";
+		};
+		FCEF1572102129E800A71C1C /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		FCEF15A11021429600A71C1C /* MainMenu */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = MainMenu;
+			sourceTree = "<group>";
+		};
+		FCEF17D31021644E00A71C1C /* Images */ = {
+			isa = PBXGroup;
+			children = (
+				FCEF17D51021648300A71C1C /* BackGround.png */,
+				FCEF17D61021648300A71C1C /* bluecircle.png */,
+				FCEF17D71021648300A71C1C /* bluehexagon.png */,
+				FCEF17D81021648300A71C1C /* bluepentagon.png */,
+				FCEF17D91021648300A71C1C /* bluesquare.png */,
+				FCEF17DA1021648300A71C1C /* bluetriangle.png */,
+				FCEF17DB1021648300A71C1C /* greencircle.png */,
+				FCEF17DC1021648300A71C1C /* greenhexagon.png */,
+				FCEF17DD1021648300A71C1C /* greenpentagon.png */,
+				FCEF17DE1021648300A71C1C /* greensquare.png */,
+				FCEF17DF1021648300A71C1C /* greentriangle.png */,
+				FCEF17E01021648300A71C1C /* orangecircle.png */,
+				FCEF17E11021648300A71C1C /* orangehexagon.png */,
+				FCEF17E21021648300A71C1C /* orangepentagon.png */,
+				FCEF17E31021648300A71C1C /* orangesquare.png */,
+				FCEF17E41021648300A71C1C /* orangetriangle.png */,
+				FCEF17E51021648300A71C1C /* redcircle.png */,
+				FCEF17E61021648300A71C1C /* redhexagon.png */,
+				FCEF17E71021648300A71C1C /* redpentagon.png */,
+				FCEF17E81021648300A71C1C /* redsquare.png */,
+				FCEF17E91021648300A71C1C /* redtriangle.png */,
+				FCEF17EA1021648300A71C1C /* yellowcircle.png */,
+				FCEF17EB1021648300A71C1C /* yellowhexagon.png */,
+				FCEF17EC1021648300A71C1C /* yellowpentagon.png */,
+				FCEF17ED1021648300A71C1C /* yellowsquare.png */,
+				FCEF17EE1021648300A71C1C /* yellowtriangle.png */,
+			);
+			name = Images;
+			sourceTree = "<group>";
+		};
+		FCEF17D41021645900A71C1C /* Nibs */ = {
+			isa = PBXGroup;
+			children = (
+				28AD733E0D9D9553002E5188 /* MainWindow.xib */,
+				FCEF16E110214EE100A71C1C /* GameBoardViewController.xib */,
+				FCEF16E210214EE100A71C1C /* Profile.xib */,
+				FCEF16E310214EE100A71C1C /* AddProfile.xib */,
+				FCEF16E410214EE100A71C1C /* Tutorial.xib */,
+				FCEF16E510214EE100A71C1C /* Purchase.xib */,
+				FCEF16E610214EE100A71C1C /* Options.xib */,
+				FCEF16E710214EE100A71C1C /* MainMenuViewController.xib */,
+			);
+			name = Nibs;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		1D6058900D05DD3D006BFB54 /* Rama Blocks */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 1D6058960D05DD3E006BFB54 /* Build configuration list for PBXNativeTarget "Rama Blocks" */;
+			buildPhases = (
+				1D60588D0D05DD3D006BFB54 /* Resources */,
+				1D60588E0D05DD3D006BFB54 /* Sources */,
+				1D60588F0D05DD3D006BFB54 /* Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "Rama Blocks";
+			productName = "Rama Blocks";
+			productReference = 1D6058910D05DD3D006BFB54 /* Rama Blocks.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		29B97313FDCFA39411CA2CEA /* Project object */ = {
+			isa = PBXProject;
+			buildConfigurationList = C01FCF4E08A954540054247B /* Build configuration list for PBXProject "Rama Blocks" */;
+			compatibilityVersion = "Xcode 3.1";
+			hasScannedForEncodings = 1;
+			mainGroup = 29B97314FDCFA39411CA2CEA /* CustomTemplate */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				1D6058900D05DD3D006BFB54 /* Rama Blocks */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		1D60588D0D05DD3D006BFB54 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				28AD733F0D9D9553002E5188 /* MainWindow.xib in Resources */,
+				FCEF16E810214EE100A71C1C /* GameBoardViewController.xib in Resources */,
+				FCEF16E910214EE100A71C1C /* Profile.xib in Resources */,
+				FCEF16EA10214EE100A71C1C /* AddProfile.xib in Resources */,
+				FCEF16EB10214EE100A71C1C /* Tutorial.xib in Resources */,
+				FCEF16EC10214EE100A71C1C /* Purchase.xib in Resources */,
+				FCEF16ED10214EE100A71C1C /* Options.xib in Resources */,
+				FCEF16EE10214EE100A71C1C /* MainMenuViewController.xib in Resources */,
+				FCEF17EF1021648300A71C1C /* BackGround.png in Resources */,
+				FCEF17F01021648300A71C1C /* bluecircle.png in Resources */,
+				FCEF17F11021648300A71C1C /* bluehexagon.png in Resources */,
+				FCEF17F21021648300A71C1C /* bluepentagon.png in Resources */,
+				FCEF17F31021648300A71C1C /* bluesquare.png in Resources */,
+				FCEF17F41021648300A71C1C /* bluetriangle.png in Resources */,
+				FCEF17F51021648300A71C1C /* greencircle.png in Resources */,
+				FCEF17F61021648300A71C1C /* greenhexagon.png in Resources */,
+				FCEF17F71021648300A71C1C /* greenpentagon.png in Resources */,
+				FCEF17F81021648300A71C1C /* greensquare.png in Resources */,
+				FCEF17F91021648300A71C1C /* greentriangle.png in Resources */,
+				FCEF17FA1021648300A71C1C /* orangecircle.png in Resources */,
+				FCEF17FB1021648300A71C1C /* orangehexagon.png in Resources */,
+				FCEF17FC1021648300A71C1C /* orangepentagon.png in Resources */,
+				FCEF17FD1021648300A71C1C /* orangesquare.png in Resources */,
+				FCEF17FE1021648300A71C1C /* orangetriangle.png in Resources */,
+				FCEF17FF1021648300A71C1C /* redcircle.png in Resources */,
+				FCEF18001021648300A71C1C /* redhexagon.png in Resources */,
+				FCEF18011021648300A71C1C /* redpentagon.png in Resources */,
+				FCEF18021021648300A71C1C /* redsquare.png in Resources */,
+				FCEF18031021648300A71C1C /* redtriangle.png in Resources */,
+				FCEF18041021648300A71C1C /* yellowcircle.png in Resources */,
+				FCEF18051021648300A71C1C /* yellowhexagon.png in Resources */,
+				FCEF18061021648300A71C1C /* yellowpentagon.png in Resources */,
+				FCEF18071021648300A71C1C /* yellowsquare.png in Resources */,
+				FCEF18081021648300A71C1C /* yellowtriangle.png in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		1D60588E0D05DD3D006BFB54 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				1D60589B0D05DD56006BFB54 /* main.m in Sources */,
+				1D3623260D0F684500981E51 /* Rama_BlocksAppDelegate.m in Sources */,
+				28C3AD8A0F43EF2300507BA6 /* Rama_Blocks.xcdatamodel in Sources */,
+				FCEF155A102118A800A71C1C /* GameItem.m in Sources */,
+				FCEF155D102118F200A71C1C /* Shape.m in Sources */,
+				FCEF15601021195F00A71C1C /* PowerItem.m in Sources */,
+				FCEF156C102128AF00A71C1C /* ItemPair.m in Sources */,
+				FCEF15711021291300A71C1C /* UIImage+Shapes.m in Sources */,
+				FCEF157F10212AB300A71C1C /* Cell.m in Sources */,
+				FCEF16FF10214F0400A71C1C /* Profile.m in Sources */,
+				FCEF170010214F0400A71C1C /* AddProfile.m in Sources */,
+				FCEF170110214F0400A71C1C /* Purchase.m in Sources */,
+				FCEF170210214F0400A71C1C /* Tutorial.m in Sources */,
+				FCEF170310214F0400A71C1C /* Options.m in Sources */,
+				FCEF170410214F0400A71C1C /* MainMenuViewController.m in Sources */,
+				FCEF170510214F0400A71C1C /* GameBoardViewController.m in Sources */,
+				FCEF176610215A7400A71C1C /* ItemCollection.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		1D6058940D05DD3E006BFB54 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				COPY_PHASE_STRIP = NO;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"/Volumes/Skiiing2/CD/ViewBased/Unknown Path/System/Library/Frameworks\"",
+				);
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = Rama_Blocks_Prefix.pch;
+				INFOPLIST_FILE = "Rama_Blocks-Info.plist";
+				PRODUCT_NAME = "Rama Blocks";
+			};
+			name = Debug;
+		};
+		1D6058950D05DD3E006BFB54 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				COPY_PHASE_STRIP = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"/Volumes/Skiiing2/CD/ViewBased/Unknown Path/System/Library/Frameworks\"",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = Rama_Blocks_Prefix.pch;
+				INFOPLIST_FILE = "Rama_Blocks-Info.plist";
+				PRODUCT_NAME = "Rama Blocks";
+			};
+			name = Release;
+		};
+		C01FCF4F08A954540054247B /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				GCC_C_LANGUAGE_STANDARD = c99;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				PREBINDING = NO;
+				SDKROOT = iphoneos3.1;
+			};
+			name = Debug;
+		};
+		C01FCF5008A954540054247B /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				GCC_C_LANGUAGE_STANDARD = c99;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				PREBINDING = NO;
+				SDKROOT = iphoneos3.1;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		1D6058960D05DD3E006BFB54 /* Build configuration list for PBXNativeTarget "Rama Blocks" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				1D6058940D05DD3E006BFB54 /* Debug */,
+				1D6058950D05DD3E006BFB54 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		C01FCF4E08A954540054247B /* Build configuration list for PBXProject "Rama Blocks" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				C01FCF4F08A954540054247B /* Debug */,
+				C01FCF5008A954540054247B /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 29B97313FDCFA39411CA2CEA /* Project object */;
+}
