@@ -35,7 +35,6 @@
 			cells[(row * ColumnLength) + column] = [[Cell alloc] initWithData: point : row : column];
 		}
 	}
-	
 	return self;
 }
 
@@ -80,7 +79,7 @@
 	}
 	if(!([self CheckCellToSet:cellA] && [self CheckCellToSet:cellB]))
     {
-		NSLog(@"Collision, unding shit");
+		NSLog(@"Collision, undoing shit");
 		return FALSE;
 	}
 	
@@ -116,17 +115,16 @@
             [self CheckTransform:item];
             couldTransform = TRUE;
         }
-	[transFormGroup removeAllObjects];
-    [self ApplyGravity];
+        [transFormGroup removeAllObjects];
+        [self ApplyGravity];
     }
     return couldTransform;
-    
 }
 
 -(void)RemoveFromCellsAndRefactor:(NSMutableArray *)TransFormGroup{
     [currentLevel removeItems:TransFormGroup];
-	for(Cell * cell in TransFormGroup){
-		//NSLog(@"Removing shape");
+	for(Cell * cell in TransFormGroup)
+    {
 		[cell.ItemInCell removeFromSuperview];
 		[cell.ItemInCell release];		
         cell.ItemInCell = nil;

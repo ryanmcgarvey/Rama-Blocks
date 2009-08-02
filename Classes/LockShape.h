@@ -19,4 +19,7 @@
 @property BOOL canSeeShape;
 @property BOOL canSeeColor;
 
+
+-(void)UpdateView;
+
 @end

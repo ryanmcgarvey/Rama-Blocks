@@ -44,17 +44,21 @@ GameBoard Behavior
 /*****************************************************
 UIController Delegates
 *****************************************************/
-- (void)viewDidLoad {
-	currentLevel = [[Level alloc] init:Easy];
-	// Create grid
-	grid = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 320, 480)];
-	grid.clipsToBounds = YES;
-	grid.autoresizesSubviews = NO;
-	 grid.contentMode = UIViewContentModeTopLeft;
-	 grid.image = [[UIImage imageNamed:@"BackGround.png"] retain];
-     self.view.backgroundColor = [UIColor blackColor];
-	[self.view addSubview:grid];
+- (void)viewDidLoad {    
+	// Create background
+	backGround = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 320, 480)];
+	backGround.clipsToBounds = YES;
+	backGround.autoresizesSubviews = NO;
+	 backGround.contentMode = UIViewContentModeTopLeft;
+	 backGround.image = [[UIImage imageNamed:@"BackGround.png"] retain];
     
+    self.view.backgroundColor = [UIColor blackColor];
+	[self.view addSubview:backGround];
+    
+    
+    //add solution to view
+    currentLevel = [[Level alloc] init:Easy];
+    [currentLevel addSolutionToView:self.view];
     itemCollection = [[ItemCollection alloc] init:NUMBER_OF_ROWS :NUMBER_OF_COLUMNS :SHAPE_WIDTH :SHAPE_WIDTH: currentLevel];
 	SpawnedPair = [[ItemPair new]retain];
 
@@ -63,6 +67,7 @@ UIController Delegates
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(didRotate:)
                                                  name:@"UIDeviceOrientationDidChangeNotification" object:nil];
+    
     
     
     [self didRotate:nil];
@@ -109,16 +114,19 @@ UIController Delegates
 
 - (void)touchesMoved:(NSSet *)touches withEvent:(UIEvent *)event {
 	UITouch *touch = [[event allTouches] anyObject];
-    
-    GameItem * highlightItem = [itemCollection GetItemFromCoordinate:[touch locationInView:grid]]; 
-    if(highlightItem != nil && ! highlightItem.IsPaired && [highlightItem isKindOfClass:[Shape class]]){
-        Shape * shape = (Shape *) highlightItem;
-        [itemCollection AddShapeToSolution:shape];
-        shape.tapped = 0;
+    if(![[touch view] isKindOfClass: [LockShape class]])
+    {
+        GameItem * highlightItem = [itemCollection GetItemFromCoordinate:[touch locationInView:backGround]]; 
+        if(highlightItem != nil && ! highlightItem.IsPaired && [highlightItem isKindOfClass:[Shape class]])
+        {
+            Shape * shape = (Shape *) highlightItem;
+            [itemCollection AddShapeToSolution:shape];
+            shape.tapped = 0;
+        }
     }
     
     
-	if([[touch view] isKindOfClass: [GameItem class]])
+	if([[touch view] isKindOfClass: [GameItem class]] && ![[touch view] isKindOfClass: [LockShape class]])
 	{
 		GameItem * item = (GameItem *)[touch view];
 		if(item.IsPaired)
@@ -133,7 +141,7 @@ UIController Delegates
 - (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event {
 	UITouch *touch = [[event allTouches] anyObject];
 	/* Shape was touched */
-	if([[touch view] isKindOfClass: [GameItem class]])
+	if([[touch view] isKindOfClass: [GameItem class]]  && ![[touch view] isKindOfClass: [LockShape class]] )
 	{
 		GameItem * item = (GameItem *)[touch view];
 		
@@ -191,7 +199,7 @@ Tear down and maintenance
 }
 
 - (void)dealloc {
-	[grid release];
+	[backGround release];
 	[SpawnedPair release];
 	[itemCollection release];
 	[TouchTimer release];

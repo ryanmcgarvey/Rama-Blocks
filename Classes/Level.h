@@ -44,7 +44,8 @@ typedef enum enum_Difficulty {
 -(void)addItem: (GameItem *) item;
 -(void)removeItem:(GameItem *) item;
 -(void)removeItems:(NSMutableArray *) items;
--(void)update;
+-(void)updateProbability;
+-(void)updateView;
 
 -(ShapeType)createShapeFromCollection;
 

@@ -21,13 +21,12 @@ Init
     [self setDifficulty:predefinedDifficulty];
     for (int i = 0; i < lockCount; i++) 
     {
-        LockShape * shape = [[Shape alloc] initWithInfo:[self createRandomColor] : [self createRandomShape]:CGPointMake(LOCK_LOCATION_X * i,LOCK_LOCATION_Y)];
-        shape.canSeeColor = TRUE;
-        shape.canSeeShape = TRUE;
+        LockShape * shape = [[LockShape alloc] initWithInfo:[self createRandomColor] : [self createRandomShape]:CGPointMake(LOCK_LOCATION_X + LOCK_LOCATION_X * i,LOCK_LOCATION_Y)];
+        shape.canSeeColor = FALSE;
+        shape.canSeeShape = FALSE;
         [solution addObject: shape];
-        
     }
-    [self update];
+    [self updateProbability];
     return self;
 }
 
@@ -37,27 +36,41 @@ Init
 Solution
  *****************************************************/
 -(BOOL)addSolutionToView:(UIView *)view{
+    [self updateView];
     for(Shape * shape in solution)
     {
         [view addSubview:shape];
     }
-    [self update];
+    [self updateProbability];
     return TRUE;
 }
 
 -(BOOL)checkSolution:(NSMutableArray *)shapes{
     if([shapes count] != [solution count])
         return FALSE;
+    
+    BOOL victory = TRUE;
+    
     for(int i = 0; i < [shapes count]; i++)
     {
         Shape * guess = (Shape *) [shapes objectAtIndex:i];
-        Shape * actual = (Shape *) [solution objectAtIndex:i];
+        LockShape * actual = (LockShape *) [solution objectAtIndex:i];
+        if(guess.shapeType == actual.shapeType)
+        {
+            actual.canSeeShape = TRUE;
+        }
+        if(guess.colorType == actual.colorType)
+        {
+            actual.canSeeColor = TRUE;
+        }
         if(guess.shapeType != actual.shapeType ||
             guess.colorType != actual.colorType)
         {
-            return FALSE;
+            victory = FALSE;
+            break;
         }
     }
+    [self updateView];
     return TRUE;
 }
 
@@ -71,7 +84,7 @@ Solution
     {
         Shape * shape = (Shape *)item;
         totalShapes[shape.shapeType] ++;
-        [self update];
+        [self updateProbability];
     }
 }
 
@@ -81,7 +94,7 @@ Solution
     {
         Shape * shape = (Shape *)item;
         totalShapes[shape.shapeType] --;
-        [self update];
+        [self updateProbability];
     }
 }
 -(void)removeItems:(NSMutableArray *) items
@@ -92,12 +105,12 @@ Solution
         {
             Shape * shape = (Shape *)item;
             totalShapes[shape.shapeType] --;
-            [self update];
+            [self updateProbability];
         }
     }
 }
 
--(void)update{
+-(void)updateProbability{
     int total = totalShapes[Triangle] + totalShapes[Square] + totalShapes[Pentagon] + totalShapes[Hexagon] + totalShapes[Circle];
    
     if(total > 0 )
@@ -113,6 +126,13 @@ Solution
         shapeSpawnProbability[Circle] =  shapeSpawnProbability[Hexagon] + totalShapes[Circle]/(float)total;
     }else{
         shapeSpawnProbability[Triangle] = 1;
+    }
+}
+
+-(void)updateView{
+    for(LockShape * shape in solution)
+    {
+        [shape UpdateView];
     }
 }
 

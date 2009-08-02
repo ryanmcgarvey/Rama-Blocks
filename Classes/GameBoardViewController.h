@@ -19,7 +19,7 @@
 
 
 @interface GameBoardViewController : UIViewController{
-	IBOutlet UIImageView *grid;
+	IBOutlet UIImageView *backGround;
 	ItemPair * SpawnedPair;
 	ItemCollection * itemCollection;
 	NSTimer *TouchTimer;
