@@ -49,7 +49,7 @@ Solution
     
     BOOL victory = TRUE;
     
-    for(int i = 0; i < [shapes count]; i++)
+    for(int i = 0; i < [solution count]; i++)
     {
         Shape * guess = (Shape *) [shapes objectAtIndex:i];
         LockShape * actual = (LockShape *) [solution objectAtIndex:i];
