@@ -21,23 +21,30 @@ Init
     [self setDifficulty:predefinedDifficulty];
     for (int i = 0; i < lockCount; i++) 
     {
-        Shape * shape = [[Shape alloc] initWithInfo:[self createRandomColor] : [self createRandomShape]:CGPointMake(0,0)];
+        LockShape * shape = [[Shape alloc] initWithInfo:[self createRandomColor] : [self createRandomShape]:CGPointMake(LOCK_LOCATION_X * i,LOCK_LOCATION_Y)];
+        shape.canSeeColor = TRUE;
+        shape.canSeeShape = TRUE;
         [solution addObject: shape];
+        
     }
     [self update];
     return self;
 }
 
--(id)initWithSolution:(NSMutableArray *)predefinedSolution : (Difficulty)predefinedDifficulty{
-    [self setDifficulty:predefinedDifficulty];
-     solution = [predefinedSolution retain];
-    [self update];
-    return self;
-}
+
 
 /*****************************************************
 Solution
  *****************************************************/
+-(BOOL)addSolutionToView:(UIView *)view{
+    for(Shape * shape in solution)
+    {
+        [view addSubview:shape];
+    }
+    [self update];
+    return TRUE;
+}
+
 -(BOOL)checkSolution:(NSMutableArray *)shapes{
     if([shapes count] != [solution count])
         return FALSE;

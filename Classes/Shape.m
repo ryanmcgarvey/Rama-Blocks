@@ -13,6 +13,7 @@
 
 @synthesize shapeType, colorType;
 
+
 - (id)initWithInfo:(ColorType)cType : (ShapeType) sType:(CGPoint)location{  
     CGRect frame = CGRectMake(0.0f, 0.0f, SHAPE_WIDTH, SHAPE_WIDTH);
     if (self = [super initWithFrame:frame]) 

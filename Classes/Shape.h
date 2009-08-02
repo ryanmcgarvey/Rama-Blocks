@@ -15,10 +15,12 @@
 @public;
 	ShapeType  shapeType;
 	ColorType  colorType;
+
 }
 
 @property ShapeType shapeType;
 @property ColorType colorType;
+
 
 
 - (id)initWithInfo:(ColorType)cType : (ShapeType) sType : (CGPoint)location;

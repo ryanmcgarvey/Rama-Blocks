@@ -9,6 +9,7 @@
 #import <Foundation/Foundation.h>
 #import "Shape.h"
 #import "GlobalDefines.h"
+#import "LockShape.h"
 
 typedef enum enum_Difficulty {
     Easy,
@@ -31,11 +32,13 @@ typedef enum enum_Difficulty {
 
 @property (readonly) Difficulty difficulty;
 
--(id)initWithSolution:(NSMutableArray *)predefinedSolution : (Difficulty)predefinedDifficulty;
+
 
 -(id)init:(Difficulty)predefinedDifficulty;
 
 -(BOOL)checkSolution:(NSMutableArray *)shapes;
+
+-(BOOL)addSolutionToView:(UIView *)view;
 
 
 -(void)addItem: (GameItem *) item;
