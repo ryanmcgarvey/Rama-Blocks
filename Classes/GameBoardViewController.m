@@ -188,7 +188,6 @@ UIController Delegates
                 {
                     [audio playTransform];
                 }
-                [itemCollection ClearSolution];
             }
             else
             {
@@ -207,17 +206,14 @@ UIController Delegates
             if([itemCollection AddItemPair:SpawnedPair])
             {
                 [self SpawnShapes];
-            }else{
+            }else
+            {
                 [self ResetShapePair:SpawnedPair];
             }
         }
     }
-    
+    [itemCollection ClearSolution];
 }
-
-
-
-
 
 
 /*****************************************************

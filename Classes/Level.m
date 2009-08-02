@@ -11,6 +11,7 @@
 
 @implementation Level
 @synthesize difficulty;
+@synthesize attempts;
 
 /*****************************************************
 Init

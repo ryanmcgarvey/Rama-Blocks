@@ -32,10 +32,12 @@ typedef enum enum_Difficulty {
     ColorType maxColor;
     ShapeType maxShape;
     int lockCount;
+    
+    int attempts;
 }
 
 @property (readonly) Difficulty difficulty;
-
+@property (readonly) int attempts;
 
 
 -(id)init:(Difficulty)predefinedDifficulty;
