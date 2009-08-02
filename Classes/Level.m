@@ -30,8 +30,6 @@ Init
     return self;
 }
 
-
-
 /*****************************************************
 Solution
  *****************************************************/
@@ -46,7 +44,7 @@ Solution
 }
 
 -(BOOL)checkSolution:(NSMutableArray *)shapes{
-    if([shapes count] != [solution count])
+    if([shapes count] < [solution count])
         return FALSE;
     
     BOOL victory = TRUE;
@@ -71,9 +69,8 @@ Solution
         }
     }
     [self updateView];
-    return TRUE;
+    return victory;
 }
-
 
 /*****************************************************
  Collection Tracker
@@ -162,7 +159,7 @@ Helpers
  *****************************************************/
 
 -(ShapeType)createRandomShape{
-    return (uint)arc4random() % maxColor;
+    return (uint)arc4random() % maxShape;
 }
 
 -(ColorType)createRandomColor{
@@ -170,29 +167,35 @@ Helpers
 }
 
 -(void)setDifficulty:(Difficulty)difficultyToSet{
+    
     difficulty = difficultyToSet;
+    NSLog(@"difficulty: %d", difficulty);
     switch (difficulty) {
         case Easy:
             maxColor = 2;
-            maxShape = Pentagon;
+            maxShape = Square;
             lockCount = 3;
             break;
         case Medium:
-            maxColor = 2;
-            maxShape = Hexagon;
+            maxColor = 3;
+            maxShape = Pentagon;
             lockCount = 4;
             break;
         case Hard:
-            maxColor = 3;
-            maxShape = Circle;
+            maxColor = 4;
+            maxShape = Hexagon;
             lockCount = 5;
             break;
         case Impossible:
-            maxColor = 4;
+            maxColor = 5;
             maxShape = Circle;
             lockCount = 6;
             break;
         default:
+            maxColor = 5;
+            maxShape = Circle;
+            lockCount = 6;
+
             break;
     }
 }

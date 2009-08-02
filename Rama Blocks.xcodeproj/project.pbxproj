@@ -16,6 +16,14 @@
 		28C3AD8A0F43EF2300507BA6 /* Rama_Blocks.xcdatamodel in Sources */ = {isa = PBXBuildFile; fileRef = 28C3AD890F43EF2300507BA6 /* Rama_Blocks.xcdatamodel */; };
 		28D801B40F44B63D00FB423F /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 28D801B30F44B63D00FB423F /* CoreData.framework */; };
 		FC0B6AA110251BDE00F1BD5E /* LockShape.m in Sources */ = {isa = PBXBuildFile; fileRef = FC0B6AA010251BDE00F1BD5E /* LockShape.m */; };
+		FC0B6B7910252C6000F1BD5E /* SoundEffects.m in Sources */ = {isa = PBXBuildFile; fileRef = FC0B6B7810252C6000F1BD5E /* SoundEffects.m */; };
+		FC0B6B7C10252E0A00F1BD5E /* SoundPlayer.m in Sources */ = {isa = PBXBuildFile; fileRef = FC0B6B7B10252E0A00F1BD5E /* SoundPlayer.m */; };
+		FC0B6B8B102531B600F1BD5E /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FC0B6B8A102531B600F1BD5E /* AVFoundation.framework */; };
+		FC0B6C0C102537FB00F1BD5E /* transform.wav in Resources */ = {isa = PBXBuildFile; fileRef = FC0B6C08102537FB00F1BD5E /* transform.wav */; };
+		FC0B6C0D102537FB00F1BD5E /* correctColor.wav in Resources */ = {isa = PBXBuildFile; fileRef = FC0B6C09102537FB00F1BD5E /* correctColor.wav */; };
+		FC0B6C0E102537FB00F1BD5E /* correctShape.wav in Resources */ = {isa = PBXBuildFile; fileRef = FC0B6C0A102537FB00F1BD5E /* correctShape.wav */; };
+		FC0B6C0F102537FB00F1BD5E /* victory.wav in Resources */ = {isa = PBXBuildFile; fileRef = FC0B6C0B102537FB00F1BD5E /* victory.wav */; };
+		FC0B6C3710253AC700F1BD5E /* GameState.m in Sources */ = {isa = PBXBuildFile; fileRef = FC0B6C3610253AC700F1BD5E /* GameState.m */; };
 		FC4366881024CCFF00C1F3BE /* greensquare.png in Resources */ = {isa = PBXBuildFile; fileRef = FC43666E1024CCFF00C1F3BE /* greensquare.png */; };
 		FC4366891024CCFF00C1F3BE /* yellowtriangle.png in Resources */ = {isa = PBXBuildFile; fileRef = FC43666F1024CCFF00C1F3BE /* yellowtriangle.png */; };
 		FC43668A1024CCFF00C1F3BE /* greenhexagon.png in Resources */ = {isa = PBXBuildFile; fileRef = FC4366701024CCFF00C1F3BE /* greenhexagon.png */; };
@@ -82,6 +90,17 @@
 		8D1107310486CEB800E47090 /* Rama_Blocks-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "Rama_Blocks-Info.plist"; sourceTree = "<group>"; };
 		FC0B6A9F10251BDE00F1BD5E /* LockShape.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LockShape.h; sourceTree = "<group>"; };
 		FC0B6AA010251BDE00F1BD5E /* LockShape.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LockShape.m; sourceTree = "<group>"; };
+		FC0B6B7710252C6000F1BD5E /* SoundEffects.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SoundEffects.h; sourceTree = "<group>"; };
+		FC0B6B7810252C6000F1BD5E /* SoundEffects.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SoundEffects.m; sourceTree = "<group>"; };
+		FC0B6B7A10252E0A00F1BD5E /* SoundPlayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SoundPlayer.h; sourceTree = "<group>"; };
+		FC0B6B7B10252E0A00F1BD5E /* SoundPlayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SoundPlayer.m; sourceTree = "<group>"; };
+		FC0B6B8A102531B600F1BD5E /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
+		FC0B6C08102537FB00F1BD5E /* transform.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = transform.wav; sourceTree = "<group>"; };
+		FC0B6C09102537FB00F1BD5E /* correctColor.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = correctColor.wav; sourceTree = "<group>"; };
+		FC0B6C0A102537FB00F1BD5E /* correctShape.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = correctShape.wav; sourceTree = "<group>"; };
+		FC0B6C0B102537FB00F1BD5E /* victory.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = victory.wav; sourceTree = "<group>"; };
+		FC0B6C3510253AC700F1BD5E /* GameState.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GameState.h; sourceTree = "<group>"; };
+		FC0B6C3610253AC700F1BD5E /* GameState.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GameState.m; sourceTree = "<group>"; };
 		FC43666E1024CCFF00C1F3BE /* greensquare.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = greensquare.png; sourceTree = "<group>"; };
 		FC43666F1024CCFF00C1F3BE /* yellowtriangle.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = yellowtriangle.png; sourceTree = "<group>"; };
 		FC4366701024CCFF00C1F3BE /* greenhexagon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = greenhexagon.png; sourceTree = "<group>"; };
@@ -158,6 +177,7 @@
 				1DF5F4E00D08C38300B7A737 /* UIKit.framework in Frameworks */,
 				288765A50DF7441C002DB57D /* CoreGraphics.framework in Frameworks */,
 				28D801B40F44B63D00FB423F /* CoreData.framework in Frameworks */,
+				FC0B6B8B102531B600F1BD5E /* AVFoundation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -208,6 +228,7 @@
 		29B97317FDCFA39411CA2CEA /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				FC0B6C07102537FB00F1BD5E /* Audio */,
 				FCEF17D41021645900A71C1C /* Nibs */,
 				FCEF17D31021644E00A71C1C /* Images */,
 				28C3AD890F43EF2300507BA6 /* Rama_Blocks.xcdatamodel */,
@@ -219,12 +240,44 @@
 		29B97323FDCFA39411CA2CEA /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				FC0B6B8A102531B600F1BD5E /* AVFoundation.framework */,
 				1DF5F4DF0D08C38300B7A737 /* UIKit.framework */,
 				1D30AB110D05D00D00671497 /* Foundation.framework */,
 				288765A40DF7441C002DB57D /* CoreGraphics.framework */,
 				28D801B30F44B63D00FB423F /* CoreData.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		FC0B6B7610252C4900F1BD5E /* Audio */ = {
+			isa = PBXGroup;
+			children = (
+				FC0B6B7710252C6000F1BD5E /* SoundEffects.h */,
+				FC0B6B7810252C6000F1BD5E /* SoundEffects.m */,
+				FC0B6B7A10252E0A00F1BD5E /* SoundPlayer.h */,
+				FC0B6B7B10252E0A00F1BD5E /* SoundPlayer.m */,
+			);
+			name = Audio;
+			sourceTree = "<group>";
+		};
+		FC0B6C07102537FB00F1BD5E /* Audio */ = {
+			isa = PBXGroup;
+			children = (
+				FC0B6C08102537FB00F1BD5E /* transform.wav */,
+				FC0B6C09102537FB00F1BD5E /* correctColor.wav */,
+				FC0B6C0A102537FB00F1BD5E /* correctShape.wav */,
+				FC0B6C0B102537FB00F1BD5E /* victory.wav */,
+			);
+			name = Audio;
+			sourceTree = "<group>";
+		};
+		FC0B6C3410253A9100F1BD5E /* GameState */ = {
+			isa = PBXGroup;
+			children = (
+				FC0B6C3510253AC700F1BD5E /* GameState.h */,
+				FC0B6C3610253AC700F1BD5E /* GameState.m */,
+			);
+			name = GameState;
 			sourceTree = "<group>";
 		};
 		FCEF1555102117B200A71C1C /* Models */ = {
@@ -253,7 +306,6 @@
 				FCEF16FA10214F0400A71C1C /* MainMenuViewController.m */,
 				FCEF16FB10214F0400A71C1C /* GameBoardViewController.h */,
 				FCEF16FC10214F0400A71C1C /* GameBoardViewController.m */,
-				FCEF15A11021429600A71C1C /* MainMenu */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -310,15 +362,10 @@
 		FCEF1572102129E800A71C1C /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				FC0B6B7610252C4900F1BD5E /* Audio */,
+				FC0B6C3410253A9100F1BD5E /* GameState */,
 			);
 			name = Frameworks;
-			sourceTree = "<group>";
-		};
-		FCEF15A11021429600A71C1C /* MainMenu */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			name = MainMenu;
 			sourceTree = "<group>";
 		};
 		FCEF17D31021644E00A71C1C /* Images */ = {
@@ -447,6 +494,10 @@
 				FC4366A01024CCFF00C1F3BE /* orangesquare.png in Resources */,
 				FC4366A11024CCFF00C1F3BE /* bluecircle.png in Resources */,
 				FC4366A31024CD0A00C1F3BE /* BackGround.png in Resources */,
+				FC0B6C0C102537FB00F1BD5E /* transform.wav in Resources */,
+				FC0B6C0D102537FB00F1BD5E /* correctColor.wav in Resources */,
+				FC0B6C0E102537FB00F1BD5E /* correctShape.wav in Resources */,
+				FC0B6C0F102537FB00F1BD5E /* victory.wav in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -476,6 +527,9 @@
 				FC4366B91024CDA000C1F3BE /* UIImage+Shapes.m in Sources */,
 				FCFD28401024F04B000313B3 /* Level.m in Sources */,
 				FC0B6AA110251BDE00F1BD5E /* LockShape.m in Sources */,
+				FC0B6B7910252C6000F1BD5E /* SoundEffects.m in Sources */,
+				FC0B6B7C10252E0A00F1BD5E /* SoundPlayer.m in Sources */,
+				FC0B6C3710253AC700F1BD5E /* GameState.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

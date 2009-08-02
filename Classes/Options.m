@@ -7,33 +7,44 @@
 //
 
 #import "Options.h"
-
+#import "Rama_BlocksAppDelegate.h"
 
 @implementation Options
 
-@synthesize sfxVolume, musicVolume;
+@synthesize sfxVolume, musicVolume, difficulty;
 
 - (void)viewDidLoad {
+    Rama_BlocksAppDelegate * appDelegate =  (Rama_BlocksAppDelegate *)[[UIApplication sharedApplication] delegate];
+    gameState = appDelegate.gameState;
+    sfxVolume.value = gameState.audio.volume;
 
+    difficulty.value = (float)gameState.currentDifficulty / NUMBER_OF_DIFF;
+    
     [super viewDidLoad];
-	
 }
 
 
 - (IBAction)returnToMenu:(id)sender 
 {
-	
-
 	[self dismissModalViewControllerAnimated:YES];
-	
-	
-	
 }
 
 - (IBAction)changeShapeColors{
+    
 }
 
-	
+-(void)changeMusicVolume{
+}
+-(void)changeSfxVolume{
+    gameState.audio.volume = sfxVolume.value;
+}
+-(void)changeDifficulty{
+    Difficulty diff = (Difficulty)(difficulty.value * NUMBER_OF_DIFF);
+    NSLog(@"Setting Difficulty %d", diff);
+    if(diff == NUMBER_OF_DIFF)
+        diff--;
+    gameState.currentDifficulty = diff;
+}
 
 
 

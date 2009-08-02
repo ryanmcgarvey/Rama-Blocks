@@ -7,7 +7,7 @@
 //
 
 #import "GameBoardViewController.h"
-
+#import "Rama_BlocksAppDelegate.h"
 @implementation GameBoardViewController
 
 
@@ -44,7 +44,11 @@ GameBoard Behavior
 /*****************************************************
 UIController Delegates
 *****************************************************/
-- (void)viewDidLoad {    
+- (void)viewDidLoad {   
+    Rama_BlocksAppDelegate * appDelegate =  (Rama_BlocksAppDelegate *)[[UIApplication sharedApplication] delegate];
+    audio = appDelegate.gameState.audio;
+    Difficulty diff = appDelegate.gameState.currentDifficulty;
+    
 	// Create background
 	backGround = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 320, 480)];
 	backGround.clipsToBounds = YES;
@@ -57,7 +61,7 @@ UIController Delegates
     
     
     //add solution to view
-    currentLevel = [[Level alloc] init:Easy];
+    currentLevel = [[Level alloc] init:diff];
     [currentLevel addSolutionToView:self.view];
     itemCollection = [[ItemCollection alloc] init:NUMBER_OF_ROWS :NUMBER_OF_COLUMNS :SHAPE_WIDTH :SHAPE_WIDTH: currentLevel];
 	SpawnedPair = [[ItemPair new]retain];
@@ -168,14 +172,15 @@ UIController Delegates
                 item.tapped = 0;
                 if([itemCollection TransformItem:item])
                 {
-                    //play sound
+                    [audio playTransform];
                 }
             }
             else
             {
                 if([itemCollection CheckSolution])
                 {
-                    //play sound
+                    
+                    [audio playVictory];
                 }
             }
         }

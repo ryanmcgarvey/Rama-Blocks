@@ -12,6 +12,7 @@
 @implementation Rama_BlocksAppDelegate
 
 @synthesize window;
+@synthesize gameState;
 
 
 #pragma mark -
@@ -23,6 +24,8 @@
     mainMenu = [[MainMenuViewController alloc] initWithNibName:@"MainMenuViewController" bundle:nil];
     [[UIApplication sharedApplication] setStatusBarHidden:YES animated:NO];
     [window addSubview:mainMenu.view];
+    gameState = [GameState new];
+    gameState.audio.volume = 0.5f;
 	[window makeKeyAndVisible];
 }
 

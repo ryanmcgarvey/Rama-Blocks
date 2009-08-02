@@ -16,6 +16,7 @@
 #import "GlobalDefines.h"
 #import "Cell.h"
 #import "Level.h"
+#import "GameState.h"
 
 
 @interface GameBoardViewController : UIViewController{
@@ -23,9 +24,9 @@
 	ItemPair * SpawnedPair;
 	ItemCollection * itemCollection;
 	NSTimer *TouchTimer;
-
     UIDevice * CurrentDevice;
     Level * currentLevel;
+    SoundEffects * audio;
 }
 
 
