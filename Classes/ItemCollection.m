@@ -324,17 +324,20 @@
     }
 }
 
+
+-(void)ClearSolution{
+    [self UnHighLightShapes];
+    [solution removeAllObjects];
+}
+
 -(BOOL)CheckSolution{
     
     BOOL isCorrect = [currentLevel checkSolution:solution];
     
-    [self UnHighLightShapes];
-    [solution removeAllObjects];
+    [self ClearSolution];
     
     return isCorrect;
 }
-
-
 
 /**************************************
  Helpers
@@ -380,5 +383,6 @@
     Cell * cell = [self GetCell:rowA:columnA];
     return cell.ItemInCell;
 }
+
 
 @end

@@ -63,6 +63,9 @@ typedef enum enum_Gravity {
 -(void)UnHighLightShapes;
 -(void)AddShapeToSolution:(Shape *)shape;
 -(BOOL)CheckSolution;
+-(void)ClearSolution;
 
 -(GameItem *)GetItemFromCoordinate:(CGPoint) point;
+
+
 @end

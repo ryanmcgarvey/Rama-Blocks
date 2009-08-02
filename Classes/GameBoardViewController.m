@@ -174,6 +174,7 @@ UIController Delegates
                 {
                     [audio playTransform];
                 }
+                [itemCollection ClearSolution];
             }
             else
             {
