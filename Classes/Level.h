@@ -12,9 +12,13 @@
 #import "LockShape.h"
 
 typedef enum enum_Difficulty {
+    VeryEasy,
     Easy,
-    Medium,
+    SortaEasy,
+    NotSoEasy,
+    SortaHard,
     Hard,
+    VeryHard,
     Impossible
 } Difficulty;
 

@@ -27,7 +27,7 @@
 
 
 - (void)dealloc {
-    [ItemView dealloc];
+    [ItemView release];
     [super dealloc];
 }
 

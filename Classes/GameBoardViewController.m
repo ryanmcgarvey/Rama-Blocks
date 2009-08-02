@@ -9,6 +9,7 @@
 #import "GameBoardViewController.h"
 #import "Rama_BlocksAppDelegate.h"
 @implementation GameBoardViewController
+@synthesize buttonMenu, buttonOptions, buttonMainMenu, buttonResume, menuView;
 
 
 
@@ -18,15 +19,27 @@ GameBoard Behavior
 *****************************************************/
 -(void)SpawnShapes{
 	if(SpawnedPair==nil)
-		SpawnedPair = [ItemPair new];
+    {
+		SpawnedPair = [[ItemPair alloc]init];
+    }
+    [SpawnedPair.GrabberA removeFromSuperview];
+    [SpawnedPair.GrabberB removeFromSuperview];
 	
     [SpawnedPair.ItemA release];
     SpawnedPair.ItemA = [[Shape alloc] initWithInfo:[currentLevel createRandomColor]: [currentLevel createShapeFromCollection] : CGPointMake(SPAWN_LOCATION_X,SPAWN_LOCATION_Y)];
-    [ self.view addSubview:SpawnedPair.ItemA];
+    
     
     [SpawnedPair.ItemB release];
     SpawnedPair.ItemB = [[Shape alloc] initWithInfo:[currentLevel createRandomColor]: [currentLevel createShapeFromCollection] : CGPointMake(SPAWN_LOCATION_X + SHAPE_WIDTH ,SPAWN_LOCATION_Y)];
-    [ self.view addSubview:SpawnedPair.ItemB];
+    
+    [SpawnedPair Reset];
+    
+    [self.view addSubview:SpawnedPair.GrabberA];
+    [self.view addSubview:SpawnedPair.GrabberB];
+    
+    [self.view addSubview:SpawnedPair.ItemA];
+    [self.view addSubview:SpawnedPair.ItemB];
+
 }
 
 
@@ -55,11 +68,11 @@ UIController Delegates
 	backGround.autoresizesSubviews = NO;
 	 backGround.contentMode = UIViewContentModeTopLeft;
 	 backGround.image = [[UIImage imageNamed:@"BackGround.png"] retain];
-    
+    backGround.userInteractionEnabled = FALSE;
     self.view.backgroundColor = [UIColor blackColor];
 	[self.view addSubview:backGround];
-    
-    
+    [self.view bringSubviewToFront:buttonMenu];
+    [self.view bringSubviewToFront:menuView];
     //add solution to view
     currentLevel = [[Level alloc] init:diff];
     [currentLevel addSolutionToView:self.view];
@@ -80,8 +93,7 @@ UIController Delegates
 }
 
 
--(void)didRotate:(NSNotification *)notification
-{
+-(void)didRotate:(NSNotification *)notification{
     switch (CurrentDevice.orientation) {
         case UIInterfaceOrientationLandscapeRight:
             [itemCollection SetGravity:left];
@@ -100,6 +112,25 @@ UIController Delegates
     }
 }
 
+
+-(IBAction)ClickButtonMenu{
+    menuView.hidden = FALSE;
+    menuView.userInteractionEnabled = TRUE;
+    [self.view bringSubviewToFront:menuView];
+    NSLog(@"Button Clicked");
+    
+}
+-(IBAction)ClickButtonResume {
+    menuView.hidden = TRUE;
+    menuView.userInteractionEnabled = FALSE;
+    
+}
+-(IBAction)ClickButtonOptions{
+    [self presentModalViewController:[[Options alloc] initWithNibName:@"Options" bundle:nil] animated:YES];
+}
+-(IBAction)ClickButtonMainMenu{
+    [self dismissModalViewControllerAnimated:YES];
+}
 /*****************************************************
     Touches
  *****************************************************/
@@ -121,25 +152,17 @@ UIController Delegates
     if(![[touch view] isKindOfClass: [LockShape class]])
     {
         GameItem * highlightItem = [itemCollection GetItemFromCoordinate:[touch locationInView:backGround]]; 
-        if(highlightItem != nil && ! highlightItem.IsPaired && [highlightItem isKindOfClass:[Shape class]])
+        if([highlightItem isKindOfClass:[Shape class]] && ! highlightItem.IsPaired)
         {
             Shape * shape = (Shape *) highlightItem;
             [itemCollection AddShapeToSolution:shape];
             shape.tapped = 0;
         }
     }
-    
-    
-	if([[touch view] isKindOfClass: [GameItem class]] && ![[touch view] isKindOfClass: [LockShape class]])
-	{
-		GameItem * item = (GameItem *)[touch view];
-		if(item.IsPaired)
-        {
-			[SpawnedPair move:[touch locationInView: self.view] :item];
-            item.tapped = 0;
-        }
-        
-	}
+    if([[touch view] isMemberOfClass:[UIImageView class]] && [touch view] != backGround)
+    {
+        [SpawnedPair move:[touch locationInView: self.view] :(UIImageView *)[touch view]];
+    }
 }
 
 - (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event {
@@ -154,16 +177,7 @@ UIController Delegates
 			if (item.tapped == 1) 
             {
 				item.tapped = 0;
-				[SpawnedPair rotate:[touch locationInView: self.view] : item];
-			}
-			if(item.center.y > GRID_Y)
-            {
-				if([itemCollection AddItemPair:SpawnedPair])
-                {
-					[self SpawnShapes];
-				}else{
-					[self ResetShapePair:SpawnedPair];
-				}
+				[SpawnedPair rotate:item];
 			}
 		}else
         {
@@ -185,9 +199,26 @@ UIController Delegates
                 }
             }
         }
-        
 	}
+    if([[touch view] isMemberOfClass:[UIImageView class]] && [touch view] != backGround)
+    {
+        if([SpawnedPair IsInGrid])
+        {
+            if([itemCollection AddItemPair:SpawnedPair])
+            {
+                [self SpawnShapes];
+            }else{
+                [self ResetShapePair:SpawnedPair];
+            }
+        }
+    }
+    
 }
+
+
+
+
+
 
 /*****************************************************
 Tear down and maintenance
@@ -199,7 +230,12 @@ Tear down and maintenance
 	// Release any cached data, images, etc that aren't in use.
 }
 
+- (void)viewWillAppear:(BOOL)animated{
+    [self ClickButtonResume];
+}
+
 - (void)viewDidUnload {
+    
 	// Release any retained subviews of the main view.
 	// e.g.  myOutlet = nil;
 }

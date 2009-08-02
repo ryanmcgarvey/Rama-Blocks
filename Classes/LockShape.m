@@ -19,7 +19,6 @@
 -(void)UpdateView{
     if(canSeeColor && canSeeShape)
     {
-        NSLog(@"Can see lock");
         self.backgroundColor = [UIColor clearColor];
         ItemView.alpha = 1.0f;
         return;

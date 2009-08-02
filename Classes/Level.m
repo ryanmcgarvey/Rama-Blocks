@@ -136,7 +136,6 @@ Solution
 -(ShapeType)createShapeFromCollection{
     
     float probabilityCheck = (float)((uint)arc4random())/0xFFFFFFFF;  
-    NSLog(@"Random item: %f", probabilityCheck);
     if(probabilityCheck <= shapeSpawnProbability[Triangle]){
         return Triangle;
     }
@@ -159,7 +158,7 @@ Helpers
  *****************************************************/
 
 -(ShapeType)createRandomShape{
-    return (uint)arc4random() % maxShape;
+    return (uint)arc4random() % (maxShape + 1);
 }
 
 -(ColorType)createRandomColor{
@@ -169,32 +168,54 @@ Helpers
 -(void)setDifficulty:(Difficulty)difficultyToSet{
     
     difficulty = difficultyToSet;
-    NSLog(@"difficulty: %d", difficulty);
     switch (difficulty) {
+        case VeryEasy:
+            maxColor = 2;
+            maxShape = Triangle;
+            lockCount = 3;
+            break;
         case Easy:
             maxColor = 2;
             maxShape = Square;
             lockCount = 3;
             break;
-        case Medium:
+            
+        case SortaEasy:
             maxColor = 3;
             maxShape = Pentagon;
+            lockCount = 3;
+            break;
+        case NotSoEasy:
+            maxColor = 3;
+            maxShape = Hexagon;
+            lockCount = 3;
+            break;
+        case SortaHard:
+            maxColor = 3;
+            maxShape = Hexagon;
             lockCount = 4;
             break;
         case Hard:
+            maxColor = 3;
+            maxShape = Circle;
+            lockCount = 4;
+            break;
+            
+        case VeryHard:
             maxColor = 4;
-            maxShape = Hexagon;
-            lockCount = 5;
+            maxShape = Circle;
+            lockCount = 4;
             break;
         case Impossible:
             maxColor = 5;
             maxShape = Circle;
-            lockCount = 6;
+            lockCount = 5;
             break;
+
         default:
             maxColor = 5;
             maxShape = Circle;
-            lockCount = 6;
+            lockCount = 5;
 
             break;
     }

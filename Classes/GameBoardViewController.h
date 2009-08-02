@@ -17,10 +17,17 @@
 #import "Cell.h"
 #import "Level.h"
 #import "GameState.h"
+#import "Options.h"
 
 
 @interface GameBoardViewController : UIViewController{
 	IBOutlet UIImageView *backGround;
+    IBOutlet UIButton * buttonMenu;
+    IBOutlet UIView * menuView;
+    IBOutlet UIButton * buttonResume;
+    IBOutlet UIButton * buttonOptions;
+    IBOutlet UIButton * buttonMainMenu;
+    
 	ItemPair * SpawnedPair;
 	ItemCollection * itemCollection;
 	NSTimer *TouchTimer;
@@ -28,13 +35,21 @@
     Level * currentLevel;
     SoundEffects * audio;
 }
-
+@property (nonatomic, retain) UIButton * buttonMenu;
+@property (nonatomic, retain) UIButton * buttonResume;
+@property (nonatomic, retain) UIButton * buttonOptions;
+@property (nonatomic, retain) UIButton * buttonMainMenu;
+@property (nonatomic, retain) UIView * menuView;
 
 -(void)resetTap:(NSTimer *)timer;
 -(void)SpawnShapes;
 -(void)ResetShapePair:(ItemPair *)pair;
 -(void)didRotate:(NSNotification *)notification;
 
+-(IBAction)ClickButtonMenu;
+-(IBAction)ClickButtonResume;
+-(IBAction)ClickButtonOptions;
+-(IBAction)ClickButtonMainMenu;
 
 
 

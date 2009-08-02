@@ -23,4 +23,9 @@
 	}
 	return self;
 }
+
+- (void)dealloc {
+    [ItemInCell release];
+    [super dealloc];
+}
 @end

@@ -38,7 +38,7 @@
 #define NUMBER_OF_COLORS 5
 #define NUMBER_OF_SHAPES 5
 
-#define NUMBER_OF_DIFF 4
+#define NUMBER_OF_DIFF 8
 
 
 //     GAME SETTINGS

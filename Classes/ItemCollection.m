@@ -129,7 +129,6 @@
 		[cell.ItemInCell release];		
         cell.ItemInCell = nil;
 	}
-	[TransFormGroup removeAllObjects];
 }
 
 -(NSMutableArray *)CheckTransform:(int)row : (int)column{
@@ -324,7 +323,6 @@
     }
 }
 
-
 -(void)ClearSolution{
     [self UnHighLightShapes];
     [solution removeAllObjects];
@@ -383,6 +381,18 @@
     Cell * cell = [self GetCell:rowA:columnA];
     return cell.ItemInCell;
 }
+
+- (void)dealloc {
+    for(int i = 0; i <NUMBER_OF_ROWS * NUMBER_OF_COLUMNS; i++)
+    {
+        [cells[i] release];
+    }
+    [solution dealloc];
+    [currentLevel dealloc];
+    [super dealloc];
+    
+}
+
 
 
 @end

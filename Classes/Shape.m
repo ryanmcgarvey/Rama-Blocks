@@ -29,6 +29,7 @@
 -(BOOL)ChangeColorAndShape: (ColorType)cType : (ShapeType) sType{
 	colorType = cType;
 	shapeType = sType;
+    [ItemView.image release];
     ItemView.image = [UIImage imageWithColorAndShape: cType : sType];
 	self.backgroundColor = [UIColor clearColor];
 	return TRUE;
@@ -43,7 +44,7 @@
 
 
 
-- (void)dealloc {
+- (void)dealloc {    
     [super dealloc];
 }
 

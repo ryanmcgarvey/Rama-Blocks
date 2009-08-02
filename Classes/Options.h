@@ -17,6 +17,7 @@
 	IBOutlet UISlider *sfxVolume;
 	IBOutlet UISlider *musicVolume;
     IBOutlet UISlider *difficulty;
+    IBOutlet UILabel * difficultyLabel;
     GameState * gameState;
     
 }
@@ -24,7 +25,7 @@
 @property(nonatomic, retain) IBOutlet UISlider *sfxVolume;
 @property(nonatomic, retain) IBOutlet UISlider *musicVolume;
 @property(nonatomic, retain) IBOutlet UISlider *difficulty;
-
+@property (nonatomic, retain) IBOutlet UILabel * difficultyLabel;
 
 - (IBAction)returnToMenu:(id)sender;
 -(IBAction)changeMusicVolume;

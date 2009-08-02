@@ -52,6 +52,7 @@
 		FC4366A11024CCFF00C1F3BE /* bluecircle.png in Resources */ = {isa = PBXBuildFile; fileRef = FC4366871024CCFF00C1F3BE /* bluecircle.png */; };
 		FC4366A31024CD0A00C1F3BE /* BackGround.png in Resources */ = {isa = PBXBuildFile; fileRef = FC4366A21024CD0A00C1F3BE /* BackGround.png */; };
 		FC4366B91024CDA000C1F3BE /* UIImage+Shapes.m in Sources */ = {isa = PBXBuildFile; fileRef = FC4366B71024CDA000C1F3BE /* UIImage+Shapes.m */; };
+		FC4CAD5E10258CDF00C6F863 /* HighLight.png in Resources */ = {isa = PBXBuildFile; fileRef = FC4CAD5D10258CDF00C6F863 /* HighLight.png */; };
 		FCEF155A102118A800A71C1C /* GameItem.m in Sources */ = {isa = PBXBuildFile; fileRef = FCEF1559102118A800A71C1C /* GameItem.m */; };
 		FCEF155D102118F200A71C1C /* Shape.m in Sources */ = {isa = PBXBuildFile; fileRef = FCEF155C102118F200A71C1C /* Shape.m */; };
 		FCEF15601021195F00A71C1C /* PowerItem.m in Sources */ = {isa = PBXBuildFile; fileRef = FCEF155F1021195F00A71C1C /* PowerItem.m */; };
@@ -131,6 +132,7 @@
 		FC4366B61024CDA000C1F3BE /* UIImage+Shapes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+Shapes.h"; sourceTree = "<group>"; };
 		FC4366B71024CDA000C1F3BE /* UIImage+Shapes.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+Shapes.m"; sourceTree = "<group>"; };
 		FC4366B81024CDA000C1F3BE /* GlobalDefines.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GlobalDefines.h; sourceTree = "<group>"; };
+		FC4CAD5D10258CDF00C6F863 /* HighLight.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = HighLight.png; sourceTree = "<group>"; };
 		FCEF1558102118A800A71C1C /* GameItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GameItem.h; sourceTree = "<group>"; };
 		FCEF1559102118A800A71C1C /* GameItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GameItem.m; sourceTree = "<group>"; };
 		FCEF155B102118F200A71C1C /* Shape.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Shape.h; sourceTree = "<group>"; };
@@ -371,6 +373,7 @@
 		FCEF17D31021644E00A71C1C /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				FC4CAD5D10258CDF00C6F863 /* HighLight.png */,
 				FC4366A21024CD0A00C1F3BE /* BackGround.png */,
 				FC43666E1024CCFF00C1F3BE /* greensquare.png */,
 				FC43666F1024CCFF00C1F3BE /* yellowtriangle.png */,
@@ -498,6 +501,7 @@
 				FC0B6C0D102537FB00F1BD5E /* correctColor.wav in Resources */,
 				FC0B6C0E102537FB00F1BD5E /* correctShape.wav in Resources */,
 				FC0B6C0F102537FB00F1BD5E /* victory.wav in Resources */,
+				FC4CAD5E10258CDF00C6F863 /* HighLight.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

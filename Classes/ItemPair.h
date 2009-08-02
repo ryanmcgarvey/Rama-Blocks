@@ -14,15 +14,22 @@
 @public;
     GameItem * ItemA;
 	GameItem * ItemB;
+    UIImageView * GrabberA;
+    UIImageView * GrabberB;
 	int Orientation;
 }
 
 @property (readwrite, retain) GameItem * ItemA;
 @property (readwrite, retain) GameItem * ItemB;
+@property (readwrite, assign) UIImageView * GrabberA;
+@property (readwrite, assign) UIImageView *GrabberB;
 @property int Orientation;
 
-- (void)rotate:(CGPoint)location :(GameItem *)touched;
-- (void)move:(CGPoint)location:(GameItem *)touched;
+-(void)Reset;
+- (void)rotate:(GameItem *)touched;
+- (void)move:(CGPoint)location:(UIImageView *)touched;
 - (BOOL)checkBounds;
+
+-(BOOL)IsInGrid;
 
 @end

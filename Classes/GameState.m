@@ -15,7 +15,7 @@
 
 -(id)init{
     audio = [SoundEffects new];
-    currentDifficulty = Easy;
+    currentDifficulty = VeryEasy;
     return self;
 }
 

@@ -11,14 +11,16 @@
 
 @implementation Options
 
-@synthesize sfxVolume, musicVolume, difficulty;
+@synthesize sfxVolume, musicVolume, difficulty, difficultyLabel;
 
 - (void)viewDidLoad {
     Rama_BlocksAppDelegate * appDelegate =  (Rama_BlocksAppDelegate *)[[UIApplication sharedApplication] delegate];
     gameState = appDelegate.gameState;
     sfxVolume.value = gameState.audio.volume;
-
-    difficulty.value = (float)gameState.currentDifficulty / NUMBER_OF_DIFF;
+    difficulty.maximumValue = NUMBER_OF_DIFF - 1;
+    difficulty.minimumValue = 0;
+    difficulty.value = gameState.currentDifficulty;
+    [self changeDifficulty];
     
     [super viewDidLoad];
 }
@@ -39,10 +41,34 @@
     gameState.audio.volume = sfxVolume.value;
 }
 -(void)changeDifficulty{
-    Difficulty diff = (Difficulty)(difficulty.value * NUMBER_OF_DIFF);
-    NSLog(@"Setting Difficulty %d", diff);
-    if(diff == NUMBER_OF_DIFF)
-        diff--;
+    Difficulty diff = (Difficulty)(difficulty.value);
+    switch (diff) {
+        case VeryEasy:
+            difficultyLabel.text = @"Very Easy";
+            break;
+        case Easy:
+            difficultyLabel.text = @"Easy";
+            break;
+        case SortaEasy:
+            difficultyLabel.text = @"Sorta Easy";
+            break;
+        case NotSoEasy:
+            difficultyLabel.text = @"Not So Easy";
+            break;
+        case SortaHard:
+            difficultyLabel.text = @"Sorta Hard";
+            break;
+        case Hard:
+           difficultyLabel.text = @"Hard";
+            break;
+        case VeryHard:
+            difficultyLabel.text = @"Very Hard";
+            break;
+        case Impossible:
+            difficultyLabel.text = @"Impossible";
+            break;
+    }
+    
     gameState.currentDifficulty = diff;
 }
 
