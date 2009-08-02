@@ -21,9 +21,10 @@
 @property ColorType colorType;
 
 
-- (id)initWithInfo:(CGRect)frame : (ColorType)cType : (ShapeType) sType;
+- (id)initWithInfo:(ColorType)cType : (ShapeType) sType : (CGPoint)location;
 - (BOOL)ChangeColorAndShape: (ColorType)cType : (ShapeType) sType;
 - (BOOL)TransForm;
 -(BOOL)Equals:(Shape *)shape;
+-(BOOL)IsNeighbor:(Shape *)shape;
 
 @end

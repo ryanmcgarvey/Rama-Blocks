@@ -13,10 +13,12 @@
 
 @synthesize shapeType, colorType;
 
-- (id)initWithInfo:(CGRect)frame : (ColorType)cType : (ShapeType) sType{    
+- (id)initWithInfo:(ColorType)cType : (ShapeType) sType:(CGPoint)location{  
+    CGRect frame = CGRectMake(0.0f, 0.0f, SHAPE_WIDTH, SHAPE_WIDTH);
     if (self = [super initWithFrame:frame]) 
     {
-        ItemView = [[UIImageView alloc] initWithFrame:CGRectMake(0.0f, 0.0f, SHAPE_WIDTH, SHAPE_WIDTH)];
+        self.center = location;
+        ItemView = [[UIImageView alloc] initWithFrame:frame];
 		[self ChangeColorAndShape: cType : sType];  
         [self addSubview:ItemView];
     }
@@ -47,7 +49,13 @@
 
 -(BOOL)Equals:(Shape *)shape{
     
-    return(shapeType == shape->shapeType && colorType == shape->colorType);
+    return(shapeType == shape.shapeType && colorType == shape.colorType);
 }
 
+-(BOOL)IsNeighbor:(Shape *)shape{
+    uint row = abs(Row - shape.Row);
+    uint column = abs(Column - shape.Column);
+    
+    return ( (column == 0 && row ==1) || (column == 1 && row == 0));
+}
 @end

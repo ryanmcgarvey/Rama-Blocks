@@ -12,6 +12,7 @@
 #import "GlobalDefines.h"
 #import "ItemPair.h"
 #import "Shape.h"
+#import "Level.h"
 
 typedef enum enum_Gravity {
     zero,
@@ -30,10 +31,11 @@ typedef enum enum_Gravity {
 	int RowPixelLength;
 	int ColumnPixelLength;
     Gravity gravityDirection;
-	ShapeType complexity;
+    NSMutableArray * solution;
+    Level * currentLevel;
 }
 
--(id)init: (int) rows : (int) columns : (int)rowPixelLength : (int)columnPixelLength;
+-(id)init: (int) rows : (int) columns : (int)rowPixelLength : (int)columnPixelLength : (Level *)level;
 
 -(BOOL)AddItemPair: (ItemPair *)itemPair;
 
@@ -43,7 +45,7 @@ typedef enum enum_Gravity {
 -(Cell *)GetCell:(int)row : (int)column;
 -(Cell *)GetCell:(GameItem *) item;
 
--(void)TransformItem:(GameItem*)shape;
+-(BOOL)TransformItem:(GameItem*)shape;
 
 -(void)RemoveFromCellsAndRefactor:(NSMutableArray *)TransFormGroup;
 
@@ -57,5 +59,10 @@ typedef enum enum_Gravity {
 -(void)SetGravity:(Gravity)gravity;
 -(void)ApplyGravityToCell:(Cell *)cell;
 
--(ShapeType)getComplexity;
+-(void)HighLightShapes;
+-(void)UnHighLightShapes;
+-(void)AddShapeToSolution:(Shape *)shape;
+-(BOOL)CheckSolution;
+
+-(GameItem *)GetItemFromCoordinate:(CGPoint) point;
 @end

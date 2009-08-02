@@ -15,6 +15,7 @@
 #import "ItemCollection.h"
 #import "GlobalDefines.h"
 #import "Cell.h"
+#import "Level.h"
 
 
 @interface GameBoardViewController : UIViewController{
@@ -22,8 +23,9 @@
 	ItemPair * SpawnedPair;
 	ItemCollection * itemCollection;
 	NSTimer *TouchTimer;
-	int complexity;
-    UIDevice * CurrentDevice;	
+
+    UIDevice * CurrentDevice;
+    Level * currentLevel;
 }
 
 

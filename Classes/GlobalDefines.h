@@ -34,3 +34,8 @@
 
 #define NUMBER_OF_COLORS 5
 #define NUMBER_OF_SHAPES 5
+
+
+//     GAME SETTINGS
+
+

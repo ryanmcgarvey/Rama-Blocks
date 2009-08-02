@@ -11,9 +11,10 @@
 
 @implementation ItemCollection
 
--(id)init: (int) rows : (int) columns : (int)rowPixelLength : (int)columnPixelLength{	
+-(id)init: (int) rows : (int) columns : (int)rowPixelLength : (int)columnPixelLength : (Level *) level{	
 
-	complexity = 0;
+	currentLevel = [level retain];
+    solution = [NSMutableArray new];
 	gravityDirection = down;
 	RowLength = rows;
 	ColumnLength = columns;
@@ -88,55 +89,47 @@
 	
 	itemPair.ItemA.IsPaired = FALSE;
 	itemPair.ItemB.IsPaired = FALSE;
+    [currentLevel addItem:itemPair.ItemA];
+    [currentLevel addItem:itemPair.ItemB];
     [self ApplyGravity];
 	return TRUE;
 }
 
--(ShapeType)getComplexity{
-	return complexity;
-}
 
 
 /**************************************
  TRANSFORMS
  **************************************/
--(void)TransformItem:(GameItem*)item{
+-(BOOL)TransformItem:(GameItem*)item{
+    BOOL couldTransform = FALSE;
     if([item isKindOfClass: [Shape class]])
     {
         Shape * shape = (Shape *)item;
         NSMutableArray * transFormGroup = [self CheckTransform : item];
         Cell * cell = [self GetCell:item];
-        if([transFormGroup count] >= 2)
+        if([transFormGroup count] > 2)
         {
             [transFormGroup removeObject:cell];
             [self RemoveFromCellsAndRefactor: transFormGroup];
-
-            if(shape.shapeType == Triangle && complexity < 1){
-                complexity = 2;
-            }
-            if(shape.shapeType == Square && complexity < 2){
-                complexity = 3;
-            }
-            if(shape.shapeType == Pentagon && complexity < 3){
-                complexity = 4;
-            }
-            if(shape.shapeType == Hexagon && complexity < 4){
-                complexity = 5;
-            }	
             [shape TransForm];
+            [currentLevel addItem:shape];
             [self CheckTransform:item];
+            couldTransform = TRUE;
         }
 	[transFormGroup removeAllObjects];
     [self ApplyGravity];
     }
+    return couldTransform;
+    
 }
+
 -(void)RemoveFromCellsAndRefactor:(NSMutableArray *)TransFormGroup{
+    [currentLevel removeItems:TransFormGroup];
 	for(Cell * cell in TransFormGroup){
 		//NSLog(@"Removing shape");
 		[cell.ItemInCell removeFromSuperview];
 		[cell.ItemInCell release];		
         cell.ItemInCell = nil;
-		
 	}
 	[TransFormGroup removeAllObjects];
 }
@@ -155,21 +148,33 @@
             Cell * neighbor = nil;
             //Check right
             neighbor = [self GetCell:cell.Row + 1 : cell.Column];
-            if(neighbor != nil && !neighbor.IsTransforming && neighbor.ItemInCell != nil && 
+            if(!neighbor.IsTransforming && neighbor.ItemInCell != nil && 
                [shape Equals:(Shape *)neighbor.ItemInCell])
             {
                 [TransformGroup addObjectsFromArray:[self CheckTransform:neighbor.Row: neighbor.Column]];
             }
             //Check left
             neighbor = [self GetCell:cell.Row - 1 : cell.Column];
-
+            if(!neighbor.IsTransforming && neighbor.ItemInCell != nil && 
+               [shape Equals:(Shape *)neighbor.ItemInCell])
+            {
+                [TransformGroup addObjectsFromArray:[self CheckTransform:neighbor.Row: neighbor.Column]];
+            }
             //Check up
             neighbor = [self GetCell:cell.Row  : cell.Column + 1];
-
+            if(!neighbor.IsTransforming && neighbor.ItemInCell != nil && 
+               [shape Equals:(Shape *)neighbor.ItemInCell])
+            {
+                [TransformGroup addObjectsFromArray:[self CheckTransform:neighbor.Row: neighbor.Column]];
+            }
             //Check down
             neighbor = [self GetCell:cell.Row  : cell.Column - 1];
+            if(!neighbor.IsTransforming && neighbor.ItemInCell != nil && 
+               [shape Equals:(Shape *)neighbor.ItemInCell])
+            {
+                [TransformGroup addObjectsFromArray:[self CheckTransform:neighbor.Row: neighbor.Column]];
+            }
 
-            NSLog(@"adding self");
             [TransformGroup addObject:cell];
             cell.IsTransforming = FALSE;
         }
@@ -178,20 +183,13 @@
 	
 }
 
-
-
-
 -(NSMutableArray *)CheckTransform:(Shape *)shape{
 	return [self CheckTransform:shape.Row : shape.Column];
 }
 
-
-
 /**************************************
  GRAVITY
  **************************************/
-
-
 -(void)SetGravity:(Gravity)gravity{
     gravityDirection = gravity;
     [self ApplyGravity];
@@ -300,6 +298,45 @@
             return nil;
     }
 }
+/**************************************
+ Solution
+ **************************************/
+
+-(void)HighLightShapes{
+    for(Shape * shape in solution)
+    {
+        [shape setBackgroundColor:[UIColor lightGrayColor]];
+    }
+}
+-(void)UnHighLightShapes{
+    for(Shape * shape in solution)
+    {
+        [shape setBackgroundColor:[UIColor clearColor]];
+    }
+}
+-(void)AddShapeToSolution:(Shape *)shape{
+    
+    if(shape != nil)
+    {
+        if([solution count] ==0 || [shape IsNeighbor:[solution lastObject]] &&![solution containsObject:shape]  )
+        {
+            [solution addObject:shape];
+            [self HighLightShapes];
+        }
+    }
+}
+
+-(BOOL)CheckSolution{
+    
+    BOOL isCorrect = [currentLevel checkSolution:solution];
+    
+    [self UnHighLightShapes];
+    [solution removeAllObjects];
+    
+    return isCorrect;
+}
+
+
 
 /**************************************
  Helpers
@@ -333,6 +370,17 @@
 }
 -(Cell *)GetCell:(GameItem *)item{
 	return [self GetCell:item.Row :item.Column];
+}
+
+-(GameItem *)GetItemFromCoordinate:(CGPoint) point{
+    // Which column is each shape in
+	int columnA = (int)(point.x - GRID_LEFT_EDGE  ) / (int)SHAPE_WIDTH;
+	
+	// Which column is each shape in
+	int rowA = (int)(GRID_Y_BOTTOM - point.y + (SHAPE_WIDTH / 2)) / (int)SHAPE_WIDTH;
+    
+    Cell * cell = [self GetCell:rowA:columnA];
+    return cell.ItemInCell;
 }
 
 @end

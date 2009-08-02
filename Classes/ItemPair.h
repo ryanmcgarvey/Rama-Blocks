@@ -22,7 +22,7 @@
 @property int Orientation;
 
 - (void)rotate:(CGPoint)location :(GameItem *)touched;
-- (void)moveShape:(CGPoint)location:(GameItem *)touched;
+- (void)move:(CGPoint)location:(GameItem *)touched;
 - (BOOL)checkBounds;
 
 @end

@@ -14,10 +14,10 @@
 
 - (void)rotate:(CGPoint)location :(GameItem *)touched{
     Orientation = ++Orientation % 4;
-	[self moveShape:location :touched];
+	[self move:location :touched];
 }
 
-- (void)moveShape:(CGPoint)location:(GameItem *)touched{
+- (void)move:(CGPoint)location:(GameItem *)touched{
     GameItem* moving;
 	touched.center = location;
 	if(touched==ItemA){

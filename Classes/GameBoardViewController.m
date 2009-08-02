@@ -20,37 +20,32 @@ GameBoard Behavior
 	if(SpawnedPair==nil)
 		SpawnedPair = [ItemPair new];
 	
-	int currentComplex = [itemCollection getComplexity];
-	if(complexity < currentComplex){
-		complexity = currentComplex;
-	}
-		
-    [SpawnedPair->ItemA release];
-    SpawnedPair->ItemA = [[Shape alloc] initWithInfo:CGRectMake(SPAWN_LOCATION_X, SPAWN_LOCATION_Y, 30.0f, 30.0f)  : (uint)arc4random() % NUMBER_OF_COLORS :(uint)arc4random() % NUMBER_OF_SHAPES];
-    [ self.view addSubview:SpawnedPair->ItemA];
+    [SpawnedPair.ItemA release];
+    SpawnedPair.ItemA = [[Shape alloc] initWithInfo:[currentLevel createRandomColor]: [currentLevel createShapeFromCollection] : CGPointMake(SPAWN_LOCATION_X,SPAWN_LOCATION_Y)];
+    [ self.view addSubview:SpawnedPair.ItemA];
     
-    [SpawnedPair->ItemB release];
-    SpawnedPair->ItemB = [[Shape alloc] initWithInfo:CGRectMake((SPAWN_LOCATION_X + SHAPE_WIDTH), SPAWN_LOCATION_Y, 30.0f, 30.0f)  : (uint)arc4random() % NUMBER_OF_COLORS :(uint)arc4random() % NUMBER_OF_SHAPES];
-    [ self.view addSubview:SpawnedPair->ItemB];
+    [SpawnedPair.ItemB release];
+    SpawnedPair.ItemB = [[Shape alloc] initWithInfo:[currentLevel createRandomColor]: [currentLevel createShapeFromCollection] : CGPointMake(SPAWN_LOCATION_X + SHAPE_WIDTH ,SPAWN_LOCATION_Y)];
+    [ self.view addSubview:SpawnedPair.ItemB];
 }
 
 
 - (void)resetTap:(NSTimer *)tapTimer 
 {
 	GameItem *tappedShape = (GameItem *)[tapTimer userInfo];
-	tappedShape->tapped = 0;
+	tappedShape.tapped = 0;
 }
 
 -(void)ResetShapePair:(ItemPair *)pair{
-	pair->ItemA.center = CGPointMake((SPAWN_LOCATION_X), SPAWN_LOCATION_Y);
-	pair->ItemB.center = CGPointMake((SPAWN_LOCATION_X + SHAPE_WIDTH), SPAWN_LOCATION_Y);
+	pair.ItemA.center = CGPointMake((SPAWN_LOCATION_X), SPAWN_LOCATION_Y);
+	pair.ItemB.center = CGPointMake((SPAWN_LOCATION_X + SHAPE_WIDTH), SPAWN_LOCATION_Y);
 }
 
 /*****************************************************
 UIController Delegates
 *****************************************************/
 - (void)viewDidLoad {
-	
+	currentLevel = [[Level alloc] init:Easy];
 	// Create grid
 	grid = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 320, 480)];
 	grid.clipsToBounds = YES;
@@ -60,79 +55,20 @@ UIController Delegates
      self.view.backgroundColor = [UIColor blackColor];
 	[self.view addSubview:grid];
     
-    itemCollection = [[ItemCollection alloc] init:NUMBER_OF_ROWS :NUMBER_OF_COLUMNS :SHAPE_WIDTH :SHAPE_WIDTH];
+    itemCollection = [[ItemCollection alloc] init:NUMBER_OF_ROWS :NUMBER_OF_COLUMNS :SHAPE_WIDTH :SHAPE_WIDTH: currentLevel];
 	SpawnedPair = [[ItemPair new]retain];
-	complexity = 0;
+
 	CurrentDevice = [UIDevice currentDevice];
     [CurrentDevice beginGeneratingDeviceOrientationNotifications];
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(didRotate:)
                                                  name:@"UIDeviceOrientationDidChangeNotification" object:nil];
     
-	//[ view addObject:flip]; 
+    
     [self didRotate:nil];
 	[self SpawnShapes];
     [super viewDidLoad];
 }
-
-- (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
-	UITouch *touch = [[event allTouches] anyObject];
-	
-	if([[touch view] isKindOfClass: [GameItem class]])
-	{
-		GameItem * touchedItem = (GameItem *)[touch view];
-		if(touchedItem.IsPaired)
-		{
-			[TouchTimer invalidate];
-			touchedItem.tapped++;
-			TouchTimer = [[NSTimer scheduledTimerWithTimeInterval:TAP_WAIT_TIME target:self selector:@selector(resetTap:) userInfo:touchedItem repeats:NO] retain];
-		}else{
-			[itemCollection TransformItem:touchedItem];
-		}
-	}
-}
-
-- (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event {
-	UITouch *touch = [[event allTouches] anyObject];
-	/* Shape was touched */
-	if([[touch view] isKindOfClass: [GameItem class]])
-	{
-		GameItem * item = (GameItem *)[touch view];
-		
-		if(item->IsPaired)
-		{
-			if (item.tapped == 1) 
-            {
-				item.tapped = 0;
-				[SpawnedPair rotate:[touch locationInView: self.view] : item];
-			}
-			if(item.center.y > GRID_Y)
-            {
-				if([itemCollection AddItemPair:SpawnedPair])
-                {
-					[self SpawnShapes];
-				}else{
-					[self ResetShapePair:SpawnedPair];
-				}
-			}
-		}
-	}
-}
-
-- (void)touchesMoved:(NSSet *)touches withEvent:(UIEvent *)event {
-	UITouch *touch = [[event allTouches] anyObject];
-	if([[touch view] isKindOfClass: [GameItem class]])
-	{
-		GameItem * item = (GameItem *)[touch view];
-		if(item->IsPaired)
-        {
-			[SpawnedPair moveShape:[touch locationInView: self.view] :item];
-        }
-	}
-}
-
-
-
 
 
 -(void)didRotate:(NSNotification *)notification
@@ -155,6 +91,89 @@ UIController Delegates
     }
 }
 
+/*****************************************************
+    Touches
+ *****************************************************/
+
+
+- (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
+	UITouch *touch = [[event allTouches] anyObject];
+	
+	if([[touch view] isKindOfClass: [GameItem class]])
+	{
+		GameItem * touchedItem = (GameItem *)[touch view];
+        touchedItem.tapped++;
+        TouchTimer = [[NSTimer scheduledTimerWithTimeInterval:TAP_WAIT_TIME target:self selector:@selector(resetTap:) userInfo:touchedItem repeats:NO] retain];
+	}
+}
+
+- (void)touchesMoved:(NSSet *)touches withEvent:(UIEvent *)event {
+	UITouch *touch = [[event allTouches] anyObject];
+    
+    GameItem * highlightItem = [itemCollection GetItemFromCoordinate:[touch locationInView:grid]]; 
+    if(highlightItem != nil && ! highlightItem.IsPaired && [highlightItem isKindOfClass:[Shape class]]){
+        Shape * shape = (Shape *) highlightItem;
+        [itemCollection AddShapeToSolution:shape];
+        shape.tapped = 0;
+    }
+    
+    
+	if([[touch view] isKindOfClass: [GameItem class]])
+	{
+		GameItem * item = (GameItem *)[touch view];
+		if(item.IsPaired)
+        {
+			[SpawnedPair move:[touch locationInView: self.view] :item];
+            item.tapped = 0;
+        }
+        
+	}
+}
+
+- (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event {
+	UITouch *touch = [[event allTouches] anyObject];
+	/* Shape was touched */
+	if([[touch view] isKindOfClass: [GameItem class]])
+	{
+		GameItem * item = (GameItem *)[touch view];
+		
+		if(item.IsPaired)
+		{
+			if (item.tapped == 1) 
+            {
+				item.tapped = 0;
+				[SpawnedPair rotate:[touch locationInView: self.view] : item];
+			}
+			if(item.center.y > GRID_Y)
+            {
+				if([itemCollection AddItemPair:SpawnedPair])
+                {
+					[self SpawnShapes];
+				}else{
+					[self ResetShapePair:SpawnedPair];
+				}
+			}
+		}else
+        {
+            if(item.tapped > 0)
+            {
+                item.tapped = 0;
+                if([itemCollection TransformItem:item])
+                {
+                    //play sound
+                }
+            }
+            else
+            {
+                if([itemCollection CheckSolution])
+                {
+                    //play sound
+                }
+            }
+        }
+        
+	}
+}
 
 /*****************************************************
 Tear down and maintenance

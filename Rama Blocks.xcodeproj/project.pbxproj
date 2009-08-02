@@ -63,6 +63,7 @@
 		FCEF170410214F0400A71C1C /* MainMenuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FCEF16FA10214F0400A71C1C /* MainMenuViewController.m */; };
 		FCEF170510214F0400A71C1C /* GameBoardViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FCEF16FC10214F0400A71C1C /* GameBoardViewController.m */; };
 		FCEF176610215A7400A71C1C /* ItemCollection.m in Sources */ = {isa = PBXBuildFile; fileRef = FCEF157410212A8800A71C1C /* ItemCollection.m */; };
+		FCFD28401024F04B000313B3 /* Level.m in Sources */ = {isa = PBXBuildFile; fileRef = FCFD283F1024F04B000313B3 /* Level.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -141,6 +142,8 @@
 		FCEF16FA10214F0400A71C1C /* MainMenuViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainMenuViewController.m; sourceTree = "<group>"; };
 		FCEF16FB10214F0400A71C1C /* GameBoardViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GameBoardViewController.h; sourceTree = "<group>"; };
 		FCEF16FC10214F0400A71C1C /* GameBoardViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GameBoardViewController.m; sourceTree = "<group>"; };
+		FCFD283E1024F04B000313B3 /* Level.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Level.h; sourceTree = "<group>"; };
+		FCFD283F1024F04B000313B3 /* Level.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Level.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -261,8 +264,8 @@
 				FCEF155C102118F200A71C1C /* Shape.m */,
 				FCEF155E1021195F00A71C1C /* PowerItem.h */,
 				FCEF155F1021195F00A71C1C /* PowerItem.m */,
-				FCEF156A102128AF00A71C1C /* ItemPair.h */,
-				FCEF156B102128AF00A71C1C /* ItemPair.m */,
+				FCFD283E1024F04B000313B3 /* Level.h */,
+				FCFD283F1024F04B000313B3 /* Level.m */,
 			);
 			name = Items;
 			sourceTree = "<group>";
@@ -279,6 +282,8 @@
 		FCEF156910211DEA00A71C1C /* Collections */ = {
 			isa = PBXGroup;
 			children = (
+				FCEF156A102128AF00A71C1C /* ItemPair.h */,
+				FCEF156B102128AF00A71C1C /* ItemPair.m */,
 				FCEF157310212A8800A71C1C /* ItemCollection.h */,
 				FCEF157410212A8800A71C1C /* ItemCollection.m */,
 				FCEF157D10212AB300A71C1C /* Cell.h */,
@@ -464,6 +469,7 @@
 				FCEF170510214F0400A71C1C /* GameBoardViewController.m in Sources */,
 				FCEF176610215A7400A71C1C /* ItemCollection.m in Sources */,
 				FC4366B91024CDA000C1F3BE /* UIImage+Shapes.m in Sources */,
+				FCFD28401024F04B000313B3 /* Level.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

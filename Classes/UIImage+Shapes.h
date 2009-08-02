@@ -24,8 +24,6 @@ typedef enum enum_ColorType {
 	Yellow,
 	Green,
 	Blue,
-	
-	
 } ColorType;
 
 @interface UIImage (Shapes)
