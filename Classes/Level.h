@@ -29,15 +29,18 @@ typedef enum enum_Difficulty {
     float shapeSpawnProbability [NUMBER_OF_SHAPES];
     int totalShapes [NUMBER_OF_SHAPES];
     
+    
+    
     ColorType maxColor;
     ShapeType maxShape;
     int lockCount;
     
     int attempts;
+    
 }
 
 @property (readonly) Difficulty difficulty;
-@property (readonly) int attempts;
+@property int attempts;
 
 
 -(id)init:(Difficulty)predefinedDifficulty;

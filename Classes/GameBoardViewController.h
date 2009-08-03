@@ -27,6 +27,7 @@
     IBOutlet UIButton * buttonResume;
     IBOutlet UIButton * buttonOptions;
     IBOutlet UIButton * buttonMainMenu;
+    IBOutlet UILabel * attemptsString;
     
 	ItemPair * SpawnedPair;
 	ItemCollection * itemCollection;
@@ -40,6 +41,7 @@
 @property (nonatomic, retain) UIButton * buttonOptions;
 @property (nonatomic, retain) UIButton * buttonMainMenu;
 @property (nonatomic, retain) UIView * menuView;
+@property (nonatomic, retain) UILabel * attemptsString;
 
 -(void)resetTap:(NSTimer *)timer;
 -(void)SpawnShapes;

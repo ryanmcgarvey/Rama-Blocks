@@ -53,6 +53,8 @@
 		FC4366A31024CD0A00C1F3BE /* BackGround.png in Resources */ = {isa = PBXBuildFile; fileRef = FC4366A21024CD0A00C1F3BE /* BackGround.png */; };
 		FC4366B91024CDA000C1F3BE /* UIImage+Shapes.m in Sources */ = {isa = PBXBuildFile; fileRef = FC4366B71024CDA000C1F3BE /* UIImage+Shapes.m */; };
 		FC4CAD5E10258CDF00C6F863 /* HighLight.png in Resources */ = {isa = PBXBuildFile; fileRef = FC4CAD5D10258CDF00C6F863 /* HighLight.png */; };
+		FC4CADC31026101E00C6F863 /* RamaIcon.png in Resources */ = {isa = PBXBuildFile; fileRef = FC4CADC21026101E00C6F863 /* RamaIcon.png */; };
+		FC4CAE4010267B2700C6F863 /* levelStatistics.m in Sources */ = {isa = PBXBuildFile; fileRef = FC4CAE3F10267B2700C6F863 /* levelStatistics.m */; };
 		FCEF155A102118A800A71C1C /* GameItem.m in Sources */ = {isa = PBXBuildFile; fileRef = FCEF1559102118A800A71C1C /* GameItem.m */; };
 		FCEF155D102118F200A71C1C /* Shape.m in Sources */ = {isa = PBXBuildFile; fileRef = FCEF155C102118F200A71C1C /* Shape.m */; };
 		FCEF15601021195F00A71C1C /* PowerItem.m in Sources */ = {isa = PBXBuildFile; fileRef = FCEF155F1021195F00A71C1C /* PowerItem.m */; };
@@ -133,6 +135,9 @@
 		FC4366B71024CDA000C1F3BE /* UIImage+Shapes.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+Shapes.m"; sourceTree = "<group>"; };
 		FC4366B81024CDA000C1F3BE /* GlobalDefines.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GlobalDefines.h; sourceTree = "<group>"; };
 		FC4CAD5D10258CDF00C6F863 /* HighLight.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = HighLight.png; sourceTree = "<group>"; };
+		FC4CADC21026101E00C6F863 /* RamaIcon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = RamaIcon.png; sourceTree = "<group>"; };
+		FC4CAE3E10267B2700C6F863 /* levelStatistics.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = levelStatistics.h; sourceTree = "<group>"; };
+		FC4CAE3F10267B2700C6F863 /* levelStatistics.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = levelStatistics.m; sourceTree = "<group>"; };
 		FCEF1558102118A800A71C1C /* GameItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GameItem.h; sourceTree = "<group>"; };
 		FCEF1559102118A800A71C1C /* GameItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GameItem.m; sourceTree = "<group>"; };
 		FCEF155B102118F200A71C1C /* Shape.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Shape.h; sourceTree = "<group>"; };
@@ -230,6 +235,7 @@
 		29B97317FDCFA39411CA2CEA /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				FC4CADC21026101E00C6F863 /* RamaIcon.png */,
 				FC0B6C07102537FB00F1BD5E /* Audio */,
 				FCEF17D41021645900A71C1C /* Nibs */,
 				FCEF17D31021644E00A71C1C /* Images */,
@@ -325,6 +331,8 @@
 				FCEF155F1021195F00A71C1C /* PowerItem.m */,
 				FCFD283E1024F04B000313B3 /* Level.h */,
 				FCFD283F1024F04B000313B3 /* Level.m */,
+				FC4CAE3E10267B2700C6F863 /* levelStatistics.h */,
+				FC4CAE3F10267B2700C6F863 /* levelStatistics.m */,
 			);
 			name = Items;
 			sourceTree = "<group>";
@@ -505,6 +513,7 @@
 				FC0B6C0E102537FB00F1BD5E /* correctShape.wav in Resources */,
 				FC0B6C0F102537FB00F1BD5E /* victory.wav in Resources */,
 				FC4CAD5E10258CDF00C6F863 /* HighLight.png in Resources */,
+				FC4CADC31026101E00C6F863 /* RamaIcon.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -537,6 +546,7 @@
 				FC0B6B7910252C6000F1BD5E /* SoundEffects.m in Sources */,
 				FC0B6B7C10252E0A00F1BD5E /* SoundPlayer.m in Sources */,
 				FC0B6C3710253AC700F1BD5E /* GameState.m in Sources */,
+				FC4CAE4010267B2700C6F863 /* levelStatistics.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -595,12 +605,12 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Simplical";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Ryan McGarvey (LELSNRL4WS)";
 				GCC_C_LANGUAGE_STANDARD = c99;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				PREBINDING = NO;
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "A5E638FA-3823-4C88-8B2A-2D4BFCC1F049";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "93C36F19-4585-4EB8-BD9D-9382D6485332";
 				SDKROOT = iphoneos3.0;
 			};
 			name = Release;
