@@ -17,6 +17,11 @@
     
     int totalTransform [NUMBER_OF_COLORS][NUMBER_OF_SHAPES];
     
+    //time info
+    //gravity stats
+    //num transforms
+    //
+    
 }
 
 @property int attempts;
