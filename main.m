@@ -4,7 +4,6 @@
 //
 //  Created by Ryan McGarvey on 7/29/09.
 //  Copyright Simplical 2009. All rights reserved.
-//
 
 #import <UIKit/UIKit.h>
 
