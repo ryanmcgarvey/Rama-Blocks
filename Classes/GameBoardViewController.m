@@ -62,7 +62,7 @@ UIController Delegates
     audio = appDelegate.gameState.audio;
     Difficulty diff = appDelegate.gameState.currentDifficulty;
     
-	// Create background
+	//// Create background
 	backGround = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 320, 480)];
 	backGround.clipsToBounds = YES;
 	backGround.autoresizesSubviews = NO;
