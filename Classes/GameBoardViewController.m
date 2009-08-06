@@ -90,6 +90,8 @@ UIController Delegates
     
     
     
+    
+    
     [self didRotate:nil];
 	[self SpawnShapes];
     [super viewDidLoad];
