@@ -28,7 +28,7 @@
         [player prepareToPlay];
     }
 
-return self;
+    return self;
 }
 
 -(void)changeVolume:(float)volumeToSet{

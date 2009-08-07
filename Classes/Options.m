@@ -29,6 +29,8 @@
 - (IBAction)returnToMenu:(id)sender 
 {
 	[self dismissModalViewControllerAnimated:YES];
+    Rama_BlocksAppDelegate * appDelegate =  (Rama_BlocksAppDelegate *)[[UIApplication sharedApplication] delegate];
+    [appDelegate saveEncodedGameState];
 }
 
 - (IBAction)changeShapeColors{
@@ -39,6 +41,7 @@
 }
 -(void)changeSfxVolume{
     gameState.audio.volume = sfxVolume.value;
+    
 }
 -(void)changeDifficulty{
     Difficulty diff = (Difficulty)(difficulty.value);
@@ -83,8 +86,7 @@
 }
 
 - (void)viewDidUnload {
-	// Release any retained subviews of the main view.
-	// e.g. self.myOutlet = nil;
+    
 }
 
 

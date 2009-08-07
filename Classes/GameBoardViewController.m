@@ -9,7 +9,7 @@
 #import "GameBoardViewController.h"
 #import "Rama_BlocksAppDelegate.h"
 @implementation GameBoardViewController
-@synthesize buttonMenu, buttonOptions, buttonMainMenu, buttonResume, menuView;
+@synthesize buttonMenu, buttonOptions, buttonMainMenu, buttonResume, menuView, attemptsString;
 
 
 
@@ -59,7 +59,8 @@ UIController Delegates
 *****************************************************/
 - (void)viewDidLoad {   
     Rama_BlocksAppDelegate * appDelegate =  (Rama_BlocksAppDelegate *)[[UIApplication sharedApplication] delegate];
-    audio = appDelegate.gameState.audio;
+    GameState * gameState = [appDelegate loadEncodedGameState];
+    audio = [gameState GetAudioPlayer];
     Difficulty diff = appDelegate.gameState.currentDifficulty;
     
 	// Create background
@@ -70,9 +71,12 @@ UIController Delegates
 	 backGround.image = [[UIImage imageNamed:@"BackGround.png"] retain];
     backGround.userInteractionEnabled = FALSE;
     self.view.backgroundColor = [UIColor blackColor];
+    [self.view sendSubviewToBack:backGround];
+    
 	[self.view addSubview:backGround];
     [self.view bringSubviewToFront:buttonMenu];
     [self.view bringSubviewToFront:menuView];
+    [self.view bringSubviewToFront:attemptsString];
     //add solution to view
     currentLevel = [[Level alloc] init:diff];
     [currentLevel addSolutionToView:self.view];
@@ -165,6 +169,7 @@ UIController Delegates
     }
 }
 
+
 - (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event {
 	UITouch *touch = [[event allTouches] anyObject];
 	/* Shape was touched */
@@ -193,9 +198,10 @@ UIController Delegates
             {
                 if([itemCollection CheckSolution])
                 {
-                    
                     [audio playVictory];
                 }
+
+                attemptsString.text = [[NSString alloc] initWithFormat:@" %d\n", currentLevel.attempts];
             }
         }
 	}

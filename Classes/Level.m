@@ -70,6 +70,7 @@ Solution
         }
     }
     [self updateView];
+    attempts++;
     return victory;
 }
 

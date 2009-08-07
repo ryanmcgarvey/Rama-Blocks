@@ -5,6 +5,9 @@
 //  Created by Ryan McGarvey on 7/29/09.
 //  Copyright Simplical 2009. All rights reserved.
 //
+
+@class MainMenuViewController;
+
 #import "MainMenuViewController.h"
 #import "GameState.h"
 
@@ -27,6 +30,8 @@
 @property (nonatomic, retain) IBOutlet UIWindow *window;
 
 - (NSString *)applicationDocumentsDirectory;
+-(GameState*)loadEncodedGameState;
+-(void)saveEncodedGameState;
 
 @end
 

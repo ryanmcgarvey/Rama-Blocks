@@ -13,6 +13,7 @@
 #import "ItemPair.h"
 #import "Shape.h"
 #import "Level.h"
+#import "GameState.h"
 
 typedef enum enum_Gravity {
     zero,

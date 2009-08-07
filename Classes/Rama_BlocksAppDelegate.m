@@ -20,13 +20,43 @@
 
 - (void)applicationDidFinishLaunching:(UIApplication *)application {    
     
-    // Override point for customization after app launch    
+    //gameState = [GameState new];
+    
+    [self loadEncodedGameState];
+    
+    //gameState.audio.volume = newGameState.volume;
+    //gameState.currentDifficulty = newGameState.currentDifficulty;
+    /*
+     if(gameState == nil){
+     gameState = [GameState new];
+     gameState.audio.volume = 0.5f;
+     }
+     */
+    
     mainMenu = [[MainMenuViewController alloc] initWithNibName:@"MainMenuViewController" bundle:nil];
     [[UIApplication sharedApplication] setStatusBarHidden:YES animated:NO];
     [window addSubview:mainMenu.view];
-    gameState = [GameState new];
-    gameState.audio.volume = 0.5f;
+    
 	[window makeKeyAndVisible];
+}
+
+
+-(void)saveEncodedGameState
+{
+	NSUserDefaults *persistentStorage = [NSUserDefaults standardUserDefaults];
+    NSData *encodedGameState = [NSKeyedArchiver archivedDataWithRootObject:gameState];
+	[persistentStorage setObject:encodedGameState forKey:@"encodedGameState"];
+}
+
+-(GameState*)loadEncodedGameState
+{
+    if (gameState == nil)
+    {
+        NSUserDefaults *persistentStorage = [NSUserDefaults standardUserDefaults];
+        NSData *encodedGameState = [persistentStorage objectForKey: @"encodedGameState"];
+        gameState = (GameState*)[[NSKeyedUnarchiver unarchiveObjectWithData: encodedGameState] retain];
+    }
+    return gameState;
 }
 
 /**
@@ -117,6 +147,12 @@
     return persistentStoreCoordinator;
 }
 
+-(void)makePersistentStore{
+    NSUserDefaults *gamestate = [NSUserDefaults standardUserDefaults];
+	[gamestate setObject:gameState forKey:@"gamestate"];
+	[gamestate synchronize];    
+	
+}
 
 #pragma mark -
 #pragma mark Application's Documents directory
