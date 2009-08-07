@@ -36,7 +36,6 @@
     mainMenu = [[MainMenuViewController alloc] initWithNibName:@"MainMenuViewController" bundle:nil];
     [[UIApplication sharedApplication] setStatusBarHidden:YES animated:NO];
     [window addSubview:mainMenu.view];
-    
 	[window makeKeyAndVisible];
 }
 
@@ -63,7 +62,7 @@
  applicationWillTerminate: saves changes in the application's managed object context before the application terminates.
  */
 - (void)applicationWillTerminate:(UIApplication *)application {
-	
+	[self saveEncodedGameState];
     NSError *error = nil;
     if (managedObjectContext != nil) {
         if ([managedObjectContext hasChanges] && ![managedObjectContext save:&error]) {

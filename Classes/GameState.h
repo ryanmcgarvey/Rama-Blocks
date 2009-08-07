@@ -14,14 +14,16 @@
 @interface GameState : NSObject {
     SoundEffects * audio;
     Difficulty currentDifficulty;
-    float volume;
+    float sfxVolume;
+    float musicVolume;
     //id *mirrorCells;
 
 }
 
 
 //@property(retain)id *mirrorCells;
-@property (readwrite, assign) float volume;
+@property (readwrite, assign) float sfxVolume;
+@property (readwrite, assign) float musicVolume;
 @property (readwrite, retain) SoundEffects * audio;
 @property Difficulty currentDifficulty;
 

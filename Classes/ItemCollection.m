@@ -33,7 +33,6 @@
 			float y = (  MAX_Y  - (RowPixelLength * row) - (SHAPE_WIDTH / 2) );
 			CGPoint point = CGPointMake( x , y );
 			cells[(row * ColumnLength) + column] = [[Cell alloc] initWithData: point : row : column];
-            GameState * game;
            // [game createMirrorCells:cells];
 		}
 	}

@@ -11,12 +11,13 @@
 
 @implementation GameState
 
-@synthesize currentDifficulty, audio, volume;
+@synthesize currentDifficulty, audio, sfxVolume, musicVolume;
 
 -(id)init{
     [self initNonPersist];
-    volume = audio.volume;
+    sfxVolume = audio.volume;
     currentDifficulty = VeryEasy;
+    musicVolume = audio.volume;
 //mirrorCells = malloc((12 * 10)*sizeof(Cell *));
     
     return self;
@@ -29,8 +30,8 @@
 	{
 		//self = [[decoder decodeObjectForKey:@"encodedState"]retain];
         self.currentDifficulty = [decoder decodeIntForKey:@"encodedStateDifficulty"];
-        float CurrentVolume = [decoder decodeFloatForKey:@"encodedStateVolume"];
-        self.volume = CurrentVolume;
+        self.sfxVolume = [decoder decodeFloatForKey:@"encodedSfxVolume"];
+        self.musicVolume = [decoder decodeFloatForKey:@"encodedMusicVolume"];
         [self initNonPersist];
 	}
 	return self;
@@ -40,10 +41,9 @@
 }
 - (void)encodeWithCoder:(NSCoder *)encoder
 {
-    int CurrentDifficulty;
-    CurrentDifficulty = self.currentDifficulty;
-    [encoder encodeInt:CurrentDifficulty forKey:@"encodedStateDifficulty"];
-    [encoder encodeFloat:volume forKey:@"encodedStateVolume"];
+    [encoder encodeInt:currentDifficulty forKey:@"encodedStateDifficulty"];
+    [encoder encodeFloat:sfxVolume forKey:@"encodedSfxVolume"];
+    [encoder encodeFloat:musicVolume forKey:@"encodedMusicVolume"];
 }
 
 - (void)createMirrorCells:(id *)mirrorCell

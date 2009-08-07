@@ -15,8 +15,9 @@
 
 - (void)viewDidLoad {
     Rama_BlocksAppDelegate * appDelegate =  (Rama_BlocksAppDelegate *)[[UIApplication sharedApplication] delegate];
-    gameState = appDelegate.gameState;
-    sfxVolume.value = gameState.audio.volume;
+    gameState = [appDelegate loadEncodedGameState];
+    sfxVolume.value = gameState.sfxVolume;
+    musicVolume.value = gameState.musicVolume;
     difficulty.maximumValue = NUMBER_OF_DIFF - 1;
     difficulty.minimumValue = 0;
     difficulty.value = gameState.currentDifficulty;
@@ -38,10 +39,11 @@
 }
 
 -(void)changeMusicVolume{
+    gameState.musicVolume = musicVolume.value;
 }
 -(void)changeSfxVolume{
     gameState.audio.volume = sfxVolume.value;
-    
+    gameState.sfxVolume = sfxVolume.value;
 }
 -(void)changeDifficulty{
     Difficulty diff = (Difficulty)(difficulty.value);
