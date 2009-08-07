@@ -67,8 +67,8 @@ UIController Delegates
 	backGround = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 320, 480)];
 	backGround.clipsToBounds = YES;
 	backGround.autoresizesSubviews = NO;
-	 backGround.contentMode = UIViewContentModeTopLeft;
-	 backGround.image = [[UIImage imageNamed:@"BackGround.png"] retain];
+    backGround.contentMode = UIViewContentModeTopLeft;
+    backGround.image = [[UIImage imageNamed:@"BackGround.png"] retain];
     backGround.userInteractionEnabled = FALSE;
     self.view.backgroundColor = [UIColor blackColor];
     [self.view sendSubviewToBack:backGround];
