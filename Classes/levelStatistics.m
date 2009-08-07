@@ -13,6 +13,11 @@
 @synthesize attempts;
 
 -(void)addShapeToCollection:(Shape *)shape{
+-(void)addShapeToDrop:(Shape *)shape{
+    totalDrops[shape.colorType][shape.shapeType]++;
+}
+-(void)addShapeToTransform:(Shape *)shape{
+    totalTransform[shape.colorType][shape.shapeType]++;
 }
 
 @end

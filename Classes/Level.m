@@ -66,7 +66,6 @@ Solution
             guess.colorType != actual.colorType)
         {
             victory = FALSE;
-            break;
         }
     }
     [self updateView];

@@ -16,11 +16,18 @@
     int totalDrops [NUMBER_OF_COLORS][NUMBER_OF_SHAPES];
     
     int totalTransform [NUMBER_OF_COLORS][NUMBER_OF_SHAPES];
-    
+
+    //time info
+    //gravity stats
+    //num transforms
+    //
 }
 
 @property int attempts;
 
 -(void)addShapeToCollection:(Shape *)shape;
+
+-(void)addShapeToDrop:(Shape *)shape;
+-(void)addShapeToTransform:(Shape *)shape;
 
 @end
