@@ -31,9 +31,8 @@
         boardState = [[NSMutableArray alloc] init];
         
     }
-
-    NSLog(@"%i", boardState.count);
     
+    NSLog(@"%i", boardState.count);
 
     mainMenu = [[MainMenuViewController alloc] initWithNibName:@"MainMenuViewController" bundle:nil];
     [[UIApplication sharedApplication] setStatusBarHidden:YES animated:NO];
