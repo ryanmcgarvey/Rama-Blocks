@@ -8,12 +8,14 @@
 
 @class Options;
 
+
 #import <UIKit/UIKit.h>
 #import "Options.h"
 #import "Profile.h"
 #import "Tutorial.h"
 #import "Purchase.h"
 #import "GameBoardViewController.h"
+#import "GameState.h"
 
 
 @interface MainMenuViewController : UIViewController {
@@ -21,6 +23,7 @@
 	Profile * profile;
 	Tutorial * tutorial;
 	Purchase * purchase;
+    GameState * gameState;
 }
 
 @property (readwrite, assign) Options * options;

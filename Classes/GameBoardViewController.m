@@ -59,7 +59,8 @@ UIController Delegates
 *****************************************************/
 - (void)viewDidLoad {   
     Rama_BlocksAppDelegate * appDelegate =  (Rama_BlocksAppDelegate *)[[UIApplication sharedApplication] delegate];
-    GameState * gameState = [appDelegate loadEncodedGameState];
+    gameState = [appDelegate loadEncodedGameState];
+    gameState.Active = TRUE;
     audio = [gameState GetAudioPlayer];
     Difficulty diff = appDelegate.gameState.currentDifficulty;
     
@@ -88,7 +89,6 @@ UIController Delegates
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(didRotate:)
                                                  name:@"UIDeviceOrientationDidChangeNotification" object:nil];
-    
     
     
     [self didRotate:nil];
@@ -123,6 +123,7 @@ UIController Delegates
     [self.view bringSubviewToFront:menuView];
     NSLog(@"Button Clicked");
     
+    
 }
 -(IBAction)ClickButtonResume {
     menuView.hidden = TRUE;
@@ -133,6 +134,7 @@ UIController Delegates
     [self presentModalViewController:[[Options alloc] initWithNibName:@"Options" bundle:nil] animated:YES];
 }
 -(IBAction)ClickButtonMainMenu{
+    gameState.Active = FALSE;
     [self dismissModalViewControllerAnimated:YES];
 }
 /*****************************************************

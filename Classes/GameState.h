@@ -9,15 +9,14 @@
 #import <Foundation/Foundation.h>
 #import "SoundEffects.h"
 #import "Level.h"
-#import "ItemCollection.h"
 
 @interface GameState : NSObject {
     SoundEffects * audio;
     Difficulty currentDifficulty;
     float sfxVolume;
     float musicVolume;
+    BOOL Active;
     //id *mirrorCells;
-
 }
 
 
@@ -25,10 +24,12 @@
 @property (readwrite, assign) float sfxVolume;
 @property (readwrite, assign) float musicVolume;
 @property (readwrite, retain) SoundEffects * audio;
+@property BOOL Active;
 @property Difficulty currentDifficulty;
 
 -(void)initNonPersist;
 - (void)createMirrorCells:(id *)mirrorCell;
 -(SoundEffects *)GetAudioPlayer;
+
 
 @end

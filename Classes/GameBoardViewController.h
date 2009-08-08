@@ -6,7 +6,6 @@
 //  Copyright 2009 Simplical, LLC. All rights reserved.
 //
 
-@class ShapeCollection;
 
 #import <UIKit/UIKit.h>
 #import <Foundation/NSTimer.h>
@@ -18,6 +17,7 @@
 #import "Level.h"
 #import "GameState.h"
 #import "Options.h"
+
 
 
 @interface GameBoardViewController : UIViewController{
@@ -35,6 +35,7 @@
     UIDevice * CurrentDevice;
     Level * currentLevel;
     SoundEffects * audio;
+    GameState * gameState;
 }
 @property (nonatomic, retain) UIButton * buttonMenu;
 @property (nonatomic, retain) UIButton * buttonResume;

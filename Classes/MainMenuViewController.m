@@ -7,7 +7,7 @@
 //
 
 #import "MainMenuViewController.h"
-
+#import "Rama_BlocksAppDelegate.h"
 
 
 @implementation MainMenuViewController
@@ -16,8 +16,15 @@
 
 
 - (void)viewDidLoad {
+    Rama_BlocksAppDelegate * appDelegate =  (Rama_BlocksAppDelegate *)[[UIApplication sharedApplication] delegate];
+    gameState = [appDelegate loadEncodedGameState];
 
 	[super viewDidLoad];
+    
+    if(gameState.Active)
+    {
+        [self presentModalViewController:[[GameBoardViewController alloc] initWithNibName:@"GameBoardViewController" bundle:nil] animated:YES];
+    }
 
 }
 
@@ -38,7 +45,6 @@
 {
 	
 	[self presentModalViewController:[[Options alloc] initWithNibName:@"Options" bundle:nil] animated:YES];
-
 
 }
 

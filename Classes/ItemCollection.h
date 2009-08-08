@@ -6,6 +6,8 @@
 //  Copyright 2009 Simplical. All rights reserved.
 //
 
+
+
 #import <Foundation/Foundation.h>
 #import "GameItem.h"
 #import "Cell.h"
@@ -34,6 +36,7 @@ typedef enum enum_Gravity {
     Gravity gravityDirection;
     NSMutableArray * solution;
     Level * currentLevel;
+    GameState * gameState;
 }
 
 -(id)init: (int) rows : (int) columns : (int)rowPixelLength : (int)columnPixelLength : (Level *)level;

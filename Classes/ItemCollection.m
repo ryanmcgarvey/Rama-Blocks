@@ -7,7 +7,7 @@
 //
 
 #import "ItemCollection.h"
-
+#import "Rama_BlocksAppDelegate.h"
 
 @implementation ItemCollection
 
@@ -21,6 +21,7 @@
 	RowPixelLength = rowPixelLength;
 	ColumnPixelLength = columnPixelLength;
 	cells = malloc((rows * columns)*sizeof(Cell *));
+    
     
 	int row = 0;
 	int column = 0;
@@ -124,8 +125,11 @@
 
 -(void)RemoveFromCellsAndRefactor:(NSMutableArray *)TransFormGroup{
     [currentLevel removeItems:TransFormGroup];
+    Rama_BlocksAppDelegate * appDelegate =  (Rama_BlocksAppDelegate *)[[UIApplication sharedApplication] delegate];
 	for(Cell * cell in TransFormGroup)
     {
+        
+        [appDelegate.boardState removeObject:cell.ItemInCell];
 		[cell.ItemInCell removeFromSuperview];
 		[cell.ItemInCell release];		
         cell.ItemInCell = nil;
@@ -248,7 +252,10 @@
             return;
         }
         [self SetItemToCell:cell.ItemInCell :cellToMoveTo];
+        
+        
         cell.ItemInCell = nil;
+        
     }
 }
 
@@ -347,16 +354,20 @@
 }
 
 -(void)SetItemToCell:(GameItem *)item : (Cell *) cell{
+    Rama_BlocksAppDelegate * appDelegate =  (Rama_BlocksAppDelegate *)[[UIApplication sharedApplication] delegate];
     if(cell == nil || cell.ItemInCell == item){
+      
         return;
     }
     if(cell.ItemInCell != nil){
+        
         [cell.ItemInCell release];
     }
 	cell.ItemInCell = [item retain];
 	[UIView beginAnimations:nil context:nil]; 
 	[UIView setAnimationDuration:0.15];
-	item.center = cell.Center;
+	[appDelegate.boardState addObject:cell.ItemInCell];
+    item.center = cell.Center;
 	item.Row = cell.Row;
 	item.Column = cell.Column;
 	[UIView commitAnimations];
