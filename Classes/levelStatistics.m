@@ -1,24 +1,22 @@
-//
-//  levelStatistics.m
+// 
+//  LevelStatistics.m
 //  Rama Blocks
 //
-//  Created by Ryan McGarvey on 8/2/09.
+//  Created by Ryan McGarvey on 8/9/09.
 //  Copyright 2009 Simplical. All rights reserved.
 //
 
-#import "levelStatistics.h"
+#import "LevelStatistics.h"
 
+#import "GameState.h"
 
-@implementation levelStatistics
-@synthesize attempts;
+@implementation LevelStatistics 
 
--(void)addShapeToCollection:(Shape *)shape{
-}
--(void)addShapeToDrop:(Shape *)shape{
-    totalDrops[shape.colorType][shape.shapeType]++;
-}
--(void)addShapeToTransform:(Shape *)shape{
-    totalTransform[shape.colorType][shape.shapeType]++;
-}
+@dynamic numberOfTransforms;
+@dynamic timeToComplete;
+@dynamic numberOfMoves;
+@dynamic numerOfAttempts;
+@dynamic Level;
+@dynamic owningGameState;
 
 @end

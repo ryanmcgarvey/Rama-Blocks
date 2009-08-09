@@ -11,39 +11,31 @@
 
 #import <UIKit/UIKit.h>
 #import "Options.h"
-#import "Profile.h"
 #import "Tutorial.h"
-#import "Purchase.h"
 #import "GameBoardViewController.h"
 #import "GameState.h"
-
+#import "LevelSelect.h"
 
 @interface MainMenuViewController : UIViewController {
 	Options * options;
-	Profile * profile;
 	Tutorial * tutorial;
-	Purchase * purchase;
     GameState * gameState;
+    LevelSelect * levelSelect;
     
     IBOutlet UIButton * GameBoardButton;
     IBOutlet UIButton * OptionsButton;
-    IBOutlet UIButton * PurchaseButton;
-    IBOutlet UIButton * ProfileButton;
-    IBOutlet UIButton * TutorialButton;
-}
 
-@property (readwrite, assign) Options * options;
-@property (readwrite, assign) Profile * profile;
-@property (readwrite, assign) Tutorial * tutorial;
-@property (readwrite, assign) Purchase * purchase;
+    IBOutlet UIButton * TutorialButton;
+    
+    IBOutlet UIButton * LevelSelectButton;
+
+}
 
 
 - (IBAction)loadGameBoard:(id)sender;
-- (IBAction)loadOptions:(id)sender;
-- (IBAction)loadProfile:(id)sender;
 - (IBAction)loadTutorial:(id)sender;
-- (IBAction)loadPurchase:(id)sender;
-
+- (IBAction)loadOptions:(id)sender;
+-(IBAction)loadLevelSelect:(id)sender;
 
 
 @end

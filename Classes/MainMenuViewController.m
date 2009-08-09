@@ -13,14 +13,12 @@
 
 @implementation MainMenuViewController
 
-@synthesize options, profile, tutorial, purchase;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil{
     
     if (self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil]) {
         Rama_BlocksAppDelegate * appDelegate =  (Rama_BlocksAppDelegate *)[[UIApplication sharedApplication] delegate];
         gameState = [[appDelegate FetchGameState] retain];
-         
     }
     
     return self;
@@ -62,13 +60,6 @@
 	[self presentModalViewController:[[Options alloc] initWithNibName:@"Options" bundle:nil] animated:YES];
 }
 
-- (IBAction)loadProfile:(id)sender 
-{
-	
-	[self presentModalViewController:[[Profile alloc] initWithNibName:@"Profile" bundle:nil] animated:YES];
-
-	
-}
 
 - (IBAction)loadTutorial:(id)sender 
 {
@@ -76,13 +67,9 @@
 	[self presentModalViewController:[[Tutorial alloc] initWithNibName:@"Tutorial" bundle:nil] animated:YES];
 	
 }
-
-- (IBAction)loadPurchase:(id)sender 
+- (IBAction)loadLevelSelect:(id)sender 
 {
-	
-	[self presentModalViewController:[[Purchase alloc] initWithNibName:@"Purchase" bundle:nil] animated:YES];
-
-	
+	[self presentModalViewController:[[LevelSelect alloc] initWithNibName:@"LevelSelect" bundle:nil] animated:YES];
 }
 
 - (IBAction)loadGameBoard:(id)sender 

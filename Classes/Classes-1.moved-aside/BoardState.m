@@ -9,12 +9,18 @@
 #import "BoardState.h"
 
 #import "ItemState.h"
+#import "ItemState.h"
+#import "ItemState.h"
+#import "ItemState.h"
 #import "GameState.h"
 
 @implementation BoardState 
 
 @dynamic Active;
+@dynamic LockItems;
+@dynamic SpawnItemA;
 @dynamic items;
+@dynamic SpawnItemB;
 @dynamic owningGameState;
 
 @end

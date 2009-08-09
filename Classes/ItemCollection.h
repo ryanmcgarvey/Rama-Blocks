@@ -39,6 +39,12 @@ typedef enum enum_Gravity {
     NSMutableArray * solution;
     Level * currentLevel;
     GameState * gameState;
+    
+    int numberOfAttempts;
+    int numberOfTransforms;
+    int numberOfMoves;
+    
+
 }
 
 -(id)init: (int) rows : (int) columns : (int)rowPixelLength : (int)columnPixelLength : (Level *)level;
@@ -76,5 +82,6 @@ typedef enum enum_Gravity {
 
 -(void)SaveState;
 
+-(void)UpdateState;
 
 @end

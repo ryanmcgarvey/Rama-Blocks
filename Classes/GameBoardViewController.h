@@ -19,6 +19,7 @@
 #import "BoardState.h"
 #import "Options.h"
 #import "SoundEffects.h"
+#import "LevelStatistics.h"
 
 
 
@@ -38,6 +39,8 @@
     Level * currentLevel;
     SoundEffects * audio;
     GameState * gameState;
+    
+    CFTimeInterval startTime;
 }
 @property (nonatomic, retain) UIButton * buttonMenu;
 @property (nonatomic, retain) UIButton * buttonResume;
@@ -50,6 +53,7 @@
 -(void)SpawnShapes;
 -(void)ResetShapePair:(ItemPair *)pair;
 -(void)didRotate:(NSNotification *)notification;
+-(void)SaveState;
 
 -(IBAction)ClickButtonMenu;
 -(IBAction)ClickButtonResume;

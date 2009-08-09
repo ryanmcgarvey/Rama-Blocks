@@ -13,6 +13,7 @@
 #import "GameState.h"
 #import "SoundEffects.h"
 #import "GameItem.h"
+#import "LevelStatistics.h"
 
 @interface Rama_BlocksAppDelegate : NSObject <UIApplicationDelegate> {
     
@@ -44,7 +45,9 @@
 -(NSArray *)FetchCollectionItemStates;
 -(NSArray *)FetchSpawnedItems;
 -(NSArray *)FetchLockItems;
+-(NSArray *)FetchPlayedLevels;
 
+-(LevelStatistics *)CreatePlayedLevel;
 
 @end
 

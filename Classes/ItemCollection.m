@@ -39,8 +39,15 @@
 			cells[(row * ColumnLength) + column] = [[Cell alloc] initWithData: point : row : column];
 		}
 	}
+    
 
 	return self;
+}
+
+-(void)UpdateState{
+    numberOfMoves = [gameState.currentBoard.numberOfMovies intValue];
+    numberOfTransforms = [gameState.currentBoard.numberOfTransforms intValue];
+    numberOfAttempts = [gameState.currentBoard.numberOfAttempts intValue];
 }
 
 -(void)SaveState {
@@ -75,6 +82,9 @@
         itemState.canSeeColor = [NSNumber numberWithBool:lock.canSeeColor];
         itemState.canSeeItem = [NSNumber numberWithBool:lock.canSeeShape];
     }
+    gameState.currentBoard.numberOfMovies = [NSNumber numberWithInt:numberOfMoves];
+    gameState.currentBoard.numberOfTransforms = [NSNumber numberWithInt:numberOfTransforms];
+    gameState.currentBoard.numberOfAttempts = [NSNumber numberWithInt:numberOfAttempts];
 }
 
 /**************************************
@@ -225,7 +235,7 @@
 		NSLog(@"Collision, undoing shit");
 		return FALSE;
 	}
-	
+	numberOfMoves ++;
 	[self SetItemToCell:itemPair.ItemA :cellA];
 	[self SetItemToCell:itemPair.ItemB :cellB];
 	
@@ -257,6 +267,7 @@
             [currentLevel addItem:shape];
             [self CheckTransform:item];
             couldTransform = TRUE;
+            numberOfTransforms ++;
         }
         [transFormGroup removeAllObjects];
         [self ApplyGravity];
@@ -476,7 +487,7 @@
 -(BOOL)CheckSolution{
     
     BOOL isCorrect = [currentLevel checkSolution:solution];
-    
+    numberOfAttempts ++;
     [self ClearSolution];
     
     return isCorrect;

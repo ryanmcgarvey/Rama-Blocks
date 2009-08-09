@@ -12,7 +12,28 @@
 @synthesize buttonMenu, buttonOptions, buttonMainMenu, buttonResume, menuView, attemptsString;
 
 
-
+-(void)SaveState{
+    if([gameState.currentBoard.Active boolValue])
+    {
+        CFTimeInterval totalTime = CFAbsoluteTimeGetCurrent() - startTime;
+        
+        [itemCollection SaveState];
+        Rama_BlocksAppDelegate * appDelegate =  (Rama_BlocksAppDelegate *)[[UIApplication sharedApplication] delegate];
+        
+        Shape * shape = (Shape *)SpawnedPair.ItemA;
+        NSArray * pair = [appDelegate FetchSpawnedItems];
+        ItemState * item = [pair objectAtIndex:0];
+        item.colorType = [NSNumber numberWithInt:shape.colorType];
+        item.shapeType = [NSNumber numberWithInt:shape.shapeType];
+        
+        item = [pair objectAtIndex:1];
+        shape = (Shape *)SpawnedPair.ItemB;
+        item.colorType = [NSNumber numberWithInt:shape.colorType];
+        item.shapeType = [NSNumber numberWithInt:shape.shapeType];
+        
+        gameState.currentBoard.timePlayed = [NSNumber numberWithDouble:[gameState.currentBoard.timePlayed doubleValue] + totalTime];
+    }
+}
 
 /*****************************************************
 GameBoard Behavior
@@ -89,7 +110,7 @@ UIController Delegates
                                              selector:@selector(didRotate:)
                                                  name:@"UIDeviceOrientationDidChangeNotification" object:nil];
 
-    currentLevel = [[Level alloc] init:[gameState.currentDifficulty intValue]];
+    currentLevel = [[Level alloc] init:[gameState.currentLevel intValue]];
     itemCollection = [[ItemCollection alloc] init:NUMBER_OF_ROWS :NUMBER_OF_COLUMNS :SHAPE_WIDTH :SHAPE_WIDTH: currentLevel];
     SpawnedPair = [[ItemPair new]retain];
     if([gameState.currentBoard.Active boolValue])
@@ -137,7 +158,7 @@ UIController Delegates
                 [self.view addSubview:shape];
             }
         }
-        
+        [itemCollection UpdateState];
         [SpawnedPair.GrabberA removeFromSuperview];
         [SpawnedPair.GrabberB removeFromSuperview];
         
@@ -155,12 +176,14 @@ UIController Delegates
     }else{
         gameState.currentBoard.Active = [NSNumber numberWithBool:YES];
     	[self SpawnShapes];
+        
     }
     [currentLevel addSolutionToView:self.view];
     [self didRotate:nil];
 
     [super viewDidLoad];
-
+    
+    startTime = CFAbsoluteTimeGetCurrent();
 }
 
 
@@ -200,7 +223,6 @@ UIController Delegates
     [self presentModalViewController:[[Options alloc] initWithNibName:@"Options" bundle:nil] animated:YES];
 }
 -(IBAction)ClickButtonMainMenu{
-    gameState.currentBoard.Active = [NSNumber numberWithBool:NO];
     [self dismissModalViewControllerAnimated:YES];
 }
 /*****************************************************
@@ -268,6 +290,24 @@ UIController Delegates
                 if([itemCollection CheckSolution])
                 {
                     [audio playVictory];
+                    Rama_BlocksAppDelegate * appDelegate =  (Rama_BlocksAppDelegate *)[[UIApplication sharedApplication] delegate];
+                    [self SaveState];
+                    if([gameState.currentLevel intValue] == [gameState.highestLevel intValue] && [gameState.highestLevel intValue] < 10)
+                    {
+                        
+                        LevelStatistics * stat = [appDelegate CreatePlayedLevel];
+                        stat.Level = [NSNumber numberWithInt:[gameState.currentLevel intValue]];
+                        stat.numberOfMoves = gameState.currentBoard.numberOfMovies;
+                        stat.numberOfTransforms = gameState.currentBoard.numberOfTransforms;
+                        stat.numerOfAttempts = gameState.currentBoard.numberOfAttempts;
+                        stat.timeToComplete = gameState.currentBoard.timePlayed;
+                        [gameState addPlayedLevelsObject:stat];
+                        gameState.highestLevel = [NSNumber numberWithInt:[gameState.highestLevel intValue] +1];
+                        gameState.currentLevel = [NSNumber numberWithInt:[gameState.highestLevel intValue]   ];
+                    }
+                    
+                    gameState.currentBoard.Active = [NSNumber numberWithBool:NO];
+                    [self dismissModalViewControllerAnimated:YES];
                 }
 
                 attemptsString.text = [[NSString alloc] initWithFormat:@" %d\n", currentLevel.attempts];
@@ -310,21 +350,8 @@ Tear down and maintenance
 }
 
 - (void)viewWillDisappear:(BOOL)animated{
-    if([gameState.currentBoard.Active boolValue])
-    {
-        [itemCollection SaveState];
-        Rama_BlocksAppDelegate * appDelegate =  (Rama_BlocksAppDelegate *)[[UIApplication sharedApplication] delegate];
-        Shape * shape = (Shape *)SpawnedPair.ItemA;
-        NSArray * pair = [appDelegate FetchSpawnedItems];
-        ItemState * item = [pair objectAtIndex:0];
-        item.colorType = [NSNumber numberWithInt:shape.colorType];
-        item.shapeType = [NSNumber numberWithInt:shape.shapeType];
-        
-        item = [pair objectAtIndex:1];
-        shape = (Shape *)SpawnedPair.ItemB;
-        item.colorType = [NSNumber numberWithInt:shape.colorType];
-        item.shapeType = [NSNumber numberWithInt:shape.shapeType];
-    }
+    [self SaveState];
+    [super viewWillDisappear:animated];
 }
 
 - (void)dealloc {

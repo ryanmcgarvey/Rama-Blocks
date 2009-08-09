@@ -9,12 +9,15 @@
 #import "GameState.h"
 
 #import "BoardState.h"
+#import "LevelStatistics.h"
 
 @implementation GameState 
 
 @dynamic sfxVolume;
-@dynamic currentDifficulty;
+@dynamic currentLevel;
+@dynamic highestLevel;
 @dynamic musicVolume;
 @dynamic currentBoard;
+@dynamic PlayedLevels;
 
 @end

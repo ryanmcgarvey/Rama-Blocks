@@ -8,19 +8,17 @@
 
 #import "BoardState.h"
 
-#import "ItemState.h"
-#import "ItemState.h"
-#import "ItemState.h"
-#import "ItemState.h"
 #import "GameState.h"
+#import "ItemState.h"
 
 @implementation BoardState 
 
+@dynamic numberOfAttempts;
+@dynamic numberOfMovies;
+@dynamic numberOfTransforms;
 @dynamic Active;
-@dynamic LockItems;
-@dynamic SpawnItemA;
-@dynamic items;
-@dynamic SpawnItemB;
+@dynamic timePlayed;
 @dynamic owningGameState;
+@dynamic items;
 
 @end

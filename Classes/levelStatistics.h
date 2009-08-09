@@ -1,33 +1,27 @@
 //
-//  levelStatistics.h
+//  LevelStatistics.h
 //  Rama Blocks
 //
-//  Created by Ryan McGarvey on 8/2/09.
+//  Created by Ryan McGarvey on 8/9/09.
 //  Copyright 2009 Simplical. All rights reserved.
 //
 
-#import <Foundation/Foundation.h>
-#import "GlobalDefines.h"
-#include "Shape.h"
+#import <CoreData/CoreData.h>
 
-@interface levelStatistics : NSObject {
+@class GameState;
 
-    int attempts;
-    int totalDrops [NUMBER_OF_COLORS][NUMBER_OF_SHAPES];
-    
-    int totalTransform [NUMBER_OF_COLORS][NUMBER_OF_SHAPES];
-
-    //time info
-    //gravity stats
-    //num transforms
-    //
+@interface LevelStatistics :  NSManagedObject  
+{
 }
 
-@property int attempts;
-
--(void)addShapeToCollection:(Shape *)shape;
-
--(void)addShapeToDrop:(Shape *)shape;
--(void)addShapeToTransform:(Shape *)shape;
+@property (nonatomic, retain) NSNumber * numberOfTransforms;
+@property (nonatomic, retain) NSNumber * timeToComplete;
+@property (nonatomic, retain) NSNumber * numberOfMoves;
+@property (nonatomic, retain) NSNumber * numerOfAttempts;
+@property (nonatomic, retain) NSNumber * Level;
+@property (nonatomic, retain) GameState * owningGameState;
 
 @end
+
+
+

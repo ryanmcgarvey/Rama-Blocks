@@ -61,6 +61,8 @@
             gameState =  [NSEntityDescription
                           insertNewObjectForEntityForName:@"GameState" 
                           inManagedObjectContext:managedObjectContext];
+            gameState.currentLevel = [NSNumber numberWithInt:0];
+            gameState.highestLevel = [NSNumber numberWithInt:1];
             gameState.currentBoard = [NSEntityDescription
                                       insertNewObjectForEntityForName:@"BoardState" 
                                       inManagedObjectContext:managedObjectContext];
@@ -208,8 +210,43 @@
                     error:&fetchError];
     return fetchResults;
 }
-
-
+-(LevelStatistics *)CreatePlayedLevel{
+    [self managedObjectContext];
+    LevelStatistics * stat = [NSEntityDescription
+                        insertNewObjectForEntityForName:@"LevelStatistics" 
+                        inManagedObjectContext:managedObjectContext];
+    
+    return stat;
+}
+-(NSArray *)FetchPlayedLevels{
+    [self managedObjectContext];
+    NSError *fetchError = nil;
+    NSArray *fetchResults;
+    
+    
+    NSEntityDescription *entityDescription = [NSEntityDescription
+                                              entityForName:@"LevelStatistics" 
+                                              inManagedObjectContext:managedObjectContext];
+    
+    NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc]
+                                        initWithKey:@"Level" ascending:YES];
+    
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:
+                              @"(owningGameState == %@)", gameState];
+    
+    
+    NSFetchRequest *request = [[[NSFetchRequest alloc] init] autorelease];
+    
+    [request setEntity:entityDescription];
+    [request setPredicate:predicate];
+    [request setSortDescriptors: [NSArray arrayWithObject:sortDescriptor]];
+    
+    
+    fetchResults = [managedObjectContext 
+                    executeFetchRequest:request 
+                    error:&fetchError];
+    return fetchResults;
+}
 
 ////////////////////////////////////////////////////////////////
 
