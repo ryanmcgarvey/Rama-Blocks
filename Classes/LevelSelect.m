@@ -42,33 +42,36 @@
         levelSelect.value = level;
     }
     switch (level) {
-        case VeryEasy:
+        case 0:
             levelLabel.text = @"Very Easy";
             break;
-        case Easy:
+        case 1:
             levelLabel.text = @"Easy";
             break;
-        case SortaEasy:
+        case 2:
             levelLabel.text = @"Sorta Easy";
             break;
-        case NotSoEasy:
+        case 3:
             levelLabel.text = @"Not So Easy";
             break;
-        case SortaHard:
+        case 4:
             levelLabel.text = @"Sorta Hard";
             break;
-        case Hard:
+        case 5:
             levelLabel.text = @"Hard";
             break;
-        case VeryHard:
+        case 6:
             levelLabel.text = @"Very Hard";
             break;
-        case Impossible:
+        case 7:
             levelLabel.text = @"Impossible";
             break;
-        default:
+        case 8:
             levelLabel.text = @"Good luck";
-        break;
+            break;
+        case 9:
+            levelLabel.text = @"You're not gonna get this far";
+            break;
     }
     
     gameState.currentLevel = [NSNumber numberWithInt:level];

@@ -19,7 +19,7 @@
 Init
  *****************************************************/
 
--(id)init:(Difficulty)predefinedDifficulty{
+-(id)init:(int)predefinedDifficulty{
     
 
     solution = [NSMutableArray new];
@@ -190,58 +190,64 @@ Helpers
     return (uint)arc4random() % maxColor;
 }
 
--(void)setDifficulty:(Difficulty)difficultyToSet{
+-(void)setDifficulty:(int)difficultyToSet{
     
     difficulty = difficultyToSet;
+
+    
     switch (difficulty) {
-        case VeryEasy:
+        case 0:
             maxColor = 2;
             maxShape = Triangle;
             lockCount = 3;
             break;
-        case Easy:
-            maxColor = 2;
+        case 1:
+            maxColor = 3;
+            maxShape = Triangle;
+            lockCount = 3;
+            break;
+            
+        case 2:
+            maxColor = 3;
             maxShape = Square;
             lockCount = 3;
             break;
-            
-        case SortaEasy:
-            maxColor = 3;
+        case 3:
+            maxColor = 4;
+            maxShape = Square;
+            lockCount = 3;
+            break;
+        case 4:
+            maxColor = 4;
             maxShape = Pentagon;
             lockCount = 3;
             break;
-        case NotSoEasy:
-            maxColor = 3;
+        case 5:
+            maxColor = 5;
+            maxShape = Pentagon;
+            lockCount = 3;
+            break;
+            
+        case 6:
+            maxColor = 5;
             maxShape = Hexagon;
             lockCount = 3;
             break;
-        case SortaHard:
-            maxColor = 3;
+        case 7:
+            maxColor = 5;
             maxShape = Hexagon;
             lockCount = 4;
             break;
-        case Hard:
-            maxColor = 3;
-            maxShape = Circle;
-            lockCount = 4;
-            break;
             
-        case VeryHard:
-            maxColor = 4;
+        case 8:
+            maxColor = 5;
             maxShape = Circle;
             lockCount = 4;
             break;
-        case Impossible:
+        case 9:
             maxColor = 5;
             maxShape = Circle;
             lockCount = 5;
-            break;
-
-        default:
-            maxColor = 5;
-            maxShape = Circle;
-            lockCount = 5;
-
             break;
     }
 }

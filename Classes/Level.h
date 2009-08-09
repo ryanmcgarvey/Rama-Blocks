@@ -12,19 +12,8 @@
 #import "LockShape.h"
 #import "GameState.h"
 
-typedef enum enum_Difficulty {
-    VeryEasy,
-    Easy,
-    SortaEasy,
-    NotSoEasy,
-    SortaHard,
-    Hard,
-    VeryHard,
-    Impossible
-} Difficulty;
-
 @interface Level : NSObject {
-    Difficulty difficulty;
+    int difficulty;
     NSMutableArray * solution;
 
     float shapeSpawnProbability [NUMBER_OF_SHAPES];
@@ -40,12 +29,12 @@ typedef enum enum_Difficulty {
     
 }
 
-@property (readonly) Difficulty difficulty;
+@property (readonly) int difficulty;
 @property int attempts;
 @property int lockCount;
 
 
--(id)init:(Difficulty)predefinedDifficulty;
+-(id)init:(int)predefinedDifficulty;
 
 -(void)SetLockAtIndex:(LockShape *)lock : (int) index;
 
@@ -68,7 +57,7 @@ typedef enum enum_Difficulty {
 -(ShapeType)createRandomShape;
 -(ColorType)createRandomColor;
 
--(void)setDifficulty:(Difficulty)difficultyToSet;
+-(void)setDifficulty:(int)difficultyToSet;
 
 
 @end
