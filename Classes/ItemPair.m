@@ -11,6 +11,7 @@
 
 @implementation ItemPair
 @synthesize ItemA, ItemB, Orientation, GrabberA, GrabberB;
+@synthesize ShaddowA, ShaddowB;
 
 
 -(id)init{
@@ -21,6 +22,9 @@
     GrabberB.image = [UIImage imageNamed:@"HighLight.png"];
     GrabberA.userInteractionEnabled = TRUE;
     GrabberB.userInteractionEnabled = TRUE;
+    
+    ShaddowA = [[UIImageView alloc]initWithFrame:CGRectMake(0.0f, 0.0f, SHAPE_WIDTH, SHAPE_WIDTH)];
+    ShaddowB = [[UIImageView alloc]initWithFrame:CGRectMake(0.0f, 0.0f, SHAPE_WIDTH, SHAPE_WIDTH)];
     
     return self;
 }
@@ -156,6 +160,14 @@
     
 }
 
+-(void)setShadow:(CGPoint)ShaddowALoc:(CGPoint)ShaddowBLoc{
+    ShaddowA.center =  ShaddowALoc;
+    ShaddowB.center = ShaddowBLoc;
+    ShaddowA.alpha = 0.4f;
+    ShaddowB.alpha = 0.4f;
+        
+}
+
 - (BOOL)checkBounds{
     if( (ItemA.center.x > (GRID_RIGHT_EDGE - (SHAPE_WIDTH/2))) || // Shape A is close to the right edge
 	   (ItemB.center.x > (GRID_RIGHT_EDGE - (SHAPE_WIDTH/2))) )  // Shape B is close to the right edge
@@ -207,10 +219,14 @@
 - (void)setItemA:(GameItem *) itemA {
     ItemA = itemA;
     ItemA.IsPaired = TRUE;
+    ShaddowA.image = [[UIImage imageWithCGImage:[ItemA.ItemView.image CGImage]] retain];
+    ShaddowA.alpha = 0.0f;
 }
 
 - (void)setItemB:(GameItem *) itemB {
     ItemB = itemB;
     ItemB.IsPaired = TRUE;
+    ShaddowB.image = [[UIImage imageWithCGImage:[ItemB.ItemView.image CGImage]] retain];
+    ShaddowB.alpha = 0.0f;
 }
 @end

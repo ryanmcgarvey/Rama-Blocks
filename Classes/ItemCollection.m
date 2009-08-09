@@ -71,7 +71,7 @@
         ItemState * itemState = [items objectAtIndex:i];
         LockShape * lock = [currentLevel GetLockAtIndex:i];
         itemState.shapeType = [NSNumber numberWithInt:lock.shapeType];
-        itemState.colorType = [NSNumber numberWithInt:lock.shapeType];
+        itemState.colorType = [NSNumber numberWithInt:lock.colorType];
         itemState.canSeeColor = [NSNumber numberWithBool:lock.canSeeColor];
         itemState.canSeeItem = [NSNumber numberWithBool:lock.canSeeShape];
     }
@@ -80,6 +80,110 @@
 /**************************************
  Public
  **************************************/
+-(BOOL)DrawShadowForItemPair: (ItemPair *)itemPair{
+    
+    int rowA; int rowB; int columnA; int columnB;
+	Cell * cellA;
+	Cell * cellB;
+	
+	// Which column is each item in
+	columnA = (int)(itemPair.ItemA.center.x - GRID_LEFT_EDGE  ) / (int)SHAPE_WIDTH;
+	columnB = (int)(itemPair.ItemB.center.x - GRID_LEFT_EDGE ) / (int)SHAPE_WIDTH;
+	
+	// Which column is each item in
+	rowA = (int)(GRID_Y_BOTTOM - itemPair.ItemA.center.y + (SHAPE_WIDTH / 2)) / (int)SHAPE_WIDTH;
+	rowB = (int)(GRID_Y_BOTTOM - itemPair.ItemB.center.y + (SHAPE_WIDTH / 2)) / (int)SHAPE_WIDTH;
+	if(rowA >= NUMBER_OF_ROWS)
+    {
+        rowA = NUMBER_OF_ROWS - 1;
+    }
+    if(rowB >= NUMBER_OF_ROWS)
+    {
+        rowB = NUMBER_OF_ROWS - 1;
+    }
+    
+    
+	cellA = [self GetCell:rowA:columnA];
+	cellB = [self GetCell:rowB:columnB];
+	
+	if(cellA == cellB)
+    {
+		if(itemPair.ItemA.center.y > itemPair.ItemB.center.y)
+        {
+			cellA = [self GetCell:cellA.Row -1 : cellA.Column];
+		}
+        else
+        {
+			cellB = [self GetCell:cellB.Row -1 : cellB.Column];
+		}
+	}
+	if(!([self CheckCellToSet:cellA] && [self CheckCellToSet:cellB]))
+    {
+		NSLog(@"Collision, undoing shit");
+		return FALSE;
+	}
+    
+    itemPair.ItemA.Row = rowA;
+    itemPair.ItemB.Row = rowB;
+    itemPair.ItemA.Column = columnA;
+    itemPair.ItemB.Column = columnB;
+    
+    cellA = [self FindCellToFallTo:itemPair.ItemA];
+    cellB = [self FindCellToFallTo:itemPair.ItemB];
+    if(cellA == cellB)
+    {
+        switch (gravityDirection) {
+            case down:
+                if(itemPair.ItemA.center.y < itemPair.ItemB.center.y)
+                {
+                    cellA = [self GetCell:cellA.Row + 1 : cellA.Column];
+                }
+                else
+                {
+                    cellB = [self GetCell:cellB.Row + 1 : cellB.Column];
+                }
+                break;
+            case up:
+                if(itemPair.ItemA.center.y > itemPair.ItemB.center.y)
+                {
+                    cellA = [self GetCell:cellA.Row - 1 : cellA.Column];
+                }
+                else
+                {
+                    cellB = [self GetCell:cellB.Row - 1 : cellB.Column];
+                }
+                break;
+            case left:
+                if(itemPair.ItemA.center.x > itemPair.ItemB.center.x)
+                {
+                    cellA = [self GetCell:cellA.Row : cellA.Column + 1];
+                }
+                else
+                {
+                    cellB = [self GetCell:cellB.Row : cellB.Column + 1];
+                }
+                break;
+
+            case right:
+
+                if(itemPair.ItemA.center.x < itemPair.ItemB.center.x)
+                {
+                    cellA = [self GetCell:cellA.Row : cellA.Column - 1];
+                }
+                else
+                {
+                    cellB = [self GetCell:cellB.Row : cellB.Column - 1];
+                }
+                break;
+        }
+
+	}
+    
+    [itemPair setShadow:cellA.Center : cellB.Center];
+    
+    return TRUE;
+}
+
 
 -(BOOL)AddItemPair: (ItemPair *)itemPair;{
 
@@ -334,6 +438,8 @@
             return nil;
     }
 }
+
+
 /**************************************
  Solution
  **************************************/

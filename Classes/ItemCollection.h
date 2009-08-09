@@ -43,6 +43,7 @@ typedef enum enum_Gravity {
 
 -(id)init: (int) rows : (int) columns : (int)rowPixelLength : (int)columnPixelLength : (Level *)level;
 
+-(BOOL)DrawShadowForItemPair: (ItemPair *)itemPair;
 -(BOOL)AddItemPair: (ItemPair *)itemPair;
 
 -(NSMutableArray *)CheckTransform:(int)row : (int)column;

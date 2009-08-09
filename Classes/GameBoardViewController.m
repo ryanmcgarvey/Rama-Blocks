@@ -39,6 +39,9 @@ GameBoard Behavior
     
     [self.view addSubview:SpawnedPair.ItemA];
     [self.view addSubview:SpawnedPair.ItemB];
+    
+    [self.view addSubview:SpawnedPair.ShaddowA];
+    [self.view addSubview:SpawnedPair.ShaddowB];
 
 }
 
@@ -145,6 +148,9 @@ UIController Delegates
         
         [self.view addSubview:SpawnedPair.ItemA];
         [self.view addSubview:SpawnedPair.ItemB];
+        
+        [self.view addSubview:SpawnedPair.ShaddowA];
+        [self.view addSubview:SpawnedPair.ShaddowB];
 
     }else{
         gameState.currentBoard.Active = [NSNumber numberWithBool:YES];
@@ -228,6 +234,7 @@ UIController Delegates
     if([[touch view] isMemberOfClass:[UIImageView class]] && [touch view] != backGround)
     {
         [SpawnedPair move:[touch locationInView: self.view] :(UIImageView *)[touch view]];
+        [itemCollection DrawShadowForItemPair:SpawnedPair];
     }
 }
 
@@ -303,18 +310,21 @@ Tear down and maintenance
 }
 
 - (void)viewWillDisappear:(BOOL)animated{
-    [itemCollection SaveState];
-    Rama_BlocksAppDelegate * appDelegate =  (Rama_BlocksAppDelegate *)[[UIApplication sharedApplication] delegate];
-    Shape * shape = (Shape *)SpawnedPair.ItemA;
-    NSArray * pair = [appDelegate FetchSpawnedItems];
-    ItemState * item = [pair objectAtIndex:0];
-    item.colorType = [NSNumber numberWithInt:shape.colorType];
-    item.shapeType = [NSNumber numberWithInt:shape.shapeType];
-    
-    item = [pair objectAtIndex:1];
-    shape = (Shape *)SpawnedPair.ItemB;
-    item.colorType = [NSNumber numberWithInt:shape.colorType];
-    item.shapeType = [NSNumber numberWithInt:shape.shapeType];
+    if([gameState.currentBoard.Active boolValue])
+    {
+        [itemCollection SaveState];
+        Rama_BlocksAppDelegate * appDelegate =  (Rama_BlocksAppDelegate *)[[UIApplication sharedApplication] delegate];
+        Shape * shape = (Shape *)SpawnedPair.ItemA;
+        NSArray * pair = [appDelegate FetchSpawnedItems];
+        ItemState * item = [pair objectAtIndex:0];
+        item.colorType = [NSNumber numberWithInt:shape.colorType];
+        item.shapeType = [NSNumber numberWithInt:shape.shapeType];
+        
+        item = [pair objectAtIndex:1];
+        shape = (Shape *)SpawnedPair.ItemB;
+        item.colorType = [NSNumber numberWithInt:shape.colorType];
+        item.shapeType = [NSNumber numberWithInt:shape.shapeType];
+    }
 }
 
 - (void)dealloc {
