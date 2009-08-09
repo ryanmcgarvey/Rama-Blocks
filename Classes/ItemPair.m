@@ -204,6 +204,13 @@
     return TRUE;
 }
 
+- (void)setItemA:(GameItem *) itemA {
+    ItemA = itemA;
+    ItemA.IsPaired = TRUE;
+}
 
-
+- (void)setItemB:(GameItem *) itemB {
+    ItemB = itemB;
+    ItemB.IsPaired = TRUE;
+}
 @end

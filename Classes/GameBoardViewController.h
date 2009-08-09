@@ -16,7 +16,9 @@
 #import "Cell.h"
 #import "Level.h"
 #import "GameState.h"
+#import "BoardState.h"
 #import "Options.h"
+#import "SoundEffects.h"
 
 
 

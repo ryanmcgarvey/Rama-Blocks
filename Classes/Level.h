@@ -10,6 +10,7 @@
 #import "Shape.h"
 #import "GlobalDefines.h"
 #import "LockShape.h"
+#import "GameState.h"
 
 typedef enum enum_Difficulty {
     VeryEasy,
@@ -29,21 +30,26 @@ typedef enum enum_Difficulty {
     float shapeSpawnProbability [NUMBER_OF_SHAPES];
     int totalShapes [NUMBER_OF_SHAPES];
     
-    
-    
     ColorType maxColor;
     ShapeType maxShape;
     int lockCount;
     
     int attempts;
     
+    GameState * gameState;
+    
 }
 
 @property (readonly) Difficulty difficulty;
 @property int attempts;
+@property int lockCount;
 
 
 -(id)init:(Difficulty)predefinedDifficulty;
+
+-(void)SetLockAtIndex:(LockShape *)lock : (int) index;
+
+-(LockShape *)GetLockAtIndex:(int)index;
 
 -(BOOL)checkSolution:(NSMutableArray *)shapes;
 

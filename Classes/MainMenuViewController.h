@@ -24,6 +24,12 @@
 	Tutorial * tutorial;
 	Purchase * purchase;
     GameState * gameState;
+    
+    IBOutlet UIButton * GameBoardButton;
+    IBOutlet UIButton * OptionsButton;
+    IBOutlet UIButton * PurchaseButton;
+    IBOutlet UIButton * ProfileButton;
+    IBOutlet UIButton * TutorialButton;
 }
 
 @property (readwrite, assign) Options * options;

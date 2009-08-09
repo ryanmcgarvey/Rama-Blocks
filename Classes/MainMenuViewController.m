@@ -10,22 +10,38 @@
 #import "Rama_BlocksAppDelegate.h"
 
 
+
 @implementation MainMenuViewController
 
 @synthesize options, profile, tutorial, purchase;
 
+- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil{
+    
+    if (self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil]) {
+        Rama_BlocksAppDelegate * appDelegate =  (Rama_BlocksAppDelegate *)[[UIApplication sharedApplication] delegate];
+        gameState = [[appDelegate FetchGameState] retain];
+         
+    }
+    
+    return self;
+}
+- (void)viewWillAppear:(BOOL)animate{
+    if([gameState.currentBoard.Active boolValue])
+    {
+        
+        [GameBoardButton setTitle: @"Continue" forState:UIControlStateNormal];
+    }
+    else{
+        [GameBoardButton setTitle: @"Play" forState:UIControlStateNormal];
+    }  
+    [GameBoardButton.titleLabel setNeedsLayout];
 
+    [super viewWillAppear:animate];
+}
 - (void)viewDidLoad {
-    Rama_BlocksAppDelegate * appDelegate =  (Rama_BlocksAppDelegate *)[[UIApplication sharedApplication] delegate];
-    gameState = [appDelegate loadEncodedGameState];
 
 	[super viewDidLoad];
     
-    if(gameState.Active)
-    {
-        [self presentModalViewController:[[GameBoardViewController alloc] initWithNibName:@"GameBoardViewController" bundle:nil] animated:YES];
-    }
-
 }
 
 - (void)didReceiveMemoryWarning {
@@ -42,10 +58,8 @@
 }
 
 - (IBAction)loadOptions:(id)sender 
-{
-	
+{	
 	[self presentModalViewController:[[Options alloc] initWithNibName:@"Options" bundle:nil] animated:YES];
-
 }
 
 - (IBAction)loadProfile:(id)sender 

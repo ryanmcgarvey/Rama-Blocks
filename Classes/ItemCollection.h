@@ -16,6 +16,8 @@
 #import "Shape.h"
 #import "Level.h"
 #import "GameState.h"
+#import "ItemState.h"
+#import "BoardState.h"
 
 typedef enum enum_Gravity {
     zero,
@@ -70,6 +72,8 @@ typedef enum enum_Gravity {
 -(void)ClearSolution;
 
 -(GameItem *)GetItemFromCoordinate:(CGPoint) point;
+
+-(void)SaveState;
 
 
 @end

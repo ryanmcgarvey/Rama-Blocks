@@ -20,7 +20,7 @@
     {
         self.center = location;
         ItemView = [[UIImageView alloc] initWithFrame:frame];
-		[self ChangeColorAndShape: cType : sType];  
+		[self ChangeColorAndShape: cType : sType];
         [self addSubview:ItemView];
     }
     return self;

@@ -20,7 +20,7 @@ GameBoard Behavior
 -(void)SpawnShapes{
 	if(SpawnedPair==nil)
     {
-		SpawnedPair = [[ItemPair alloc]init];
+		SpawnedPair = [ItemPair new];
     }
     [SpawnedPair.GrabberA removeFromSuperview];
     [SpawnedPair.GrabberB removeFromSuperview];
@@ -59,13 +59,14 @@ UIController Delegates
 *****************************************************/
 - (void)viewDidLoad {   
     Rama_BlocksAppDelegate * appDelegate =  (Rama_BlocksAppDelegate *)[[UIApplication sharedApplication] delegate];
-    gameState = [appDelegate loadEncodedGameState];
-    gameState.Active = TRUE;
-    audio = [gameState GetAudioPlayer];
-    Difficulty diff = appDelegate.gameState.currentDifficulty;
+    gameState = [appDelegate FetchGameState];
+    
+    audio = [appDelegate FetchAudio];
+
+
     
 	//// Create background
-	backGround = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 320, 480)];
+    backGround = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 320, 480)];
 	backGround.clipsToBounds = YES;
 	backGround.autoresizesSubviews = NO;
     backGround.contentMode = UIViewContentModeTopLeft;
@@ -73,27 +74,87 @@ UIController Delegates
     backGround.userInteractionEnabled = FALSE;
     self.view.backgroundColor = [UIColor blackColor];
     [self.view sendSubviewToBack:backGround];
-    
 	[self.view addSubview:backGround];
     [self.view bringSubviewToFront:buttonMenu];
     [self.view bringSubviewToFront:menuView];
     [self.view bringSubviewToFront:attemptsString];
     //add solution to view
-    currentLevel = [[Level alloc] init:diff];
-    [currentLevel addSolutionToView:self.view];
-    itemCollection = [[ItemCollection alloc] init:NUMBER_OF_ROWS :NUMBER_OF_COLUMNS :SHAPE_WIDTH :SHAPE_WIDTH: currentLevel];
-	SpawnedPair = [[ItemPair new]retain];
-
-	CurrentDevice = [UIDevice currentDevice];
+    
+    CurrentDevice = [UIDevice currentDevice];
     [CurrentDevice beginGeneratingDeviceOrientationNotifications];
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(didRotate:)
                                                  name:@"UIDeviceOrientationDidChangeNotification" object:nil];
-    
-    
+
+    currentLevel = [[Level alloc] init:[gameState.currentDifficulty intValue]];
+    itemCollection = [[ItemCollection alloc] init:NUMBER_OF_ROWS :NUMBER_OF_COLUMNS :SHAPE_WIDTH :SHAPE_WIDTH: currentLevel];
+    SpawnedPair = [[ItemPair new]retain];
+    if([gameState.currentBoard.Active boolValue])
+    {
+        NSArray * pair = [appDelegate FetchSpawnedItems];
+        ItemState * item = [pair objectAtIndex:0];
+        SpawnedPair.ItemA = [[Shape alloc] initWithInfo:
+                             [item.colorType intValue] :
+                             [item.shapeType intValue] : 
+                             CGPointMake(SPAWN_LOCATION_X,SPAWN_LOCATION_Y)];
+        
+        item = [pair objectAtIndex:1];
+
+        SpawnedPair.ItemB = [[Shape alloc] initWithInfo:
+                              [item.colorType intValue] :
+                              [item.shapeType intValue] : 
+                              CGPointMake(SPAWN_LOCATION_X + SHAPE_WIDTH ,SPAWN_LOCATION_Y)];
+        
+        for(ItemState * item in [appDelegate FetchLockItems])
+        {
+            if([item.shapeType intValue] != -1 && [item.colorType intValue] != -1)
+            {
+                
+                LockShape * lockShape = [[LockShape alloc] initWithInfo:[item.colorType intValue] :
+                                  [item.shapeType intValue] :
+                                  CGPointMake(SPAWN_LOCATION_X,SPAWN_LOCATION_Y)];
+                lockShape.canSeeColor = 
+                    [item.canSeeColor boolValue];
+                lockShape.canSeeShape = 
+                    [item.canSeeItem boolValue];
+
+                [currentLevel SetLockAtIndex:lockShape : [item.index intValue]];
+            }
+        }
+
+        for(ItemState * item in [appDelegate FetchCollectionItemStates])
+        {
+            if([item.shapeType intValue] != -1 && [item.colorType intValue] != -1)
+            {
+                
+                Shape * shape = [[[Shape alloc] initWithInfo:[item.colorType intValue] :[item.shapeType intValue] : CGPointMake(SPAWN_LOCATION_X,SPAWN_LOCATION_Y)]retain];
+                
+                Cell * cell = [itemCollection GetCell:[item.Row intValue] : [item.Column intValue]];
+                [itemCollection SetItemToCell:shape : cell];
+                [self.view addSubview:shape];
+            }
+        }
+        
+        [SpawnedPair.GrabberA removeFromSuperview];
+        [SpawnedPair.GrabberB removeFromSuperview];
+        
+        [SpawnedPair Reset];
+        
+        [self.view addSubview:SpawnedPair.GrabberA];
+        [self.view addSubview:SpawnedPair.GrabberB];
+        
+        [self.view addSubview:SpawnedPair.ItemA];
+        [self.view addSubview:SpawnedPair.ItemB];
+
+    }else{
+        gameState.currentBoard.Active = [NSNumber numberWithBool:YES];
+    	[self SpawnShapes];
+    }
+    [currentLevel addSolutionToView:self.view];
     [self didRotate:nil];
-	[self SpawnShapes];
+
     [super viewDidLoad];
+
 }
 
 
@@ -123,7 +184,6 @@ UIController Delegates
     [self.view bringSubviewToFront:menuView];
     NSLog(@"Button Clicked");
     
-    
 }
 -(IBAction)ClickButtonResume {
     menuView.hidden = TRUE;
@@ -134,7 +194,7 @@ UIController Delegates
     [self presentModalViewController:[[Options alloc] initWithNibName:@"Options" bundle:nil] animated:YES];
 }
 -(IBAction)ClickButtonMainMenu{
-    gameState.Active = FALSE;
+    gameState.currentBoard.Active = [NSNumber numberWithBool:NO];
     [self dismissModalViewControllerAnimated:YES];
 }
 /*****************************************************
@@ -240,11 +300,25 @@ Tear down and maintenance
 
 - (void)viewDidUnload {
     
-	// Release any retained subviews of the main view.
-	// e.g.  myOutlet = nil;
+}
+
+- (void)viewWillDisappear:(BOOL)animated{
+    [itemCollection SaveState];
+    Rama_BlocksAppDelegate * appDelegate =  (Rama_BlocksAppDelegate *)[[UIApplication sharedApplication] delegate];
+    Shape * shape = (Shape *)SpawnedPair.ItemA;
+    NSArray * pair = [appDelegate FetchSpawnedItems];
+    ItemState * item = [pair objectAtIndex:0];
+    item.colorType = [NSNumber numberWithInt:shape.colorType];
+    item.shapeType = [NSNumber numberWithInt:shape.shapeType];
+    
+    item = [pair objectAtIndex:1];
+    shape = (Shape *)SpawnedPair.ItemB;
+    item.colorType = [NSNumber numberWithInt:shape.colorType];
+    item.shapeType = [NSNumber numberWithInt:shape.shapeType];
 }
 
 - (void)dealloc {
+    
 	[backGround release];
 	[SpawnedPair release];
 	[itemCollection release];

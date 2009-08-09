@@ -7,17 +7,21 @@
 //
 
 #import "Level.h"
+#import "Rama_BlocksAppDelegate.h"
 
 
 @implementation Level
 @synthesize difficulty;
 @synthesize attempts;
+@synthesize lockCount;
 
 /*****************************************************
 Init
  *****************************************************/
 
 -(id)init:(Difficulty)predefinedDifficulty{
+    
+
     solution = [NSMutableArray new];
     [self setDifficulty:predefinedDifficulty];
     for (int i = 0; i < lockCount; i++) 
@@ -29,6 +33,26 @@ Init
     }
     [self updateProbability];
     return self;
+}
+
+-(void)SetLockAtIndex:(LockShape *)lock : (int) index{
+    if(index >= lockCount){
+        return;
+    }
+    LockShape * oldLock = (LockShape *)[solution objectAtIndex:index];
+    lock.center = oldLock.center;
+    [solution removeObjectAtIndex:index];
+    [oldLock removeFromSuperview];
+    [oldLock release];
+    [solution insertObject:lock atIndex:index];
+
+}
+
+-(LockShape *)GetLockAtIndex:(int)index{
+    if(index >= lockCount){
+        return nil;
+    }
+    return (LockShape *)[solution objectAtIndex:index];
 }
 
 /*****************************************************

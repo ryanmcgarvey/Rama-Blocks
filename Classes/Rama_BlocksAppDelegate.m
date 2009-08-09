@@ -12,72 +12,202 @@
 @implementation Rama_BlocksAppDelegate
 
 @synthesize window;
-@synthesize gameState, boardState;
-
-
 
 - (void)applicationDidFinishLaunching:(UIApplication *)application {
-    [self loadEncodedGameState];
-    [self loadEncodedBoardState];
     
-    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
-    NSString *documentsDirectory = [paths objectAtIndex:0];
-    NSString *gameBoardFile = [NSString stringWithFormat:@"%@/gameBoardArray", documentsDirectory];
-    boardState = [[NSMutableArray alloc] initWithContentsOfFile:gameBoardFile];
-
-    
-    if(boardState == nil){
-
-        boardState = [[NSMutableArray alloc] init];
-        
-    }
-    
-    NSLog(@"%i", boardState.count);
-
+    gameState = [self FetchGameState];
     mainMenu = [[MainMenuViewController alloc] initWithNibName:@"MainMenuViewController" bundle:nil];
     [[UIApplication sharedApplication] setStatusBarHidden:YES animated:NO];
+    
+    
     [window addSubview:mainMenu.view];
 	[window makeKeyAndVisible];
 }
-
-
-
-///////////////////////////////////////////////////////////////
-
--(void)saveEncodedGameState{
-	NSUserDefaults *persistentStorage = [NSUserDefaults standardUserDefaults];
-    NSData *encodedGameState = [NSKeyedArchiver archivedDataWithRootObject:self.gameState];
-	[persistentStorage setObject:encodedGameState forKey:@"encodedGameState"];
+-(SoundEffects *)FetchAudio{
+    if(audio == nil){
+        audio = [SoundEffects new];
+    }
+    return audio;
 }
 
--(GameState*)loadEncodedGameState{
-    if (gameState == nil)
+-(GameState *)FetchGameState{
+    
+    if(gameState == nil)
     {
-        NSUserDefaults *persistentStorage = [NSUserDefaults standardUserDefaults];
-        NSData *encodedGameState = [persistentStorage objectForKey: @"encodedGameState"];
-        gameState = (GameState*)[NSKeyedUnarchiver unarchiveObjectWithData: encodedGameState];
+        
+        [self managedObjectContext];
+    
+        NSError *fetchError = nil;
+        NSArray *fetchResults;
+        
+        NSEntityDescription *entityDescription = [NSEntityDescription
+                                                  entityForName:@"GameState" 
+                                                  inManagedObjectContext:managedObjectContext];
+        
+        NSFetchRequest *request = [[[NSFetchRequest alloc] init] autorelease];
+        
+        [request setEntity:entityDescription];
+        
+        fetchResults = [managedObjectContext 
+                        executeFetchRequest:request 
+                        error:&fetchError];
+        
+        if ((fetchResults != nil) && ([fetchResults count] == 1) && (fetchError == nil)) 
+        {
+            gameState = [fetchResults objectAtIndex:0];
+        }
+        else
+        {
+            gameState =  [NSEntityDescription
+                          insertNewObjectForEntityForName:@"GameState" 
+                          inManagedObjectContext:managedObjectContext];
+            gameState.currentBoard = [NSEntityDescription
+                                      insertNewObjectForEntityForName:@"BoardState" 
+                                      inManagedObjectContext:managedObjectContext];
+            
+            for(int i = 0; i < NUMBER_OF_ROWS * NUMBER_OF_COLUMNS; i++)
+            {
+            
+                ItemState * item = [NSEntityDescription
+                                    insertNewObjectForEntityForName:@"ItemState" 
+                                    inManagedObjectContext:managedObjectContext];
+                
+                item.index = [NSNumber numberWithInt:i];
+                item.ItemType = [NSNumber numberWithInt: ShapeItem];
+                [gameState.currentBoard addItemsObject:item];
+                
+            }
+            for(int i = 0; i < 6; i++)
+            {
+                
+                ItemState * item = [NSEntityDescription
+                                    insertNewObjectForEntityForName:@"ItemState" 
+                                    inManagedObjectContext:managedObjectContext];
+                
+                item.index = [NSNumber numberWithInt:i];
+                item.ItemType = [NSNumber numberWithInt:LockShapeItem];
+                [gameState.currentBoard addItemsObject:item];
+            }
+            
+            ItemState * item = [NSEntityDescription
+                                insertNewObjectForEntityForName:@"ItemState" 
+                                inManagedObjectContext:managedObjectContext];
+            
+            item.index = [NSNumber numberWithInt:0];
+            item.ItemType = [NSNumber numberWithInt:SpawnItem];
+            [gameState.currentBoard addItemsObject:item];
+            
+            item = [NSEntityDescription
+                                insertNewObjectForEntityForName:@"ItemState" 
+                                inManagedObjectContext:managedObjectContext];
+            item.index = [NSNumber numberWithInt:1];
+            item.ItemType = [NSNumber numberWithInt:SpawnItem];
+            [gameState.currentBoard addItemsObject:item];
+            
+        }
+
+
+        [managedObjectContext processPendingChanges];
     }
     return gameState;
 }
 
+-(NSArray *)FetchCollectionItemStates{
+    
+    [self managedObjectContext];
+    NSError *fetchError = nil;
+    NSArray *fetchResults;
+    
+    
+    NSEntityDescription *entityDescription = [NSEntityDescription
+                                              entityForName:@"ItemState" 
+                                              inManagedObjectContext:managedObjectContext];
+    
+    NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc]
+                                        initWithKey:@"index" ascending:YES];
+    
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:
+                              @"(owningBoardState == %@) and (ItemType == %d) ", gameState.currentBoard, ShapeItem ];
+    
+                              
+    NSFetchRequest *request = [[[NSFetchRequest alloc] init] autorelease];
+    
 
-////////////////////////////////////////////////////////////////
+    
+    [request setEntity:entityDescription];
+    [request setPredicate:predicate];
+    [request setSortDescriptors: [NSArray arrayWithObject:sortDescriptor]];
 
-
-
-- (void)saveEncodedBoardState{
-    //NSString * encodedBoardState = [self pathForDataFile];
-    //[NSKeyedArchiver archiveRootObject: self.boardState toFile: encodedBoardState];
+    
+    fetchResults = [managedObjectContext 
+                    executeFetchRequest:request 
+                    error:&fetchError];
+    
+    return fetchResults;
 }
 
+-(NSArray *)FetchLockItems{
+    
+    [self managedObjectContext];
+    NSError *fetchError = nil;
+    NSArray *fetchResults;
+    
+    
+    NSEntityDescription *entityDescription = [NSEntityDescription
+                                              entityForName:@"ItemState" 
+                                              inManagedObjectContext:managedObjectContext];
 
-
-- (void)loadEncodedBoardState{
-    //NSString * encodedBoardState = [self pathForDataFile];
-    //self.boardState = [NSKeyedUnarchiver unarchiveObjectWithFile:encodedBoardState];
+    
+    NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc]
+                                        initWithKey:@"index" ascending:YES];
+    
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:
+                              @" (owningBoardState == %@) and (ItemType == %d) ", gameState.currentBoard, LockShapeItem ];
+    
+    
+    NSFetchRequest *request = [[[NSFetchRequest alloc] init] autorelease];
+    
+    [request setEntity:entityDescription];
+    [request setPredicate:predicate];
+    [request setSortDescriptors: [NSArray arrayWithObject:sortDescriptor]];
+    
+    
+    fetchResults = [managedObjectContext 
+                    executeFetchRequest:request 
+                    error:&fetchError];
+    return fetchResults;
 }
 
-
+-(NSArray *)FetchSpawnedItems{
+    
+    [self managedObjectContext];
+    NSError *fetchError = nil;
+    NSArray *fetchResults;
+    
+    
+    NSEntityDescription *entityDescription = [NSEntityDescription
+                                              entityForName:@"ItemState" 
+                                              inManagedObjectContext:managedObjectContext];
+    
+    NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc]
+                                        initWithKey:@"index" ascending:YES];
+    
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:
+                              @" (owningBoardState == %@) and (ItemType == %d) ", gameState.currentBoard, SpawnItem ];
+    
+    
+    NSFetchRequest *request = [[[NSFetchRequest alloc] init] autorelease];
+    
+    [request setEntity:entityDescription];
+    [request setPredicate:predicate];
+    [request setSortDescriptors: [NSArray arrayWithObject:sortDescriptor]];
+    
+    
+    fetchResults = [managedObjectContext 
+                    executeFetchRequest:request 
+                    error:&fetchError];
+    return fetchResults;
+}
 
 
 
@@ -85,92 +215,123 @@
 
 
 - (void)applicationWillTerminate:(UIApplication *)application {
-	[self saveEncodedGameState];
-    [self saveEncodedBoardState];
-    /*
-    NSArray *paths = NSSearchPathForDirectoriesInDomains (NSDocumentDirectory, NSUserDomainMask, YES);
-    NSString *documentsDirectory = [paths objectAtIndex:0];
-    NSString *gameBoardFile = [NSString stringWithFormat:@"%@/gameBoardArray", documentsDirectory];
-    [boardState writeToFile:gameBoardFile atomically:NO];
-     */
-    NSLog(@"%i", boardState.count);
-}
-
-
-
--(void)makePersistentStore{
-    NSUserDefaults *gamestate = [NSUserDefaults standardUserDefaults];
-	[gamestate setObject:gameState forKey:@"gamestate"];
-	[gamestate synchronize];    
-	
-}
-
-
-
-
-
-
-///////////////////////////////////////////////////////////////////
-- (id)initWithCoder:(NSCoder *)decoder{
-	self = [super init];
-	if( self != nil ){
-        /*
-		Shape * arrayThingies;
-        for(arrayThingies in boardState){
-            arrayThingies.shapeType = [decoder decodeIntForKey:@"encodedShapeType"];
-            arrayThingies.colorType = [decoder decodeIntForKey:@"encodedColorType"];
-            arrayThingies.Row = [decoder decodeIntForKey:@"encodedRow"];
-            arrayThingies.Column = [decoder decodeIntForKey:@"encodedColumn"];
-        }
-         */
-	}
-	return self;
-}
-
-
-- (void)encodeWithCoder:(NSCoder *)encoder{
-    /*
-    Shape * arrayThingies;
-    
-    for(arrayThingies in boardState){
-    [encoder encodeInt:arrayThingies.shapeType forKey:@"encodedShapeType"];
-    [encoder encodeInt:arrayThingies.colorType forKey:@"encodedColorType"];
-    [encoder encodeInt:arrayThingies.Row forKey:@"encodedRow"];
-    [encoder encodeInt:arrayThingies.Column forKey:@"encodedColumn"];
-    }
-    */
-}
-//////////////////////////////////////////////////////////////////////
-
-
-- (NSString *) pathForDataFile{
-    NSFileManager *fileManager = [NSFileManager defaultManager];
-    NSArray *folder = NSSearchPathForDirectoriesInDomains (NSDocumentDirectory, NSUserDomainMask, YES);
-    NSString *documentsDirectory = [folder objectAtIndex:0];
-    //NSString *folder = @"~/Library/Application Support/GameStuff/";
-    
-    NSString *gameBoardFile = [NSString stringWithFormat:@"%@/gameBoardArray", documentsDirectory];
-    gameBoardFile = [gameBoardFile stringByExpandingTildeInPath];
-    if ([fileManager fileExistsAtPath: gameBoardFile] == NO)
+    NSError *error = nil;
+    if (managedObjectContext != nil) 
     {
-        [fileManager createDirectoryAtPath: gameBoardFile attributes: nil];
+        if ([managedObjectContext hasChanges] && ![managedObjectContext save:&error]) 
+        {
+			/*
+			 Replace this implementation with code to handle the error appropriately.
+			 
+			 abort() causes the application to generate a crash log and terminate. 
+             You should not use this function in a shipping application, although 
+             it may be useful during development. If it is not possible to recover 
+             from the error, display an alert panel that instructs the user to quit 
+             the application by pressing the Home button.
+			 */
+			NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
+			abort();
+        } 
     }
-    
-    NSString *fileName = @"rootObjectsBox";
-    return [gameBoardFile stringByAppendingPathComponent: fileName];
 }
 
 
-/////////////////////////////////////////////////////////////////
+#pragma mark -
+#pragma mark Core Data stack
+
+/**
+ Returns the managed object context for the application.
+ If the context doesn't already exist, it is created and bound to the persistent store coordinator for the application.
+ */
+- (NSManagedObjectContext *) managedObjectContext {
+	
+    if (managedObjectContext != nil) {
+        return managedObjectContext;
+    }
+	
+    NSPersistentStoreCoordinator *coordinator = [self persistentStoreCoordinator];
+    if (coordinator != nil) {
+        managedObjectContext = [[NSManagedObjectContext alloc] init];
+        [managedObjectContext setPersistentStoreCoordinator: coordinator];
+    }
+    return managedObjectContext;
+}
 
 
+/**
+ Returns the managed object model for the application.
+ If the model doesn't already exist, it is created by merging all of the models found in the application bundle.
+ */
+- (NSManagedObjectModel *)managedObjectModel {
+	
+    if (managedObjectModel != nil) {
+        return managedObjectModel;
+    }
+    managedObjectModel = [[NSManagedObjectModel mergedModelFromBundles:nil] retain];    
+    return managedObjectModel;
+}
+
+
+/**
+ Returns the persistent store coordinator for the application.
+ If the coordinator doesn't already exist, it is created and the application's store added to it.
+ */
+- (NSPersistentStoreCoordinator *)persistentStoreCoordinator {
+	
+    if (persistentStoreCoordinator != nil) {
+        return persistentStoreCoordinator;
+    }
+	
+    NSURL *storeUrl = [NSURL fileURLWithPath: [[self applicationDocumentsDirectory] stringByAppendingPathComponent: @"persistenTest.sqlite"]];
+	
+	NSError *error = nil;
+    persistentStoreCoordinator = [[NSPersistentStoreCoordinator alloc] initWithManagedObjectModel:[self managedObjectModel]];
+    if (![persistentStoreCoordinator addPersistentStoreWithType:NSSQLiteStoreType configuration:nil URL:storeUrl options:nil error:&error]) {
+		/*
+		 Replace this implementation with code to handle the error appropriately.
+		 
+		 abort() causes the application to generate a crash log and terminate. 
+         You should not use this function in a shipping application, although 
+         it may be useful during development. If it is not possible to recover 
+         from the error, display an alert panel that instructs the user to quit 
+         the application by pressing the Home button.
+		 
+		 Typical reasons for an error here include:
+		 * The persistent store is not accessible
+		 * The schema for the persistent store is incompatible with current managed object model
+		 Check the error message to determine what the actual problem was.
+		 */
+		NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
+		abort();
+    }    
+	
+    return persistentStoreCoordinator;
+}
+
+
+#pragma mark -
+#pragma mark Application's Documents directory
+
+/**
+ Returns the path to the application's Documents directory.
+ */
+- (NSString *)applicationDocumentsDirectory {
+	return [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject];
+}
+
+
+#pragma mark -
+#pragma mark Memory management
 
 - (void)dealloc {
-
+	
+    [managedObjectContext release];
+    [managedObjectModel release];
+    [persistentStoreCoordinator release];
+    
 	[window release];
 	[super dealloc];
+    
 }
-
-
 @end
 

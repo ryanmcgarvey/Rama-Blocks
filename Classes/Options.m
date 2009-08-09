@@ -15,14 +15,13 @@
 
 - (void)viewDidLoad {
     Rama_BlocksAppDelegate * appDelegate =  (Rama_BlocksAppDelegate *)[[UIApplication sharedApplication] delegate];
-    gameState = [appDelegate loadEncodedGameState];
-    sfxVolume.value = gameState.sfxVolume;
-    musicVolume.value = gameState.musicVolume;
+    gameState = [[appDelegate FetchGameState] retain];
+    sfxVolume.value = [gameState.sfxVolume floatValue];
+    musicVolume.value = [gameState.musicVolume floatValue];
     difficulty.maximumValue = NUMBER_OF_DIFF - 1;
     difficulty.minimumValue = 0;
-    difficulty.value = gameState.currentDifficulty;
+    difficulty.value = [gameState.currentDifficulty intValue];
     [self changeDifficulty];
-    
     [super viewDidLoad];
 }
 
@@ -30,8 +29,6 @@
 - (IBAction)returnToMenu:(id)sender 
 {
 	[self dismissModalViewControllerAnimated:YES];
-    Rama_BlocksAppDelegate * appDelegate =  (Rama_BlocksAppDelegate *)[[UIApplication sharedApplication] delegate];
-    [appDelegate saveEncodedGameState];
 }
 
 - (IBAction)changeShapeColors{
@@ -39,11 +36,10 @@
 }
 
 -(void)changeMusicVolume{
-    gameState.musicVolume = musicVolume.value;
+    gameState.musicVolume = [NSNumber numberWithFloat:musicVolume.value];
 }
 -(void)changeSfxVolume{
-    gameState.audio.volume = sfxVolume.value;
-    gameState.sfxVolume = sfxVolume.value;
+    gameState.sfxVolume = [NSNumber numberWithFloat:sfxVolume.value];
 }
 -(void)changeDifficulty{
     Difficulty diff = (Difficulty)(difficulty.value);
@@ -74,7 +70,7 @@
             break;
     }
     
-    gameState.currentDifficulty = diff;
+    gameState.currentDifficulty = [NSNumber numberWithInt:diff];
 }
 
 
@@ -91,8 +87,8 @@
     
 }
 
-
 - (void)dealloc {
+    [gameState release];
     [super dealloc];
 }
 

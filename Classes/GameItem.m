@@ -15,7 +15,7 @@
 - (id)initWithFrame:(CGRect)frame {
     if (self = [super initWithFrame:frame]) {
         tapped = 0;
-        IsPaired = TRUE;
+        IsPaired = FALSE;
     }
     return self;
 }

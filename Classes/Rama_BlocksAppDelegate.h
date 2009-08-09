@@ -11,34 +11,40 @@
 
 #import "MainMenuViewController.h"
 #import "GameState.h"
+#import "SoundEffects.h"
+#import "GameItem.h"
 
 @interface Rama_BlocksAppDelegate : NSObject <UIApplicationDelegate> {
     
-    NSMutableArray * boardState;
+    
+    NSManagedObjectModel *managedObjectModel;
+    NSManagedObjectContext *managedObjectContext;	    
+    NSPersistentStoreCoordinator *persistentStoreCoordinator;
+    
+    SoundEffects * audio;
+    
+    
     MainMenuViewController * mainMenu;
     GameState * gameState;
-    Difficulty difficulty;
     UIWindow *window;
 }
 
-
-@property (nonatomic, retain) NSMutableArray * boardState;
-@property (nonatomic, retain, readonly) GameState * gameState;
 @property (nonatomic, retain) IBOutlet UIWindow *window;
 
+@property (nonatomic, retain, readonly) NSManagedObjectModel *managedObjectModel;
+@property (nonatomic, retain, readonly) NSManagedObjectContext *managedObjectContext;
+@property (nonatomic, retain, readonly) NSPersistentStoreCoordinator *persistentStoreCoordinator;
 
-//- (void) setNewBoardState: (NSArray *)newBoardState;
+- (NSString *)applicationDocumentsDirectory;
 
--(GameState*)loadEncodedGameState;
--(void)saveEncodedGameState;
 
-- (void)loadEncodedBoardState;
--(void)saveEncodedBoardState;
+-(GameState *)FetchGameState;
+-(SoundEffects *)FetchAudio;
 
-- (id)initWithCoder:(NSCoder *)decoder;
-- (void)encodeWithCoder:(NSCoder *)encoder;
+-(NSArray *)FetchCollectionItemStates;
+-(NSArray *)FetchSpawnedItems;
+-(NSArray *)FetchLockItems;
 
-- (NSString *) pathForDataFile;
 
 @end
 

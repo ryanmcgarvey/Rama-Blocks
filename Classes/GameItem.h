@@ -7,7 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
-
+typedef enum enum_ItemType {
+    ShapeItem,
+    LockShapeItem,
+    SpawnItem
+} TypeItem;
 
 @interface GameItem : UIView {
 @public;

@@ -13,7 +13,10 @@
 
 -(id)init: (int) rows : (int) columns : (int)rowPixelLength : (int)columnPixelLength : (Level *) level{	
 
-	currentLevel = [level retain];
+    Rama_BlocksAppDelegate * appDelegate =  (Rama_BlocksAppDelegate *)[[UIApplication sharedApplication] delegate];
+    gameState = [appDelegate FetchGameState];
+	
+    currentLevel = [level retain];
     solution = [NSMutableArray new];
 	gravityDirection = down;
 	RowLength = rows;
@@ -34,10 +37,44 @@
 			float y = (  MAX_Y  - (RowPixelLength * row) - (SHAPE_WIDTH / 2) );
 			CGPoint point = CGPointMake( x , y );
 			cells[(row * ColumnLength) + column] = [[Cell alloc] initWithData: point : row : column];
-           // [game createMirrorCells:cells];
 		}
 	}
+
 	return self;
+}
+
+-(void)SaveState {
+    Rama_BlocksAppDelegate * appDelegate =  (Rama_BlocksAppDelegate *)[[UIApplication sharedApplication] delegate];
+    NSArray * items = [appDelegate FetchCollectionItemStates];
+    
+    for(int i = 0; i < NUMBER_OF_ROWS * NUMBER_OF_COLUMNS; i++)
+    {
+			Cell * cell = cells[i];
+            ItemState * itemState = [items objectAtIndex:i];
+            if(cell.ItemInCell != nil && [cell.ItemInCell isKindOfClass:[Shape class]])
+            {
+                Shape * shape = (Shape *) cell.ItemInCell;
+                itemState.shapeType = 
+                    [NSNumber numberWithInt:shape.shapeType];
+                itemState.colorType = 
+                    [NSNumber numberWithInt:shape.colorType];
+                itemState.Row = [NSNumber numberWithInt:cell.Row];
+                itemState.Column = [NSNumber numberWithInt:cell.Column];
+            }else{
+                itemState.shapeType = [NSNumber numberWithInt:-1];
+                itemState.colorType = [NSNumber numberWithInt:-1];
+            }
+    }
+    items = [appDelegate FetchLockItems];
+    for(int i = 0; i < currentLevel.lockCount; i++)
+    {
+        ItemState * itemState = [items objectAtIndex:i];
+        LockShape * lock = [currentLevel GetLockAtIndex:i];
+        itemState.shapeType = [NSNumber numberWithInt:lock.shapeType];
+        itemState.colorType = [NSNumber numberWithInt:lock.shapeType];
+        itemState.canSeeColor = [NSNumber numberWithBool:lock.canSeeColor];
+        itemState.canSeeItem = [NSNumber numberWithBool:lock.canSeeShape];
+    }
 }
 
 /**************************************
@@ -125,11 +162,8 @@
 
 -(void)RemoveFromCellsAndRefactor:(NSMutableArray *)TransFormGroup{
     [currentLevel removeItems:TransFormGroup];
-    Rama_BlocksAppDelegate * appDelegate =  (Rama_BlocksAppDelegate *)[[UIApplication sharedApplication] delegate];
 	for(Cell * cell in TransFormGroup)
     {
-        
-        [appDelegate.boardState removeObject:cell.ItemInCell];
 		[cell.ItemInCell removeFromSuperview];
 		[cell.ItemInCell release];		
         cell.ItemInCell = nil;
@@ -252,10 +286,7 @@
             return;
         }
         [self SetItemToCell:cell.ItemInCell :cellToMoveTo];
-        
-        
         cell.ItemInCell = nil;
-        
     }
 }
 
@@ -354,7 +385,6 @@
 }
 
 -(void)SetItemToCell:(GameItem *)item : (Cell *) cell{
-    Rama_BlocksAppDelegate * appDelegate =  (Rama_BlocksAppDelegate *)[[UIApplication sharedApplication] delegate];
     if(cell == nil || cell.ItemInCell == item){
       
         return;
@@ -366,7 +396,6 @@
 	cell.ItemInCell = [item retain];
 	[UIView beginAnimations:nil context:nil]; 
 	[UIView setAnimationDuration:0.15];
-	[appDelegate.boardState addObject:cell.ItemInCell];
     item.center = cell.Center;
 	item.Row = cell.Row;
 	item.Column = cell.Column;
