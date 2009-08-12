@@ -86,8 +86,6 @@ UIController Delegates
     gameState = [appDelegate FetchGameState];
     
     audio = [appDelegate FetchAudio];
-
-
     
 	//// Create background
     backGround = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 320, 480)];
@@ -206,7 +204,30 @@ UIController Delegates
     }
 }
 
-
+-(IBAction)ClickReset{
+    menuView.hidden = FALSE;
+    menuView.userInteractionEnabled = TRUE;
+	gameState.currentBoard.Active = FALSE;
+    [self.view bringSubviewToFront:menuView];
+	/*
+	for(UIView *removedViewForReset in self.view.subviews){
+		if([removedViewForReset isKindOfClass: [GameItem class]]){
+			GameItem * pairedOrNot = removedViewForReset;
+			if(pairedOrNot.IsPaired == FALSE){
+				[removedViewForReset removeFromSuperview];
+				[removedViewForReset release];		
+				removedViewForReset = nil;
+			}
+		}
+		
+		
+		
+	}
+	*/
+	[self dismissModalViewControllerAnimated:YES];
+    NSLog(@"Reset View");
+    
+}
 -(IBAction)ClickButtonMenu{
     menuView.hidden = FALSE;
     menuView.userInteractionEnabled = TRUE;

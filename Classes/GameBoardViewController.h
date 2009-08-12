@@ -55,6 +55,7 @@
 -(void)didRotate:(NSNotification *)notification;
 -(void)SaveState;
 
+-(IBAction)ClickReset;
 -(IBAction)ClickButtonMenu;
 -(IBAction)ClickButtonResume;
 -(IBAction)ClickButtonOptions;

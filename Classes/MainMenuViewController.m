@@ -12,7 +12,7 @@
 
 
 @implementation MainMenuViewController
-
+@synthesize testAnimation, testImages;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil{
     
@@ -37,7 +37,21 @@
     [super viewWillAppear:animate];
 }
 - (void)viewDidLoad {
-
+	
+	testImages = [[NSMutableArray alloc] init];
+	
+	for(int i = 1; i < 13; i++){
+		NSString *theImage = [NSString stringWithFormat:@"flag%d.png", i];
+		NSLog(@"%@", theImage); 
+		UIImage *flag = [UIImage imageNamed:theImage];
+		[testImages addObject:flag];
+	}
+	
+	[testAnimation setAnimationImages:testImages];
+	[testAnimation setAnimationDuration:1.5f];
+	[testAnimation startAnimating];
+	
+	
 	[super viewDidLoad];
     
 }

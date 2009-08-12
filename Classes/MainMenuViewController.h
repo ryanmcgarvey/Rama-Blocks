@@ -28,9 +28,14 @@
     IBOutlet UIButton * TutorialButton;
     
     IBOutlet UIButton * LevelSelectButton;
+	
+	IBOutlet UIImageView *testAnimation;
+	NSMutableArray *testImages;
 
 }
 
+@property(nonatomic, retain)IBOutlet UIImageView *testAnimation;
+@property(nonatomic, retain)NSMutableArray *testImages;
 
 - (IBAction)loadGameBoard:(id)sender;
 - (IBAction)loadTutorial:(id)sender;
