@@ -27,11 +27,13 @@
     if([gameState.currentBoard.Active boolValue])
     {
         
-        [GameBoardButton setTitle: @"Continue" forState:UIControlStateNormal];
+        [GameBoardButton setTitle: @"Play Puzzle Mode" forState:UIControlStateNormal];
     }
-    else{
+    /*
+	else{
         [GameBoardButton setTitle: @"Play" forState:UIControlStateNormal];
-    }  
+    }
+	 */
     [GameBoardButton.titleLabel setNeedsLayout];
 
     [super viewWillAppear:animate];
@@ -48,7 +50,7 @@
 	}
 	
 	[testAnimation setAnimationImages:testImages];
-	[testAnimation setAnimationDuration:1.5f];
+	[testAnimation setAnimationDuration:1.0f];
 	[testAnimation startAnimating];
 	
 	
@@ -88,6 +90,15 @@
 
 - (IBAction)loadGameBoard:(id)sender 
 {
+	Rama_BlocksAppDelegate * appDelegate =  (Rama_BlocksAppDelegate *)[[UIApplication sharedApplication] delegate];
+	appDelegate.gameType = 1;
+	[self presentModalViewController:[[GameBoardViewController alloc] initWithNibName:@"GameBoardViewController" bundle:nil] animated:YES];
+}
+
+- (IBAction)loadTimeBoard:(id)sender 
+{
+	Rama_BlocksAppDelegate * appDelegate =  (Rama_BlocksAppDelegate *)[[UIApplication sharedApplication] delegate];
+	appDelegate.gameType = 2;
 	[self presentModalViewController:[[GameBoardViewController alloc] initWithNibName:@"GameBoardViewController" bundle:nil] animated:YES];
 }
 

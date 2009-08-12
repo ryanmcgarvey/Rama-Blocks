@@ -23,12 +23,10 @@
     LevelSelect * levelSelect;
     
     IBOutlet UIButton * GameBoardButton;
+	IBOutlet UIButton * GameTimeButton;
     IBOutlet UIButton * OptionsButton;
-
     IBOutlet UIButton * TutorialButton;
-    
     IBOutlet UIButton * LevelSelectButton;
-	
 	IBOutlet UIImageView *testAnimation;
 	NSMutableArray *testImages;
 
@@ -38,6 +36,7 @@
 @property(nonatomic, retain)NSMutableArray *testImages;
 
 - (IBAction)loadGameBoard:(id)sender;
+- (IBAction)loadTimeBoard:(id)sender;
 - (IBAction)loadTutorial:(id)sender;
 - (IBAction)loadOptions:(id)sender;
 -(IBAction)loadLevelSelect:(id)sender;

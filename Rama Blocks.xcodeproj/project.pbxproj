@@ -15,6 +15,11 @@
 		28AD733F0D9D9553002E5188 /* MainWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 28AD733E0D9D9553002E5188 /* MainWindow.xib */; };
 		28C3AD8A0F43EF2300507BA6 /* Rama_Blocks.xcdatamodel in Sources */ = {isa = PBXBuildFile; fileRef = 28C3AD890F43EF2300507BA6 /* Rama_Blocks.xcdatamodel */; };
 		28D801B40F44B63D00FB423F /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 28D801B30F44B63D00FB423F /* CoreData.framework */; };
+		C2028FA61033577100E6E0DA /* whitetriangle.png in Resources */ = {isa = PBXBuildFile; fileRef = C2028FA11033577100E6E0DA /* whitetriangle.png */; };
+		C2028FA71033577100E6E0DA /* whitesquare.png in Resources */ = {isa = PBXBuildFile; fileRef = C2028FA21033577100E6E0DA /* whitesquare.png */; };
+		C2028FA81033577100E6E0DA /* whitehexagon.png in Resources */ = {isa = PBXBuildFile; fileRef = C2028FA31033577100E6E0DA /* whitehexagon.png */; };
+		C2028FA91033577100E6E0DA /* whitecircle.png in Resources */ = {isa = PBXBuildFile; fileRef = C2028FA41033577100E6E0DA /* whitecircle.png */; };
+		C2028FAA1033577100E6E0DA /* whitepentagon.png in Resources */ = {isa = PBXBuildFile; fileRef = C2028FA51033577100E6E0DA /* whitepentagon.png */; };
 		C21FB3C41032291000C1D29B /* flag10.png in Resources */ = {isa = PBXBuildFile; fileRef = C21FB3B81032291000C1D29B /* flag10.png */; };
 		C21FB3C51032291000C1D29B /* flag11.png in Resources */ = {isa = PBXBuildFile; fileRef = C21FB3B91032291000C1D29B /* flag11.png */; };
 		C21FB3C61032291000C1D29B /* flag9.png in Resources */ = {isa = PBXBuildFile; fileRef = C21FB3BA1032291000C1D29B /* flag9.png */; };
@@ -105,6 +110,11 @@
 		29B97316FDCFA39411CA2CEA /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		32CA4F630368D1EE00C91783 /* Rama_Blocks_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Rama_Blocks_Prefix.pch; sourceTree = "<group>"; };
 		8D1107310486CEB800E47090 /* Rama_Blocks-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "Rama_Blocks-Info.plist"; sourceTree = "<group>"; };
+		C2028FA11033577100E6E0DA /* whitetriangle.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = whitetriangle.png; sourceTree = "<group>"; };
+		C2028FA21033577100E6E0DA /* whitesquare.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = whitesquare.png; sourceTree = "<group>"; };
+		C2028FA31033577100E6E0DA /* whitehexagon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = whitehexagon.png; sourceTree = "<group>"; };
+		C2028FA41033577100E6E0DA /* whitecircle.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = whitecircle.png; sourceTree = "<group>"; };
+		C2028FA51033577100E6E0DA /* whitepentagon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = whitepentagon.png; sourceTree = "<group>"; };
 		C21FB3B81032291000C1D29B /* flag10.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = flag10.png; sourceTree = "<group>"; };
 		C21FB3B91032291000C1D29B /* flag11.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = flag11.png; sourceTree = "<group>"; };
 		C21FB3BA1032291000C1D29B /* flag9.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = flag9.png; sourceTree = "<group>"; };
@@ -411,46 +421,51 @@
 		FCEF17D31021644E00A71C1C /* Images */ = {
 			isa = PBXGroup;
 			children = (
-				C21FB3B81032291000C1D29B /* flag10.png */,
-				C21FB3B91032291000C1D29B /* flag11.png */,
-				C21FB3BA1032291000C1D29B /* flag9.png */,
-				C21FB3BB1032291000C1D29B /* flag12.png */,
-				C21FB3BC1032291000C1D29B /* flag6.png */,
-				C21FB3BD1032291000C1D29B /* flag7.png */,
-				C21FB3BE1032291000C1D29B /* flag8.png */,
+				C21FB4221032318700C1D29B /* flag1.png */,
+				C21FB3C31032291000C1D29B /* flag2.png */,
 				C21FB3BF1032291000C1D29B /* flag3.png */,
 				C21FB3C01032291000C1D29B /* flag4.png */,
 				C21FB3C11032291000C1D29B /* flag5.png */,
-				C21FB3C31032291000C1D29B /* flag2.png */,
-				C21FB4221032318700C1D29B /* flag1.png */,
+				C21FB3BC1032291000C1D29B /* flag6.png */,
+				C21FB3BD1032291000C1D29B /* flag7.png */,
+				C21FB3BE1032291000C1D29B /* flag8.png */,
+				C21FB3BA1032291000C1D29B /* flag9.png */,
+				C21FB3B81032291000C1D29B /* flag10.png */,
+				C21FB3B91032291000C1D29B /* flag11.png */,
+				C21FB3BB1032291000C1D29B /* flag12.png */,
 				FC4CAD5D10258CDF00C6F863 /* HighLight.png */,
 				FC4366A21024CD0A00C1F3BE /* BackGround.png */,
-				FC43666E1024CCFF00C1F3BE /* greensquare.png */,
-				FC43666F1024CCFF00C1F3BE /* yellowtriangle.png */,
-				FC4366701024CCFF00C1F3BE /* greenhexagon.png */,
-				FC4366711024CCFF00C1F3BE /* bluesquare.png */,
-				FC4366721024CCFF00C1F3BE /* orangepentagon.png */,
 				FC4366731024CCFF00C1F3BE /* grid.png */,
+				FC4366791024CCFF00C1F3BE /* redtriangle.png */,
+				FC4366851024CCFF00C1F3BE /* redsquare.png */,
+				FC43667C1024CCFF00C1F3BE /* redhexagon.png */,
+				FC43667B1024CCFF00C1F3BE /* redcircle.png */,
 				FC4366741024CCFF00C1F3BE /* redpentagon.png */,
+				FC43666F1024CCFF00C1F3BE /* yellowtriangle.png */,
+				FC4366821024CCFF00C1F3BE /* yellowsquare.png */,
 				FC4366751024CCFF00C1F3BE /* yellowpentagon.png */,
-				FC4366761024CCFF00C1F3BE /* bluepentagon.png */,
 				FC4366771024CCFF00C1F3BE /* yellowhexagon.png */,
 				FC4366781024CCFF00C1F3BE /* yellowcircle.png */,
-				FC4366791024CCFF00C1F3BE /* redtriangle.png */,
-				FC43667A1024CCFF00C1F3BE /* bluetriangle.png */,
-				FC43667B1024CCFF00C1F3BE /* redcircle.png */,
-				FC43667C1024CCFF00C1F3BE /* redhexagon.png */,
-				FC43667D1024CCFF00C1F3BE /* orangehexagon.png */,
 				FC43667E1024CCFF00C1F3BE /* greentriangle.png */,
-				FC43667F1024CCFF00C1F3BE /* bluehexagon.png */,
-				FC4366801024CCFF00C1F3BE /* orangecircle.png */,
-				FC4366811024CCFF00C1F3BE /* orangetriangle.png */,
-				FC4366821024CCFF00C1F3BE /* yellowsquare.png */,
+				FC43666E1024CCFF00C1F3BE /* greensquare.png */,
 				FC4366831024CCFF00C1F3BE /* greenpentagon.png */,
+				FC4366701024CCFF00C1F3BE /* greenhexagon.png */,
 				FC4366841024CCFF00C1F3BE /* greencircle.png */,
-				FC4366851024CCFF00C1F3BE /* redsquare.png */,
-				FC4366861024CCFF00C1F3BE /* orangesquare.png */,
+				FC43667A1024CCFF00C1F3BE /* bluetriangle.png */,
+				FC4366711024CCFF00C1F3BE /* bluesquare.png */,
+				FC4366761024CCFF00C1F3BE /* bluepentagon.png */,
+				FC43667F1024CCFF00C1F3BE /* bluehexagon.png */,
 				FC4366871024CCFF00C1F3BE /* bluecircle.png */,
+				FC4366811024CCFF00C1F3BE /* orangetriangle.png */,
+				FC4366861024CCFF00C1F3BE /* orangesquare.png */,
+				FC4366721024CCFF00C1F3BE /* orangepentagon.png */,
+				FC43667D1024CCFF00C1F3BE /* orangehexagon.png */,
+				FC4366801024CCFF00C1F3BE /* orangecircle.png */,
+				C2028FA11033577100E6E0DA /* whitetriangle.png */,
+				C2028FA21033577100E6E0DA /* whitesquare.png */,
+				C2028FA31033577100E6E0DA /* whitehexagon.png */,
+				C2028FA41033577100E6E0DA /* whitecircle.png */,
+				C2028FA51033577100E6E0DA /* whitepentagon.png */,
 			);
 			name = Images;
 			sourceTree = "<group>";
@@ -571,6 +586,11 @@
 				C21FB3CD1032291000C1D29B /* flag5.png in Resources */,
 				C21FB3CF1032291000C1D29B /* flag2.png in Resources */,
 				C21FB4231032318700C1D29B /* flag1.png in Resources */,
+				C2028FA61033577100E6E0DA /* whitetriangle.png in Resources */,
+				C2028FA71033577100E6E0DA /* whitesquare.png in Resources */,
+				C2028FA81033577100E6E0DA /* whitehexagon.png in Resources */,
+				C2028FA91033577100E6E0DA /* whitecircle.png in Resources */,
+				C2028FAA1033577100E6E0DA /* whitepentagon.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

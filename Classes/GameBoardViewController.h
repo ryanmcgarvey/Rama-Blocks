@@ -31,6 +31,7 @@
     IBOutlet UIButton * buttonOptions;
     IBOutlet UIButton * buttonMainMenu;
     IBOutlet UILabel * attemptsString;
+	IBOutlet UILabel * timeToDrop;
     
 	ItemPair * SpawnedPair;
 	ItemCollection * itemCollection;
@@ -41,19 +42,25 @@
     GameState * gameState;
     
     CFTimeInterval startTime;
+	int countDown;
 }
+@property (readwrite, assign)int countDown;
 @property (nonatomic, retain) UIButton * buttonMenu;
 @property (nonatomic, retain) UIButton * buttonResume;
 @property (nonatomic, retain) UIButton * buttonOptions;
 @property (nonatomic, retain) UIButton * buttonMainMenu;
 @property (nonatomic, retain) UIView * menuView;
 @property (nonatomic, retain) UILabel * attemptsString;
+@property (nonatomic, retain) UILabel * timeToDrop;
 
 -(void)resetTap:(NSTimer *)timer;
 -(void)SpawnShapes;
 -(void)ResetShapePair:(ItemPair *)pair;
 -(void)didRotate:(NSNotification *)notification;
 -(void)SaveState;
+
+-(void)timeUntilDrop;
+-(void)timerDrop;
 
 -(IBAction)ClickReset;
 -(IBAction)ClickButtonMenu;

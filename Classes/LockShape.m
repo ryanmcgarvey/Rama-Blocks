@@ -17,14 +17,50 @@
 
 
 -(void)UpdateView{
-    if(canSeeColor && canSeeShape)
-    {
-        self.backgroundColor = [UIColor clearColor];
-        ItemView.alpha = 1.0f;
-        return;
-    }
-    if(canSeeColor)
-    {
+    if(canSeeColor && canSeeShape){
+		ItemView.alpha = 1;
+		self.backgroundColor = [UIColor clearColor];
+		NSString * color;
+		NSString * shape;
+		switch(shapeType){
+			case Triangle:
+				shape = [NSString stringWithFormat:@"triangle"];
+				break;
+			case Square:
+				shape = [NSString stringWithFormat:@"square"];
+				break;
+			case Pentagon:
+				shape = [NSString stringWithFormat:@"pentagon"];
+				break;
+			case Hexagon:
+				shape = [NSString stringWithFormat:@"hexagon"];
+				break;
+			case Circle:
+				shape = [NSString stringWithFormat:@"circle"];
+				break;
+		}
+		switch(colorType){
+			case Red:
+				color = [NSString stringWithFormat:@"red"];
+				break;
+			case Orange:
+				color = [NSString stringWithFormat:@"orange"];
+				break;
+			case Yellow:
+				color = [NSString stringWithFormat:@"yellow"];
+				break;
+			case Green:
+				color = [NSString stringWithFormat:@"green"];
+				break;
+			case Blue:
+				color = [NSString stringWithFormat:@"blue"];
+				break;
+		}
+		NSString *theImage = [NSString stringWithFormat:@"%@%@.png", color, shape];
+		ItemView.image = [UIImage imageNamed:theImage];
+		return;
+	}
+    if(canSeeColor){
         
         ItemView.alpha = 0;
         switch(colorType)
@@ -47,13 +83,28 @@
         }
         return;
     }
-    if(canSeeShape)
-    {
-        
-        ItemView.alpha = 0.5f;
-        self.backgroundColor = [UIColor whiteColor];
-        return;
-    }
+    if(canSeeShape){
+		ItemView.alpha = 1;
+		self.backgroundColor = [UIColor clearColor];
+		switch(shapeType){
+			case Triangle:
+				ItemView.image = [UIImage imageNamed:@"whitetriangle.png"];
+				return;
+			case Square:
+				ItemView.image = [UIImage imageNamed:@"whitesquare.png"];
+				return;
+			case Pentagon:
+				ItemView.image = [UIImage imageNamed:@"whitepentagon.png"];
+				return;
+			case Hexagon:
+				ItemView.image = [UIImage imageNamed:@"whitehexagon.png"];
+				return;
+			case Circle:
+				ItemView.image = [UIImage imageNamed:@"whitecircle.png"];
+				return;
+		}
+		return;
+	}			
     ItemView.alpha = 0.0f;
     self.backgroundColor = [UIColor clearColor];
 }

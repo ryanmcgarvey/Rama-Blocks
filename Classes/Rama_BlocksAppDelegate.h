@@ -28,10 +28,11 @@
     MainMenuViewController * mainMenu;
     GameState * gameState;
     UIWindow *window;
+	int gameType;
 }
 
 @property (nonatomic, retain) IBOutlet UIWindow *window;
-
+@property (readwrite, assign) int gameType;
 @property (nonatomic, retain, readonly) NSManagedObjectModel *managedObjectModel;
 @property (nonatomic, retain, readonly) NSManagedObjectContext *managedObjectContext;
 @property (nonatomic, retain, readonly) NSPersistentStoreCoordinator *persistentStoreCoordinator;

@@ -11,7 +11,7 @@
 
 @implementation Rama_BlocksAppDelegate
 
-@synthesize window;
+@synthesize window, gameType;
 
 - (void)applicationDidFinishLaunching:(UIApplication *)application {
     
@@ -19,7 +19,7 @@
     mainMenu = [[MainMenuViewController alloc] initWithNibName:@"MainMenuViewController" bundle:nil];
     [[UIApplication sharedApplication] setStatusBarHidden:YES animated:NO];
     
-    
+    gameType = 0;
     [window addSubview:mainMenu.view];
 	[window makeKeyAndVisible];
 }
