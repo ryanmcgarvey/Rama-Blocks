@@ -7,11 +7,11 @@
 //
 
 #import "ItemPair.h"
-
+#import "Rama_BlocksAppDelegate.h"
 
 @implementation ItemPair
-@synthesize ItemA, ItemB, Orientation, GrabberA, GrabberB;
-@synthesize ShaddowA, ShaddowB;
+@synthesize ItemA, ItemB, ItemC, Orientation, GrabberA, GrabberB;
+@synthesize ShaddowA, ShaddowB, drawingView;
 
 
 -(id)init{
@@ -25,6 +25,7 @@
     
     ShaddowA = [[UIImageView alloc]initWithFrame:CGRectMake(0.0f, 0.0f, SHAPE_WIDTH, SHAPE_WIDTH)];
     ShaddowB = [[UIImageView alloc]initWithFrame:CGRectMake(0.0f, 0.0f, SHAPE_WIDTH, SHAPE_WIDTH)];
+	
     
     return self;
 }
@@ -87,6 +88,44 @@
     [self move:CGPointMake(SPAWN_LOCATION_X,SPAWN_LOCATION_Y) :GrabberA];
 }
 
+-(CGPoint)moveObjectDistance:(CGPoint)touch from:(CGPoint)center{
+	
+	float x = center.x - touch.x;
+	float y = center.y - touch.y;
+	
+	CGPoint distance = CGPointMake(x, y);
+	
+	return distance;
+}
+
+-(void)airMove:(CGPoint)location{
+	UIImageView * grabberA = GrabberA;
+	UIImageView * grabberB = GrabberB;
+	GameItem * itemA = ItemA;
+	GameItem * itemB = ItemB;
+	GameItem * itemC = ItemC;
+	Rama_BlocksAppDelegate * appDelegate =  (Rama_BlocksAppDelegate *)[[UIApplication sharedApplication] delegate];
+	
+	if(appDelegate.isMoving == YES){
+		distanceToItemA = [self moveObjectDistance: location from: itemA.center];
+		distanceToItemB = [self moveObjectDistance: location from: itemB.center];
+		distanceToItemC = [self moveObjectDistance: location from: itemC.center];
+		distanceToGrabberA = [self moveObjectDistance:location from:grabberA.center];
+		distanceToGrabberB = [self moveObjectDistance: location from: grabberB.center];
+		appDelegate.isMoving = NO;
+		
+	}
+	itemA.center = CGPointMake(location.x + distanceToItemA.x, location.y + distanceToItemA.y);
+	itemB.center = CGPointMake(location.x + distanceToItemB.x, location.y + distanceToItemB.y);
+	itemC.center = CGPointMake(location.x + distanceToItemC.x, location.y + distanceToItemC.y);
+	grabberA.center = CGPointMake(location.x + distanceToGrabberA.x, location.y + distanceToGrabberA.y);
+	grabberB.center = CGPointMake(location.x + distanceToGrabberB.x, location.y + distanceToGrabberB.y);
+	
+	[self checkBounds];
+
+	}
+	
+	
 - (void)move:(CGPoint)location:(UIImageView *)grabberTouched{
     GameItem* moving;
     UIImageView * grabberMoving;
@@ -122,6 +161,7 @@
             default:
                 break;
         }
+		[self checkBounds];
     }
     else if(grabberTouched == GrabberB)
     {

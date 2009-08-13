@@ -10,7 +10,8 @@
 typedef enum enum_ItemType {
     ShapeItem,
     LockShapeItem,
-    SpawnItem
+    SpawnItem,
+	DrawingItem
 } TypeItem;
 
 @interface GameItem : UIView {

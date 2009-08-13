@@ -21,8 +21,8 @@
 }
 
 
-- (void)drawRect:(CGRect)rect {
-    // Drawing code
+- (void)drawRect:(CGRect)rect{
+
 }
 
 

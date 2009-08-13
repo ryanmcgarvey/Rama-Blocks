@@ -8,9 +8,10 @@
 
 #import "GameBoardViewController.h"
 #import "Rama_BlocksAppDelegate.h"
+#import "DrawingView.h"
 @implementation GameBoardViewController
 @synthesize buttonMenu, buttonOptions, buttonMainMenu, buttonResume, menuView, attemptsString;
-@synthesize timeToDrop, countDown;
+@synthesize timeToDrop, countDown, drawingView;
 
 -(void)SaveState{
     if([gameState.currentBoard.Active boolValue])
@@ -38,6 +39,8 @@
 /*****************************************************
 GameBoard Behavior
 *****************************************************/
+
+
 -(void)SpawnShapes{
 	if(SpawnedPair==nil)
     {
@@ -53,13 +56,24 @@ GameBoard Behavior
     [SpawnedPair.ItemB release];
     SpawnedPair.ItemB = [[Shape alloc] initWithInfo:[currentLevel createRandomColor]: [currentLevel createShapeFromCollection] : CGPointMake(SPAWN_LOCATION_X + SHAPE_WIDTH ,SPAWN_LOCATION_Y)];
     
+	
     [SpawnedPair Reset];
+	
+	CGRect frame = CGRectMake(0.0f, 0.0f, 90, 90);
+	drawingView = [DrawingView alloc];
+	[drawingView makeCirclePoint:SpawnedPair.ItemA.center:SpawnedPair.ItemB.center];
+	[drawingView initWithFrame: frame];
+	drawingView.backgroundColor = [UIColor clearColor];
+	
+	
+	SpawnedPair.ItemC = drawingView;
     
-    [self.view addSubview:SpawnedPair.GrabberA];
-    [self.view addSubview:SpawnedPair.GrabberB];
+    //[self.view addSubview:SpawnedPair.GrabberA];
+    //[self.view addSubview:SpawnedPair.GrabberB];
     
     [self.view addSubview:SpawnedPair.ItemA];
     [self.view addSubview:SpawnedPair.ItemB];
+	[self.view addSubview:SpawnedPair.ItemC];
     
     [self.view addSubview:SpawnedPair.ShaddowA];
     [self.view addSubview:SpawnedPair.ShaddowB];
@@ -99,6 +113,7 @@ UIController Delegates
 		self.view.backgroundColor = [UIColor blackColor];
 		timeToDrop.backgroundColor = [UIColor clearColor];
 		timeToDrop.textColor = [UIColor greenColor];
+		
 		[self.view sendSubviewToBack:backGround];
 		[self.view addSubview:backGround];
 		[self.view bringSubviewToFront:buttonMenu];
@@ -206,10 +221,15 @@ UIController Delegates
 		self.view.backgroundColor = [UIColor blackColor];
 		timeToDrop.backgroundColor = [UIColor clearColor];
 		timeToDrop.textColor = [UIColor greenColor];
+		
+		
+		
 		[self.view sendSubviewToBack:backGround];
 		[self.view addSubview:backGround];
-		[self.view bringSubviewToFront:buttonMenu];
-		[self.view bringSubviewToFront:menuView];
+		[self.view addSubview:buttonMenu];
+		[self.view addSubview:menuView];
+		
+		
 		//[self.view bringSubviewToFront:timeToDrop];
 		//add solution to view
 		
@@ -273,14 +293,23 @@ UIController Delegates
 			
 			[SpawnedPair Reset];
 			
-			[self.view addSubview:SpawnedPair.GrabberA];
-			[self.view addSubview:SpawnedPair.GrabberB];
+			//[self.view addSubview:SpawnedPair.GrabberA];
+			//[self.view addSubview:SpawnedPair.GrabberB];
 			
 			[self.view addSubview:SpawnedPair.ItemA];
 			[self.view addSubview:SpawnedPair.ItemB];
 			
 			[self.view addSubview:SpawnedPair.ShaddowA];
 			[self.view addSubview:SpawnedPair.ShaddowB];
+			
+			CGRect frame = CGRectMake(0.0f, 0.0f, 90, 90);
+			drawingView = [DrawingView alloc];
+			[drawingView makeCirclePoint:SpawnedPair.ItemA.center:SpawnedPair.ItemB.center];
+			[drawingView initWithFrame: frame];
+			drawingView.backgroundColor = [UIColor clearColor];
+			SpawnedPair.ItemC = drawingView;
+
+			[self.view addSubview:SpawnedPair.ItemC];
 			
 		}else{
 			gameState.currentBoard.Active = [NSNumber numberWithBool:YES];
@@ -384,9 +413,19 @@ UIController Delegates
     Touches
  *****************************************************/
 
+-(CGFloat)isTouchWithinRange:(CGPoint)touch from:(CGPoint)center{
+	
+	float x = center.x - touch.x;
+	float y = center.y - touch.y;
+	
+	return sqrt(x * x + y * y);
+}
+
 
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
 	UITouch *touch = [[event allTouches] anyObject];
+	Rama_BlocksAppDelegate * appDelegate =  (Rama_BlocksAppDelegate *)[[UIApplication sharedApplication] delegate];
+	appDelegate.isMoving = YES;
 	
 	if([[touch view] isKindOfClass: [GameItem class]])
 	{
@@ -394,6 +433,8 @@ UIController Delegates
         touchedItem.tapped++;
         TouchTimer = [[NSTimer scheduledTimerWithTimeInterval:TAP_WAIT_TIME target:self selector:@selector(resetTap:) userInfo:touchedItem repeats:NO] retain];
 	}
+	
+	
 }
 
 - (void)touchesMoved:(NSSet *)touches withEvent:(UIEvent *)event {
@@ -413,6 +454,22 @@ UIController Delegates
         [SpawnedPair move:[touch locationInView: self.view] :(UIImageView *)[touch view]];
         [itemCollection DrawShadowForItemPair:SpawnedPair];
     }
+	else{
+		touchDistanceToItemA = [self isTouchWithinRange:[touch locationInView:self.view] from:SpawnedPair.ItemA.center];
+		touchDistanceToItemB = [self isTouchWithinRange:[touch locationInView:self.view] from:SpawnedPair.ItemB.center];
+		if(touchDistanceToItemB < 60.0f){
+			[SpawnedPair airMove:[touch locationInView:[self view]]];
+			//[drawingView airMove:[touch locationInView:[self view]]];
+			[itemCollection DrawShadowForItemPair:SpawnedPair];
+		}
+		else if(touchDistanceToItemA < 60.0f){
+			[SpawnedPair airMove:[touch locationInView:[self view]]];
+			//[drawingView airMove:[touch locationInView:[self view]]];
+			[itemCollection DrawShadowForItemPair:SpawnedPair];
+		}
+		
+	}
+	
 }
 
 
@@ -469,13 +526,18 @@ UIController Delegates
             }
         }
 	}
-    if([[touch view] isMemberOfClass:[UIImageView class]] && [touch view] != backGround)
+    if([[touch view] isMemberOfClass:[DrawingView class]] && [touch view] != backGround)
     {
         if([SpawnedPair IsInGrid])
         {
             if([itemCollection AddItemPair:SpawnedPair])
             {
+				[SpawnedPair.ItemC release];
+				[SpawnedPair.ItemC removeFromSuperview];
+				SpawnedPair.ItemC = nil;
                 [self SpawnShapes];
+				
+				
             }else
             {
                 [self ResetShapePair:SpawnedPair];

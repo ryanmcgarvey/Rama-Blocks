@@ -12,6 +12,7 @@
 @implementation Rama_BlocksAppDelegate
 
 @synthesize window, gameType;
+@synthesize isMoving;
 
 - (void)applicationDidFinishLaunching:(UIApplication *)application {
     
@@ -22,6 +23,8 @@
     gameType = 0;
     [window addSubview:mainMenu.view];
 	[window makeKeyAndVisible];
+	
+	isMoving = NO;
 }
 -(SoundEffects *)FetchAudio{
     if(audio == nil){
@@ -147,6 +150,41 @@
     
     return fetchResults;
 }
+
+-(NSArray *)FetchCircleStates{
+    
+    [self managedObjectContext];
+    NSError *fetchError = nil;
+    NSArray *fetchResults;
+    
+    
+    NSEntityDescription *entityDescription = [NSEntityDescription
+                                              entityForName:@"ItemState" 
+                                              inManagedObjectContext:managedObjectContext];
+    
+    NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc]
+                                        initWithKey:@"index" ascending:YES];
+    
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:
+                              @"(owningBoardState == %@) and (ItemType == %d) ", gameState.currentBoard, DrawingItem ];
+    
+	
+    NSFetchRequest *request = [[[NSFetchRequest alloc] init] autorelease];
+    
+	
+    
+    [request setEntity:entityDescription];
+    [request setPredicate:predicate];
+    [request setSortDescriptors: [NSArray arrayWithObject:sortDescriptor]];
+	
+    
+    fetchResults = [managedObjectContext 
+                    executeFetchRequest:request 
+                    error:&fetchError];
+    
+    return fetchResults;
+}
+
 
 -(NSArray *)FetchLockItems{
     

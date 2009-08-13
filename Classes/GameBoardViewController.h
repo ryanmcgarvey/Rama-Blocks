@@ -40,9 +40,15 @@
     Level * currentLevel;
     SoundEffects * audio;
     GameState * gameState;
+	DrawingView *drawingView;
+	
+	CGFloat touchDistanceToItemA;
+	CGFloat touchDistanceToItemB;
+	
     
     CFTimeInterval startTime;
 	int countDown;
+
 }
 @property (readwrite, assign)int countDown;
 @property (nonatomic, retain) UIButton * buttonMenu;
@@ -52,6 +58,7 @@
 @property (nonatomic, retain) UIView * menuView;
 @property (nonatomic, retain) UILabel * attemptsString;
 @property (nonatomic, retain) UILabel * timeToDrop;
+@property (readwrite, retain) DrawingView *drawingView;
 
 -(void)resetTap:(NSTimer *)timer;
 -(void)SpawnShapes;
@@ -61,6 +68,7 @@
 
 -(void)timeUntilDrop;
 -(void)timerDrop;
+-(CGFloat)isTouchWithinRange:(CGPoint)touch from:(CGPoint)center;
 
 -(IBAction)ClickReset;
 -(IBAction)ClickButtonMenu;
