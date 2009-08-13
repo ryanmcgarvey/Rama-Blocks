@@ -263,7 +263,16 @@
         {
             [transFormGroup removeObject:cell];
             [self RemoveFromCellsAndRefactor: transFormGroup];
-            [shape TransForm];
+			if(shape.shapeType != Circle){
+				[shape TransForm];
+			}
+			else{
+				[cell.ItemInCell removeFromSuperview];
+				[cell.ItemInCell release];		
+				cell.ItemInCell = nil;
+				return FALSE;
+			}
+				
             [currentLevel addItem:shape];
             [self CheckTransform:item];
             couldTransform = TRUE;
