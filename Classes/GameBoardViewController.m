@@ -59,15 +59,14 @@ GameBoard Behavior
 	
     [SpawnedPair Reset];
 	
-	CGRect frame = CGRectMake(0.0f, 0.0f, 90, 90);
+	CGRect frame = CGRectMake(0.0f, 0.0f, 91, 91);
 	drawingView = [DrawingView alloc];
 	[drawingView makeCirclePoint:SpawnedPair.ItemA.center:SpawnedPair.ItemB.center];
 	[drawingView initWithFrame: frame];
 	drawingView.backgroundColor = [UIColor clearColor];
 	[SpawnedPair.ItemC setUserInteractionEnabled:false];
-	
-	
 	SpawnedPair.ItemC = drawingView;
+	SpawnedPair.ItemC.alpha = 0.1f;
     
     //[self.view addSubview:SpawnedPair.GrabberA];
     //[self.view addSubview:SpawnedPair.GrabberB];
@@ -298,12 +297,13 @@ UIController Delegates
 			//[self.view addSubview:SpawnedPair.GrabberA];
 			//[self.view addSubview:SpawnedPair.GrabberB];
 			
-			CGRect frame = CGRectMake(0.0f, 0.0f, 90, 90);
+			CGRect frame = CGRectMake(0.0f, 0.0f, 91, 91);
 			drawingView = [DrawingView alloc];
 			[drawingView makeCirclePoint:SpawnedPair.ItemA.center:SpawnedPair.ItemB.center];
 			[drawingView initWithFrame: frame];
 			drawingView.backgroundColor = [UIColor clearColor];
 			SpawnedPair.ItemC = drawingView;
+			SpawnedPair.ItemC.alpha = 0.2f;
 			[SpawnedPair.ItemC setUserInteractionEnabled:false];
 			
 			[self.view addSubview:SpawnedPair.ItemC];
@@ -426,9 +426,11 @@ UIController Delegates
 }
 
 
-#define HORIZ_SWIPE_DRAG_MIN  35
+#define HORIZ_SWIPE_DRAG_MIN  60
+#define VERT_SWIPE_DRAG_MAX    15
 
-#define VERT_SWIPE_DRAG_MAX    10
+#define VERT_SWIPE_DRAG_MIN  60
+#define HORIZ_SWIPE_DRAG_MAX    15
 
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
 	UITouch *touch = [[event allTouches] anyObject];
@@ -467,36 +469,45 @@ UIController Delegates
     }
 	
 	else{
-		touchDistanceToItemA = [self isTouchWithinRange:[touch locationInView:self.view] from:SpawnedPair.ItemA.center];
-		touchDistanceToItemB = [self isTouchWithinRange:[touch locationInView:self.view] from:SpawnedPair.ItemB.center];
-		if(touchDistanceToItemB < 50.0f){
+		
+		touchDistanceToItemC = [self isTouchWithinRange:[touch locationInView:self.view] from:SpawnedPair.ItemC.center];
+		if(touchDistanceToItemC < 50.0f){
 			[SpawnedPair airMove:[touch locationInView:[self view]]];
-			//[drawingView airMove:[touch locationInView:[self view]]];
-			[itemCollection DrawShadowForItemPair:SpawnedPair];
-		}
-		else if(touchDistanceToItemA < 50.0f){
-			[SpawnedPair airMove:[touch locationInView:[self view]]];
-			//[drawingView airMove:[touch locationInView:[self view]]];
+			SpawnedPair.ItemC.alpha = 0.7f;
 			[itemCollection DrawShadowForItemPair:SpawnedPair];
 		}
 		
-	}
-	
-	if(![[touch view] isKindOfClass: [GameItem class]] && [self isTouchWithinRange: startTouchPosition from: SpawnedPair.ItemC.center] < 80.0f && [self isTouchWithinRange: startTouchPosition from: SpawnedPair.ItemC.center] > 50.0f ){
 		
-		if (fabsf(startTouchPosition.x - currentTouchPosition.x) >= HORIZ_SWIPE_DRAG_MIN && fabsf(startTouchPosition.y - currentTouchPosition.y) <= VERT_SWIPE_DRAG_MAX){
-			[SpawnedPair rotate:SpawnedPair.ItemA];
-			SpawnedPair.ItemC.center = [drawingView makeCirclePoint:SpawnedPair.ItemA.center :SpawnedPair.ItemB.center];
-			
-		}
-	
 	}
+	
+	
 	
 }
 
 
 - (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event {
 	UITouch *touch = [[event allTouches] anyObject];
+	SpawnedPair.ItemC.alpha = 0.1f;
+	if(![[touch view] isKindOfClass: [Shape class]] && [self isTouchWithinRange: startTouchPosition from: SpawnedPair.ItemC.center] < 130.0f && [self isTouchWithinRange: startTouchPosition from: SpawnedPair.ItemC.center] > 50.0f ){
+		
+		if (fabsf(startTouchPosition.x - currentTouchPosition.x) >= HORIZ_SWIPE_DRAG_MIN && fabsf(startTouchPosition.y - currentTouchPosition.y) <= VERT_SWIPE_DRAG_MAX){
+			[SpawnedPair rotate:SpawnedPair.ItemA];
+			SpawnedPair.ItemC.center = [drawingView makeCirclePoint:SpawnedPair.ItemA.center :SpawnedPair.ItemB.center];
+			
+		}
+		
+	}
+	
+	if(![[touch view] isKindOfClass: [Shape class]] && [self isTouchWithinRange: startTouchPosition from: SpawnedPair.ItemC.center] < 130.0f && [self isTouchWithinRange: startTouchPosition from: SpawnedPair.ItemC.center] > 50.0f ){
+		
+		if (fabsf(startTouchPosition.y - currentTouchPosition.y) >= VERT_SWIPE_DRAG_MIN && fabsf(startTouchPosition.x - currentTouchPosition.x) <= HORIZ_SWIPE_DRAG_MAX){
+			[SpawnedPair rotate:SpawnedPair.ItemB];
+			SpawnedPair.ItemC.center = [drawingView makeCirclePoint:SpawnedPair.ItemA.center :SpawnedPair.ItemB.center];
+			
+		}
+		
+	}
+	
 	/* Shape was touched */
 	
 	if([SpawnedPair IsInGrid])

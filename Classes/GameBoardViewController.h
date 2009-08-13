@@ -42,8 +42,7 @@
     GameState * gameState;
 	DrawingView *drawingView;
 	
-	CGFloat touchDistanceToItemA;
-	CGFloat touchDistanceToItemB;
+	CGFloat touchDistanceToItemC;
 	
 	CGPoint startTouchPosition;
 	CGPoint currentTouchPosition;

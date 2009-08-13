@@ -29,6 +29,7 @@ Init
         LockShape * shape = [[LockShape alloc] initWithInfo:[self createRandomColor] : [self createRandomShape]:CGPointMake(LOCK_LOCATION_X + LOCK_LOCATION_X * i,LOCK_LOCATION_Y)];
         shape.canSeeColor = FALSE;
         shape.canSeeShape = FALSE;
+		[shape setUserInteractionEnabled:false];
         [solution addObject: shape];
     }
     [self updateProbability];
