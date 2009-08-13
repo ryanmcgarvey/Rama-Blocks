@@ -64,6 +64,7 @@ GameBoard Behavior
 	[drawingView makeCirclePoint:SpawnedPair.ItemA.center:SpawnedPair.ItemB.center];
 	[drawingView initWithFrame: frame];
 	drawingView.backgroundColor = [UIColor clearColor];
+	[SpawnedPair.ItemC setUserInteractionEnabled:false];
 	
 	
 	SpawnedPair.ItemC = drawingView;
@@ -71,9 +72,10 @@ GameBoard Behavior
     //[self.view addSubview:SpawnedPair.GrabberA];
     //[self.view addSubview:SpawnedPair.GrabberB];
     
+	[self.view addSubview:SpawnedPair.ItemC];
     [self.view addSubview:SpawnedPair.ItemA];
     [self.view addSubview:SpawnedPair.ItemB];
-	[self.view addSubview:SpawnedPair.ItemC];
+	
     
     [self.view addSubview:SpawnedPair.ShaddowA];
     [self.view addSubview:SpawnedPair.ShaddowB];
@@ -296,20 +298,22 @@ UIController Delegates
 			//[self.view addSubview:SpawnedPair.GrabberA];
 			//[self.view addSubview:SpawnedPair.GrabberB];
 			
-			[self.view addSubview:SpawnedPair.ItemA];
-			[self.view addSubview:SpawnedPair.ItemB];
-			
-			[self.view addSubview:SpawnedPair.ShaddowA];
-			[self.view addSubview:SpawnedPair.ShaddowB];
-			
 			CGRect frame = CGRectMake(0.0f, 0.0f, 90, 90);
 			drawingView = [DrawingView alloc];
 			[drawingView makeCirclePoint:SpawnedPair.ItemA.center:SpawnedPair.ItemB.center];
 			[drawingView initWithFrame: frame];
 			drawingView.backgroundColor = [UIColor clearColor];
 			SpawnedPair.ItemC = drawingView;
-
+			[SpawnedPair.ItemC setUserInteractionEnabled:false];
+			
 			[self.view addSubview:SpawnedPair.ItemC];
+			[self.view addSubview:SpawnedPair.ItemA];
+			[self.view addSubview:SpawnedPair.ItemB];
+			
+			[self.view addSubview:SpawnedPair.ShaddowA];
+			[self.view addSubview:SpawnedPair.ShaddowB];
+			
+			
 			
 		}else{
 			gameState.currentBoard.Active = [NSNumber numberWithBool:YES];
@@ -485,7 +489,13 @@ UIController Delegates
 			if (item.tapped == 1) 
             {
 				item.tapped = 0;
+				
 				[SpawnedPair rotate:item];
+				SpawnedPair.ItemC.center = [drawingView makeCirclePoint:SpawnedPair.ItemA.center :SpawnedPair.ItemB.center];
+				
+				
+				
+				
 			}
 		}else
         {

@@ -32,13 +32,14 @@
 	self.center = circleDrawingPoint;
 }
 
--(void)makeCirclePoint:(CGPoint)itemA :(CGPoint)itemB{
+-(CGPoint)makeCirclePoint:(CGPoint)itemA :(CGPoint)itemB{
 	int x;
 	int y;
 	x = (itemA.x + itemB.x)/2;
 	y = (itemA.y + itemB.y)/2;
 	circleDrawingPoint = CGPointMake(x,y);
 	
+	return circleDrawingPoint;
 }
 	
 

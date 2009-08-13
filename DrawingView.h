@@ -14,6 +14,6 @@
 	CGPoint circleDrawingPoint;
 }
 
--(void)makeCirclePoint:(CGPoint)itemA :(CGPoint)itemB;
+-(CGPoint)makeCirclePoint:(CGPoint)itemA :(CGPoint)itemB;
 
 @end
