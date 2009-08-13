@@ -45,6 +45,8 @@
 	CGFloat touchDistanceToItemA;
 	CGFloat touchDistanceToItemB;
 	
+	CGPoint startTouchPosition;
+	CGPoint currentTouchPosition;
     
     CFTimeInterval startTime;
 	int countDown;

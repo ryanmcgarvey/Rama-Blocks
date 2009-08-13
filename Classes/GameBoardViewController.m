@@ -426,9 +426,14 @@ UIController Delegates
 }
 
 
+#define HORIZ_SWIPE_DRAG_MIN  35
+
+#define VERT_SWIPE_DRAG_MAX    10
+
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
 	UITouch *touch = [[event allTouches] anyObject];
 	Rama_BlocksAppDelegate * appDelegate =  (Rama_BlocksAppDelegate *)[[UIApplication sharedApplication] delegate];
+	startTouchPosition = [touch locationInView:self.view];
 	appDelegate.isMoving = YES;
 	
 	if([[touch view] isKindOfClass: [GameItem class]])
@@ -436,6 +441,7 @@ UIController Delegates
 		GameItem * touchedItem = (GameItem *)[touch view];
         touchedItem.tapped++;
         TouchTimer = [[NSTimer scheduledTimerWithTimeInterval:TAP_WAIT_TIME target:self selector:@selector(resetTap:) userInfo:touchedItem repeats:NO] retain];
+		
 	}
 	
 	
@@ -443,6 +449,7 @@ UIController Delegates
 
 - (void)touchesMoved:(NSSet *)touches withEvent:(UIEvent *)event {
 	UITouch *touch = [[event allTouches] anyObject];
+	currentTouchPosition = [touch locationInView:self.view];
     if(![[touch view] isKindOfClass: [LockShape class]])
     {
         GameItem * highlightItem = [itemCollection GetItemFromCoordinate:[touch locationInView:backGround]]; 
@@ -458,20 +465,31 @@ UIController Delegates
         [SpawnedPair move:[touch locationInView: self.view] :(UIImageView *)[touch view]];
         [itemCollection DrawShadowForItemPair:SpawnedPair];
     }
+	
 	else{
 		touchDistanceToItemA = [self isTouchWithinRange:[touch locationInView:self.view] from:SpawnedPair.ItemA.center];
 		touchDistanceToItemB = [self isTouchWithinRange:[touch locationInView:self.view] from:SpawnedPair.ItemB.center];
-		if(touchDistanceToItemB < 60.0f){
+		if(touchDistanceToItemB < 50.0f){
 			[SpawnedPair airMove:[touch locationInView:[self view]]];
 			//[drawingView airMove:[touch locationInView:[self view]]];
 			[itemCollection DrawShadowForItemPair:SpawnedPair];
 		}
-		else if(touchDistanceToItemA < 60.0f){
+		else if(touchDistanceToItemA < 50.0f){
 			[SpawnedPair airMove:[touch locationInView:[self view]]];
 			//[drawingView airMove:[touch locationInView:[self view]]];
 			[itemCollection DrawShadowForItemPair:SpawnedPair];
 		}
 		
+	}
+	
+	if(![[touch view] isKindOfClass: [GameItem class]] && [self isTouchWithinRange: startTouchPosition from: SpawnedPair.ItemC.center] < 80.0f && [self isTouchWithinRange: startTouchPosition from: SpawnedPair.ItemC.center] > 50.0f ){
+		
+		if (fabsf(startTouchPosition.x - currentTouchPosition.x) >= HORIZ_SWIPE_DRAG_MIN && fabsf(startTouchPosition.y - currentTouchPosition.y) <= VERT_SWIPE_DRAG_MAX){
+			[SpawnedPair rotate:SpawnedPair.ItemA];
+			SpawnedPair.ItemC.center = [drawingView makeCirclePoint:SpawnedPair.ItemA.center :SpawnedPair.ItemB.center];
+			
+		}
+	
 	}
 	
 }
@@ -480,6 +498,23 @@ UIController Delegates
 - (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event {
 	UITouch *touch = [[event allTouches] anyObject];
 	/* Shape was touched */
+	
+	if([SpawnedPair IsInGrid])
+	{
+		if([itemCollection AddItemPair:SpawnedPair])
+		{
+			[SpawnedPair.ItemC release];
+			[SpawnedPair.ItemC removeFromSuperview];
+			SpawnedPair.ItemC = nil;
+			[self SpawnShapes];
+			
+			
+		}else
+		{
+			[self ResetShapePair:SpawnedPair];
+		}
+	}
+	
 	if([[touch view] isKindOfClass: [GameItem class]]  && ![[touch view] isKindOfClass: [LockShape class]] )
 	{
 		GameItem * item = (GameItem *)[touch view];
@@ -536,7 +571,7 @@ UIController Delegates
             }
         }
 	}
-    if([[touch view] isMemberOfClass:[DrawingView class]] && [touch view] != backGround)
+    if([[touch view] isMemberOfClass:[UIView class]] && [touch view] != backGround)
     {
         if([SpawnedPair IsInGrid])
         {
