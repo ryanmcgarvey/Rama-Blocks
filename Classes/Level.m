@@ -183,7 +183,11 @@ Helpers
  *****************************************************/
 
 -(ShapeType)createRandomShape{
-    return (uint)arc4random() % (maxShape + 1);
+    int ret = (uint)arc4random() % (maxShape + 1);
+	if(ret > Circle){
+		NSLog(@"spawned super circle");
+	}
+	return ret;
 }
 
 -(ColorType)createRandomColor{

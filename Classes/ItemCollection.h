@@ -27,6 +27,8 @@ typedef enum enum_Gravity {
     up
 } Gravity;
 
+#define rotate_xDegrees(x) (M_PI * x / 180.0)
+
 @interface ItemCollection : NSObject {
     
 	id * cells;

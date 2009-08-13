@@ -392,15 +392,56 @@
     }
 }
 
+
+
+
 -(void)ApplyGravityToCell:(Cell *)cell{
     if(cell.ItemInCell !=nil)
     {
+		GameItem *rotatedShape = [GameItem new];
+		switch (gravityDirection) {
+			case left:
+				rotatedShape = cell.ItemInCell;
+				rotatedShape.transform = CGAffineTransformIdentity;
+				rotatedShape.transform = CGAffineTransformRotate(cell.ItemInCell.transform, rotate_xDegrees(90));
+				cell.ItemInCell = rotatedShape;
+				[rotatedShape release];
+				break;
+			case right:
+				rotatedShape = cell.ItemInCell;
+				rotatedShape.transform = CGAffineTransformIdentity;
+				rotatedShape.transform = CGAffineTransformRotate(cell.ItemInCell.transform, rotate_xDegrees(270));
+				cell.ItemInCell = rotatedShape;
+				[rotatedShape release];
+				break;
+			case down:
+				rotatedShape = cell.ItemInCell;
+				rotatedShape.transform = CGAffineTransformIdentity;
+				rotatedShape.transform = CGAffineTransformRotate(cell.ItemInCell.transform, rotate_xDegrees(180));
+				cell.ItemInCell = rotatedShape;
+				[rotatedShape release];
+				break;
+			case up:
+				rotatedShape = cell.ItemInCell;
+				rotatedShape.transform = CGAffineTransformIdentity;
+				cell.ItemInCell = rotatedShape;
+				[rotatedShape release];
+				break;
+			case zero:
+				
+			default:
+				break;
+		}
+		
         Cell * cellToMoveTo = [self FindCellToFallTo:cell.ItemInCell];
         if(cellToMoveTo == nil || cellToMoveTo.ItemInCell != nil)
         {
             return;
         }
+		
+		
         [self SetItemToCell:cell.ItemInCell :cellToMoveTo];
+		
         cell.ItemInCell = nil;
     }
 }
