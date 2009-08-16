@@ -278,7 +278,7 @@
 			}
 				
             [currentLevel addItem:shape];
-            [self CheckTransform:item];
+            //[self CheckTransform:item];
             couldTransform = TRUE;
             numberOfTransforms ++;
         }
