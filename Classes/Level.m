@@ -135,7 +135,6 @@ Solution
 
 -(void)updateProbability{
     int total = totalShapes[Triangle] + totalShapes[Square] + totalShapes[Pentagon] + totalShapes[Hexagon] + totalShapes[Circle];
-   
     if(total > 0 )
     {
         shapeSpawnProbability[Triangle] = totalShapes[Triangle]/(float)total;
@@ -147,10 +146,8 @@ Solution
         shapeSpawnProbability[Hexagon] = shapeSpawnProbability[Pentagon] + totalShapes[Hexagon]/(float)total;
         
         shapeSpawnProbability[Circle] =  shapeSpawnProbability[Hexagon] + totalShapes[Circle]/(float)total;
-		//shapeSpawnProbability[Circle] =  1;
     }else{
         shapeSpawnProbability[Triangle] = 1;
-		//shapeSpawnProbability[Triangle] = 0.5f;
     }
 }
 
@@ -164,6 +161,7 @@ Solution
 -(ShapeType)createShapeFromCollection{
     
     float probabilityCheck = (float)((uint)arc4random())/0xFFFFFFFF;  
+    return Circle;
     if(probabilityCheck <= shapeSpawnProbability[Triangle]){
         return Triangle;
     }

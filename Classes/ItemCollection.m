@@ -295,8 +295,8 @@
 		[cell.ItemInCell removeFromSuperview];
 		[cell.ItemInCell release];		
         cell.ItemInCell = nil;
-		[self ApplyGravity];
 	}
+    [self ApplyGravity];
 }
 
 -(NSMutableArray *)CheckTransform:(int)row : (int)column{
