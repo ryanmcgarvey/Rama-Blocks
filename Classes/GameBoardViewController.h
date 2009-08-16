@@ -20,6 +20,7 @@
 #import "Options.h"
 #import "SoundEffects.h"
 #import "LevelStatistics.h"
+#import "PowerItem.h"
 
 
 
@@ -41,6 +42,7 @@
     SoundEffects * audio;
     GameState * gameState;
 	DrawingView *drawingView;
+	PowerItem *powerItem;
 	
 	CGFloat touchDistanceToItemC;
 	
@@ -60,6 +62,9 @@
 @property (nonatomic, retain) UILabel * attemptsString;
 @property (nonatomic, retain) UILabel * timeToDrop;
 @property (readwrite, retain) DrawingView *drawingView;
+@property (readwrite, assign) CGPoint startTouchPosition;
+@property (readwrite, assign) CGPoint currentTouchPosition;
+@property (readwrite, assign) CGFloat touchDistanceToItemC;
 
 -(void)resetTap:(NSTimer *)timer;
 -(void)SpawnShapes;

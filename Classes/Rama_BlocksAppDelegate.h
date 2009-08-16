@@ -30,11 +30,14 @@
     UIWindow *window;
 	int gameType;
 	BOOL isMoving;
+	BOOL isAttaching;
 }
 
 @property (nonatomic, retain) IBOutlet UIWindow *window;
 @property (readwrite, assign) int gameType;
 @property (readwrite, assign) BOOL isMoving;
+@property (readwrite, assign) BOOL isAttaching;
+
 @property (nonatomic, retain, readonly) NSManagedObjectModel *managedObjectModel;
 @property (nonatomic, retain, readonly) NSManagedObjectContext *managedObjectContext;
 @property (nonatomic, retain, readonly) NSPersistentStoreCoordinator *persistentStoreCoordinator;

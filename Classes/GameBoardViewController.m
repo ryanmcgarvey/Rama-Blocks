@@ -11,7 +11,7 @@
 #import "DrawingView.h"
 @implementation GameBoardViewController
 @synthesize buttonMenu, buttonOptions, buttonMainMenu, buttonResume, menuView, attemptsString;
-@synthesize timeToDrop, countDown, drawingView;
+@synthesize timeToDrop, countDown, drawingView, startTouchPosition, currentTouchPosition, touchDistanceToItemC;
 
 -(void)SaveState{
     if([gameState.currentBoard.Active boolValue])
@@ -101,7 +101,7 @@ UIController Delegates
 	if(appDelegate.gameType == 2){
 		Rama_BlocksAppDelegate * appDelegate =  (Rama_BlocksAppDelegate *)[[UIApplication sharedApplication] delegate];
 		gameState = [appDelegate FetchGameState];
-		
+		powerItem = [[PowerItem alloc]init];
 		audio = [appDelegate FetchAudio];
 		
 		//// Create background
@@ -209,7 +209,7 @@ UIController Delegates
 	if(appDelegate.gameType == 1){
 		Rama_BlocksAppDelegate * appDelegate =  (Rama_BlocksAppDelegate *)[[UIApplication sharedApplication] delegate];
 		gameState = [appDelegate FetchGameState];
-		
+		powerItem = [[PowerItem alloc]init];
 		audio = [appDelegate FetchAudio];
 		
 		//// Create background
@@ -434,25 +434,47 @@ UIController Delegates
 
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
 	UITouch *touch = [[event allTouches] anyObject];
-	Rama_BlocksAppDelegate * appDelegate =  (Rama_BlocksAppDelegate *)[[UIApplication sharedApplication] delegate];
 	startTouchPosition = [touch locationInView:self.view];
+	Rama_BlocksAppDelegate * appDelegate =  (Rama_BlocksAppDelegate *)[[UIApplication sharedApplication] delegate];
 	appDelegate.isMoving = YES;
 	
-	if([[touch view] isKindOfClass: [GameItem class]])
-	{
+	if([[touch view] isKindOfClass: [GameItem class]] && appDelegate.isAttaching == NO){
 		GameItem * touchedItem = (GameItem *)[touch view];
+		Shape * powerTouchItem = (Shape *)touchedItem;
+		
+		if([[touch view] isKindOfClass:[Shape class]] && powerTouchItem.shapeType == Vortex){
+			
+			
+			if(powerTouchItem.colorType == Red){
+				[powerItem makeCollection:itemCollection];
+				[powerItem useBombItem:powerTouchItem];
+			}
+			if(powerTouchItem.colorType == Orange){
+				[[UIApplication sharedApplication] beginIgnoringInteractionEvents];
+				[powerItem makeCollection:itemCollection];
+				[powerItem placeAnchor:powerTouchItem];
+			}
+			
+		}
+		
         touchedItem.tapped++;
         TouchTimer = [[NSTimer scheduledTimerWithTimeInterval:TAP_WAIT_TIME target:self selector:@selector(resetTap:) userInfo:touchedItem repeats:NO] retain];
 		
 	}
-	
-	
+		
+	if([[touch view] isKindOfClass: [Shape class]] && appDelegate.isAttaching == YES){
+		appDelegate.isAttaching = NO;
+		[powerItem makeAnchor:(Shape *)[touch view]];
+		
+	}
+		
 }
 
 - (void)touchesMoved:(NSSet *)touches withEvent:(UIEvent *)event {
 	UITouch *touch = [[event allTouches] anyObject];
+	Rama_BlocksAppDelegate * appDelegate =  (Rama_BlocksAppDelegate *)[[UIApplication sharedApplication] delegate];
 	currentTouchPosition = [touch locationInView:self.view];
-    if(![[touch view] isKindOfClass: [LockShape class]])
+    if(![[touch view] isKindOfClass: [LockShape class]] && appDelegate.isAttaching == NO)
     {
         GameItem * highlightItem = [itemCollection GetItemFromCoordinate:[touch locationInView:backGround]]; 
         if([highlightItem isKindOfClass:[Shape class]] && ! highlightItem.IsPaired)
@@ -462,7 +484,7 @@ UIController Delegates
             shape.tapped = 0;
         }
     }
-    if([[touch view] isMemberOfClass:[UIImageView class]] && [touch view] != backGround)
+    if([[touch view] isMemberOfClass:[UIImageView class]] && [touch view] != backGround && appDelegate.isAttaching == NO)
     {
         [SpawnedPair move:[touch locationInView: self.view] :(UIImageView *)[touch view]];
         [itemCollection DrawShadowForItemPair:SpawnedPair];
@@ -485,10 +507,14 @@ UIController Delegates
 }
 
 
+
+
+
 - (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event {
 	UITouch *touch = [[event allTouches] anyObject];
+	Rama_BlocksAppDelegate * appDelegate =  (Rama_BlocksAppDelegate *)[[UIApplication sharedApplication] delegate];
 	SpawnedPair.ItemC.alpha = 0.1f;
-	if(![[touch view] isKindOfClass: [Shape class]] && [self isTouchWithinRange: startTouchPosition from: SpawnedPair.ItemC.center] < 130.0f && [self isTouchWithinRange: startTouchPosition from: SpawnedPair.ItemC.center] > 50.0f ){
+	if(![[touch view] isKindOfClass: [Shape class]]  && appDelegate.isAttaching == NO && [self isTouchWithinRange: startTouchPosition from: SpawnedPair.ItemC.center] < 130.0f && [self isTouchWithinRange: startTouchPosition from: SpawnedPair.ItemC.center] > 50.0f ){
 		
 		if (fabsf(startTouchPosition.x - currentTouchPosition.x) >= HORIZ_SWIPE_DRAG_MIN && fabsf(startTouchPosition.y - currentTouchPosition.y) <= VERT_SWIPE_DRAG_MAX){
 			[SpawnedPair rotate:SpawnedPair.ItemA];
@@ -498,7 +524,7 @@ UIController Delegates
 		
 	}
 	
-	if(![[touch view] isKindOfClass: [Shape class]] && [self isTouchWithinRange: startTouchPosition from: SpawnedPair.ItemC.center] < 130.0f && [self isTouchWithinRange: startTouchPosition from: SpawnedPair.ItemC.center] > 50.0f ){
+	if(![[touch view] isKindOfClass: [Shape class]] && appDelegate.isAttaching == NO && [self isTouchWithinRange: startTouchPosition from: SpawnedPair.ItemC.center] < 130.0f && [self isTouchWithinRange: startTouchPosition from: SpawnedPair.ItemC.center] > 50.0f ){
 		
 		if (fabsf(startTouchPosition.y - currentTouchPosition.y) >= VERT_SWIPE_DRAG_MIN && fabsf(startTouchPosition.x - currentTouchPosition.x) <= HORIZ_SWIPE_DRAG_MAX){
 			[SpawnedPair rotate:SpawnedPair.ItemB];
@@ -532,11 +558,11 @@ UIController Delegates
 		
 		if(item.IsPaired)
 		{
-			if (item.tapped == 1) 
+			if (item.tapped == 0) 
             {
 				item.tapped = 0;
 				
-				[SpawnedPair rotate:item];
+				[SpawnedPair rotate:SpawnedPair.ItemA];
 				SpawnedPair.ItemC.center = [drawingView makeCirclePoint:SpawnedPair.ItemA.center :SpawnedPair.ItemB.center];
 				
 				

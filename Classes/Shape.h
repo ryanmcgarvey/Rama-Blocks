@@ -15,7 +15,6 @@
 @public;
 	ShapeType  shapeType;
 	ColorType  colorType;
-
 }
 
 @property ShapeType shapeType;

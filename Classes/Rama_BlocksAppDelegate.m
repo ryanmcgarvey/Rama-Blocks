@@ -12,7 +12,7 @@
 @implementation Rama_BlocksAppDelegate
 
 @synthesize window, gameType;
-@synthesize isMoving;
+@synthesize isMoving, isAttaching;
 
 - (void)applicationDidFinishLaunching:(UIApplication *)application {
     
@@ -25,6 +25,7 @@
 	[window makeKeyAndVisible];
 	
 	isMoving = NO;
+	isAttaching = NO;
 }
 -(SoundEffects *)FetchAudio{
     if(audio == nil){

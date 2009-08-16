@@ -147,8 +147,10 @@ Solution
         shapeSpawnProbability[Hexagon] = shapeSpawnProbability[Pentagon] + totalShapes[Hexagon]/(float)total;
         
         shapeSpawnProbability[Circle] =  shapeSpawnProbability[Hexagon] + totalShapes[Circle]/(float)total;
+		//shapeSpawnProbability[Circle] =  1;
     }else{
         shapeSpawnProbability[Triangle] = 1;
+		//shapeSpawnProbability[Triangle] = 0.5f;
     }
 }
 

@@ -26,8 +26,8 @@
 					return [UIImage imageNamed:@"redhexagon.png"];
 				case Circle:
 					return [UIImage imageNamed:@"redcircle.png"];
-				//case Vortex:
-				//	return [UIImage imageNamed:@"RedVortex.jpeg"];					
+				case Vortex:
+					return [UIImage imageNamed:@"whitetriangle.png"];					
 				default:
 					return nil;
 			}
@@ -43,8 +43,8 @@
 					return [UIImage imageNamed:@"orangehexagon.png"];
 				case Circle:
 					return [UIImage imageNamed:@"orangecircle.png"];
-				//case Vortex:
-				//	return [UIImage imageNamed:@"OrangeVortex.jpeg"];
+				case Vortex:
+					return [UIImage imageNamed:@"whitesquare.png"];
 				default:
 					return nil;
 			}

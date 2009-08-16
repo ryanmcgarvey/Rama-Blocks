@@ -6,7 +6,7 @@
 //  Copyright 2009 Simplical. All rights reserved.
 //
 
-
+@class PowerItem;
 
 #import <Foundation/Foundation.h>
 #import "GameItem.h"
@@ -18,6 +18,7 @@
 #import "GameState.h"
 #import "ItemState.h"
 #import "BoardState.h"
+
 
 typedef enum enum_Gravity {
     zero,
@@ -41,6 +42,7 @@ typedef enum enum_Gravity {
     NSMutableArray * solution;
     Level * currentLevel;
     GameState * gameState;
+
     
     int numberOfAttempts;
     int numberOfTransforms;
@@ -50,6 +52,7 @@ typedef enum enum_Gravity {
 }
 
 -(id)init: (int) rows : (int) columns : (int)rowPixelLength : (int)columnPixelLength : (Level *)level;
+-(void)createNewWithSelf:(ItemCollection *)newCollection;
 
 -(BOOL)DrawShadowForItemPair: (ItemPair *)itemPair;
 -(BOOL)AddItemPair: (ItemPair *)itemPair;

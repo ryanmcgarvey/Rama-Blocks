@@ -16,9 +16,10 @@ typedef enum enum_ItemType {
 
 @interface GameItem : UIView {
 @public;
-    	UIImageView *ItemView;
-    	int tapped;
-    	BOOL IsPaired;
+		UIImageView *ItemView;
+		int tapped;
+		BOOL IsPaired;
+		BOOL IsAnchored;
     int Row;
 	int Column;
 }
@@ -26,6 +27,7 @@ typedef enum enum_ItemType {
 @property (readwrite, assign) UIImageView * ItemView;
 @property int tapped;
 @property BOOL IsPaired;
+@property BOOL IsAnchored;
 @property int Row;
 @property int Column;
 

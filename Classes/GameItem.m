@@ -10,12 +10,13 @@
 
 
 @implementation GameItem
-@synthesize ItemView, tapped, IsPaired, Row, Column;
+@synthesize ItemView, tapped, IsPaired, Row, Column, IsAnchored;
 
 - (id)initWithFrame:(CGRect)frame {
     if (self = [super initWithFrame:frame]) {
         tapped = 0;
         IsPaired = FALSE;
+		IsAnchored = NO;
     }
     return self;
 }

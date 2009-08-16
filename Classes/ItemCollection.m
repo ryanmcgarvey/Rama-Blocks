@@ -44,6 +44,10 @@
 	return self;
 }
 
+-(void)createNewWithSelf:(ItemCollection *)newCollection{
+	self = newCollection;
+}
+
 -(void)UpdateState{
     numberOfMoves = [gameState.currentBoard.numberOfMovies intValue];
     numberOfTransforms = [gameState.currentBoard.numberOfTransforms intValue];
@@ -263,7 +267,7 @@
         {
             [transFormGroup removeObject:cell];
             [self RemoveFromCellsAndRefactor: transFormGroup];
-			if(shape.shapeType != Circle){
+			if(shape.shapeType != NUMBER_OF_SHAPES){
 				[shape TransForm];
 			}
 			else{
@@ -291,6 +295,7 @@
 		[cell.ItemInCell removeFromSuperview];
 		[cell.ItemInCell release];		
         cell.ItemInCell = nil;
+		[self ApplyGravity];
 	}
 }
 
@@ -347,6 +352,9 @@
 	return [self CheckTransform:shape.Row : shape.Column];
 }
 
+
+	
+
 /**************************************
  GRAVITY
  **************************************/
@@ -363,7 +371,10 @@
             {
                 for(column = 0; column < NUMBER_OF_COLUMNS; column ++)
                 {
-                    [self ApplyGravityToCell:[self GetCell:row : column]];
+                    Cell * cell = [self GetCell:row : column];
+					if(cell.ItemInCell != 0 && cell.ItemInCell.IsAnchored == NO){
+						[self ApplyGravityToCell:cell];
+					}
                 }
             }
             return;
@@ -372,7 +383,10 @@
             {
                 for(column = NUMBER_OF_COLUMNS - 1; column >= 0; column --)
                 {
-                    [self ApplyGravityToCell:[self GetCell:row : column]];
+                    Cell * cell = [self GetCell:row : column];
+					if(cell.ItemInCell != 0 && cell.ItemInCell.IsAnchored == NO){
+						[self ApplyGravityToCell:cell];
+					}
                 }
             }
             return;
@@ -381,7 +395,10 @@
             {
                 for(row = 0; row < NUMBER_OF_ROWS; row++)
                 {
-                    [self ApplyGravityToCell:[self GetCell:row : column]];
+                    Cell * cell = [self GetCell:row : column];
+					if(cell.ItemInCell != 0 && cell.ItemInCell.IsAnchored == NO){
+						[self ApplyGravityToCell:cell];
+					}
                 }
             }
             return;
@@ -390,7 +407,10 @@
             {
                 for(row = NUMBER_OF_ROWS -1 ; row >= 0; row--)
                 {
-                    [self ApplyGravityToCell:[self GetCell:row : column]];
+                    Cell * cell = [self GetCell:row : column];
+					if(cell.ItemInCell != 0 && cell.ItemInCell.IsAnchored == NO){
+						[self ApplyGravityToCell:cell];
+					}
                 }
             }
             return;
@@ -566,6 +586,7 @@
 	item.Column = cell.Column;
 	[UIView commitAnimations];
 }
+	
 
 -(Cell *)GetCell:(int)row : (int)column{
 	if(row >= 0 && row < RowLength && column >= 0 && column < ColumnLength)
