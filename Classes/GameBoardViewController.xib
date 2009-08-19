@@ -188,74 +188,74 @@
 						<float key="IBUIMinimumFontSize">1.000000e+01</float>
 						<int key="IBUITextAlignment">1</int>
 					</object>
-					<object class="IBUIImageView" id="221755912">
+					<object class="IBUIImageView" id="234915929">
 						<reference key="NSNextResponder" ref="191373211"/>
 						<int key="NSvFlags">292</int>
-						<string key="NSFrame">{{0, 422}, {320, 58}}</string>
+						<string key="NSFrame">{{0, 395}, {320, 92}}</string>
 						<reference key="NSSuperview" ref="191373211"/>
 						<bool key="IBUIOpaque">NO</bool>
 						<bool key="IBUIClearsContextBeforeDrawing">NO</bool>
-						<int key="IBUIContentMode">9</int>
+						<int key="IBUIContentMode">4</int>
 						<bool key="IBUIUserInteractionEnabled">NO</bool>
 						<object class="NSCustomResource" key="IBUIImage">
 							<string key="NSClassName">NSImage</string>
 							<string key="NSResourceName">lockSet.png</string>
 						</object>
 					</object>
-					<object class="IBUIImageView" id="364035782">
+					<object class="IBUIImageView" id="555779802">
 						<reference key="NSNextResponder" ref="191373211"/>
 						<int key="NSvFlags">292</int>
-						<string key="NSFrame">{{70, 448}, {32, 30}}</string>
+						<string key="NSFrame">{{70, 436}, {32, 30}}</string>
 						<reference key="NSSuperview" ref="191373211"/>
 						<bool key="IBUIOpaque">NO</bool>
 						<bool key="IBUIClearsContextBeforeDrawing">NO</bool>
 						<int key="IBUIContentMode">4</int>
 						<bool key="IBUIUserInteractionEnabled">NO</bool>
 					</object>
-					<object class="IBUIImageView" id="765026680">
+					<object class="IBUIImageView" id="933390180">
 						<reference key="NSNextResponder" ref="191373211"/>
 						<int key="NSvFlags">292</int>
-						<string key="NSFrame">{{100, 448}, {32, 30}}</string>
+						<string key="NSFrame">{{100, 436}, {32, 30}}</string>
 						<reference key="NSSuperview" ref="191373211"/>
 						<bool key="IBUIOpaque">NO</bool>
 						<bool key="IBUIClearsContextBeforeDrawing">NO</bool>
 						<int key="IBUIContentMode">4</int>
 						<bool key="IBUIUserInteractionEnabled">NO</bool>
 					</object>
-					<object class="IBUIImageView" id="873861639">
+					<object class="IBUIImageView" id="930732233">
 						<reference key="NSNextResponder" ref="191373211"/>
 						<int key="NSvFlags">292</int>
-						<string key="NSFrame">{{130, 448}, {32, 30}}</string>
+						<string key="NSFrame">{{130, 436}, {32, 30}}</string>
 						<reference key="NSSuperview" ref="191373211"/>
 						<bool key="IBUIOpaque">NO</bool>
 						<bool key="IBUIClearsContextBeforeDrawing">NO</bool>
 						<int key="IBUIContentMode">4</int>
 						<bool key="IBUIUserInteractionEnabled">NO</bool>
 					</object>
-					<object class="IBUIImageView" id="278167273">
+					<object class="IBUIImageView" id="994963128">
 						<reference key="NSNextResponder" ref="191373211"/>
 						<int key="NSvFlags">292</int>
-						<string key="NSFrame">{{160, 448}, {32, 30}}</string>
+						<string key="NSFrame">{{160, 436}, {32, 30}}</string>
 						<reference key="NSSuperview" ref="191373211"/>
 						<bool key="IBUIOpaque">NO</bool>
 						<bool key="IBUIClearsContextBeforeDrawing">NO</bool>
 						<int key="IBUIContentMode">4</int>
 						<bool key="IBUIUserInteractionEnabled">NO</bool>
 					</object>
-					<object class="IBUIImageView" id="81365967">
+					<object class="IBUIImageView" id="680365603">
 						<reference key="NSNextResponder" ref="191373211"/>
 						<int key="NSvFlags">292</int>
-						<string key="NSFrame">{{190, 448}, {32, 30}}</string>
+						<string key="NSFrame">{{190, 436}, {32, 30}}</string>
 						<reference key="NSSuperview" ref="191373211"/>
 						<bool key="IBUIOpaque">NO</bool>
 						<bool key="IBUIClearsContextBeforeDrawing">NO</bool>
 						<int key="IBUIContentMode">4</int>
 						<bool key="IBUIUserInteractionEnabled">NO</bool>
 					</object>
-					<object class="IBUIImageView" id="606529640">
+					<object class="IBUIImageView" id="260088256">
 						<reference key="NSNextResponder" ref="191373211"/>
 						<int key="NSvFlags">292</int>
-						<string key="NSFrame">{{220, 448}, {32, 30}}</string>
+						<string key="NSFrame">{{220, 436}, {32, 30}}</string>
 						<reference key="NSSuperview" ref="191373211"/>
 						<bool key="IBUIOpaque">NO</bool>
 						<bool key="IBUIClearsContextBeforeDrawing">NO</bool>
@@ -383,7 +383,7 @@
 					<object class="IBCocoaTouchOutletConnection" key="connection">
 						<string key="label">lockSet</string>
 						<reference key="source" ref="372490531"/>
-						<reference key="destination" ref="221755912"/>
+						<reference key="destination" ref="234915929"/>
 					</object>
 					<int key="connectionID">53</int>
 				</object>
@@ -408,13 +408,13 @@
 							<reference ref="696208633"/>
 							<reference ref="125638931"/>
 							<reference ref="568319411"/>
-							<reference ref="364035782"/>
-							<reference ref="765026680"/>
-							<reference ref="873861639"/>
-							<reference ref="278167273"/>
-							<reference ref="81365967"/>
-							<reference ref="606529640"/>
-							<reference ref="221755912"/>
+							<reference ref="234915929"/>
+							<reference ref="555779802"/>
+							<reference ref="933390180"/>
+							<reference ref="930732233"/>
+							<reference ref="994963128"/>
+							<reference ref="680365603"/>
+							<reference ref="260088256"/>
 						</object>
 						<reference key="parent" ref="317526666"/>
 					</object>
@@ -478,37 +478,37 @@
 					</object>
 					<object class="IBObjectRecord">
 						<int key="objectID">47</int>
-						<reference key="object" ref="364035782"/>
+						<reference key="object" ref="555779802"/>
 						<reference key="parent" ref="191373211"/>
 					</object>
 					<object class="IBObjectRecord">
 						<int key="objectID">48</int>
-						<reference key="object" ref="765026680"/>
+						<reference key="object" ref="933390180"/>
 						<reference key="parent" ref="191373211"/>
 					</object>
 					<object class="IBObjectRecord">
 						<int key="objectID">49</int>
-						<reference key="object" ref="873861639"/>
+						<reference key="object" ref="930732233"/>
 						<reference key="parent" ref="191373211"/>
 					</object>
 					<object class="IBObjectRecord">
 						<int key="objectID">50</int>
-						<reference key="object" ref="278167273"/>
+						<reference key="object" ref="994963128"/>
 						<reference key="parent" ref="191373211"/>
 					</object>
 					<object class="IBObjectRecord">
 						<int key="objectID">51</int>
-						<reference key="object" ref="81365967"/>
+						<reference key="object" ref="680365603"/>
 						<reference key="parent" ref="191373211"/>
 					</object>
 					<object class="IBObjectRecord">
 						<int key="objectID">52</int>
-						<reference key="object" ref="606529640"/>
+						<reference key="object" ref="260088256"/>
 						<reference key="parent" ref="191373211"/>
 					</object>
 					<object class="IBObjectRecord">
 						<int key="objectID">46</int>
-						<reference key="object" ref="221755912"/>
+						<reference key="object" ref="234915929"/>
 						<reference key="parent" ref="191373211"/>
 					</object>
 				</object>
@@ -542,7 +542,7 @@
 					<bool key="EncodedWithXMLCoder">YES</bool>
 					<string>GameBoardViewController</string>
 					<string>UIResponder</string>
-					<string>{{837, 423}, {320, 480}}</string>
+					<string>{{839, 469}, {320, 480}}</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<object class="NSMutableArray">
 						<bool key="EncodedWithXMLCoder">YES</bool>

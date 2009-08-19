@@ -22,7 +22,7 @@
 #define NUMBER_OF_COLUMNS 10
 
 #define SPAWN_LOCATION_X 80.0f
-#define SPAWN_LOCATION_Y GRID_Y - SHAPE_WIDTH
+#define SPAWN_LOCATION_Y 80.0f
 
 #define LOCK_LOCATION_X 40.0f
 #define LOCK_LOCATION_Y  18.5f
@@ -32,7 +32,7 @@
 #define TAP_WAIT_TIME 0.17
 
 
-#define MAX_Y 480
+#define MAX_Y 418
 #define MAX_X 320
 
 #define NUMBER_OF_COLORS 5
