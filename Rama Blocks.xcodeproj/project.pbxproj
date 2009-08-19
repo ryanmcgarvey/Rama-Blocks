@@ -78,12 +78,14 @@
 		FC4CAD5E10258CDF00C6F863 /* HighLight.png in Resources */ = {isa = PBXBuildFile; fileRef = FC4CAD5D10258CDF00C6F863 /* HighLight.png */; };
 		FC4CADC31026101E00C6F863 /* RamaIcon.png in Resources */ = {isa = PBXBuildFile; fileRef = FC4CADC21026101E00C6F863 /* RamaIcon.png */; };
 		FC79C872102F76BA0041930A /* dist.plist in Resources */ = {isa = PBXBuildFile; fileRef = FC79C871102F76BA0041930A /* dist.plist */; };
+		FCA4B40D103BBAFB005587B1 /* GameBoardViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = FCA4B40C103BBAFB005587B1 /* GameBoardViewController.xib */; };
+		FCA4B41B103BBD60005587B1 /* lockSet.png in Resources */ = {isa = PBXBuildFile; fileRef = FCA4B41A103BBD60005587B1 /* lockSet.png */; };
+		FCA4B41E103BBDAD005587B1 /* gameBoardGrid.png in Resources */ = {isa = PBXBuildFile; fileRef = FCA4B41D103BBDAD005587B1 /* gameBoardGrid.png */; };
 		FCEF155A102118A800A71C1C /* GameItem.m in Sources */ = {isa = PBXBuildFile; fileRef = FCEF1559102118A800A71C1C /* GameItem.m */; };
 		FCEF155D102118F200A71C1C /* Shape.m in Sources */ = {isa = PBXBuildFile; fileRef = FCEF155C102118F200A71C1C /* Shape.m */; };
 		FCEF15601021195F00A71C1C /* PowerItem.m in Sources */ = {isa = PBXBuildFile; fileRef = FCEF155F1021195F00A71C1C /* PowerItem.m */; };
 		FCEF156C102128AF00A71C1C /* ItemPair.m in Sources */ = {isa = PBXBuildFile; fileRef = FCEF156B102128AF00A71C1C /* ItemPair.m */; };
 		FCEF157F10212AB300A71C1C /* Cell.m in Sources */ = {isa = PBXBuildFile; fileRef = FCEF157E10212AB300A71C1C /* Cell.m */; };
-		FCEF16E810214EE100A71C1C /* GameBoardViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = FCEF16E110214EE100A71C1C /* GameBoardViewController.xib */; };
 		FCEF16EA10214EE100A71C1C /* AddProfile.xib in Resources */ = {isa = PBXBuildFile; fileRef = FCEF16E310214EE100A71C1C /* AddProfile.xib */; };
 		FCEF16EB10214EE100A71C1C /* Tutorial.xib in Resources */ = {isa = PBXBuildFile; fileRef = FCEF16E410214EE100A71C1C /* Tutorial.xib */; };
 		FCEF16EC10214EE100A71C1C /* Purchase.xib in Resources */ = {isa = PBXBuildFile; fileRef = FCEF16E510214EE100A71C1C /* Purchase.xib */; };
@@ -138,8 +140,6 @@
 		C222B9BA103B838400259C2F /* mainMenuBackGround.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = mainMenuBackGround.png; sourceTree = "<group>"; };
 		C222B9C1103B851E00259C2F /* mainMenuButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = mainMenuButton.png; sourceTree = "<group>"; };
 		C222B9C4103B859300259C2F /* mainMenuButtonBackground.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = mainMenuButtonBackground.png; sourceTree = "<group>"; };
-		C27E570E103B97AF00E63AFA /* gameBoardGrid.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = gameBoardGrid.png; sourceTree = "<group>"; };
-		C27E575A103BA43900E63AFA /* lockSet.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = lockSet.png; sourceTree = "<group>"; };
 		C2B29071103440D2001B31FA /* DrawingView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DrawingView.h; path = ../DrawingView.h; sourceTree = "<group>"; };
 		C2B29072103440D2001B31FA /* DrawingView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DrawingView.m; path = ../DrawingView.m; sourceTree = "<group>"; };
 		FC0B6A9F10251BDE00F1BD5E /* LockShape.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LockShape.h; sourceTree = "<group>"; };
@@ -189,6 +189,9 @@
 		FC4CAD5D10258CDF00C6F863 /* HighLight.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = HighLight.png; sourceTree = "<group>"; };
 		FC4CADC21026101E00C6F863 /* RamaIcon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = RamaIcon.png; sourceTree = "<group>"; };
 		FC79C871102F76BA0041930A /* dist.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = dist.plist; sourceTree = "<group>"; };
+		FCA4B40C103BBAFB005587B1 /* GameBoardViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = GameBoardViewController.xib; sourceTree = "<group>"; };
+		FCA4B41A103BBD60005587B1 /* lockSet.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = lockSet.png; path = Classes/lockSet.png; sourceTree = "<group>"; };
+		FCA4B41D103BBDAD005587B1 /* gameBoardGrid.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = gameBoardGrid.png; path = Classes/gameBoardGrid.png; sourceTree = "<group>"; };
 		FCEF1558102118A800A71C1C /* GameItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GameItem.h; sourceTree = "<group>"; };
 		FCEF1559102118A800A71C1C /* GameItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GameItem.m; sourceTree = "<group>"; };
 		FCEF155B102118F200A71C1C /* Shape.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Shape.h; sourceTree = "<group>"; };
@@ -201,7 +204,6 @@
 		FCEF157410212A8800A71C1C /* ItemCollection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ItemCollection.m; sourceTree = "<group>"; };
 		FCEF157D10212AB300A71C1C /* Cell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Cell.h; sourceTree = "<group>"; };
 		FCEF157E10212AB300A71C1C /* Cell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Cell.m; sourceTree = "<group>"; };
-		FCEF16E110214EE100A71C1C /* GameBoardViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = GameBoardViewController.xib; path = Classes/GameBoardViewController.xib; sourceTree = "<group>"; };
 		FCEF16E310214EE100A71C1C /* AddProfile.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = AddProfile.xib; path = Classes/AddProfile.xib; sourceTree = "<group>"; };
 		FCEF16E410214EE100A71C1C /* Tutorial.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Tutorial.xib; path = Classes/Tutorial.xib; sourceTree = "<group>"; };
 		FCEF16E510214EE100A71C1C /* Purchase.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Purchase.xib; path = Classes/Purchase.xib; sourceTree = "<group>"; };
@@ -329,8 +331,8 @@
 		C222B9A7103B80D100259C2F /* GameBoardGraphics */ = {
 			isa = PBXGroup;
 			children = (
-				C27E570E103B97AF00E63AFA /* gameBoardGrid.png */,
-				C27E575A103BA43900E63AFA /* lockSet.png */,
+				FCA4B41D103BBDAD005587B1 /* gameBoardGrid.png */,
+				FCA4B41A103BBD60005587B1 /* lockSet.png */,
 			);
 			name = GameBoardGraphics;
 			sourceTree = "<group>";
@@ -520,9 +522,9 @@
 		FCEF17D41021645900A71C1C /* Nibs */ = {
 			isa = PBXGroup;
 			children = (
+				FCA4B40C103BBAFB005587B1 /* GameBoardViewController.xib */,
 				FC4072E3102EC451000B40E8 /* LevelSelect.xib */,
 				28AD733E0D9D9553002E5188 /* MainWindow.xib */,
-				FCEF16E110214EE100A71C1C /* GameBoardViewController.xib */,
 				FCEF16E310214EE100A71C1C /* AddProfile.xib */,
 				FCEF16E410214EE100A71C1C /* Tutorial.xib */,
 				FCEF16E510214EE100A71C1C /* Purchase.xib */,
@@ -579,7 +581,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				28AD733F0D9D9553002E5188 /* MainWindow.xib in Resources */,
-				FCEF16E810214EE100A71C1C /* GameBoardViewController.xib in Resources */,
 				FCEF16EA10214EE100A71C1C /* AddProfile.xib in Resources */,
 				FCEF16EB10214EE100A71C1C /* Tutorial.xib in Resources */,
 				FCEF16EC10214EE100A71C1C /* Purchase.xib in Resources */,
@@ -642,6 +643,9 @@
 				C222B9BB103B838400259C2F /* mainMenuBackGround.png in Resources */,
 				C222B9C2103B851E00259C2F /* mainMenuButton.png in Resources */,
 				C222B9C5103B859300259C2F /* mainMenuButtonBackground.png in Resources */,
+				FCA4B40D103BBAFB005587B1 /* GameBoardViewController.xib in Resources */,
+				FCA4B41B103BBD60005587B1 /* lockSet.png in Resources */,
+				FCA4B41E103BBDAD005587B1 /* gameBoardGrid.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

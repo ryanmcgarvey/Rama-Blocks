@@ -109,14 +109,14 @@ UIController Delegates
 		backGround.clipsToBounds = YES;
 		backGround.autoresizesSubviews = NO;
 		backGround.contentMode = UIViewContentModeTopLeft;
-		backGround.image = [[UIImage imageNamed:@"BackGround.png"] retain];
+		backGround.image = [[UIImage imageNamed:@"gameBoardGrid.png"] retain];
 		backGround.userInteractionEnabled = FALSE;
 		self.view.backgroundColor = [UIColor blackColor];
 		timeToDrop.backgroundColor = [UIColor clearColor];
 		timeToDrop.textColor = [UIColor greenColor];
 		
+        [self.view addSubview:backGround];
 		[self.view sendSubviewToBack:backGround];
-		[self.view addSubview:backGround];
 		[self.view bringSubviewToFront:buttonMenu];
 		[self.view bringSubviewToFront:menuView];
 		[self.view bringSubviewToFront:timeToDrop];
