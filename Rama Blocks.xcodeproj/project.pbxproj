@@ -36,8 +36,6 @@
 		C222B9BB103B838400259C2F /* mainMenuBackGround.png in Resources */ = {isa = PBXBuildFile; fileRef = C222B9BA103B838400259C2F /* mainMenuBackGround.png */; };
 		C222B9C2103B851E00259C2F /* mainMenuButton.png in Resources */ = {isa = PBXBuildFile; fileRef = C222B9C1103B851E00259C2F /* mainMenuButton.png */; };
 		C222B9C5103B859300259C2F /* mainMenuButtonBackground.png in Resources */ = {isa = PBXBuildFile; fileRef = C222B9C4103B859300259C2F /* mainMenuButtonBackground.png */; };
-		C27E570F103B97AF00E63AFA /* gameBoardGrid.png in Resources */ = {isa = PBXBuildFile; fileRef = C27E570E103B97AF00E63AFA /* gameBoardGrid.png */; };
-		C27E575B103BA43900E63AFA /* lockSet.png in Resources */ = {isa = PBXBuildFile; fileRef = C27E575A103BA43900E63AFA /* lockSet.png */; };
 		C2B29073103440D2001B31FA /* DrawingView.m in Sources */ = {isa = PBXBuildFile; fileRef = C2B29072103440D2001B31FA /* DrawingView.m */; };
 		FC0B6AA110251BDE00F1BD5E /* LockShape.m in Sources */ = {isa = PBXBuildFile; fileRef = FC0B6AA010251BDE00F1BD5E /* LockShape.m */; };
 		FC0B6B7910252C6000F1BD5E /* SoundEffects.m in Sources */ = {isa = PBXBuildFile; fileRef = FC0B6B7810252C6000F1BD5E /* SoundEffects.m */; };
@@ -639,14 +637,11 @@
 				C2028FA81033577100E6E0DA /* whitehexagon.png in Resources */,
 				C2028FA91033577100E6E0DA /* whitecircle.png in Resources */,
 				C2028FAA1033577100E6E0DA /* whitepentagon.png in Resources */,
-<<<<<<< HEAD:Rama Blocks.xcodeproj/project.pbxproj
 				FCF50A51103B851000F9F0C3 /* ProfilePicker.xib in Resources */,
-=======
 				C222B996103B7C5600259C2F /* mainMenuTitle.png in Resources */,
 				C222B9BB103B838400259C2F /* mainMenuBackGround.png in Resources */,
 				C222B9C2103B851E00259C2F /* mainMenuButton.png in Resources */,
 				C222B9C5103B859300259C2F /* mainMenuButtonBackground.png in Resources */,
->>>>>>> b5ebd935bacaeb6690d4bdbb3c733fa2a7703602:Rama Blocks.xcodeproj/project.pbxproj
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

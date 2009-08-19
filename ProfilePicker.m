@@ -11,13 +11,6 @@
 
 @implementation ProfilePicker
 
-- (void)viewDidLoad {
-    Rama_BlocksAppDelegate * appDelegate =  (Rama_BlocksAppDelegate *)[[UIApplication sharedApplication] delegate];
-    profile = [[appDelegate FetchProfile] retain];
-    savedGames = profile.savedGames;
-    [picker setDelegate:<#(id UIPickerViewDelegate)#>
-    [super viewDidLoad];
-}
 
 
 /*
