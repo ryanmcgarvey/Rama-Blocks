@@ -26,6 +26,7 @@
 
 @interface GameBoardViewController : UIViewController{
 	IBOutlet UIImageView *backGround;
+	IBOutlet UIImageView *lockSet;
     IBOutlet UIButton * buttonMenu;
     IBOutlet UIView * menuView;
     IBOutlet UIButton * buttonResume;
