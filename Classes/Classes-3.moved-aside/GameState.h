@@ -8,7 +8,6 @@
 
 #import <CoreData/CoreData.h>
 
-@class Profile;
 @class BoardState;
 @class LevelStatistics;
 
@@ -18,10 +17,9 @@
 
 @property (nonatomic, retain) NSNumber * sfxVolume;
 @property (nonatomic, retain) NSNumber * highestLevel;
-@property (nonatomic, retain) NSNumber * IsDefault;
 @property (nonatomic, retain) NSNumber * currentLevel;
 @property (nonatomic, retain) NSNumber * musicVolume;
-@property (nonatomic, retain) Profile * owningProfile;
+@property (nonatomic, retain) NSManagedObject * owningProfile;
 @property (nonatomic, retain) BoardState * currentBoard;
 @property (nonatomic, retain) NSSet* PlayedLevels;
 

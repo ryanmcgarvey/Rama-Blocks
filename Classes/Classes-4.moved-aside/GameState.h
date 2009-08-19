@@ -17,8 +17,8 @@
 }
 
 @property (nonatomic, retain) NSNumber * sfxVolume;
+@property (nonatomic, retain) NSNumber * newAttribute;
 @property (nonatomic, retain) NSNumber * highestLevel;
-@property (nonatomic, retain) NSNumber * IsDefault;
 @property (nonatomic, retain) NSNumber * currentLevel;
 @property (nonatomic, retain) NSNumber * musicVolume;
 @property (nonatomic, retain) Profile * owningProfile;
