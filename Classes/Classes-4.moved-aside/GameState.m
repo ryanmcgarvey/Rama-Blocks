@@ -15,8 +15,8 @@
 @implementation GameState 
 
 @dynamic sfxVolume;
+@dynamic newAttribute;
 @dynamic highestLevel;
-@dynamic IsDefault;
 @dynamic currentLevel;
 @dynamic musicVolume;
 @dynamic owningProfile;

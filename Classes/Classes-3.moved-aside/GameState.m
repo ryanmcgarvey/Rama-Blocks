@@ -8,7 +8,6 @@
 
 #import "GameState.h"
 
-#import "Profile.h"
 #import "BoardState.h"
 #import "LevelStatistics.h"
 
@@ -16,7 +15,6 @@
 
 @dynamic sfxVolume;
 @dynamic highestLevel;
-@dynamic IsDefault;
 @dynamic currentLevel;
 @dynamic musicVolume;
 @dynamic owningProfile;

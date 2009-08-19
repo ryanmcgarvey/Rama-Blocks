@@ -14,6 +14,7 @@
 #import "SoundEffects.h"
 #import "GameItem.h"
 #import "LevelStatistics.h"
+#import "Profile.h"
 
 @interface Rama_BlocksAppDelegate : NSObject <UIApplicationDelegate> {
     
@@ -27,6 +28,7 @@
     
     MainMenuViewController * mainMenu;
     GameState * gameState;
+    Profile * profile;
     UIWindow *window;
 	int gameType;
 	BOOL isMoving;
@@ -48,6 +50,9 @@
 -(GameState *)FetchGameState;
 -(SoundEffects *)FetchAudio;
 
+
+-(NSArray*)FetchProfileList;
+-(Profile*)FetchProfile;
 -(NSArray *)FetchCollectionItemStates;
 -(NSArray *)FetchSpawnedItems;
 -(NSArray *)FetchLockItems;
