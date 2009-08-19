@@ -63,23 +63,23 @@
 	}
     if(canSeeColor){
         
-        ItemView.alpha = 0;
+        ItemView.alpha = 1;
         switch(colorType)
         {
             case Red:
-                self.backgroundColor = [UIColor redColor];
+                ItemView.image = [UIImage imageNamed:@"redglow.png"];
                 return;
             case Green:
-                self.backgroundColor = [UIColor greenColor];
+                ItemView.image = [UIImage imageNamed:@"greenglow.png"];
                 return;
             case Blue:
-                self.backgroundColor = [UIColor blueColor];
+                ItemView.image = [UIImage imageNamed:@"blueglow.png"];
                 return;
             case Purple:
-                self.backgroundColor = [UIColor orangeColor];
+                ItemView.image = [UIImage imageNamed:@"purpleglow.png"];
                 return;
             case Yellow:
-				self.backgroundColor = [UIColor yellowColor];
+				ItemView.image = [UIImage imageNamed:@"yellowglow.png"];
                 return;
         }
         return;

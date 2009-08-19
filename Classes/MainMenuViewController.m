@@ -13,6 +13,7 @@
 
 @implementation MainMenuViewController
 
+@synthesize zoomBack;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil{
     
@@ -20,6 +21,10 @@
         Rama_BlocksAppDelegate * appDelegate =  (Rama_BlocksAppDelegate *)[[UIApplication sharedApplication] delegate];
         gameState = [[appDelegate FetchGameState] retain];
 		buttonGraphic = [[UIImageView alloc]init];
+		zoomBack = [[UIImageView alloc] initWithFrame:CGRectMake(140, 200, 40, 60)]; 
+		zoomBack.image = [UIImage imageNamed:@"zoomBack.png"];
+		zoomBack.alpha = 0.3f;
+		self.view.contentMode = UIViewContentModeCenter;
 
     }
     
@@ -87,17 +92,19 @@
 	 behindButtonCenter = behindButtonGraphic.center;
 	
 	[UIView beginAnimations:nil context:nil]; 
-	[UIView setAnimationDuration:1.6f];
+	[UIView setAnimationDuration:2.0f];
 	[UIView setAnimationDelegate:self];
-	[UIView setAnimationDidStopSelector:@selector(animateButtons)];
+	[UIView setAnimationDidStopSelector:@selector(animateBoard)];
 	buttonGraphic.center = CGPointMake(buttonGraphic.center.x - 300,buttonGraphic.center.y);
 	titleGraphic.center = CGPointMake(titleGraphic.center.x,titleGraphic.center.y - 300);
 	behindButtonGraphic.center = CGPointMake(behindButtonGraphic.center.x+ 300,behindButtonGraphic.center.y);
+	
+	
+	
 	[UIView commitAnimations];
 	
-	//buttonGraphic.center = originalButton;
 	
-		
+
 	
 }
 
@@ -108,13 +115,32 @@
 	[self presentModalViewController:[[GameBoardViewController alloc] initWithNibName:@"GameBoardViewController" bundle:nil] animated:YES];
 }
 
--(void)animateButtons{
-	[self presentModalViewController:[[GameBoardViewController alloc] initWithNibName:@"GameBoardViewController" bundle:nil] animated:YES];
-	[NSTimer scheduledTimerWithTimeInterval:2 target:self selector:@selector(restoreCenters) userInfo:nil repeats:YES];
+
+-(void)animateBoard{
+	[UIView beginAnimations:nil context:nil]; 
+	[UIView setAnimationDuration:2.0f];
+	[UIView setAnimationDelegate:self];
+	[UIView setAnimationDidStopSelector:@selector(animateButtons)];
 	
-	//buttonGraphic.center = buttonCenter;
-	//titleGraphic.center = titleCenter;
-	//behindButtonGraphic.center = behindButtonCenter;
+	[self.view addSubview:zoomBack];
+	[self.view bringSubviewToFront:zoomBack];
+	
+	zoomBack.bounds = CGRectMake(0, 0, 320, 480);
+	zoomBack.alpha = 1;
+	zoomBack.center = CGPointMake(zoomBack.center.x,zoomBack.center.y + 10.5);
+	
+	[UIView commitAnimations];
+	
+}
+
+
+-(void)animateButtons{
+	[self presentModalViewController:[[GameBoardViewController alloc] initWithNibName:@"GameBoardViewController" bundle:nil] animated:NO];
+	[NSTimer scheduledTimerWithTimeInterval:2 target:self selector:@selector(restoreCenters) userInfo:nil repeats:NO];
+	
+	buttonGraphic.center = buttonCenter;
+	titleGraphic.center = titleCenter;
+	behindButtonGraphic.center = behindButtonCenter;
 	
 	
 }
@@ -123,6 +149,13 @@
 	buttonGraphic.center = buttonCenter;
 	titleGraphic.center = titleCenter;
 	behindButtonGraphic.center = behindButtonCenter;
+	[zoomBack removeFromSuperview];
+	zoomBack = nil;
+	[zoomBack release];
+	zoomBack = [[UIImageView alloc] initWithFrame:CGRectMake(140, 200, 40, 60)];
+	zoomBack.image = [UIImage imageNamed:@"zoomBack.png"];
+	zoomBack.alpha = 0.3f;
+	
 }
 	
 

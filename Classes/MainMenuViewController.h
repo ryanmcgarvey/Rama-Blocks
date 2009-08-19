@@ -31,6 +31,7 @@
 	IBOutlet UIImageView *buttonGraphic;
 	IBOutlet UIImageView *titleGraphic;
 	IBOutlet UIImageView *behindButtonGraphic;
+	UIImageView *zoomBack;
 	
 	CGPoint buttonCenter;
 	CGPoint titleCenter;
@@ -38,6 +39,9 @@
 	
 
 }
+
+@property (nonatomic, retain) UIImageView *zoomBack;
+
 
 - (IBAction)loadGameBoard:(id)sender;
 - (IBAction)loadTimeBoard:(id)sender;
@@ -47,6 +51,7 @@
 
 -(void)animateButtons;
 -(void)restoreCenters;
+-(void)animateBoard;
 
 
 @end

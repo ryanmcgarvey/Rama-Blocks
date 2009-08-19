@@ -226,8 +226,8 @@
 		backGround.image = [[UIImage imageNamed:@"gameBoardGrid.png"] retain];
 		backGround.userInteractionEnabled = FALSE;
 		self.view.backgroundColor = [UIColor blackColor];
-		timeToDrop.backgroundColor = [UIColor clearColor];
-		timeToDrop.textColor = [UIColor greenColor];
+		//timeToDrop.backgroundColor = [UIColor clearColor];
+		//timeToDrop.textColor = [UIColor greenColor];
 		
 		[self.view addSubview:backGround];
 		

@@ -80,6 +80,12 @@
 		C26CFC5E103BFC68007843C0 /* Options.xib in Resources */ = {isa = PBXBuildFile; fileRef = C26CFC55103BFC68007843C0 /* Options.xib */; };
 		C26CFC5F103BFC68007843C0 /* MainMenuViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C26CFC56103BFC68007843C0 /* MainMenuViewController.xib */; };
 		C26CFC60103BFC68007843C0 /* ProfilePicker.xib in Resources */ = {isa = PBXBuildFile; fileRef = C26CFC57103BFC68007843C0 /* ProfilePicker.xib */; };
+		C26CFE73103C25C8007843C0 /* zoomBack.png in Resources */ = {isa = PBXBuildFile; fileRef = C26CFE72103C25C8007843C0 /* zoomBack.png */; };
+		C26CFF1B103C3235007843C0 /* yellowglow.png in Resources */ = {isa = PBXBuildFile; fileRef = C26CFF16103C3234007843C0 /* yellowglow.png */; };
+		C26CFF1C103C3235007843C0 /* redglow.png in Resources */ = {isa = PBXBuildFile; fileRef = C26CFF17103C3234007843C0 /* redglow.png */; };
+		C26CFF1D103C3235007843C0 /* purpleglow.png in Resources */ = {isa = PBXBuildFile; fileRef = C26CFF18103C3234007843C0 /* purpleglow.png */; };
+		C26CFF1E103C3235007843C0 /* greenglow.png in Resources */ = {isa = PBXBuildFile; fileRef = C26CFF19103C3234007843C0 /* greenglow.png */; };
+		C26CFF1F103C3235007843C0 /* blueglow.png in Resources */ = {isa = PBXBuildFile; fileRef = C26CFF1A103C3235007843C0 /* blueglow.png */; };
 		C2B29073103440D2001B31FA /* DrawingView.m in Sources */ = {isa = PBXBuildFile; fileRef = C2B29072103440D2001B31FA /* DrawingView.m */; };
 		FC0B6AA110251BDE00F1BD5E /* LockShape.m in Sources */ = {isa = PBXBuildFile; fileRef = FC0B6AA010251BDE00F1BD5E /* LockShape.m */; };
 		FC0B6B7910252C6000F1BD5E /* SoundEffects.m in Sources */ = {isa = PBXBuildFile; fileRef = FC0B6B7810252C6000F1BD5E /* SoundEffects.m */; };
@@ -190,6 +196,12 @@
 		C26CFC55103BFC68007843C0 /* Options.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = Options.xib; sourceTree = "<group>"; };
 		C26CFC56103BFC68007843C0 /* MainMenuViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MainMenuViewController.xib; sourceTree = "<group>"; };
 		C26CFC57103BFC68007843C0 /* ProfilePicker.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ProfilePicker.xib; sourceTree = "<group>"; };
+		C26CFE72103C25C8007843C0 /* zoomBack.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = zoomBack.png; sourceTree = "<group>"; };
+		C26CFF16103C3234007843C0 /* yellowglow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = yellowglow.png; sourceTree = "<group>"; };
+		C26CFF17103C3234007843C0 /* redglow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = redglow.png; sourceTree = "<group>"; };
+		C26CFF18103C3234007843C0 /* purpleglow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = purpleglow.png; sourceTree = "<group>"; };
+		C26CFF19103C3234007843C0 /* greenglow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = greenglow.png; sourceTree = "<group>"; };
+		C26CFF1A103C3235007843C0 /* blueglow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = blueglow.png; sourceTree = "<group>"; };
 		C2B29071103440D2001B31FA /* DrawingView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DrawingView.h; path = ../DrawingView.h; sourceTree = "<group>"; };
 		C2B29072103440D2001B31FA /* DrawingView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DrawingView.m; path = ../DrawingView.m; sourceTree = "<group>"; };
 		FC0B6A9F10251BDE00F1BD5E /* LockShape.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LockShape.h; sourceTree = "<group>"; };
@@ -332,6 +344,7 @@
 		C26CFBB8103BFC44007843C0 /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				C26CFF0C103C320D007843C0 /* Lock Glow */,
 				C26CFC03103BFC44007843C0 /* Powerups */,
 				C26CFBF3103BFC44007843C0 /* GameBoardGraphics */,
 				C26CFBEE103BFC44007843C0 /* MainMenuGraphics */,
@@ -455,6 +468,7 @@
 		C26CFBF3103BFC44007843C0 /* GameBoardGraphics */ = {
 			isa = PBXGroup;
 			children = (
+				C26CFE72103C25C8007843C0 /* zoomBack.png */,
 				C26CFBF4103BFC44007843C0 /* gameBoardGrid.png */,
 				C26CFBF5103BFC44007843C0 /* lockSet.png */,
 			);
@@ -487,6 +501,18 @@
 				C26CFC57103BFC68007843C0 /* ProfilePicker.xib */,
 			);
 			name = Nibs;
+			sourceTree = "<group>";
+		};
+		C26CFF0C103C320D007843C0 /* Lock Glow */ = {
+			isa = PBXGroup;
+			children = (
+				C26CFF16103C3234007843C0 /* yellowglow.png */,
+				C26CFF17103C3234007843C0 /* redglow.png */,
+				C26CFF18103C3234007843C0 /* purpleglow.png */,
+				C26CFF19103C3234007843C0 /* greenglow.png */,
+				C26CFF1A103C3235007843C0 /* blueglow.png */,
+			);
+			name = "Lock Glow";
 			sourceTree = "<group>";
 		};
 		FC0B6B7610252C4900F1BD5E /* Audio */ = {
@@ -734,6 +760,12 @@
 				C26CFC5E103BFC68007843C0 /* Options.xib in Resources */,
 				C26CFC5F103BFC68007843C0 /* MainMenuViewController.xib in Resources */,
 				C26CFC60103BFC68007843C0 /* ProfilePicker.xib in Resources */,
+				C26CFE73103C25C8007843C0 /* zoomBack.png in Resources */,
+				C26CFF1B103C3235007843C0 /* yellowglow.png in Resources */,
+				C26CFF1C103C3235007843C0 /* redglow.png in Resources */,
+				C26CFF1D103C3235007843C0 /* purpleglow.png in Resources */,
+				C26CFF1E103C3235007843C0 /* greenglow.png in Resources */,
+				C26CFF1F103C3235007843C0 /* blueglow.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -165,7 +165,7 @@
 -(ShapeType)createShapeFromCollection{
     
     float probabilityCheck = (float)((uint)arc4random())/0xFFFFFFFF;  
-    return Circle;
+    //return Circle;
     if(probabilityCheck <= shapeSpawnProbability[Triangle]){
         return Triangle;
     }
