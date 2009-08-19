@@ -17,6 +17,7 @@
 
 
 -(void)UpdateView{
+	
     if(canSeeColor && canSeeShape){
 		ItemView.alpha = 1;
 		self.backgroundColor = [UIColor clearColor];
@@ -43,8 +44,8 @@
 			case Red:
 				color = [NSString stringWithFormat:@"red"];
 				break;
-			case Orange:
-				color = [NSString stringWithFormat:@"orange"];
+			case Purple:
+				color = [NSString stringWithFormat:@"purple"];
 				break;
 			case Yellow:
 				color = [NSString stringWithFormat:@"yellow"];
@@ -74,11 +75,11 @@
             case Blue:
                 self.backgroundColor = [UIColor blueColor];
                 return;
-            case Orange:
+            case Purple:
                 self.backgroundColor = [UIColor orangeColor];
                 return;
             case Yellow:
-               self.backgroundColor = [UIColor yellowColor];
+				self.backgroundColor = [UIColor yellowColor];
                 return;
         }
         return;
@@ -88,19 +89,19 @@
 		self.backgroundColor = [UIColor clearColor];
 		switch(shapeType){
 			case Triangle:
-				ItemView.image = [UIImage imageNamed:@"whitetriangle.png"];
+				ItemView.image = [UIImage imageNamed:@"greytriangle.png"];
 				return;
 			case Square:
-				ItemView.image = [UIImage imageNamed:@"whitesquare.png"];
+				ItemView.image = [UIImage imageNamed:@"greysquare.png"];
 				return;
 			case Pentagon:
-				ItemView.image = [UIImage imageNamed:@"whitepentagon.png"];
+				ItemView.image = [UIImage imageNamed:@"greypentagon.png"];
 				return;
 			case Hexagon:
-				ItemView.image = [UIImage imageNamed:@"whitehexagon.png"];
+				ItemView.image = [UIImage imageNamed:@"greyhexagon.png"];
 				return;
 			case Circle:
-				ItemView.image = [UIImage imageNamed:@"whitecircle.png"];
+				ItemView.image = [UIImage imageNamed:@"greycircle.png"];
 				return;
 		}
 		return;

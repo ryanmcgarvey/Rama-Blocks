@@ -34,7 +34,11 @@
     IBOutlet UIButton * buttonMainMenu;
     IBOutlet UILabel * attemptsString;
 	IBOutlet UILabel * timeToDrop;
-    
+	
+	IBOutlet UILabel * bullshit;
+	
+    NSMutableArray * experimentArray;
+	
 	ItemPair * SpawnedPair;
 	ItemCollection * itemCollection;
 	NSTimer *TouchTimer;
@@ -52,7 +56,7 @@
     
     CFTimeInterval startTime;
 	int countDown;
-
+	
 }
 @property (readwrite, assign)int countDown;
 @property (nonatomic, retain) UIButton * buttonMenu;
@@ -66,6 +70,10 @@
 @property (readwrite, assign) CGPoint startTouchPosition;
 @property (readwrite, assign) CGPoint currentTouchPosition;
 @property (readwrite, assign) CGFloat touchDistanceToItemC;
+
+@property (nonatomic, retain) UILabel * bullshit;
+
+//@property (nonatomic, retain) NSMutableArray * experimentArray;
 
 -(void)resetTap:(NSTimer *)timer;
 -(void)SpawnShapes;

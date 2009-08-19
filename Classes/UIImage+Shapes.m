@@ -12,7 +12,7 @@
 @implementation UIImage (Shapes)
 
 + (UIImage *)imageWithColorAndShape: (ColorType)colorType : (ShapeType)shapeType{
-
+	
 	switch (colorType) {
 		case Red:
 			switch (shapeType) {
@@ -31,18 +31,18 @@
 				default:
 					return nil;
 			}
-		case Orange:
+		case Purple:
 			switch (shapeType) {
 				case Triangle:
-					return [UIImage imageNamed:@"orangetriangle.png"];
+					return [UIImage imageNamed:@"purpletriangle.png"];
 				case Square:
-					return [UIImage imageNamed:@"orangesquare.png"];
+					return [UIImage imageNamed:@"purplesquare.png"];
 				case Pentagon:
-					return [UIImage imageNamed:@"orangepentagon.png"];
+					return [UIImage imageNamed:@"purplepentagon.png"];
 				case Hexagon:
-					return [UIImage imageNamed:@"orangehexagon.png"];
+					return [UIImage imageNamed:@"purplehexagon.png"];
 				case Circle:
-					return [UIImage imageNamed:@"orangecircle.png"];
+					return [UIImage imageNamed:@"purplecircle.png"];
 				case Vortex:
 					return [UIImage imageNamed:@"whitesquare.png"];
 				default:
@@ -60,8 +60,8 @@
 					return [UIImage imageNamed:@"yellowhexagon.png"];
 				case Circle:
 					return [UIImage imageNamed:@"yellowcircle.png"];
-				//case Vortex:
-				//	return [UIImage imageNamed:@"YellowVortex.jpeg"];
+					//case Vortex:
+					//	return [UIImage imageNamed:@"YellowVortex.jpeg"];
 				default:
 					return nil;
 			}
@@ -77,8 +77,8 @@
 					return [UIImage imageNamed:@"greenhexagon.png"];
 				case Circle:
 					return [UIImage imageNamed:@"greencircle.png"];
-				//case Vortex:
-				//	return [UIImage imageNamed:@"GreenVortex.jpeg"];
+					//case Vortex:
+					//	return [UIImage imageNamed:@"GreenVortex.jpeg"];
 				default:
 					return nil;
 			}
@@ -94,8 +94,8 @@
 					return [UIImage imageNamed:@"bluehexagon.png"];
 				case Circle:
 					return [UIImage imageNamed:@"bluecircle.png"];
-				//case Vortex:
-				//	return [UIImage imageNamed:@"BlueVortex.jpeg"];
+					//case Vortex:
+					//	return [UIImage imageNamed:@"BlueVortex.jpeg"];
 				default:
 					return nil;
 			}

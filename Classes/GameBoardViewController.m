@@ -12,6 +12,8 @@
 @implementation GameBoardViewController
 @synthesize buttonMenu, buttonOptions, buttonMainMenu, buttonResume, menuView, attemptsString;
 @synthesize timeToDrop, countDown, drawingView, startTouchPosition, currentTouchPosition, touchDistanceToItemC;
+@synthesize bullshit;
+
 
 -(void)SaveState{
     if([gameState.currentBoard.Active boolValue])
@@ -37,8 +39,8 @@
 }
 
 /*****************************************************
-GameBoard Behavior
-*****************************************************/
+ GameBoard Behavior
+ *****************************************************/
 
 
 -(void)SpawnShapes{
@@ -78,7 +80,7 @@ GameBoard Behavior
     
     [self.view addSubview:SpawnedPair.ShaddowA];
     [self.view addSubview:SpawnedPair.ShaddowB];
-
+	
 }
 
 
@@ -94,8 +96,8 @@ GameBoard Behavior
 }
 
 /*****************************************************
-UIController Delegates
-*****************************************************/
+ UIController Delegates
+ *****************************************************/
 - (void)viewDidLoad {   
     Rama_BlocksAppDelegate * appDelegate =  (Rama_BlocksAppDelegate *)[[UIApplication sharedApplication] delegate];
 	if(appDelegate.gameType == 2){
@@ -127,7 +129,7 @@ UIController Delegates
 		[[NSNotificationCenter defaultCenter] addObserver:self
 												 selector:@selector(didRotate:)
 													 name:@"UIDeviceOrientationDidChangeNotification" object:nil];
-
+		
 		currentLevel = [[Level alloc] init:[gameState.currentLevel intValue]];
 		itemCollection = [[ItemCollection alloc] init:NUMBER_OF_ROWS :NUMBER_OF_COLUMNS :SHAPE_WIDTH :SHAPE_WIDTH: currentLevel];
 		SpawnedPair = [[ItemPair new]retain];
@@ -141,11 +143,11 @@ UIController Delegates
 								 CGPointMake(SPAWN_LOCATION_X,SPAWN_LOCATION_Y)];
 			
 			item = [pair objectAtIndex:1];
-
+			
 			SpawnedPair.ItemB = [[Shape alloc] initWithInfo:
-								  [item.colorType intValue] :
-								  [item.shapeType intValue] : 
-								  CGPointMake(SPAWN_LOCATION_X + SHAPE_WIDTH ,SPAWN_LOCATION_Y)];
+								 [item.colorType intValue] :
+								 [item.shapeType intValue] : 
+								 CGPointMake(SPAWN_LOCATION_X + SHAPE_WIDTH ,SPAWN_LOCATION_Y)];
 			
 			for(ItemState * item in [appDelegate FetchLockItems])
 			{
@@ -153,17 +155,17 @@ UIController Delegates
 				{
 					
 					LockShape * lockShape = [[LockShape alloc] initWithInfo:[item.colorType intValue] :
-									  [item.shapeType intValue] :
-									  CGPointMake(SPAWN_LOCATION_X,SPAWN_LOCATION_Y)];
+											 [item.shapeType intValue] :
+											 CGPointMake(SPAWN_LOCATION_X,SPAWN_LOCATION_Y)];
 					lockShape.canSeeColor = 
-						[item.canSeeColor boolValue];
+					[item.canSeeColor boolValue];
 					lockShape.canSeeShape = 
-						[item.canSeeItem boolValue];
-
+					[item.canSeeItem boolValue];
+					
 					[currentLevel SetLockAtIndex:lockShape : [item.index intValue]];
 				}
 			}
-
+			
 			for(ItemState * item in [appDelegate FetchCollectionItemStates])
 			{
 				if([item.shapeType intValue] != -1 && [item.colorType intValue] != -1)
@@ -190,15 +192,19 @@ UIController Delegates
 			
 			[self.view addSubview:SpawnedPair.ShaddowA];
 			[self.view addSubview:SpawnedPair.ShaddowB];
-
+			
 		}else{
 			gameState.currentBoard.Active = [NSNumber numberWithBool:YES];
 			[self SpawnShapes];
 			
 		}
 		[currentLevel addSolutionToView:self.view];
+		
+		
+		
+		
 		[self didRotate:nil];
-
+		
 		[super viewDidLoad];
 		
 		startTime = CFAbsoluteTimeGetCurrent();
@@ -223,17 +229,8 @@ UIController Delegates
 		timeToDrop.backgroundColor = [UIColor clearColor];
 		timeToDrop.textColor = [UIColor greenColor];
 		
-/*
-		lockSet = [[UIImageView alloc] initWithFrame:CGRectMake(0, 416, 320, 64)];
-		lockSet.clipsToBounds = YES;
-		lockSet.autoresizesSubviews = NO;
-		lockSet.contentMode = UIViewContentModeTopLeft;
-		lockSet.image = [[UIImage imageNamed:@"lockSet.png"] retain];
-*/
-		 
-		 
 		[self.view addSubview:backGround];
-		[self.view addSubview:lockSet];
+		
 		[self.view sendSubviewToBack:backGround];
 		[self.view addSubview:buttonMenu];
 		[self.view addSubview:menuView];
@@ -329,6 +326,32 @@ UIController Delegates
 			
 		}
 		[currentLevel addSolutionToView:self.view];
+		
+		//lockSet = [[UIImageView alloc] initWithFrame:CGRectMake(LOCK_LOCATION_X - 11, LOCK_LOCATION_Y - 13, 23, 23)];
+		
+		experimentArray = [[NSMutableArray alloc] init];
+		
+		for(int i = 0; i < currentLevel.lockCount; i++){
+			UIImageView * newLock = [[UIImageView alloc] initWithFrame:CGRectMake(LOCK_LOCATION_X + (30 * i) - 11, LOCK_LOCATION_Y  - 13, 23, 23)];
+			
+			for(int x = 1; x < 17; x++){
+				NSString *theImage = [NSString stringWithFormat:@"exp%d.png", x];
+				NSLog(@"%@", theImage); 
+				UIImage *expImage = [UIImage imageNamed:theImage];
+				[experimentArray addObject:expImage];
+				
+				
+			}
+			
+			[newLock setAnimationImages:experimentArray];
+			[newLock setAnimationDuration:1.0f + i];
+			[newLock startAnimating];
+			
+			[self.view addSubview:newLock];
+			//[self.view bringSubviewToFront:newLock];
+			
+		}
+		
 		[self didRotate:nil];
 		
 		[super viewDidLoad];
@@ -422,7 +445,7 @@ UIController Delegates
     [self dismissModalViewControllerAnimated:YES];
 }
 /*****************************************************
-    Touches
+ Touches
  *****************************************************/
 
 -(CGFloat)isTouchWithinRange:(CGPoint)touch from:(CGPoint)center{
@@ -457,7 +480,7 @@ UIController Delegates
 				[powerItem makeCollection:itemCollection];
 				[powerItem useBombItem:powerTouchItem];
 			}
-			if(powerTouchItem.colorType == Orange){
+			if(powerTouchItem.colorType == Purple){
 				[[UIApplication sharedApplication] beginIgnoringInteractionEvents];
 				[powerItem makeCollection:itemCollection];
 				[powerItem placeAnchor:powerTouchItem];
@@ -469,13 +492,13 @@ UIController Delegates
         TouchTimer = [[NSTimer scheduledTimerWithTimeInterval:TAP_WAIT_TIME target:self selector:@selector(resetTap:) userInfo:touchedItem repeats:NO] retain];
 		
 	}
-		
+	
 	if([[touch view] isKindOfClass: [Shape class]] && appDelegate.isAttaching == YES){
 		appDelegate.isAttaching = NO;
 		[powerItem makeAnchor:(Shape *)[touch view]];
 		
 	}
-		
+	
 }
 
 - (void)touchesMoved:(NSSet *)touches withEvent:(UIEvent *)event {
@@ -611,7 +634,7 @@ UIController Delegates
                     gameState.currentBoard.Active = [NSNumber numberWithBool:NO];
                     [self dismissModalViewControllerAnimated:YES];
                 }
-
+				
                 attemptsString.text = [[NSString alloc] initWithFormat:@" %d\n", currentLevel.attempts];
             }
         }
@@ -639,8 +662,8 @@ UIController Delegates
 
 
 /*****************************************************
-Tear down and maintenance
-*****************************************************/
+ Tear down and maintenance
+ *****************************************************/
 - (void)didReceiveMemoryWarning {
 	// Releases the view if it doesn't have a superview.
     [super didReceiveMemoryWarning];	

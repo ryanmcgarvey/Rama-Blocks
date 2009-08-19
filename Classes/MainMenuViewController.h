@@ -27,19 +27,26 @@
     IBOutlet UIButton * OptionsButton;
     IBOutlet UIButton * TutorialButton;
     IBOutlet UIButton * LevelSelectButton;
-	IBOutlet UIImageView *testAnimation;
-	NSMutableArray *testImages;
+	
+	IBOutlet UIImageView *buttonGraphic;
+	IBOutlet UIImageView *titleGraphic;
+	IBOutlet UIImageView *behindButtonGraphic;
+	
+	CGPoint buttonCenter;
+	CGPoint titleCenter;
+	CGPoint behindButtonCenter;
+	
 
 }
-
-@property(nonatomic, retain)IBOutlet UIImageView *testAnimation;
-@property(nonatomic, retain)NSMutableArray *testImages;
 
 - (IBAction)loadGameBoard:(id)sender;
 - (IBAction)loadTimeBoard:(id)sender;
 - (IBAction)loadTutorial:(id)sender;
 - (IBAction)loadOptions:(id)sender;
 -(IBAction)loadLevelSelect:(id)sender;
+
+-(void)animateButtons;
+-(void)restoreCenters;
 
 
 @end

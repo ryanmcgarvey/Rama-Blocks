@@ -16,21 +16,22 @@
 @synthesize lockCount;
 
 /*****************************************************
-Init
+ Init
  *****************************************************/
 
 -(id)init:(int)predefinedDifficulty{
     
-
+	
     solution = [NSMutableArray new];
     [self setDifficulty:predefinedDifficulty];
     for (int i = 0; i < lockCount; i++) 
     {
-        LockShape * shape = [[LockShape alloc] initWithInfo:[self createRandomColor] : [self createRandomShape]:CGPointMake(LOCK_LOCATION_X + LOCK_LOCATION_X * i,LOCK_LOCATION_Y)];
+        LockShape * shape = [[LockShape alloc] initWithInfo:[self createRandomColor] : [self createRandomShape]:CGPointMake(LOCK_LOCATION_X +(30 * i),LOCK_LOCATION_Y)];
         shape.canSeeColor = FALSE;
         shape.canSeeShape = FALSE;
 		[shape setUserInteractionEnabled:false];
         [solution addObject: shape];
+		
     }
     [self updateProbability];
     return self;
@@ -46,7 +47,7 @@ Init
     [oldLock removeFromSuperview];
     [oldLock release];
     [solution insertObject:lock atIndex:index];
-
+	
 }
 
 -(LockShape *)GetLockAtIndex:(int)index{
@@ -57,13 +58,14 @@ Init
 }
 
 /*****************************************************
-Solution
+ Solution
  *****************************************************/
 -(BOOL)addSolutionToView:(UIView *)view{
     [self updateView];
     for(Shape * shape in solution)
     {
-        [view addSubview:shape];
+		[view addSubview:shape];
+		
     }
     [self updateProbability];
     return TRUE;
@@ -88,7 +90,7 @@ Solution
             actual.canSeeColor = TRUE;
         }
         if(guess.shapeType != actual.shapeType ||
-            guess.colorType != actual.colorType)
+		   guess.colorType != actual.colorType)
         {
             victory = FALSE;
         }
@@ -151,6 +153,8 @@ Solution
     }
 }
 
+
+
 -(void)updateView{
     for(LockShape * shape in solution)
     {
@@ -180,7 +184,7 @@ Solution
 
 
 /*****************************************************
-Helpers
+ Helpers
  *****************************************************/
 
 -(ShapeType)createRandomShape{
@@ -198,7 +202,7 @@ Helpers
 -(void)setDifficulty:(int)difficultyToSet{
     
     difficulty = difficultyToSet;
-
+	
     
     switch (difficulty) {
         case 0:
@@ -256,6 +260,6 @@ Helpers
             break;
     }
 }
-            
-            
+
+
 @end

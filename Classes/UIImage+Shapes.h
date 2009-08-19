@@ -20,7 +20,7 @@ typedef enum enum_ShapeType {
 
 typedef enum enum_ColorType {
 	Red,
-	Orange,
+	Purple,
 	Yellow,
 	Green,
 	Blue,

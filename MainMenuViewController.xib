@@ -8,7 +8,7 @@
 		<string key="IBDocument.HIToolboxVersion">353.00</string>
 		<object class="NSMutableArray" key="IBDocument.EditedObjectIDs">
 			<bool key="EncodedWithXMLCoder">YES</bool>
-			<integer value="47"/>
+			<integer value="6"/>
 		</object>
 		<object class="NSArray" key="IBDocument.PluginDependencies">
 			<bool key="EncodedWithXMLCoder">YES</bool>
@@ -145,6 +145,20 @@
 							<string key="NSResourceName">mainMenuButton.png</string>
 						</object>
 					</object>
+					<object class="IBUIImageView" id="680559776">
+						<reference key="NSNextResponder" ref="774585933"/>
+						<int key="NSvFlags">292</int>
+						<string key="NSFrameSize">{321, 224}</string>
+						<reference key="NSSuperview" ref="774585933"/>
+						<bool key="IBUIOpaque">NO</bool>
+						<bool key="IBUIClearsContextBeforeDrawing">NO</bool>
+						<int key="IBUIContentMode">5</int>
+						<bool key="IBUIUserInteractionEnabled">NO</bool>
+						<object class="NSCustomResource" key="IBUIImage">
+							<string key="NSClassName">NSImage</string>
+							<string key="NSResourceName">mainMenuTitle.png</string>
+						</object>
+					</object>
 				</object>
 				<string key="NSFrameSize">{366, 518}</string>
 				<reference key="NSSuperview"/>
@@ -217,6 +231,30 @@
 					</object>
 					<int key="connectionID">58</int>
 				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchOutletConnection" key="connection">
+						<string key="label">behindButtonGraphic</string>
+						<reference key="source" ref="372490531"/>
+						<reference key="destination" ref="778120715"/>
+					</object>
+					<int key="connectionID">59</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchOutletConnection" key="connection">
+						<string key="label">buttonGraphic</string>
+						<reference key="source" ref="372490531"/>
+						<reference key="destination" ref="404923612"/>
+					</object>
+					<int key="connectionID">60</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchOutletConnection" key="connection">
+						<string key="label">titleGraphic</string>
+						<reference key="source" ref="372490531"/>
+						<reference key="destination" ref="680559776"/>
+					</object>
+					<int key="connectionID">62</int>
+				</object>
 			</object>
 			<object class="IBMutableOrderedSet" key="objectRecords">
 				<object class="NSArray" key="orderedObjects">
@@ -245,12 +283,13 @@
 						<reference key="object" ref="774585933"/>
 						<object class="NSMutableArray" key="children">
 							<bool key="EncodedWithXMLCoder">YES</bool>
-							<reference ref="87299707"/>
 							<reference ref="896241064"/>
 							<reference ref="426230768"/>
 							<reference ref="404923612"/>
 							<reference ref="778120715"/>
 							<reference ref="320817484"/>
+							<reference ref="87299707"/>
+							<reference ref="680559776"/>
 						</object>
 						<reference key="parent" ref="345025391"/>
 					</object>
@@ -286,6 +325,11 @@
 						<reference key="object" ref="778120715"/>
 						<reference key="parent" ref="774585933"/>
 					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">61</int>
+						<reference key="object" ref="680559776"/>
+						<reference key="parent" ref="774585933"/>
+					</object>
 				</object>
 			</object>
 			<object class="NSMutableDictionary" key="flattenedProperties">
@@ -303,6 +347,7 @@
 					<string>6.IBEditorWindowLastContentRect</string>
 					<string>6.IBPluginDependency</string>
 					<string>6.IBUserGuides</string>
+					<string>61.IBPluginDependency</string>
 				</object>
 				<object class="NSMutableArray" key="dict.values">
 					<bool key="EncodedWithXMLCoder">YES</bool>
@@ -314,11 +359,12 @@
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
-					<string>{{754, 457}, {366, 518}}</string>
+					<string>{{753, 457}, {366, 518}}</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<object class="NSMutableArray">
 						<bool key="EncodedWithXMLCoder">YES</bool>
 					</object>
+					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 				</object>
 			</object>
 			<object class="NSMutableDictionary" key="unlocalizedProperties">
@@ -341,7 +387,7 @@
 				</object>
 			</object>
 			<nil key="sourceID"/>
-			<int key="maxID">58</int>
+			<int key="maxID">62</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<object class="NSMutableArray" key="referencedPartialClassDescriptions">
@@ -377,7 +423,9 @@
 							<string>LevelSelectButton</string>
 							<string>OptionsButton</string>
 							<string>TutorialButton</string>
-							<string>testAnimation</string>
+							<string>behindButtonGraphic</string>
+							<string>buttonGraphic</string>
+							<string>titleGraphic</string>
 						</object>
 						<object class="NSMutableArray" key="dict.values">
 							<bool key="EncodedWithXMLCoder">YES</bool>
@@ -386,6 +434,8 @@
 							<string>UIButton</string>
 							<string>UIButton</string>
 							<string>UIButton</string>
+							<string>UIImageView</string>
+							<string>UIImageView</string>
 							<string>UIImageView</string>
 						</object>
 					</object>
@@ -413,7 +463,7 @@
 			</object>
 		</object>
 		<int key="IBDocument.localizationMode">0</int>
-		<string key="IBDocument.LastKnownRelativeProjectPath">../Rama Blocks.xcodeproj</string>
+		<string key="IBDocument.LastKnownRelativeProjectPath">Rama Blocks.xcodeproj</string>
 		<int key="IBDocument.defaultPropertyAccessControl">3</int>
 		<string key="IBCocoaTouchPluginVersion">3.0</string>
 	</data>
