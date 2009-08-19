@@ -223,13 +223,13 @@ UIController Delegates
 		timeToDrop.backgroundColor = [UIColor clearColor];
 		timeToDrop.textColor = [UIColor greenColor];
 		
-		/*
+/*
 		lockSet = [[UIImageView alloc] initWithFrame:CGRectMake(0, 416, 320, 64)];
 		lockSet.clipsToBounds = YES;
 		lockSet.autoresizesSubviews = NO;
 		lockSet.contentMode = UIViewContentModeTopLeft;
 		lockSet.image = [[UIImage imageNamed:@"lockSet.png"] retain];
-		*/
+*/
 		 
 		 
 		[self.view addSubview:backGround];
