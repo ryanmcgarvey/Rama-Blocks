@@ -283,8 +283,9 @@
 							<key>PBXSmartGroupTreeModuleOutlineStateSelectionKey</key>
 							<array>
 								<array>
-									<integer>42</integer>
-									<integer>28</integer>
+									<integer>41</integer>
+									<integer>34</integer>
+									<integer>30</integer>
 									<integer>0</integer>
 								</array>
 							</array>
@@ -549,9 +550,9 @@
 			</array>
 			<key>TableOfContents</key>
 			<array>
-				<string>C26CF7E0103BB095007843C0</string>
+				<string>C26CF7F4103BB628007843C0</string>
 				<string>1CE0B1FE06471DED0097A5F4</string>
-				<string>C26CF7E1103BB095007843C0</string>
+				<string>C26CF7F5103BB628007843C0</string>
 				<string>1CE0B20306471E060097A5F4</string>
 				<string>1CE0B20506471E060097A5F4</string>
 			</array>
@@ -767,7 +768,7 @@
 			<key>TableOfContents</key>
 			<array>
 				<string>C21FB318103202EA00C1D29B</string>
-				<string>C26CF7E2103BB095007843C0</string>
+				<string>C26CF7F6103BB628007843C0</string>
 				<string>1CD0528F0623707200166675</string>
 				<string>XCMainBuildResultsModuleGUID</string>
 			</array>
@@ -887,13 +888,13 @@
 			<key>TableOfContents</key>
 			<array>
 				<string>1CD10A99069EF8BA00B06720</string>
-				<string>C26CF7E3103BB095007843C0</string>
+				<string>C26CF7F7103BB628007843C0</string>
 				<string>1C162984064C10D400B95A72</string>
-				<string>C26CF7E4103BB095007843C0</string>
-				<string>C26CF7E5103BB095007843C0</string>
-				<string>C26CF7E6103BB095007843C0</string>
-				<string>C26CF7E7103BB095007843C0</string>
-				<string>C26CF7E8103BB095007843C0</string>
+				<string>C26CF7F8103BB628007843C0</string>
+				<string>C26CF7F9103BB628007843C0</string>
+				<string>C26CF7FA103BB628007843C0</string>
+				<string>C26CF7FB103BB628007843C0</string>
+				<string>C26CF7FC103BB628007843C0</string>
 			</array>
 			<key>ToolbarConfiguration</key>
 			<string>xcode.toolbar.config.debugV3</string>
@@ -1049,7 +1050,7 @@
 			<key>TableOfContents</key>
 			<array>
 				<string>1C78EAAD065D492600B07095</string>
-				<string>C26CF7E9103BB095007843C0</string>
+				<string>C26CF7FD103BB628007843C0</string>
 				<string>1C78EAAC065D492600B07095</string>
 			</array>
 			<key>ToolbarConfiguration</key>
