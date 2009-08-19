@@ -2,21 +2,24 @@
 //  GameState.m
 //  Rama Blocks
 //
-//  Created by Ryan McGarvey on 8/9/09.
-//  Copyright 2009 Simplical. All rights reserved.
+//  Created by Ryan McGarvey on 8/18/09.
+//  Copyright 2009 __MyCompanyName__. All rights reserved.
 //
 
 #import "GameState.h"
 
+#import "Profile.h"
 #import "BoardState.h"
 #import "LevelStatistics.h"
 
 @implementation GameState 
 
 @dynamic sfxVolume;
-@dynamic currentLevel;
 @dynamic highestLevel;
+@dynamic IsDefault;
+@dynamic currentLevel;
 @dynamic musicVolume;
+@dynamic owningProfile;
 @dynamic currentBoard;
 @dynamic PlayedLevels;
 

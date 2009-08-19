@@ -2,8 +2,8 @@
 //  LevelStatistics.m
 //  Rama Blocks
 //
-//  Created by Ryan McGarvey on 8/9/09.
-//  Copyright 2009 Simplical. All rights reserved.
+//  Created by Ryan McGarvey on 8/18/09.
+//  Copyright 2009 __MyCompanyName__. All rights reserved.
 //
 
 #import "LevelStatistics.h"
@@ -12,10 +12,10 @@
 
 @implementation LevelStatistics 
 
-@dynamic numberOfTransforms;
 @dynamic timeToComplete;
 @dynamic numberOfMoves;
 @dynamic numerOfAttempts;
+@dynamic numberOfTransforms;
 @dynamic Level;
 @dynamic owningGameState;
 

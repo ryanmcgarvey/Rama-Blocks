@@ -73,10 +73,6 @@
 		FC4366B91024CDA000C1F3BE /* UIImage+Shapes.m in Sources */ = {isa = PBXBuildFile; fileRef = FC4366B71024CDA000C1F3BE /* UIImage+Shapes.m */; };
 		FC4CAD5E10258CDF00C6F863 /* HighLight.png in Resources */ = {isa = PBXBuildFile; fileRef = FC4CAD5D10258CDF00C6F863 /* HighLight.png */; };
 		FC4CADC31026101E00C6F863 /* RamaIcon.png in Resources */ = {isa = PBXBuildFile; fileRef = FC4CADC21026101E00C6F863 /* RamaIcon.png */; };
-		FC79C7DB102EE2F00041930A /* GameState.m in Sources */ = {isa = PBXBuildFile; fileRef = FC79C7D4102EE2F00041930A /* GameState.m */; };
-		FC79C7DC102EE2F00041930A /* ItemState.m in Sources */ = {isa = PBXBuildFile; fileRef = FC79C7D6102EE2F00041930A /* ItemState.m */; };
-		FC79C7DD102EE2F00041930A /* BoardState.m in Sources */ = {isa = PBXBuildFile; fileRef = FC79C7D8102EE2F00041930A /* BoardState.m */; };
-		FC79C7DE102EE2F00041930A /* LevelStatistics.m in Sources */ = {isa = PBXBuildFile; fileRef = FC79C7DA102EE2F00041930A /* LevelStatistics.m */; };
 		FC79C872102F76BA0041930A /* dist.plist in Resources */ = {isa = PBXBuildFile; fileRef = FC79C871102F76BA0041930A /* dist.plist */; };
 		FCEF155A102118A800A71C1C /* GameItem.m in Sources */ = {isa = PBXBuildFile; fileRef = FCEF1559102118A800A71C1C /* GameItem.m */; };
 		FCEF155D102118F200A71C1C /* Shape.m in Sources */ = {isa = PBXBuildFile; fileRef = FCEF155C102118F200A71C1C /* Shape.m */; };
@@ -84,7 +80,6 @@
 		FCEF156C102128AF00A71C1C /* ItemPair.m in Sources */ = {isa = PBXBuildFile; fileRef = FCEF156B102128AF00A71C1C /* ItemPair.m */; };
 		FCEF157F10212AB300A71C1C /* Cell.m in Sources */ = {isa = PBXBuildFile; fileRef = FCEF157E10212AB300A71C1C /* Cell.m */; };
 		FCEF16E810214EE100A71C1C /* GameBoardViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = FCEF16E110214EE100A71C1C /* GameBoardViewController.xib */; };
-		FCEF16E910214EE100A71C1C /* Profile.xib in Resources */ = {isa = PBXBuildFile; fileRef = FCEF16E210214EE100A71C1C /* Profile.xib */; };
 		FCEF16EA10214EE100A71C1C /* AddProfile.xib in Resources */ = {isa = PBXBuildFile; fileRef = FCEF16E310214EE100A71C1C /* AddProfile.xib */; };
 		FCEF16EB10214EE100A71C1C /* Tutorial.xib in Resources */ = {isa = PBXBuildFile; fileRef = FCEF16E410214EE100A71C1C /* Tutorial.xib */; };
 		FCEF16EC10214EE100A71C1C /* Purchase.xib in Resources */ = {isa = PBXBuildFile; fileRef = FCEF16E510214EE100A71C1C /* Purchase.xib */; };
@@ -95,6 +90,13 @@
 		FCEF170410214F0400A71C1C /* MainMenuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FCEF16FA10214F0400A71C1C /* MainMenuViewController.m */; };
 		FCEF170510214F0400A71C1C /* GameBoardViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FCEF16FC10214F0400A71C1C /* GameBoardViewController.m */; };
 		FCEF176610215A7400A71C1C /* ItemCollection.m in Sources */ = {isa = PBXBuildFile; fileRef = FCEF157410212A8800A71C1C /* ItemCollection.m */; };
+		FCF509E6103B7A0C00F9F0C3 /* ItemState.m in Sources */ = {isa = PBXBuildFile; fileRef = FCF509DE103B7A0C00F9F0C3 /* ItemState.m */; };
+		FCF509E7103B7A0C00F9F0C3 /* Profile.m in Sources */ = {isa = PBXBuildFile; fileRef = FCF509E0103B7A0C00F9F0C3 /* Profile.m */; };
+		FCF509E8103B7A0C00F9F0C3 /* BoardState.m in Sources */ = {isa = PBXBuildFile; fileRef = FCF509E2103B7A0C00F9F0C3 /* BoardState.m */; };
+		FCF509E9103B7A0C00F9F0C3 /* LevelStatistics.m in Sources */ = {isa = PBXBuildFile; fileRef = FCF509E4103B7A0C00F9F0C3 /* LevelStatistics.m */; };
+		FCF509F5103B7F3A00F9F0C3 /* GameState.m in Sources */ = {isa = PBXBuildFile; fileRef = FCF509F4103B7F3A00F9F0C3 /* GameState.m */; };
+		FCF50A50103B851000F9F0C3 /* ProfilePicker.m in Sources */ = {isa = PBXBuildFile; fileRef = FCF50A4E103B851000F9F0C3 /* ProfilePicker.m */; };
+		FCF50A51103B851000F9F0C3 /* ProfilePicker.xib in Resources */ = {isa = PBXBuildFile; fileRef = FCF50A4F103B851000F9F0C3 /* ProfilePicker.xib */; };
 		FCFD28401024F04B000313B3 /* Level.m in Sources */ = {isa = PBXBuildFile; fileRef = FCFD283F1024F04B000313B3 /* Level.m */; };
 /* End PBXBuildFile section */
 
@@ -176,14 +178,6 @@
 		FC4366B81024CDA000C1F3BE /* GlobalDefines.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GlobalDefines.h; sourceTree = "<group>"; };
 		FC4CAD5D10258CDF00C6F863 /* HighLight.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = HighLight.png; sourceTree = "<group>"; };
 		FC4CADC21026101E00C6F863 /* RamaIcon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = RamaIcon.png; sourceTree = "<group>"; };
-		FC79C7D3102EE2F00041930A /* GameState.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GameState.h; sourceTree = "<group>"; };
-		FC79C7D4102EE2F00041930A /* GameState.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GameState.m; sourceTree = "<group>"; };
-		FC79C7D5102EE2F00041930A /* ItemState.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ItemState.h; sourceTree = "<group>"; };
-		FC79C7D6102EE2F00041930A /* ItemState.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ItemState.m; sourceTree = "<group>"; };
-		FC79C7D7102EE2F00041930A /* BoardState.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BoardState.h; sourceTree = "<group>"; };
-		FC79C7D8102EE2F00041930A /* BoardState.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BoardState.m; sourceTree = "<group>"; };
-		FC79C7D9102EE2F00041930A /* LevelStatistics.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LevelStatistics.h; sourceTree = "<group>"; };
-		FC79C7DA102EE2F00041930A /* LevelStatistics.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LevelStatistics.m; sourceTree = "<group>"; };
 		FC79C871102F76BA0041930A /* dist.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = dist.plist; sourceTree = "<group>"; };
 		FCEF1558102118A800A71C1C /* GameItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GameItem.h; sourceTree = "<group>"; };
 		FCEF1559102118A800A71C1C /* GameItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GameItem.m; sourceTree = "<group>"; };
@@ -198,7 +192,6 @@
 		FCEF157D10212AB300A71C1C /* Cell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Cell.h; sourceTree = "<group>"; };
 		FCEF157E10212AB300A71C1C /* Cell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Cell.m; sourceTree = "<group>"; };
 		FCEF16E110214EE100A71C1C /* GameBoardViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = GameBoardViewController.xib; path = Classes/GameBoardViewController.xib; sourceTree = "<group>"; };
-		FCEF16E210214EE100A71C1C /* Profile.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Profile.xib; path = Classes/Profile.xib; sourceTree = "<group>"; };
 		FCEF16E310214EE100A71C1C /* AddProfile.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = AddProfile.xib; path = Classes/AddProfile.xib; sourceTree = "<group>"; };
 		FCEF16E410214EE100A71C1C /* Tutorial.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Tutorial.xib; path = Classes/Tutorial.xib; sourceTree = "<group>"; };
 		FCEF16E510214EE100A71C1C /* Purchase.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Purchase.xib; path = Classes/Purchase.xib; sourceTree = "<group>"; };
@@ -212,6 +205,19 @@
 		FCEF16FA10214F0400A71C1C /* MainMenuViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainMenuViewController.m; sourceTree = "<group>"; };
 		FCEF16FB10214F0400A71C1C /* GameBoardViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GameBoardViewController.h; sourceTree = "<group>"; };
 		FCEF16FC10214F0400A71C1C /* GameBoardViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GameBoardViewController.m; sourceTree = "<group>"; };
+		FCF509DD103B7A0C00F9F0C3 /* ItemState.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ItemState.h; sourceTree = "<group>"; };
+		FCF509DE103B7A0C00F9F0C3 /* ItemState.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ItemState.m; sourceTree = "<group>"; };
+		FCF509DF103B7A0C00F9F0C3 /* Profile.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Profile.h; sourceTree = "<group>"; };
+		FCF509E0103B7A0C00F9F0C3 /* Profile.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Profile.m; sourceTree = "<group>"; };
+		FCF509E1103B7A0C00F9F0C3 /* BoardState.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BoardState.h; sourceTree = "<group>"; };
+		FCF509E2103B7A0C00F9F0C3 /* BoardState.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BoardState.m; sourceTree = "<group>"; };
+		FCF509E3103B7A0C00F9F0C3 /* LevelStatistics.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LevelStatistics.h; sourceTree = "<group>"; };
+		FCF509E4103B7A0C00F9F0C3 /* LevelStatistics.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LevelStatistics.m; sourceTree = "<group>"; };
+		FCF509F3103B7F3A00F9F0C3 /* GameState.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GameState.h; sourceTree = "<group>"; };
+		FCF509F4103B7F3A00F9F0C3 /* GameState.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GameState.m; sourceTree = "<group>"; };
+		FCF50A4D103B851000F9F0C3 /* ProfilePicker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ProfilePicker.h; path = ../ProfilePicker.h; sourceTree = "<group>"; };
+		FCF50A4E103B851000F9F0C3 /* ProfilePicker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ProfilePicker.m; path = ../ProfilePicker.m; sourceTree = "<group>"; };
+		FCF50A4F103B851000F9F0C3 /* ProfilePicker.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ProfilePicker.xib; sourceTree = "<group>"; };
 		FCFD283E1024F04B000313B3 /* Level.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Level.h; sourceTree = "<group>"; };
 		FCFD283F1024F04B000313B3 /* Level.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Level.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -324,14 +330,16 @@
 		FC0B6C3410253A9100F1BD5E /* State */ = {
 			isa = PBXGroup;
 			children = (
-				FC79C7D3102EE2F00041930A /* GameState.h */,
-				FC79C7D4102EE2F00041930A /* GameState.m */,
-				FC79C7D5102EE2F00041930A /* ItemState.h */,
-				FC79C7D6102EE2F00041930A /* ItemState.m */,
-				FC79C7D7102EE2F00041930A /* BoardState.h */,
-				FC79C7D8102EE2F00041930A /* BoardState.m */,
-				FC79C7D9102EE2F00041930A /* LevelStatistics.h */,
-				FC79C7DA102EE2F00041930A /* LevelStatistics.m */,
+				FCF509F3103B7F3A00F9F0C3 /* GameState.h */,
+				FCF509F4103B7F3A00F9F0C3 /* GameState.m */,
+				FCF509DD103B7A0C00F9F0C3 /* ItemState.h */,
+				FCF509DE103B7A0C00F9F0C3 /* ItemState.m */,
+				FCF509DF103B7A0C00F9F0C3 /* Profile.h */,
+				FCF509E0103B7A0C00F9F0C3 /* Profile.m */,
+				FCF509E1103B7A0C00F9F0C3 /* BoardState.h */,
+				FCF509E2103B7A0C00F9F0C3 /* BoardState.m */,
+				FCF509E3103B7A0C00F9F0C3 /* LevelStatistics.h */,
+				FCF509E4103B7A0C00F9F0C3 /* LevelStatistics.m */,
 				28C3AD890F43EF2300507BA6 /* Rama_Blocks.xcdatamodel */,
 			);
 			name = State;
@@ -350,6 +358,8 @@
 		FCEF1556102117BC00A71C1C /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				FCF50A4D103B851000F9F0C3 /* ProfilePicker.h */,
+				FCF50A4E103B851000F9F0C3 /* ProfilePicker.m */,
 				FC4072E1102EC451000B40E8 /* LevelSelect.h */,
 				FC4072E2102EC451000B40E8 /* LevelSelect.m */,
 				FCEF16F510214F0400A71C1C /* Tutorial.h */,
@@ -481,12 +491,12 @@
 				FC4072E3102EC451000B40E8 /* LevelSelect.xib */,
 				28AD733E0D9D9553002E5188 /* MainWindow.xib */,
 				FCEF16E110214EE100A71C1C /* GameBoardViewController.xib */,
-				FCEF16E210214EE100A71C1C /* Profile.xib */,
 				FCEF16E310214EE100A71C1C /* AddProfile.xib */,
 				FCEF16E410214EE100A71C1C /* Tutorial.xib */,
 				FCEF16E510214EE100A71C1C /* Purchase.xib */,
 				FCEF16E610214EE100A71C1C /* Options.xib */,
 				FCEF16E710214EE100A71C1C /* MainMenuViewController.xib */,
+				FCF50A4F103B851000F9F0C3 /* ProfilePicker.xib */,
 			);
 			name = Nibs;
 			sourceTree = "<group>";
@@ -538,7 +548,6 @@
 			files = (
 				28AD733F0D9D9553002E5188 /* MainWindow.xib in Resources */,
 				FCEF16E810214EE100A71C1C /* GameBoardViewController.xib in Resources */,
-				FCEF16E910214EE100A71C1C /* Profile.xib in Resources */,
 				FCEF16EA10214EE100A71C1C /* AddProfile.xib in Resources */,
 				FCEF16EB10214EE100A71C1C /* Tutorial.xib in Resources */,
 				FCEF16EC10214EE100A71C1C /* Purchase.xib in Resources */,
@@ -596,6 +605,7 @@
 				C2028FA81033577100E6E0DA /* whitehexagon.png in Resources */,
 				C2028FA91033577100E6E0DA /* whitecircle.png in Resources */,
 				C2028FAA1033577100E6E0DA /* whitepentagon.png in Resources */,
+				FCF50A51103B851000F9F0C3 /* ProfilePicker.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -625,11 +635,13 @@
 				FC0B6B7910252C6000F1BD5E /* SoundEffects.m in Sources */,
 				FC0B6B7C10252E0A00F1BD5E /* SoundPlayer.m in Sources */,
 				FC4072E4102EC451000B40E8 /* LevelSelect.m in Sources */,
-				FC79C7DB102EE2F00041930A /* GameState.m in Sources */,
-				FC79C7DC102EE2F00041930A /* ItemState.m in Sources */,
-				FC79C7DD102EE2F00041930A /* BoardState.m in Sources */,
-				FC79C7DE102EE2F00041930A /* LevelStatistics.m in Sources */,
 				C2B29073103440D2001B31FA /* DrawingView.m in Sources */,
+				FCF509E6103B7A0C00F9F0C3 /* ItemState.m in Sources */,
+				FCF509E7103B7A0C00F9F0C3 /* Profile.m in Sources */,
+				FCF509E8103B7A0C00F9F0C3 /* BoardState.m in Sources */,
+				FCF509E9103B7A0C00F9F0C3 /* LevelStatistics.m in Sources */,
+				FCF509F5103B7F3A00F9F0C3 /* GameState.m in Sources */,
+				FCF50A50103B851000F9F0C3 /* ProfilePicker.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
