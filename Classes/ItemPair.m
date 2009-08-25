@@ -210,21 +210,24 @@
 
 - (BOOL)checkBounds{
     if( (ItemA.center.x > (GRID_RIGHT_EDGE - (SHAPE_WIDTH/2))) || // Shape A is close to the right edge
-	   (ItemB.center.x > (GRID_RIGHT_EDGE - (SHAPE_WIDTH/2))) )  // Shape B is close to the right edge
+	   (ItemB.center.x > (GRID_RIGHT_EDGE - (SHAPE_WIDTH/2))) || (ItemC.center.x > (GRID_RIGHT_EDGE - 15)) )  // Shape B is close to the right edge
 	{
 		switch (Orientation) {
 			case 0: // A left of B; B right of A
 				ItemA.center = CGPointMake(GRID_RIGHT_EDGE - (SHAPE_WIDTH*1.5), ItemA.center.y);
 				ItemB.center = CGPointMake(GRID_RIGHT_EDGE - (SHAPE_WIDTH/2), ItemB.center.y);
+				ItemC.center = CGPointMake(GRID_RIGHT_EDGE - 30, ItemC.center.y);
 				break;
 			case 2: // A right of B; B left of A
 				ItemA.center = CGPointMake(GRID_RIGHT_EDGE - (SHAPE_WIDTH/2), ItemA.center.y);
 				ItemB.center = CGPointMake(GRID_RIGHT_EDGE - (SHAPE_WIDTH*1.5), ItemB.center.y);
+				ItemC.center = CGPointMake(GRID_RIGHT_EDGE - 30, ItemC.center.y);
 				break;
 			case 1: // A below B; B above A
 			case 3: // A above B; B below A
 				ItemA.center = CGPointMake(GRID_RIGHT_EDGE - (SHAPE_WIDTH/2), ItemA.center.y);
 				ItemB.center = CGPointMake(ItemA.center.x, ItemB.center.y);
+				ItemC.center = CGPointMake(GRID_RIGHT_EDGE - 30, ItemC.center.y);
 				break;
 			default:
 				NSLog(@"ERROR: Unknown orientation: %d", Orientation);
@@ -232,21 +235,24 @@
 		}
 	}
 	if( (ItemA.center.x < (GRID_LEFT_EDGE  + (SHAPE_WIDTH/2))) || // Shape A is close to the left edge
-       (ItemB.center.x < (GRID_LEFT_EDGE  + (SHAPE_WIDTH/2)))  ) // Shape B is close to the left edge
+       (ItemB.center.x < (GRID_LEFT_EDGE  + (SHAPE_WIDTH/2))) || (ItemC.center.x < (GRID_LEFT_EDGE + 15)) ) // Shape B is close to the left edge
 	{
 		switch (Orientation) {
 			case 0: // A left of B; B right of A
 				ItemA.center = CGPointMake(GRID_LEFT_EDGE + (SHAPE_WIDTH/2), ItemA.center.y);
 				ItemB.center = CGPointMake(GRID_LEFT_EDGE + (SHAPE_WIDTH*1.5), ItemB.center.y);
+				ItemC.center = CGPointMake(GRID_LEFT_EDGE + 30, ItemC.center.y);
 				break;
 			case 2: // A right of B; B left of A
 				ItemA.center = CGPointMake(GRID_LEFT_EDGE + (SHAPE_WIDTH*1.5), ItemA.center.y);
 				ItemB.center = CGPointMake(GRID_LEFT_EDGE + (SHAPE_WIDTH/2), ItemB.center.y);
+				ItemC.center = CGPointMake(GRID_LEFT_EDGE + 30, ItemC.center.y);
 				break;
 			case 1: // A below B; B above A
 			case 3: // A above B; B below A
 				ItemA.center = CGPointMake(GRID_LEFT_EDGE + (SHAPE_WIDTH/2), ItemA.center.y);
 				ItemB.center = CGPointMake(ItemA.center.x, ItemB.center.y);
+				ItemC.center = CGPointMake(GRID_LEFT_EDGE + 30, ItemC.center.y);
 				break;
 			default:
 				NSLog(@"ERROR: Unknown orientation: %d", Orientation);

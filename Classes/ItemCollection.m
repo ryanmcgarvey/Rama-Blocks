@@ -666,18 +666,18 @@
 	[UIView commitAnimations];
 }
 
--(void)setShuffledArray:(NSMutableArray *)item{
-    int row = 0;
-	int column = 0;
+/*
+-(void)setShuffledArray:(NSMutableArray *)shuffledPieces{
+    
 	int i = 0;
-	int numberOfShapes = [item count];
+	int numberOfShapes = [shuffledPieces count];
 
 	for (row = 0; row <= NUMBER_OF_ROWS; row++) {
 		for (column =0; column <= NUMBER_OF_COLUMNS; column++) {
 			
 			if(i < numberOfShapes){
 				Cell *placedCell = [self GetCell:row :column];
-				Shape *shuffleShape = [item objectAtIndex:i];
+				Shape *shuffleShape = [shuffledPieces objectAtIndex:i];
 				[shuffleShape ChangeColorAndShape:shuffleShape.colorType :shuffleShape.shapeType];
 				placedCell.ItemInCell = shuffleShape;
 				placedCell.ItemInCell.ItemView = shuffleShape.ItemView;
@@ -693,7 +693,36 @@
 
 	
 }
+*/
 
+-(void)setShuffledArray:(NSMutableArray *)shuffledPieces{
+    
+	int i;
+	int row;
+	int column;
+	int numberOfShapes = [shuffledPieces count];
+	
+	for (row = 0; row <= NUMBER_OF_ROWS; row++) {
+		for (column =0; column <= NUMBER_OF_COLUMNS; column++) {
+			
+			if(i < numberOfShapes){
+				Cell *placedCell = [self GetCell:row :column];
+				Shape *shuffleShape = [shuffledPieces objectAtIndex:i];
+				[shuffleShape ChangeColorAndShape:shuffleShape.colorType :shuffleShape.shapeType];
+				placedCell.ItemInCell = shuffleShape;
+				placedCell.ItemInCell.ItemView = shuffleShape.ItemView;
+				[self ApplyGravity];
+				
+			}
+			i++;
+			
+			
+		}
+	}
+	NSLog(@"adding");
+	
+	
+}
 
 -(Cell *)GetCell:(int)row : (int)column{
 	if(row >= 0 && row < RowLength && column >= 0 && column < ColumnLength)

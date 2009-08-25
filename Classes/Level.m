@@ -28,7 +28,7 @@ Init
     {
         LockShape * shape = [[LockShape alloc] initWithInfo:[self createRandomColor] : [self createRandomShape]:CGPointMake(LOCK_LOCATION_X + (30 * i), LOCK_LOCATION_Y)];
         shape.canSeeColor = FALSE;
-        shape.canSeeShape = TRUE;
+        shape.canSeeShape = FALSE;
 		[shape setUserInteractionEnabled:false];
         [solution addObject: shape];
     }
@@ -69,6 +69,13 @@ Solution
     return TRUE;
 }
 
+-(void)hideSolution{
+	for (LockShape * lock in solution){
+		lock.canSeeColor = FALSE;
+		lock.canSeeShape = FALSE;
+		[self updateView];
+	}
+}
 -(BOOL)checkSolution:(NSMutableArray *)shapes{
     if([shapes count] < [solution count])
         return FALSE;
@@ -82,10 +89,12 @@ Solution
         if(guess.shapeType == actual.shapeType)
         {
             actual.canSeeShape = TRUE;
+			 [NSTimer scheduledTimerWithTimeInterval:5 target:self selector:@selector(hideSolution) userInfo:nil repeats:NO];
         }
         if(guess.colorType == actual.colorType)
         {
             actual.canSeeColor = TRUE;
+			[NSTimer scheduledTimerWithTimeInterval:5 target:self selector:@selector(hideSolution) userInfo:nil repeats:NO];
         }
         if(guess.shapeType != actual.shapeType ||
             guess.colorType != actual.colorType)

@@ -40,6 +40,7 @@
 
 -(LockShape *)GetLockAtIndex:(int)index;
 
+-(void)hideSolution;
 -(BOOL)checkSolution:(NSMutableArray *)shapes;
 
 -(BOOL)addSolutionToView:(UIView *)view;
