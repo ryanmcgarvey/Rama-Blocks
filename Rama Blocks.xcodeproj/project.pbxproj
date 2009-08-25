@@ -112,6 +112,7 @@
 		C2A236D81043A5410095019B /* MainMenuViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C2A236CF1043A5410095019B /* MainMenuViewController.xib */; };
 		C2A236D91043A5410095019B /* ProfilePicker.xib in Resources */ = {isa = PBXBuildFile; fileRef = C2A236D01043A5410095019B /* ProfilePicker.xib */; };
 		C2B29073103440D2001B31FA /* DrawingView.m in Sources */ = {isa = PBXBuildFile; fileRef = C2B29072103440D2001B31FA /* DrawingView.m */; };
+		C2B8FB9C1044A1AE00D36DD3 /* Discard.png in Resources */ = {isa = PBXBuildFile; fileRef = C2B8FB9B1044A1AE00D36DD3 /* Discard.png */; };
 		FC0B6AA110251BDE00F1BD5E /* LockShape.m in Sources */ = {isa = PBXBuildFile; fileRef = FC0B6AA010251BDE00F1BD5E /* LockShape.m */; };
 		FC0B6B7910252C6000F1BD5E /* SoundEffects.m in Sources */ = {isa = PBXBuildFile; fileRef = FC0B6B7810252C6000F1BD5E /* SoundEffects.m */; };
 		FC0B6B7C10252E0A00F1BD5E /* SoundPlayer.m in Sources */ = {isa = PBXBuildFile; fileRef = FC0B6B7B10252E0A00F1BD5E /* SoundPlayer.m */; };
@@ -253,6 +254,7 @@
 		C2A236D01043A5410095019B /* ProfilePicker.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ProfilePicker.xib; sourceTree = "<group>"; };
 		C2B29071103440D2001B31FA /* DrawingView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DrawingView.h; path = ../DrawingView.h; sourceTree = "<group>"; };
 		C2B29072103440D2001B31FA /* DrawingView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DrawingView.m; path = ../DrawingView.m; sourceTree = "<group>"; };
+		C2B8FB9B1044A1AE00D36DD3 /* Discard.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Discard.png; sourceTree = "<group>"; };
 		FC0B6A9F10251BDE00F1BD5E /* LockShape.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LockShape.h; sourceTree = "<group>"; };
 		FC0B6AA010251BDE00F1BD5E /* LockShape.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LockShape.m; sourceTree = "<group>"; };
 		FC0B6B7710252C6000F1BD5E /* SoundEffects.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SoundEffects.h; sourceTree = "<group>"; };
@@ -568,6 +570,7 @@
 		C2A236831043A52A0095019B /* GameBoardGraphics */ = {
 			isa = PBXGroup;
 			children = (
+				C2B8FB9B1044A1AE00D36DD3 /* Discard.png */,
 				C2A236841043A52A0095019B /* zoomBack.png */,
 				C2A236851043A52A0095019B /* gameBoardGrid.png */,
 				C2A236861043A52A0095019B /* lockSet.png */,
@@ -906,6 +909,7 @@
 				C2809B3610447CAF00240716 /* purplepiece3.png in Resources */,
 				C2809B3810447CB700240716 /* purplepiece2.png in Resources */,
 				C2809B3A10447CBC00240716 /* purplepiece1.png in Resources */,
+				C2B8FB9C1044A1AE00D36DD3 /* Discard.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

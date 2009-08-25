@@ -322,6 +322,7 @@
             numberOfTransforms ++;
         }
         [transFormGroup removeAllObjects];
+		transFormGroup = nil;
         [self ApplyGravity];
     }
     return couldTransform;

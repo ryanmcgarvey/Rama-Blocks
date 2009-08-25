@@ -11,8 +11,8 @@
 #import "DrawingView.h"
 @implementation GameBoardViewController
 @synthesize buttonMenu, buttonOptions, buttonMainMenu, buttonResume, menuView, attemptsString;
-@synthesize timeToDrop, countDown, drawingView, startTouchPosition, currentTouchPosition, touchDistanceToItemC;
-@synthesize bullshit;
+@synthesize timeToDrop, drawingView, startTouchPosition, currentTouchPosition, touchDistanceToItemC;
+@synthesize bullshit, discardCount, transformCount;
 
 
 -(void)SaveState{
@@ -104,6 +104,8 @@
 	gameState = [appDelegate FetchGameState];
 	powerItem = [[PowerItem alloc]init];
 	audio = [appDelegate FetchAudio];
+	discardCount = 0;
+	transformCount = 0;
 	
 	//// Create background
 	backGround = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 320, 480)];
@@ -113,8 +115,7 @@
 	backGround.image = [[UIImage imageNamed:@"gameBoardGrid.png"] retain];
 	backGround.userInteractionEnabled = FALSE;
 	self.view.backgroundColor = [UIColor blackColor];
-	//timeToDrop.backgroundColor = [UIColor clearColor];
-	//timeToDrop.textColor = [UIColor greenColor];
+
 	
 	[self.view addSubview:backGround];
 	
@@ -123,8 +124,6 @@
 	[self.view sendSubviewToBack:buttonMenu];
 	[self.view addSubview:menuView];
 	
-	
-	//[self.view bringSubviewToFront:timeToDrop];
 	//add solution to view
 	
 	CurrentDevice = [UIDevice currentDevice];
@@ -256,35 +255,6 @@
 	
 }
 
--(void)timeUntilDrop{
-	int currentFontSize = 13;
-	countDown++;
-	currentFontSize = currentFontSize + (countDown * 3);
-	timeToDrop.font = [UIFont boldSystemFontOfSize:currentFontSize];
-	timeToDrop.text = [[NSString alloc] initWithFormat:@"%d", countDown];
-	if(countDown < 2){
-		timeToDrop.textColor = [UIColor greenColor];
-	}
-	if(countDown > 2){
-		timeToDrop.textColor = [UIColor yellowColor];
-	}
-	if(countDown > 4){
-		timeToDrop.textColor = [UIColor redColor];
-	}
-	if(countDown == 6){
-		[self timerDrop];
-		countDown = 0;
-	}
-}
--(void)timerDrop{
-	if([itemCollection AddItemPair:SpawnedPair])
-	{
-		[self SpawnShapes];
-	}else
-	{
-		[self ResetShapePair:SpawnedPair];
-	}
-}
 
 -(void)didRotate:(NSNotification *)notification{
     switch (CurrentDevice.orientation) {
@@ -344,7 +314,30 @@
 }
 -(IBAction)ClickButtonMainMenu{
     [self dismissModalViewControllerAnimated:YES];
+	
 }
+
+-(IBAction)discardPiece{
+	if(transformCount >= 10){
+		transformCount = 0;
+		discardCount = 0;
+	}
+	
+	if(discardCount <= 3){
+		[SpawnedPair.ItemA removeFromSuperview];
+		[SpawnedPair.ItemB removeFromSuperview];
+		[SpawnedPair.ItemC removeFromSuperview];
+		[SpawnedPair.ShaddowA removeFromSuperview];
+		[SpawnedPair.ShaddowB removeFromSuperview];
+		
+		[self SpawnShapes];
+		[self ResetShapePair:SpawnedPair];
+		
+		discardCount++;
+		
+	}
+}
+	
 /*****************************************************
  Touches
  *****************************************************/
@@ -421,7 +414,7 @@
 		}
 		
         touchedItem.tapped++;
-        TouchTimer = [[NSTimer scheduledTimerWithTimeInterval:TAP_WAIT_TIME target:self selector:@selector(resetTap:) userInfo:touchedItem repeats:NO] retain];
+        TouchTimer = [NSTimer scheduledTimerWithTimeInterval:TAP_WAIT_TIME target:self selector:@selector(resetTap:) userInfo:touchedItem repeats:NO];
 		
 	}
 	
@@ -551,8 +544,8 @@
             {
                 item.tapped = 0;
                 if([itemCollection TransformItem:item])
-                {
-                    [audio playTransform];
+                {	
+					
                 }
             }
             else
@@ -580,7 +573,7 @@
                     [self dismissModalViewControllerAnimated:YES];
                 }
 				
-                attemptsString.text = [[NSString alloc] initWithFormat:@" %d\n", currentLevel.attempts];
+                //attemptsString.text = [[NSString alloc] initWithFormat:@" %d\n", currentLevel.attempts];
             }
         }
 	}
@@ -590,9 +583,9 @@
         {
             if([itemCollection AddItemPair:SpawnedPair])
             {
+				SpawnedPair.ItemC = nil;
 				[SpawnedPair.ItemC release];
 				[SpawnedPair.ItemC removeFromSuperview];
-				SpawnedPair.ItemC = nil;
                 [self SpawnShapes];
 				
 				
