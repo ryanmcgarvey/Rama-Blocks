@@ -327,7 +327,7 @@
 		}
 		[currentLevel addSolutionToView:self.view];
 		
-		//lockSet = [[UIImageView alloc] initWithFrame:CGRectMake(LOCK_LOCATION_X - 11, LOCK_LOCATION_Y - 13, 23, 23)];
+		//lockSet = [[UIImageView alloc] initWithFrame:CGRectMake(LOCK_LOCATION_X + (30 * i) - 11, LOCK_LOCATION_Y  - 13, 23, 23)];
 		
 		experimentArray = [[NSMutableArray alloc] init];
 		/*

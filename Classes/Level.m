@@ -26,9 +26,9 @@ Init
     [self setDifficulty:predefinedDifficulty];
     for (int i = 0; i < lockCount; i++) 
     {
-        LockShape * shape = [[LockShape alloc] initWithInfo:[self createRandomColor] : [self createRandomShape]:CGPointMake(LOCK_LOCATION_X + LOCK_LOCATION_X * i,LOCK_LOCATION_Y)];
+        LockShape * shape = [[LockShape alloc] initWithInfo:[self createRandomColor] : [self createRandomShape]:CGPointMake(LOCK_LOCATION_X + (30 * i), LOCK_LOCATION_Y)];
         shape.canSeeColor = FALSE;
-        shape.canSeeShape = FALSE;
+        shape.canSeeShape = TRUE;
 		[shape setUserInteractionEnabled:false];
         [solution addObject: shape];
     }
