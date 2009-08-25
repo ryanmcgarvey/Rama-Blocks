@@ -276,15 +276,36 @@
  **************************************/
 -(BOOL)TransformItem:(GameItem*)item{
     BOOL couldTransform = FALSE;
+	NSMutableArray * transFormGroup = [self CheckTransform : item];
+	
+	SEL  arraySelector;
+	NSMethodSignature * animateSignature;
+	NSInvocation * animateInvocation;
+	
+	arraySelector = @selector(RemoveFromCellsAndRefactor:);
+	animateSignature = [ItemCollection instanceMethodSignatureForSelector:arraySelector];
+	animateInvocation = [NSInvocation invocationWithMethodSignature:animateSignature];
+	[animateInvocation setSelector:arraySelector];
+	
+	[animateInvocation setTarget:self];
+	[animateInvocation setArgument:&transFormGroup atIndex:2];
+	
     if([item isKindOfClass: [Shape class]])
     {
         Shape * shape = (Shape *)item;
-        NSMutableArray * transFormGroup = [self CheckTransform : item];
+        
         Cell * cell = [self GetCell:item];
         if([transFormGroup count] > 2)
         {
             [transFormGroup removeObject:cell];
-            [self RemoveFromCellsAndRefactor: transFormGroup];
+            [self animateTransform: transFormGroup];
+			
+			
+			[NSTimer timerWithTimeInterval:1 invocation:animateInvocation repeats:NO];
+			//[NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(RemoveFromCellsAndRefactor) userInfo:transFormGroup repeats:NO];
+			[NSTimer release];
+			
+			
 			if(shape.shapeType != NUMBER_OF_SHAPES){
 				[shape TransForm];
 			}
@@ -306,10 +327,50 @@
     return couldTransform;
 }
 
+-(void)animateTransform:(NSMutableArray *)TransFormGroup{
+	for(Cell * cell in TransFormGroup){	
+		//Shape * shape = (Shape *)cell.ItemInCell;
+		//if(shape.colorType == Red){
+			cell.ItemInCell.ItemView.image = nil; 
+			
+			cell.ItemInCell.ItemView.contentMode = UIViewContentModeRedraw;
+			
+			[UIView beginAnimations:nil context:nil]; 
+			[UIView setAnimationDuration:1];
+			
+			UIImageView * piece1 = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"redpiece1.png"]];
+			UIImageView * piece2 = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"redpiece2.png"]];
+			UIImageView * piece3 = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"redpiece3.png"]];
+			UIImageView * piece4 = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"redpiece4.png"]];
+			UIImageView * piece5 = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"redpiece5.png"]];
+			[cell.ItemInCell addSubview:piece1];
+			[cell.ItemInCell addSubview:piece2];
+			[cell.ItemInCell addSubview:piece3];
+			[cell.ItemInCell addSubview:piece4];
+			[cell.ItemInCell addSubview:piece5];
+			
+			piece1.center = CGPointMake(piece1.center.x + ((float)((uint)arc4random())/0xFFFFFFFF * 10),piece1.center.x + ((float)((uint)arc4random())/0xFFFFFFFF * 10));
+			piece2.center = CGPointMake(piece2.center.x - ((float)((uint)arc4random())/0xFFFFFFFF * 10),piece2.center.x - ((float)((uint)arc4random())/0xFFFFFFFF * 10));
+			piece3.center = CGPointMake(piece3.center.x - ((float)((uint)arc4random())/0xFFFFFFFF * 10),piece3.center.x + ((float)((uint)arc4random())/0xFFFFFFFF * 10));
+			piece4.center = CGPointMake(piece4.center.x + ((float)((uint)arc4random())/0xFFFFFFFF * 10),piece4.center.x - ((float)((uint)arc4random())/0xFFFFFFFF * 10));
+			piece5.center = CGPointMake(piece5.center.x + ((float)((uint)arc4random())/0xFFFFFFFF * 5),piece5.center.x + ((float)((uint)arc4random())/0xFFFFFFFF * 5));
+			[cell.ItemInCell setNeedsDisplay];
+			cell.ItemInCell.alpha = 0;
+			cell.ItemInCell = nil;
+			
+			
+			[UIView commitAnimations]; 
+		//}
+	}
+	
+	//[self RemoveFromCellsAndRefactor:TransFormGroup];
+}
+
 -(void)RemoveFromCellsAndRefactor:(NSMutableArray *)TransFormGroup{
     [currentLevel removeItems:TransFormGroup];
+	//[self animateTransform:TransFormGroup];
 	for(Cell * cell in TransFormGroup)
-    {
+    {	
 		[cell.ItemInCell removeFromSuperview];
 		[cell.ItemInCell release];		
         cell.ItemInCell = nil;

@@ -65,6 +65,7 @@ typedef enum enum_Gravity {
 -(Cell *)GetCell:(GameItem *) item;
 
 -(BOOL)TransformItem:(GameItem*)shape;
+-(void)animateTransform:(NSMutableArray *)TransFormGroup;
 
 -(void)RemoveFromCellsAndRefactor:(NSMutableArray *)TransFormGroup;
 
