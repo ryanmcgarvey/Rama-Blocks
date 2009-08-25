@@ -11,6 +11,7 @@
 #import "GameBoardViewController.h"
 
 
+
 @interface LevelSelect : UIViewController {
     
     
@@ -21,10 +22,24 @@
     IBOutlet UIButton * returnButton;
     IBOutlet UITextView * recapText;
     GameState * gameState;
+	
+	IBOutlet UISlider * colorSelect;
+	IBOutlet UISlider * shapeSelect;
+	IBOutlet UISlider * lockSelect;
+	
+	IBOutlet UILabel * colorAmount;
+	IBOutlet UILabel * shapeAmount;
+	IBOutlet UILabel * lockAmount;
+
 }
 
 
 - (IBAction)returnToMenu;
 -(IBAction)ChangeLevel;
 -(IBAction)PlayLevel;
+
+-(IBAction)changeColor;
+-(IBAction)changeShape;
+-(IBAction)changeLock;
+
 @end

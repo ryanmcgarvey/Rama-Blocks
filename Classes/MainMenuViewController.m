@@ -79,12 +79,12 @@
 	
 	[self presentModalViewController:[[LevelSelect alloc] initWithNibName:@"LevelSelect" bundle:nil] animated:YES];
 	
+	
 }
 
 - (IBAction)loadGameBoard:(id)sender 
 {
-	Rama_BlocksAppDelegate * appDelegate =  (Rama_BlocksAppDelegate *)[[UIApplication sharedApplication] delegate];
-	appDelegate.gameType = 1;
+
 	[self presentModalViewController:[[GameBoardViewController alloc] initWithNibName:@"GameBoardViewController" bundle:nil] animated:YES];
 }
 

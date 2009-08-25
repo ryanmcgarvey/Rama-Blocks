@@ -329,8 +329,8 @@
 
 -(void)animateTransform:(NSMutableArray *)TransFormGroup{
 	for(Cell * cell in TransFormGroup){	
-		//Shape * shape = (Shape *)cell.ItemInCell;
-		//if(shape.colorType == Red){
+		Shape * shape = (Shape *)cell.ItemInCell;
+		if(shape.colorType == Red){
 			cell.ItemInCell.ItemView.image = nil; 
 			
 			cell.ItemInCell.ItemView.contentMode = UIViewContentModeRedraw;
@@ -360,7 +360,153 @@
 			
 			
 			[UIView commitAnimations]; 
-		//}
+		}
+		if(shape.colorType == Green){
+			cell.ItemInCell.ItemView.image = nil; 
+			
+			cell.ItemInCell.ItemView.contentMode = UIViewContentModeRedraw;
+			
+			[UIView beginAnimations:nil context:nil]; 
+			[UIView setAnimationDuration:1];
+			
+			UIImageView * piece1 = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"greenpiece1.png"]];
+			UIImageView * piece2 = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"greenpiece2.png"]];
+			UIImageView * piece3 = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"greenpiece3.png"]];
+			UIImageView * piece4 = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"greenpiece4.png"]];
+			UIImageView * piece5 = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"greenpiece5.png"]];
+			[cell.ItemInCell addSubview:piece1];
+			[cell.ItemInCell addSubview:piece2];
+			[cell.ItemInCell addSubview:piece3];
+			[cell.ItemInCell addSubview:piece4];
+			[cell.ItemInCell addSubview:piece5];
+			
+			piece1.center = CGPointMake(piece1.center.x + ((float)((uint)arc4random())/0xFFFFFFFF * 10),piece1.center.x + ((float)((uint)arc4random())/0xFFFFFFFF * 10));
+			piece2.center = CGPointMake(piece2.center.x - ((float)((uint)arc4random())/0xFFFFFFFF * 10),piece2.center.x - ((float)((uint)arc4random())/0xFFFFFFFF * 10));
+			piece3.center = CGPointMake(piece3.center.x - ((float)((uint)arc4random())/0xFFFFFFFF * 10),piece3.center.x + ((float)((uint)arc4random())/0xFFFFFFFF * 10));
+			piece4.center = CGPointMake(piece4.center.x + ((float)((uint)arc4random())/0xFFFFFFFF * 10),piece4.center.x - ((float)((uint)arc4random())/0xFFFFFFFF * 10));
+			piece5.center = CGPointMake(piece5.center.x + ((float)((uint)arc4random())/0xFFFFFFFF * 5),piece5.center.x + ((float)((uint)arc4random())/0xFFFFFFFF * 5));
+			[cell.ItemInCell setNeedsDisplay];
+			cell.ItemInCell.alpha = 0;
+			cell.ItemInCell = nil;
+			
+			
+			[UIView commitAnimations]; 
+		}
+		if(shape.colorType == Blue){
+			cell.ItemInCell.ItemView.image = nil; 
+			
+			cell.ItemInCell.ItemView.contentMode = UIViewContentModeRedraw;
+			
+			[UIView beginAnimations:nil context:nil]; 
+			[UIView setAnimationDuration:1];
+			
+			UIImageView * piece1 = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"bluepiece1.png"]];
+			UIImageView * piece2 = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"bluepiece2.png"]];
+			UIImageView * piece3 = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"bluepiece3.png"]];
+			UIImageView * piece4 = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"bluepiece4.png"]];
+			UIImageView * piece5 = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"bluepiece5.png"]];
+			[cell.ItemInCell addSubview:piece1];
+			[cell.ItemInCell addSubview:piece2];
+			[cell.ItemInCell addSubview:piece3];
+			[cell.ItemInCell addSubview:piece4];
+			[cell.ItemInCell addSubview:piece5];
+			
+			piece1.center = CGPointMake(piece1.center.x + ((float)((uint)arc4random())/0xFFFFFFFF * 10),piece1.center.x + ((float)((uint)arc4random())/0xFFFFFFFF * 10));
+			piece2.center = CGPointMake(piece2.center.x - ((float)((uint)arc4random())/0xFFFFFFFF * 10),piece2.center.x - ((float)((uint)arc4random())/0xFFFFFFFF * 10));
+			piece3.center = CGPointMake(piece3.center.x - ((float)((uint)arc4random())/0xFFFFFFFF * 10),piece3.center.x + ((float)((uint)arc4random())/0xFFFFFFFF * 10));
+			piece4.center = CGPointMake(piece4.center.x + ((float)((uint)arc4random())/0xFFFFFFFF * 10),piece4.center.x - ((float)((uint)arc4random())/0xFFFFFFFF * 10));
+			piece5.center = CGPointMake(piece5.center.x + ((float)((uint)arc4random())/0xFFFFFFFF * 5),piece5.center.x + ((float)((uint)arc4random())/0xFFFFFFFF * 5));
+			[cell.ItemInCell setNeedsDisplay];
+			cell.ItemInCell.alpha = 0;
+			cell.ItemInCell = nil;
+			
+			
+			[UIView commitAnimations]; 
+		}
+		if(shape.colorType == Yellow){
+			cell.ItemInCell.ItemView.image = nil; 
+			
+			cell.ItemInCell.ItemView.contentMode = UIViewContentModeRedraw;
+			
+			[UIView beginAnimations:nil context:nil]; 
+			[UIView setAnimationDuration:1];
+			
+			UIImageView * piece1 = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"yellowpiece1.png"]];
+			UIImageView * piece2 = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"yellowpiece2.png"]];
+			UIImageView * piece3 = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"yellowpiece3.png"]];
+			UIImageView * piece4 = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"yellowpiece4.png"]];
+			UIImageView * piece5 = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"yellowpiece5.png"]];
+			[cell.ItemInCell addSubview:piece1];
+			[cell.ItemInCell addSubview:piece2];
+			[cell.ItemInCell addSubview:piece3];
+			[cell.ItemInCell addSubview:piece4];
+			[cell.ItemInCell addSubview:piece5];
+			
+			piece1.center = CGPointMake(piece1.center.x + ((float)((uint)arc4random())/0xFFFFFFFF * 10),piece1.center.x + ((float)((uint)arc4random())/0xFFFFFFFF * 10));
+			piece2.center = CGPointMake(piece2.center.x - ((float)((uint)arc4random())/0xFFFFFFFF * 10),piece2.center.x - ((float)((uint)arc4random())/0xFFFFFFFF * 10));
+			piece3.center = CGPointMake(piece3.center.x - ((float)((uint)arc4random())/0xFFFFFFFF * 10),piece3.center.x + ((float)((uint)arc4random())/0xFFFFFFFF * 10));
+			piece4.center = CGPointMake(piece4.center.x + ((float)((uint)arc4random())/0xFFFFFFFF * 10),piece4.center.x - ((float)((uint)arc4random())/0xFFFFFFFF * 10));
+			piece5.center = CGPointMake(piece5.center.x + ((float)((uint)arc4random())/0xFFFFFFFF * 5),piece5.center.x + ((float)((uint)arc4random())/0xFFFFFFFF * 5));
+			[cell.ItemInCell setNeedsDisplay];
+			cell.ItemInCell.alpha = 0;
+			cell.ItemInCell = nil;
+			
+			
+			[UIView commitAnimations]; 
+		}
+		if(shape.colorType == Purple){
+			cell.ItemInCell.ItemView.image = nil; 
+			
+			cell.ItemInCell.ItemView.contentMode = UIViewContentModeRedraw;
+			
+			[UIView beginAnimations:nil context:nil]; 
+			[UIView setAnimationDuration:1];
+			
+			UIImageView * piece1 = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"purplepiece1.png"]];
+			UIImageView * piece2 = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"purplepiece2.png"]];
+			UIImageView * piece3 = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"purplepiece3.png"]];
+			UIImageView * piece4 = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"purplepiece4.png"]];
+			UIImageView * piece5 = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"purplepiece5.png"]];
+			[cell.ItemInCell addSubview:piece1];
+			[cell.ItemInCell addSubview:piece2];
+			[cell.ItemInCell addSubview:piece3];
+			[cell.ItemInCell addSubview:piece4];
+			[cell.ItemInCell addSubview:piece5];
+			
+			piece1.center = CGPointMake(piece1.center.x + ((float)((uint)arc4random())/0xFFFFFFFF * 10),piece1.center.x + ((float)((uint)arc4random())/0xFFFFFFFF * 10));
+			piece2.center = CGPointMake(piece2.center.x - ((float)((uint)arc4random())/0xFFFFFFFF * 10),piece2.center.x - ((float)((uint)arc4random())/0xFFFFFFFF * 10));
+			piece3.center = CGPointMake(piece3.center.x - ((float)((uint)arc4random())/0xFFFFFFFF * 10),piece3.center.x + ((float)((uint)arc4random())/0xFFFFFFFF * 10));
+			piece4.center = CGPointMake(piece4.center.x + ((float)((uint)arc4random())/0xFFFFFFFF * 10),piece4.center.x - ((float)((uint)arc4random())/0xFFFFFFFF * 10));
+			piece5.center = CGPointMake(piece5.center.x + ((float)((uint)arc4random())/0xFFFFFFFF * 5),piece5.center.x + ((float)((uint)arc4random())/0xFFFFFFFF * 5));
+			[cell.ItemInCell setNeedsDisplay];
+			cell.ItemInCell.alpha = 0;
+			
+			
+			[UIView commitAnimations]; 
+			
+			piece1 = nil;
+			piece2 = nil;
+			piece3 = nil;
+			piece4 = nil;
+			piece5 = nil;
+			
+			[piece1 release];
+			[piece2 release];
+			[piece3 release];
+			[piece4 release];
+			[piece5 release];
+			
+			[piece1 dealloc];
+			[piece2 dealloc];
+			[piece3 dealloc];
+			[piece4 dealloc];
+			[piece5 dealloc];
+			
+			cell.ItemInCell = nil;
+			[cell.ItemInCell release];
+			
+		}
+		
 	}
 	
 	//[self RemoveFromCellsAndRefactor:TransFormGroup];

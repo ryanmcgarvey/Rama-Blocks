@@ -14,6 +14,8 @@
 #import "SoundEffects.h"
 #import "GameItem.h"
 #import "LevelStatistics.h"
+#import "Level.h"
+
 
 @interface Rama_BlocksAppDelegate : NSObject <UIApplicationDelegate> {
     
@@ -23,12 +25,13 @@
     NSPersistentStoreCoordinator *persistentStoreCoordinator;
     
     SoundEffects * audio;
-    
+	
+	Level * level;
     
     MainMenuViewController * mainMenu;
     GameState * gameState;
     UIWindow *window;
-	int gameType;
+
 	BOOL isMoving;
 	BOOL isAttaching;
 	BOOL isFiltering;
@@ -37,7 +40,7 @@
 }
 
 @property (nonatomic, retain) IBOutlet UIWindow *window;
-@property (readwrite, assign) int gameType;
+@property (readwrite, assign) Level * level;
 @property (readwrite, assign) BOOL isMoving;
 @property (readwrite, assign) BOOL allowGravity;
 @property (readwrite, assign) BOOL isFiltering;
@@ -46,6 +49,8 @@
 @property (nonatomic, retain, readonly) NSManagedObjectModel *managedObjectModel;
 @property (nonatomic, retain, readonly) NSManagedObjectContext *managedObjectContext;
 @property (nonatomic, retain, readonly) NSPersistentStoreCoordinator *persistentStoreCoordinator;
+
+
 
 - (NSString *)applicationDocumentsDirectory;
 

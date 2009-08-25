@@ -11,16 +11,15 @@
 
 @implementation Rama_BlocksAppDelegate
 
-@synthesize window, gameType;
-@synthesize isMoving, isAttaching, isFiltering, isUpgrading, allowGravity;
+@synthesize window;
+@synthesize isMoving, isAttaching, isFiltering, isUpgrading, allowGravity, level;
 
 - (void)applicationDidFinishLaunching:(UIApplication *)application {
     
     gameState = [self FetchGameState];
     mainMenu = [[MainMenuViewController alloc] initWithNibName:@"MainMenuViewController" bundle:nil];
     [[UIApplication sharedApplication] setStatusBarHidden:YES animated:NO];
-    
-    gameType = 0;
+
     [window addSubview:mainMenu.view];
 	[window makeKeyAndVisible];
 	
@@ -29,6 +28,8 @@
 	isFiltering = NO;
 	isUpgrading = NO;
 	allowGravity = YES;
+	
+	level = [[Level alloc] init:[gameState.currentLevel intValue]];
 }
 -(SoundEffects *)FetchAudio{
     if(audio == nil){

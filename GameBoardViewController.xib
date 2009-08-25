@@ -138,7 +138,7 @@
 								<reference key="IBUINormalTitleShadowColor" ref="17469997"/>
 							</object>
 						</object>
-						<string key="NSFrame">{{195, 38}, {125, 212}}</string>
+						<string key="NSFrame">{{195, 217}, {125, 212}}</string>
 						<reference key="NSSuperview" ref="191373211"/>
 						<object class="NSColor" key="IBUIBackgroundColor">
 							<int key="NSColorSpace">2</int>
@@ -150,7 +150,7 @@
 					<object class="IBUIButton" id="188537377">
 						<reference key="NSNextResponder" ref="191373211"/>
 						<int key="NSvFlags">292</int>
-						<string key="NSFrame">{{262, -1}, {58, 40}}</string>
+						<string key="NSFrame">{{265, 428}, {49, 43}}</string>
 						<reference key="NSSuperview" ref="191373211"/>
 						<bool key="IBUIOpaque">NO</bool>
 						<bool key="IBUIClearsContextBeforeDrawing">NO</bool>
@@ -322,10 +322,10 @@
 						<reference key="object" ref="191373211"/>
 						<object class="NSMutableArray" key="children">
 							<bool key="EncodedWithXMLCoder">YES</bool>
-							<reference ref="188537377"/>
-							<reference ref="125638931"/>
 							<reference ref="568319411"/>
 							<reference ref="234915929"/>
+							<reference ref="188537377"/>
+							<reference ref="125638931"/>
 						</object>
 						<reference key="parent" ref="317526666"/>
 					</object>
@@ -411,7 +411,7 @@
 					<bool key="EncodedWithXMLCoder">YES</bool>
 					<string>GameBoardViewController</string>
 					<string>UIResponder</string>
-					<string>{{839, 469}, {320, 480}}</string>
+					<string>{{1078, 436}, {320, 480}}</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<object class="NSMutableArray">
 						<bool key="EncodedWithXMLCoder">YES</bool>

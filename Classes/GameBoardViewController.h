@@ -71,6 +71,8 @@
 @property (readwrite, assign) CGPoint currentTouchPosition;
 @property (readwrite, assign) CGFloat touchDistanceToItemC;
 
+
+
 @property (nonatomic, retain) UILabel * bullshit;
 
 //@property (nonatomic, retain) NSMutableArray * experimentArray;

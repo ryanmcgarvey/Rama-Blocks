@@ -14,7 +14,12 @@
 
 @interface Level : NSObject {
     int difficulty;
-    NSMutableArray * solution;
+	
+	int selectMaxShape;
+	int selectMaxColor;
+	int selectMaxLock;
+    
+	NSMutableArray * solution;
 
     float shapeSpawnProbability [NUMBER_OF_SHAPES];
     int totalShapes [NUMBER_OF_SHAPES];
@@ -33,6 +38,9 @@
 @property int attempts;
 @property int lockCount;
 
+@property(readwrite, assign) int selectMaxShape;
+@property(readwrite, assign) int selectMaxColor;
+@property(readwrite, assign) int selectMaxLock;
 
 -(id)init:(int)predefinedDifficulty;
 
@@ -59,6 +67,11 @@
 -(ColorType)createRandomColor;
 
 -(void)setDifficulty:(int)difficultyToSet;
+
+
+-(Level*)giveLevel;
+
+-(void)updateLevel;
 
 
 @end
