@@ -16,6 +16,7 @@
 
 
 
+
 @interface PowerItem : GameItem {
 	ItemCollection *itemCollection;
 
@@ -26,6 +27,16 @@
 - (void)makeCollection:(ItemCollection *)collection;
 -(void)placeAnchor:(GameItem *)item;
 -(void)makeAnchor:(GameItem *)item;
+-(void)stopGravity:(GameItem *)item;
+-(void)returnGravity;
+
+-(void)placeFilter:(GameItem *)item;
+-(void)makeFilter:(GameItem *)item;
+
+-(void)placeUpgrader:(GameItem *)item;
+-(void)makeUpgrader:(GameItem *)item;
+
+-(void)shuffleBoard:(GameItem *)item;
 
 
 @end

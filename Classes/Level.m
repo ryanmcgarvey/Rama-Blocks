@@ -16,22 +16,21 @@
 @synthesize lockCount;
 
 /*****************************************************
- Init
+Init
  *****************************************************/
 
 -(id)init:(int)predefinedDifficulty{
     
-	
+
     solution = [NSMutableArray new];
     [self setDifficulty:predefinedDifficulty];
     for (int i = 0; i < lockCount; i++) 
     {
-        LockShape * shape = [[LockShape alloc] initWithInfo:[self createRandomColor] : [self createRandomShape]:CGPointMake(LOCK_LOCATION_X +(30 * i),LOCK_LOCATION_Y)];
+        LockShape * shape = [[LockShape alloc] initWithInfo:[self createRandomColor] : [self createRandomShape]:CGPointMake(LOCK_LOCATION_X + LOCK_LOCATION_X * i,LOCK_LOCATION_Y)];
         shape.canSeeColor = FALSE;
         shape.canSeeShape = FALSE;
 		[shape setUserInteractionEnabled:false];
         [solution addObject: shape];
-		
     }
     [self updateProbability];
     return self;
@@ -47,7 +46,7 @@
     [oldLock removeFromSuperview];
     [oldLock release];
     [solution insertObject:lock atIndex:index];
-	
+
 }
 
 -(LockShape *)GetLockAtIndex:(int)index{
@@ -58,14 +57,13 @@
 }
 
 /*****************************************************
- Solution
+Solution
  *****************************************************/
 -(BOOL)addSolutionToView:(UIView *)view{
     [self updateView];
     for(Shape * shape in solution)
     {
-		[view addSubview:shape];
-		
+        [view addSubview:shape];
     }
     [self updateProbability];
     return TRUE;
@@ -90,7 +88,7 @@
             actual.canSeeColor = TRUE;
         }
         if(guess.shapeType != actual.shapeType ||
-		   guess.colorType != actual.colorType)
+            guess.colorType != actual.colorType)
         {
             victory = FALSE;
         }
@@ -137,6 +135,7 @@
 
 -(void)updateProbability{
     int total = totalShapes[Triangle] + totalShapes[Square] + totalShapes[Pentagon] + totalShapes[Hexagon] + totalShapes[Circle];
+   
     if(total > 0 )
     {
         shapeSpawnProbability[Triangle] = totalShapes[Triangle]/(float)total;
@@ -148,12 +147,12 @@
         shapeSpawnProbability[Hexagon] = shapeSpawnProbability[Pentagon] + totalShapes[Hexagon]/(float)total;
         
         shapeSpawnProbability[Circle] =  shapeSpawnProbability[Hexagon] + totalShapes[Circle]/(float)total;
+
     }else{
         shapeSpawnProbability[Triangle] = 1;
+
     }
 }
-
-
 
 -(void)updateView{
     for(LockShape * shape in solution)
@@ -163,9 +162,8 @@
 }
 
 -(ShapeType)createShapeFromCollection{
-    
+    return Circle;
     float probabilityCheck = (float)((uint)arc4random())/0xFFFFFFFF;  
-    //return Circle;
     if(probabilityCheck <= shapeSpawnProbability[Triangle]){
         return Triangle;
     }
@@ -184,7 +182,7 @@
 
 
 /*****************************************************
- Helpers
+Helpers
  *****************************************************/
 
 -(ShapeType)createRandomShape{
@@ -202,11 +200,11 @@
 -(void)setDifficulty:(int)difficultyToSet{
     
     difficulty = difficultyToSet;
-	
+
     
     switch (difficulty) {
         case 0:
-            maxColor = 2;
+            maxColor = 5;
             maxShape = Triangle;
             lockCount = 3;
             break;
@@ -260,6 +258,6 @@
             break;
     }
 }
-
-
+            
+            
 @end

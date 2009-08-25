@@ -12,7 +12,7 @@
 @implementation ItemCollection
 
 -(id)init: (int) rows : (int) columns : (int)rowPixelLength : (int)columnPixelLength : (Level *) level{	
-
+	
     Rama_BlocksAppDelegate * appDelegate =  (Rama_BlocksAppDelegate *)[[UIApplication sharedApplication] delegate];
     gameState = [appDelegate FetchGameState];
 	
@@ -40,12 +40,30 @@
 		}
 	}
     
-
+	
 	return self;
 }
 
 -(void)createNewWithSelf:(ItemCollection *)newCollection{
 	self = newCollection;
+}
+
+-(void)cleanBoard{
+	int row = 0;
+	int column = 0;
+    
+	for (row = 0; row <= NUMBER_OF_ROWS; row++) 
+	{
+		for (column =0; column <= NUMBER_OF_COLUMNS; column++) 
+		{
+			Cell *removeCell = [self GetCell:row :column];
+			[removeCell.ItemInCell removeFromSuperview];
+			removeCell.ItemInCell = nil;
+			//[removeCell.ItemInCell release];
+			
+			
+		}
+	}
 }
 
 -(void)UpdateState{
@@ -60,21 +78,21 @@
     
     for(int i = 0; i < NUMBER_OF_ROWS * NUMBER_OF_COLUMNS; i++)
     {
-			Cell * cell = cells[i];
-            ItemState * itemState = [items objectAtIndex:i];
-            if(cell.ItemInCell != nil && [cell.ItemInCell isKindOfClass:[Shape class]])
-            {
-                Shape * shape = (Shape *) cell.ItemInCell;
-                itemState.shapeType = 
-                    [NSNumber numberWithInt:shape.shapeType];
-                itemState.colorType = 
-                    [NSNumber numberWithInt:shape.colorType];
-                itemState.Row = [NSNumber numberWithInt:cell.Row];
-                itemState.Column = [NSNumber numberWithInt:cell.Column];
-            }else{
-                itemState.shapeType = [NSNumber numberWithInt:-1];
-                itemState.colorType = [NSNumber numberWithInt:-1];
-            }
+		Cell * cell = cells[i];
+		ItemState * itemState = [items objectAtIndex:i];
+		if(cell.ItemInCell != nil && [cell.ItemInCell isKindOfClass:[Shape class]])
+		{
+			Shape * shape = (Shape *) cell.ItemInCell;
+			itemState.shapeType = 
+			[NSNumber numberWithInt:shape.shapeType];
+			itemState.colorType = 
+			[NSNumber numberWithInt:shape.colorType];
+			itemState.Row = [NSNumber numberWithInt:cell.Row];
+			itemState.Column = [NSNumber numberWithInt:cell.Column];
+		}else{
+			itemState.shapeType = [NSNumber numberWithInt:-1];
+			itemState.colorType = [NSNumber numberWithInt:-1];
+		}
     }
     items = [appDelegate FetchLockItems];
     for(int i = 0; i < currentLevel.lockCount; i++)
@@ -177,9 +195,9 @@
                     cellB = [self GetCell:cellB.Row : cellB.Column + 1];
                 }
                 break;
-
+				
             case right:
-
+				
                 if(itemPair.ItemA.center.x < itemPair.ItemB.center.x)
                 {
                     cellA = [self GetCell:cellA.Row : cellA.Column - 1];
@@ -190,7 +208,7 @@
                 }
                 break;
         }
-
+		
 	}
     
     [itemPair setShadow:cellA.Center : cellB.Center];
@@ -200,7 +218,7 @@
 
 
 -(BOOL)AddItemPair: (ItemPair *)itemPair;{
-
+	
 	int rowA; int rowB; int columnA; int columnB;
 	Cell * cellA;
 	Cell * cellB;
@@ -276,7 +294,7 @@
 				cell.ItemInCell = nil;
 				return FALSE;
 			}
-				
+			
             [currentLevel addItem:shape];
             //[self CheckTransform:item];
             couldTransform = TRUE;
@@ -339,7 +357,7 @@
             {
                 [TransformGroup addObjectsFromArray:[self CheckTransform:neighbor.Row: neighbor.Column]];
             }
-
+			
             [TransformGroup addObject:cell];
             cell.IsTransforming = FALSE;
         }
@@ -353,7 +371,7 @@
 }
 
 
-	
+
 
 /**************************************
  GRAVITY
@@ -457,7 +475,7 @@
 				cell.ItemInCell = rotatedShape;
 				rotatedShape = nil;
 				break;
-			
+				
 		}
 		
         Cell * cellToMoveTo = [self FindCellToFallTo:cell.ItemInCell];
@@ -571,7 +589,7 @@
 
 -(void)SetItemToCell:(GameItem *)item : (Cell *) cell{
     if(cell == nil || cell.ItemInCell == item){
-      
+		
         return;
     }
     if(cell.ItemInCell != nil){
@@ -586,7 +604,35 @@
 	item.Column = cell.Column;
 	[UIView commitAnimations];
 }
+
+-(void)setShuffledArray:(NSMutableArray *)item{
+    int row = 0;
+	int column = 0;
+	int i = 0;
+	int numberOfShapes = [item count];
+
+	for (row = 0; row <= NUMBER_OF_ROWS; row++) {
+		for (column =0; column <= NUMBER_OF_COLUMNS; column++) {
+			
+			if(i < numberOfShapes){
+				Cell *placedCell = [self GetCell:row :column];
+				Shape *shuffleShape = [item objectAtIndex:i];
+				[shuffleShape ChangeColorAndShape:shuffleShape.colorType :shuffleShape.shapeType];
+				placedCell.ItemInCell = shuffleShape;
+				placedCell.ItemInCell.ItemView = shuffleShape.ItemView;
+				[self ApplyGravity];
+
+			}
+			i++;
+			
+			
+		}
+	}
+	NSLog(@"adding");
+
 	
+}
+
 
 -(Cell *)GetCell:(int)row : (int)column{
 	if(row >= 0 && row < RowLength && column >= 0 && column < ColumnLength)
