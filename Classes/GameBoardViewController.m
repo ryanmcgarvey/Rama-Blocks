@@ -222,7 +222,7 @@
 	
 	//lockSet = [[UIImageView alloc] initWithFrame:CGRectMake(LOCK_LOCATION_X + (30 * i) - 11, LOCK_LOCATION_Y  - 13, 23, 23)];
 	
-	experimentArray = [[NSMutableArray alloc] init];
+	//experimentArray = [[NSMutableArray alloc] init];
 	/*
 	 for(int i = 0; i < currentLevel.lockCount; i++){
 	 UIImageView * newLock = [[UIImageView alloc] initWithFrame:CGRectMake(LOCK_LOCATION_X + (30 * i) - 11, LOCK_LOCATION_Y  - 13, 23, 23)];

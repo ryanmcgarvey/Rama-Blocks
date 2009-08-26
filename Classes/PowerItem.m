@@ -35,6 +35,7 @@
 	[itemCollection RemoveFromCellsAndRefactor:gravityArray];
 	
 	[gravityArray release];
+	[NSTimer release];
 	
 	
 }

@@ -105,6 +105,7 @@ Solution
             victory = FALSE;
         }
     }
+	[NSTimer release];
     [self updateView];
     attempts++;
     return victory;
