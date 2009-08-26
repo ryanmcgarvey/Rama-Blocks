@@ -29,6 +29,7 @@
 -(BOOL)ChangeColorAndShape: (ColorType)cType : (ShapeType) sType{
 	colorType = cType;
 	shapeType = sType;
+	ItemView.image = nil;
     [ItemView.image release];
     ItemView.image = [UIImage imageWithColorAndShape: cType : sType];
 	self.backgroundColor = [UIColor clearColor];

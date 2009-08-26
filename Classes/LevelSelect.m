@@ -20,7 +20,7 @@
     gameState = [[appDelegate FetchGameState] retain];
     levelSelect.value = [gameState.currentLevel floatValue];
     
-    
+
     recapText.text = [NSString stringWithFormat:@"Number of Attempts: %d", [gameState.currentBoard.numberOfAttempts intValue]];
 
     [self ChangeLevel];
@@ -29,6 +29,22 @@
 - (IBAction)returnToMenu
 {
 	[self dismissModalViewControllerAnimated:YES];
+}
+
+-(IBAction)changeColor{
+	Rama_BlocksAppDelegate * appDelegate =  (Rama_BlocksAppDelegate *)[[UIApplication sharedApplication] delegate];
+	appDelegate.level.selectMaxColor = (int)colorSelect.value;
+	colorAmount.text = [NSString stringWithFormat:@"Maximum Colors Spawned: %d", (int)colorSelect.value];
+}
+-(IBAction)changeShape{
+	Rama_BlocksAppDelegate * appDelegate =  (Rama_BlocksAppDelegate *)[[UIApplication sharedApplication] delegate];
+	appDelegate.level.selectMaxShape = (int)shapeSelect.value;
+	shapeAmount.text = [NSString stringWithFormat:@"Maximum Shapes Spawned: %d", (int)shapeSelect.value];
+}
+-(IBAction)changeLock{
+	Rama_BlocksAppDelegate * appDelegate =  (Rama_BlocksAppDelegate *)[[UIApplication sharedApplication] delegate];
+	appDelegate.level.selectMaxLock = (int)lockSelect.value;
+	lockAmount.text = [NSString stringWithFormat:@"Maximum Locks Spawned: %d", (int)lockSelect.value];
 }
 
 -(IBAction)ChangeLevel{
@@ -43,41 +59,44 @@
     }
     switch (level) {
         case 0:
-            levelLabel.text = @"Very Easy";
+            //levelLabel.text = @"Very Easy";
             break;
         case 1:
-            levelLabel.text = @"Easy";
+            //levelLabel.text = @"Easy";
             break;
         case 2:
-            levelLabel.text = @"Sorta Easy";
+            //levelLabel.text = @"Sorta Easy";
             break;
         case 3:
-            levelLabel.text = @"Not So Easy";
+            //levelLabel.text = @"Not So Easy";
             break;
         case 4:
-            levelLabel.text = @"Sorta Hard";
+            //levelLabel.text = @"Sorta Hard";
             break;
         case 5:
-            levelLabel.text = @"Hard";
+            //levelLabel.text = @"Hard";
             break;
         case 6:
-            levelLabel.text = @"Very Hard";
+            //levelLabel.text = @"Very Hard";
             break;
         case 7:
-            levelLabel.text = @"Impossible";
+            //levelLabel.text = @"Impossible";
             break;
         case 8:
-            levelLabel.text = @"Good luck";
+            //levelLabel.text = @"Good luck";
             break;
         case 9:
-            levelLabel.text = @"You're not gonna get this far";
+            //levelLabel.text = @"You're not gonna get this far";
             break;
     }
     
     gameState.currentLevel = [NSNumber numberWithInt:level];
 }
 -(IBAction)PlayLevel{
-    [self presentModalViewController:[[GameBoardViewController alloc] initWithNibName:@"GameBoardViewController" bundle:nil] animated:YES];
+	[self changeLock];
+	[self changeColor];
+	[self changeShape];
+	[self presentModalViewController:[[GameBoardViewController alloc] initWithNibName:@"GameBoardViewController" bundle:nil] animated:YES];
 }
 - (void)viewWillAppear:(BOOL)animate{
     Rama_BlocksAppDelegate * appDelegate =  (Rama_BlocksAppDelegate *)[[UIApplication sharedApplication] delegate];

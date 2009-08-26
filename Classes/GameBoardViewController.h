@@ -55,10 +55,14 @@
 	CGPoint currentTouchPosition;
     
     CFTimeInterval startTime;
-	int countDown;
+	//int countDown;
+	int discardCount;
+	int transformCount;
 	
 }
-@property (readwrite, assign)int countDown;
+//@property (readwrite, assign)int countDown;
+@property (readwrite, assign)int discardCount;
+@property (readwrite, assign)int transformCount;
 @property (nonatomic, retain) UIButton * buttonMenu;
 @property (nonatomic, retain) UIButton * buttonResume;
 @property (nonatomic, retain) UIButton * buttonOptions;
@@ -70,6 +74,8 @@
 @property (readwrite, assign) CGPoint startTouchPosition;
 @property (readwrite, assign) CGPoint currentTouchPosition;
 @property (readwrite, assign) CGFloat touchDistanceToItemC;
+
+
 
 @property (nonatomic, retain) UILabel * bullshit;
 
@@ -90,6 +96,7 @@
 -(IBAction)ClickButtonResume;
 -(IBAction)ClickButtonOptions;
 -(IBAction)ClickButtonMainMenu;
+-(IBAction)discardPiece;
 
 
 

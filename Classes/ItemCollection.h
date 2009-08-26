@@ -42,17 +42,18 @@ typedef enum enum_Gravity {
     NSMutableArray * solution;
     Level * currentLevel;
     GameState * gameState;
-
+	
     
     int numberOfAttempts;
     int numberOfTransforms;
     int numberOfMoves;
     
-
+	
 }
 
 -(id)init: (int) rows : (int) columns : (int)rowPixelLength : (int)columnPixelLength : (Level *)level;
 -(void)createNewWithSelf:(ItemCollection *)newCollection;
+-(void)cleanBoard;
 
 -(BOOL)DrawShadowForItemPair: (ItemPair *)itemPair;
 -(BOOL)AddItemPair: (ItemPair *)itemPair;
@@ -64,6 +65,7 @@ typedef enum enum_Gravity {
 -(Cell *)GetCell:(GameItem *) item;
 
 -(BOOL)TransformItem:(GameItem*)shape;
+-(void)animateTransform:(NSMutableArray *)TransFormGroup;
 
 -(void)RemoveFromCellsAndRefactor:(NSMutableArray *)TransFormGroup;
 
@@ -88,5 +90,7 @@ typedef enum enum_Gravity {
 -(void)SaveState;
 
 -(void)UpdateState;
+
+-(void)setShuffledArray:(NSMutableArray *)item;
 
 @end

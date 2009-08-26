@@ -13,10 +13,10 @@
 @implementation Level
 @synthesize difficulty;
 @synthesize attempts;
-@synthesize lockCount;
+@synthesize lockCount, selectMaxShape, selectMaxColor, selectMaxLock;
 
 /*****************************************************
- Init
+Init
  *****************************************************/
 
 -(id)init:(int)predefinedDifficulty{
@@ -26,13 +26,13 @@
     [self setDifficulty:predefinedDifficulty];
     for (int i = 0; i < lockCount; i++) 
     {
-        LockShape * shape = [[LockShape alloc] initWithInfo:[self createRandomColor] : [self createRandomShape]:CGPointMake(LOCK_LOCATION_X +(30 * i),LOCK_LOCATION_Y)];
+        LockShape * shape = [[LockShape alloc] initWithInfo:[self createRandomColor] : [self createRandomShape]:CGPointMake(LOCK_LOCATION_X + (30 * i), LOCK_LOCATION_Y)];
         shape.canSeeColor = FALSE;
         shape.canSeeShape = FALSE;
 		[shape setUserInteractionEnabled:false];
         [solution addObject: shape];
-		
     }
+	
     [self updateProbability];
     return self;
 }
@@ -47,7 +47,7 @@
     [oldLock removeFromSuperview];
     [oldLock release];
     [solution insertObject:lock atIndex:index];
-	
+
 }
 
 -(LockShape *)GetLockAtIndex:(int)index{
@@ -58,19 +58,27 @@
 }
 
 /*****************************************************
- Solution
+Solution
  *****************************************************/
 -(BOOL)addSolutionToView:(UIView *)view{
     [self updateView];
     for(Shape * shape in solution)
     {
-		[view addSubview:shape];
-		
+        [view addSubview:shape];
     }
+	[self hideSolution];
     [self updateProbability];
     return TRUE;
 }
 
+-(void)hideSolution{
+	for (LockShape * lock in solution){
+
+		lock.canSeeColor = FALSE;
+		lock.canSeeShape = FALSE;
+		[self updateView];
+	}
+}
 -(BOOL)checkSolution:(NSMutableArray *)shapes{
     if([shapes count] < [solution count])
         return FALSE;
@@ -84,17 +92,20 @@
         if(guess.shapeType == actual.shapeType)
         {
             actual.canSeeShape = TRUE;
+			 [NSTimer scheduledTimerWithTimeInterval:5 target:self selector:@selector(hideSolution) userInfo:nil repeats:NO];
         }
         if(guess.colorType == actual.colorType)
         {
             actual.canSeeColor = TRUE;
+			[NSTimer scheduledTimerWithTimeInterval:5 target:self selector:@selector(hideSolution) userInfo:nil repeats:NO];
         }
         if(guess.shapeType != actual.shapeType ||
-		   guess.colorType != actual.colorType)
+            guess.colorType != actual.colorType)
         {
             victory = FALSE;
         }
     }
+	[NSTimer release];
     [self updateView];
     attempts++;
     return victory;
@@ -137,6 +148,7 @@
 
 -(void)updateProbability{
     int total = totalShapes[Triangle] + totalShapes[Square] + totalShapes[Pentagon] + totalShapes[Hexagon] + totalShapes[Circle];
+   
     if(total > 0 )
     {
         shapeSpawnProbability[Triangle] = totalShapes[Triangle]/(float)total;
@@ -148,12 +160,12 @@
         shapeSpawnProbability[Hexagon] = shapeSpawnProbability[Pentagon] + totalShapes[Hexagon]/(float)total;
         
         shapeSpawnProbability[Circle] =  shapeSpawnProbability[Hexagon] + totalShapes[Circle]/(float)total;
+
     }else{
         shapeSpawnProbability[Triangle] = 1;
+
     }
 }
-
-
 
 -(void)updateView{
     for(LockShape * shape in solution)
@@ -163,9 +175,8 @@
 }
 
 -(ShapeType)createShapeFromCollection{
-    
-    float probabilityCheck = (float)((uint)arc4random())/0xFFFFFFFF;  
     //return Circle;
+    float probabilityCheck = (float)((uint)arc4random())/0xFFFFFFFF;  
     if(probabilityCheck <= shapeSpawnProbability[Triangle]){
         return Triangle;
     }
@@ -184,82 +195,174 @@
 
 
 /*****************************************************
- Helpers
+Helpers
  *****************************************************/
 
 -(ShapeType)createRandomShape{
-    int ret = (uint)arc4random() % (maxShape + 1);
-	if(ret > Circle){
-		NSLog(@"spawned super circle");
+	Rama_BlocksAppDelegate * appDelegate =  (Rama_BlocksAppDelegate *)[[UIApplication sharedApplication] delegate];
+    if(appDelegate.level.selectMaxShape != 0){
+		int ret = (uint)arc4random() % appDelegate.level.selectMaxShape;
+		if(ret > Circle){
+			NSLog(@"spawned super circle");
+		}
+		return ret;
+		
 	}
-	return ret;
+	else{
+		int ret = (uint)arc4random() % 2;
+		if(ret > Circle){
+			NSLog(@"spawned super circle");
+		}
+		return ret;
+	}
 }
 
 -(ColorType)createRandomColor{
-    return (uint)arc4random() % maxColor;
+	Rama_BlocksAppDelegate * appDelegate =  (Rama_BlocksAppDelegate *)[[UIApplication sharedApplication] delegate];
+    
+	if(appDelegate.level.selectMaxShape != 0){
+		return (uint)arc4random() % appDelegate.level.selectMaxColor;
+	}
+	else{
+		return (uint)arc4random() % 2;
+	}
 }
 
 -(void)setDifficulty:(int)difficultyToSet{
-    
+    Rama_BlocksAppDelegate * appDelegate =  (Rama_BlocksAppDelegate *)[[UIApplication sharedApplication] delegate];
     difficulty = difficultyToSet;
-	
-    
+
+    if(lockCount < 3){
     switch (difficulty) {
         case 0:
-            maxColor = 2;
-            maxShape = Triangle;
-            lockCount = 3;
+            maxColor = appDelegate.level.selectMaxColor;
+            maxShape = appDelegate.level.selectMaxShape;
+            lockCount = appDelegate.level.selectMaxLock;
             break;
         case 1:
-            maxColor = 3;
-            maxShape = Triangle;
+            maxColor = appDelegate.level.selectMaxColor;
+            maxShape = appDelegate.level.selectMaxShape;
             lockCount = 3;
             break;
             
         case 2:
-            maxColor = 3;
-            maxShape = Square;
+            maxColor = appDelegate.level.selectMaxColor;
+            maxShape = appDelegate.level.selectMaxShape;
             lockCount = 3;
             break;
         case 3:
-            maxColor = 4;
-            maxShape = Square;
+            maxColor = appDelegate.level.selectMaxColor;
+            maxShape = appDelegate.level.selectMaxShape;
             lockCount = 3;
             break;
         case 4:
-            maxColor = 4;
-            maxShape = Pentagon;
+            maxColor = appDelegate.level.selectMaxColor;
+            maxShape = appDelegate.level.selectMaxShape;
             lockCount = 3;
             break;
         case 5:
-            maxColor = 5;
-            maxShape = Pentagon;
+            maxColor = appDelegate.level.selectMaxColor;
+            maxShape = appDelegate.level.selectMaxShape;
             lockCount = 3;
             break;
             
         case 6:
-            maxColor = 5;
-            maxShape = Hexagon;
+            maxColor = appDelegate.level.selectMaxColor;
+            maxShape = appDelegate.level.selectMaxShape;
             lockCount = 3;
             break;
         case 7:
-            maxColor = 5;
-            maxShape = Hexagon;
-            lockCount = 4;
+            maxColor = appDelegate.level.selectMaxColor;
+            maxShape = appDelegate.level.selectMaxShape;
+            lockCount = 3;
             break;
             
         case 8:
-            maxColor = 5;
-            maxShape = Circle;
-            lockCount = 4;
+            maxColor = appDelegate.level.selectMaxColor;
+            maxShape = appDelegate.level.selectMaxShape;
+            lockCount = 3;
             break;
         case 9:
-            maxColor = 5;
-            maxShape = Circle;
-            lockCount = 5;
+            maxColor = appDelegate.level.selectMaxColor;
+            maxShape = appDelegate.level.selectMaxShape;
+            lockCount = 3;
             break;
+	}
     }
+	else {
+		switch (difficulty) {
+			case 0:
+				maxColor = appDelegate.level.selectMaxColor;
+				maxShape = appDelegate.level.selectMaxShape;
+				lockCount = appDelegate.level.selectMaxLock;
+				break;
+			case 1:
+				maxColor = appDelegate.level.selectMaxColor;
+				maxShape = appDelegate.level.selectMaxShape;
+				lockCount = appDelegate.level.selectMaxLock;
+				break;
+				
+			case 2:
+				maxColor = appDelegate.level.selectMaxColor;
+				maxShape = appDelegate.level.selectMaxShape;
+				lockCount = appDelegate.level.selectMaxLock;
+				break;
+			case 3:
+				maxColor = appDelegate.level.selectMaxColor;
+				maxShape = appDelegate.level.selectMaxShape;
+				lockCount = appDelegate.level.selectMaxLock;
+				break;
+			case 4:
+				maxColor = appDelegate.level.selectMaxColor;
+				maxShape = appDelegate.level.selectMaxShape;
+				lockCount = appDelegate.level.selectMaxLock;
+				break;
+			case 5:
+				maxColor = appDelegate.level.selectMaxColor;
+				maxShape = appDelegate.level.selectMaxShape;
+				lockCount = appDelegate.level.selectMaxLock;
+				break;
+				
+			case 6:
+				maxColor = appDelegate.level.selectMaxColor;
+				maxShape = appDelegate.level.selectMaxShape;
+				lockCount = appDelegate.level.selectMaxLock;
+				break;
+			case 7:
+				maxColor = appDelegate.level.selectMaxColor;
+				maxShape = appDelegate.level.selectMaxShape;
+				lockCount = appDelegate.level.selectMaxLock;
+				break;
+				
+			case 8:
+				maxColor = appDelegate.level.selectMaxColor;
+				maxShape = appDelegate.level.selectMaxShape;
+				lockCount = appDelegate.level.selectMaxLock;
+				break;
+			case 9:
+				maxColor = appDelegate.level.selectMaxColor;
+				maxShape = appDelegate.level.selectMaxShape;
+				lockCount = appDelegate.level.selectMaxLock;
+				break;
+		}
+	}
+
+}
+
+-(Level*)giveLevel{
+	return self;
 }
 
 
+
+-(void)updateLevel{
+	Rama_BlocksAppDelegate * appDelegate =  (Rama_BlocksAppDelegate *)[[UIApplication sharedApplication] delegate];
+	
+	self.selectMaxColor = appDelegate.level.selectMaxColor;
+	self.selectMaxShape = appDelegate.level.selectMaxShape;
+	lockCount = appDelegate.level.selectMaxLock;
+}
+	
+            
+            
 @end

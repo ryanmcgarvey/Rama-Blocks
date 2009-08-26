@@ -11,21 +11,25 @@
 
 @implementation Rama_BlocksAppDelegate
 
-@synthesize window, gameType;
-@synthesize isMoving, isAttaching;
+@synthesize window;
+@synthesize isMoving, isAttaching, isFiltering, isUpgrading, allowGravity, level;
 
 - (void)applicationDidFinishLaunching:(UIApplication *)application {
     
     gameState = [self FetchGameState];
     mainMenu = [[MainMenuViewController alloc] initWithNibName:@"MainMenuViewController" bundle:nil];
     [[UIApplication sharedApplication] setStatusBarHidden:YES animated:NO];
-    
-    gameType = 0;
+
     [window addSubview:mainMenu.view];
 	[window makeKeyAndVisible];
 	
 	isMoving = NO;
 	isAttaching = NO;
+	isFiltering = NO;
+	isUpgrading = NO;
+	allowGravity = YES;
+	
+	level = [[Level alloc] init:[gameState.currentLevel intValue]];
 }
 -(SoundEffects *)FetchAudio{
     if(audio == nil){
@@ -34,105 +38,23 @@
     return audio;
 }
 
--(NSArray*)FetchProfileList {
-
-    [self managedObjectContext];
-    
-    NSError *fetchError = nil;
-    NSArray *fetchResults;
-    
-    NSEntityDescription *entityDescription = [NSEntityDescription
-                                              entityForName:@"Profile" 
-                                              inManagedObjectContext:managedObjectContext];
-    
-    NSFetchRequest *request = [[[NSFetchRequest alloc] init] autorelease];
-    
-    [request setEntity:entityDescription];
-    
-    fetchResults = [managedObjectContext 
-                    executeFetchRequest:request 
-                    error:&fetchError];
-    
-    return fetchResults;
-}
-
-
-
--(Profile*)FetchProfile{
-    
-    if(profile == nil)
-    {
-        
-        [self managedObjectContext];
-        
-        NSError *fetchError = nil;
-        NSArray *fetchResults;
-        
-        NSEntityDescription *entityDescription = [NSEntityDescription
-                                                  entityForName:@"Profile" 
-                                                  inManagedObjectContext:managedObjectContext];
-        
-        NSPredicate *predicate = [NSPredicate predicateWithFormat:
-                                  @"(Default == %d) ", TRUE ];
-        
-        NSFetchRequest *request = [[[NSFetchRequest alloc] init] autorelease];
-        
-        [request setEntity:entityDescription];
-        [request setPredicate:predicate];
-        
-        fetchResults = [managedObjectContext 
-                        executeFetchRequest:request 
-                        error:&fetchError];
-        
-        if ((fetchResults != nil) && ([fetchResults count] > 0) && (fetchError == nil)) 
-        {
-            profile = [fetchResults objectAtIndex:0];
-        }
-        else
-        {
-            profile =  [NSEntityDescription
-                          insertNewObjectForEntityForName:@"Profile" 
-                          inManagedObjectContext:managedObjectContext];
-            
-           GameState * gs = [NSEntityDescription
-                            insertNewObjectForEntityForName:@"GameState" 
-                            inManagedObjectContext:managedObjectContext];
-            [profile addSavedGamesObject:gs];
-        }
-        
-        
-        [managedObjectContext processPendingChanges];
-        
-    }
-    return profile;
-}
-
-    
-
 -(GameState *)FetchGameState{
-
-    [self FetchProfile];
-    
     
     if(gameState == nil)
     {
         
         [self managedObjectContext];
-        
+    
         NSError *fetchError = nil;
         NSArray *fetchResults;
         
         NSEntityDescription *entityDescription = [NSEntityDescription
                                                   entityForName:@"GameState" 
                                                   inManagedObjectContext:managedObjectContext];
-        NSPredicate *predicate = [NSPredicate predicateWithFormat:
-                                  @"(IsDefault == %d) ", TRUE ];
         
         NSFetchRequest *request = [[[NSFetchRequest alloc] init] autorelease];
         
         [request setEntity:entityDescription];
-        [request setPredicate:predicate];
-        
         
         fetchResults = [managedObjectContext 
                         executeFetchRequest:request 
@@ -147,7 +69,6 @@
             gameState =  [NSEntityDescription
                           insertNewObjectForEntityForName:@"GameState" 
                           inManagedObjectContext:managedObjectContext];
-            gameState.owningProfile = profile;
             gameState.currentLevel = [NSNumber numberWithInt:0];
             gameState.highestLevel = [NSNumber numberWithInt:1];
             gameState.currentBoard = [NSEntityDescription
@@ -166,7 +87,7 @@
                 [gameState.currentBoard addItemsObject:item];
                 
             }
-            for(int i = 0; i < 6; i++)
+            for(int i = 0; i <= 6; i++)
             {
                 
                 ItemState * item = [NSEntityDescription

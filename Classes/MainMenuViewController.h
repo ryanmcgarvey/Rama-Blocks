@@ -37,7 +37,7 @@
 	CGPoint titleCenter;
 	CGPoint behindButtonCenter;
 	
-
+	
 }
 
 @property (nonatomic, retain) UIImageView *zoomBack;

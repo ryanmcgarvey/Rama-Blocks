@@ -14,7 +14,8 @@
 #import "SoundEffects.h"
 #import "GameItem.h"
 #import "LevelStatistics.h"
-#import "Profile.h"
+#import "Level.h"
+
 
 @interface Rama_BlocksAppDelegate : NSObject <UIApplicationDelegate> {
     
@@ -24,25 +25,32 @@
     NSPersistentStoreCoordinator *persistentStoreCoordinator;
     
     SoundEffects * audio;
-    
+	
+	Level * level;
     
     MainMenuViewController * mainMenu;
     GameState * gameState;
-    Profile * profile;
     UIWindow *window;
-	int gameType;
+
 	BOOL isMoving;
 	BOOL isAttaching;
+	BOOL isFiltering;
+	BOOL isUpgrading;
+	BOOL allowGravity;
 }
 
 @property (nonatomic, retain) IBOutlet UIWindow *window;
-@property (readwrite, assign) int gameType;
+@property (readwrite, assign) Level * level;
 @property (readwrite, assign) BOOL isMoving;
+@property (readwrite, assign) BOOL allowGravity;
+@property (readwrite, assign) BOOL isFiltering;
 @property (readwrite, assign) BOOL isAttaching;
-
+@property (readwrite, assign) BOOL isUpgrading;
 @property (nonatomic, retain, readonly) NSManagedObjectModel *managedObjectModel;
 @property (nonatomic, retain, readonly) NSManagedObjectContext *managedObjectContext;
 @property (nonatomic, retain, readonly) NSPersistentStoreCoordinator *persistentStoreCoordinator;
+
+
 
 - (NSString *)applicationDocumentsDirectory;
 
@@ -50,9 +58,6 @@
 -(GameState *)FetchGameState;
 -(SoundEffects *)FetchAudio;
 
-
--(NSArray*)FetchProfileList;
--(Profile*)FetchProfile;
 -(NSArray *)FetchCollectionItemStates;
 -(NSArray *)FetchSpawnedItems;
 -(NSArray *)FetchLockItems;
