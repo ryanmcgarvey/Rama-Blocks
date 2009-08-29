@@ -310,9 +310,10 @@
              the application by pressing the Home button.
 			 */
 			NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
-			abort();
+			//abort();
         } 
     }
+	[self dealloc];
 }
 
 

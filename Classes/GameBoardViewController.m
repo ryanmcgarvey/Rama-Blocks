@@ -64,15 +64,14 @@
 	
 	[SpawnedPair.ItemC release];
 	SpawnedPair.ItemC = nil;
-	CGRect frame = CGRectMake(0.0f, 0.0f, 91, 91);
+	
 	drawingView = [DrawingView alloc];
 	[drawingView makeCirclePoint:SpawnedPair.ItemA.center:SpawnedPair.ItemB.center];
-	[drawingView initWithFrame: frame];
+	[drawingView initWithFrame: CGRectMake(0, 0, 100, 100)];
 	drawingView.backgroundColor = [UIColor clearColor];
-	[SpawnedPair.ItemC setUserInteractionEnabled:false];
 	SpawnedPair.ItemC = drawingView;
-	SpawnedPair.ItemC.alpha = 0.1f;
-    
+	SpawnedPair.ItemC.alpha = 0.4f;
+	
 	[self.view addSubview:SpawnedPair.ItemC];
     [self.view addSubview:SpawnedPair.ItemA];
     [self.view addSubview:SpawnedPair.ItemB];
@@ -111,6 +110,7 @@
     Rama_BlocksAppDelegate * appDelegate =  (Rama_BlocksAppDelegate *)[[UIApplication sharedApplication] delegate];
 	gameState = [appDelegate FetchGameState];
 	powerItem = [[PowerItem alloc]init];
+	
 	audio = [appDelegate FetchAudio];
 	discardCount = 0;
 	transformCount = 0;
@@ -495,7 +495,7 @@
             shape.tapped = 0;
         }
     }
-    if([[touch view] isMemberOfClass:[DrawingView class]] && [touch view] != backGround && touchDistanceToItemC < 50.0f)
+    if([[touch view] isMemberOfClass:[DrawingView class]] && [touch view] != backGround && touchDistanceToItemC < 55.0f)
     {
         
 		[SpawnedPair airMove:[touch locationInView:[self view]]];
@@ -513,7 +513,7 @@
 
 - (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event {
 	UITouch *touch = [[event allTouches] anyObject];
-	SpawnedPair.ItemC.alpha = 0.1f;
+	SpawnedPair.ItemC.alpha = 0.4f;
 	
 	
 	/* Shape was touched */
