@@ -59,6 +59,7 @@
 			Cell *removeCell = [self GetCell:row :column];
 			[removeCell.ItemInCell removeFromSuperview];
 			removeCell.ItemInCell = nil;
+			[removeCell.ItemInCell release];
 			
 			
 		}

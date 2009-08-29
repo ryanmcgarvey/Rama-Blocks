@@ -70,12 +70,14 @@
 	[drawingView initWithFrame: CGRectMake(0, 0, 100, 100)];
 	drawingView.backgroundColor = [UIColor clearColor];
 	SpawnedPair.ItemC = drawingView;
-	SpawnedPair.ItemC.alpha = 0.4f;
+	SpawnedPair.ItemC.alpha = 0.25f;
 	
 	[self.view addSubview:SpawnedPair.ItemC];
     [self.view addSubview:SpawnedPair.ItemA];
     [self.view addSubview:SpawnedPair.ItemB];
 	
+	[self.view bringSubviewToFront: SpawnedPair.ItemA];
+	[self.view bringSubviewToFront: SpawnedPair.ItemB];
     
     [self.view addSubview:SpawnedPair.ShaddowA];
     [self.view addSubview:SpawnedPair.ShaddowB];
@@ -488,7 +490,7 @@
     if(![[touch view] isKindOfClass: [LockShape class]] && appDelegate.isAttaching == NO)
     {
         GameItem * highlightItem = [itemCollection GetItemFromCoordinate:[touch locationInView:backGround]]; 
-        if([highlightItem isKindOfClass:[Shape class]] && ! highlightItem.IsPaired)
+        if([highlightItem isKindOfClass:[Shape class]] && ! highlightItem.IsPaired && SpawnedPair.ItemC.alpha != 1)
         {
             Shape * shape = (Shape *) highlightItem;
             [itemCollection AddShapeToSolution:shape];
@@ -499,7 +501,7 @@
     {
         
 		[SpawnedPair airMove:[touch locationInView:[self view]]];
-		SpawnedPair.ItemC.alpha = 0.7f;
+		SpawnedPair.ItemC.alpha = 1;
 		[itemCollection DrawShadowForItemPair:SpawnedPair];
 		
     }
@@ -513,7 +515,8 @@
 
 - (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event {
 	UITouch *touch = [[event allTouches] anyObject];
-	SpawnedPair.ItemC.alpha = 0.4f;
+	SpawnedPair.ItemC.center = CGPointMake((SpawnedPair.ItemA.center.x + SpawnedPair.ItemB.center.x)/2, (SpawnedPair.ItemA.center.y + SpawnedPair.ItemB.center.y)/2);
+	SpawnedPair.ItemC.alpha = 0.25f;
 	
 	
 	/* Shape was touched */
@@ -526,11 +529,13 @@
 			[SpawnedPair.ItemC removeFromSuperview];
 			SpawnedPair.ItemC = nil;
 			[self SpawnShapes];
+			return;
 			
 			
 		}else
 		{
 			[self ResetShapePair:SpawnedPair];
+			return;
 		}
 	}
 	
@@ -546,7 +551,7 @@
 				
 				[SpawnedPair rotate:SpawnedPair.ItemA];
 				SpawnedPair.ItemC.center = [drawingView makeCirclePoint:SpawnedPair.ItemA.center :SpawnedPair.ItemB.center];
-				
+				return;
 				
 				
 				
@@ -558,7 +563,7 @@
 				item.tapped = 0;
 				if([itemCollection TransformItem:item])
 				{	
-					
+					return;
 				}
 			}
 			else

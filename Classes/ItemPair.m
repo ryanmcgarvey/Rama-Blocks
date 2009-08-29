@@ -85,14 +85,13 @@
 	if(appDelegate.isMoving == YES){
 		distanceToItemA = [self moveObjectDistance: location from: itemA.center];
 		distanceToItemB = [self moveObjectDistance: location from: itemB.center];
-		distanceToItemC = [self moveObjectDistance: location from: itemC.center];
 		appDelegate.isMoving = NO;
 		
 	}
+	itemC.center = CGPointMake((itemA.center.x + itemB.center.x)/2, (itemA.center.y + itemB.center.y)/2);
 	itemA.center = CGPointMake(location.x + distanceToItemA.x, location.y + distanceToItemA.y);
 	itemB.center = CGPointMake(location.x + distanceToItemB.x, location.y + distanceToItemB.y);
-	itemC.center = CGPointMake(location.x + distanceToItemC.x, location.y + distanceToItemC.y);
-
+	
 	
 	[self checkBounds];
 
