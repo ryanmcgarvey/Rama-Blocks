@@ -15,7 +15,7 @@
 
 
 - (id)initWithInfo:(ColorType)cType : (ShapeType) sType:(CGPoint)location{  
-    CGRect frame = CGRectMake(0.0f, 0.0f, SHAPE_WIDTH, SHAPE_WIDTH);
+    CGRect frame = CGRectMake(0.0f, 0.0f, 32.0f, 32.0f);
     if (self = [super initWithFrame:frame]) 
     {
         self.center = location;

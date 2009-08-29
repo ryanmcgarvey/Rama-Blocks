@@ -10,18 +10,13 @@
 #import "Rama_BlocksAppDelegate.h"
 
 @implementation ItemPair
-@synthesize ItemA, ItemB, ItemC, Orientation, GrabberA, GrabberB;
+@synthesize ItemA, ItemB, ItemC, Orientation;
 @synthesize ShaddowA, ShaddowB, drawingView;
 
 
 -(id)init{
 
-    GrabberA = [[UIImageView alloc]initWithFrame:CGRectMake(0.0f, 0.0f, SHAPE_WIDTH, SHAPE_WIDTH)];
-    GrabberB = [[UIImageView alloc]initWithFrame:CGRectMake(0.0f, 0.0f, SHAPE_WIDTH, SHAPE_WIDTH)];
-    GrabberA.image = [UIImage imageNamed:@"HighLight.png"];
-    GrabberB.image = [UIImage imageNamed:@"HighLight.png"];
-    GrabberA.userInteractionEnabled = TRUE;
-    GrabberB.userInteractionEnabled = TRUE;
+
     
     ShaddowA = [[UIImageView alloc]initWithFrame:CGRectMake(0.0f, 0.0f, SHAPE_WIDTH, SHAPE_WIDTH)];
     ShaddowB = [[UIImageView alloc]initWithFrame:CGRectMake(0.0f, 0.0f, SHAPE_WIDTH, SHAPE_WIDTH)];
@@ -36,56 +31,39 @@
 
 - (void)rotate:(GameItem *)touched{
     Orientation = ++Orientation % 4;
-    CGPoint anchor;
-    UIImageView * grabberTouched;
-    if(touched == ItemA)
-    {
-        grabberTouched = GrabberA;
-        switch (Orientation) 
-        {
-            case 2:
-                anchor = CGPointMake(touched.center.x + SHAPE_WIDTH, touched.center.y);
-                break;
-            case 3:
-                anchor = CGPointMake(touched.center.x, touched.center.y - SHAPE_WIDTH);
-                break;
-            case 0:
-                anchor = CGPointMake(touched.center.x - SHAPE_WIDTH, touched.center.y);
-                break;
-            case 1:
-               anchor = CGPointMake(touched.center.x, touched.center.y + SHAPE_WIDTH);
-                break;
-            default:
-                break;
-        }
-    }
-    else
-    {
-        grabberTouched = GrabberB;
-        switch (Orientation) 
-        {
-            case 0:
-                anchor = CGPointMake(touched.center.x + SHAPE_WIDTH, touched.center.y);
-                break;
-            case 1:
-                anchor = CGPointMake(touched.center.x, touched.center.y - SHAPE_WIDTH);
-                break;
-            case 2:
-                anchor = CGPointMake(touched.center.x - SHAPE_WIDTH, touched.center.y);
-                break;
-            case 3:
-                anchor = CGPointMake(touched.center.x, touched.center.y + SHAPE_WIDTH);
-                break;
-            default:
-                break;
-        }
-    }
-    [self move:anchor :grabberTouched];
+	GameItem * rotating;
+
+	
+	rotating = ItemB;
+		
+	switch (Orientation) 
+	{
+		case 0:
+			rotating.center = CGPointMake(touched.center.x + (SHAPE_WIDTH/2), touched.center.y + (SHAPE_WIDTH/2));
+			touched.center = CGPointMake(touched.center.x - (SHAPE_WIDTH/2), touched.center.y + (SHAPE_WIDTH/2));
+			break;
+		case 1:
+			rotating.center = CGPointMake(touched.center.x + (SHAPE_WIDTH/2), touched.center.y - (SHAPE_WIDTH/2));
+			touched.center = CGPointMake(touched.center.x + (SHAPE_WIDTH/2), touched.center.y + (SHAPE_WIDTH/2));
+			break;
+		case 2:
+			rotating.center = CGPointMake(touched.center.x - (SHAPE_WIDTH/2), touched.center.y - (SHAPE_WIDTH/2));
+			touched.center = CGPointMake(touched.center.x + (SHAPE_WIDTH/2), touched.center.y - (SHAPE_WIDTH/2));
+			break;
+		case 3:
+			rotating.center = CGPointMake(touched.center.x - (SHAPE_WIDTH/2), touched.center.y + (SHAPE_WIDTH/2));
+			touched.center = CGPointMake(touched.center.x - (SHAPE_WIDTH/2), touched.center.y - (SHAPE_WIDTH/2));
+			break;
+		
+		default:
+			break;
+	}
+
+
 }
                 
 -(void)Reset{
     Orientation = 0;
-    [self move:CGPointMake(SPAWN_LOCATION_X,SPAWN_LOCATION_Y) :GrabberA];
 }
 
 -(CGPoint)moveObjectDistance:(CGPoint)touch from:(CGPoint)center{
@@ -99,8 +77,6 @@
 }
 
 -(void)airMove:(CGPoint)location{
-	UIImageView * grabberA = GrabberA;
-	UIImageView * grabberB = GrabberB;
 	GameItem * itemA = ItemA;
 	GameItem * itemB = ItemB;
 	GameItem * itemC = ItemC;
@@ -109,97 +85,18 @@
 	if(appDelegate.isMoving == YES){
 		distanceToItemA = [self moveObjectDistance: location from: itemA.center];
 		distanceToItemB = [self moveObjectDistance: location from: itemB.center];
-		distanceToItemC = [self moveObjectDistance: location from: itemC.center];
-		distanceToGrabberA = [self moveObjectDistance:location from:grabberA.center];
-		distanceToGrabberB = [self moveObjectDistance: location from: grabberB.center];
 		appDelegate.isMoving = NO;
 		
 	}
+	itemC.center = CGPointMake((itemA.center.x + itemB.center.x)/2, (itemA.center.y + itemB.center.y)/2);
 	itemA.center = CGPointMake(location.x + distanceToItemA.x, location.y + distanceToItemA.y);
 	itemB.center = CGPointMake(location.x + distanceToItemB.x, location.y + distanceToItemB.y);
-	itemC.center = CGPointMake(location.x + distanceToItemC.x, location.y + distanceToItemC.y);
-	grabberA.center = CGPointMake(location.x + distanceToGrabberA.x, location.y + distanceToGrabberA.y);
-	grabberB.center = CGPointMake(location.x + distanceToGrabberB.x, location.y + distanceToGrabberB.y);
+	
 	
 	[self checkBounds];
 
 	}
 	
-	
-- (void)move:(CGPoint)location:(UIImageView *)grabberTouched{
-    GameItem* moving;
-    UIImageView * grabberMoving;
-    GameItem * touched;
-        
-    if(grabberTouched==GrabberA){
-        grabberTouched.center = location;
-        touched = ItemA;
-        moving = ItemB;
-        grabberMoving = GrabberB;
-        switch (Orientation) 
-        {
-            case 0:
-                touched.center = CGPointMake(grabberTouched.center.x + SHAPE_WIDTH, grabberTouched.center.y);
-                moving.center = CGPointMake(touched.center.x + SHAPE_WIDTH, touched.center.y);
-                grabberMoving.center = CGPointMake(moving.center.x + SHAPE_WIDTH, moving.center.y);
-                break;
-            case 1:
-                touched.center = CGPointMake(grabberTouched.center.x, grabberTouched.center.y - SHAPE_WIDTH);
-                moving.center = CGPointMake(touched.center.x, touched.center.y - SHAPE_WIDTH);
-                grabberMoving.center = CGPointMake(moving.center.x, moving.center.y - SHAPE_WIDTH);
-                break;
-            case 2:
-                touched.center = CGPointMake(grabberTouched.center.x - SHAPE_WIDTH, grabberTouched.center.y);
-                moving.center = CGPointMake(touched.center.x - SHAPE_WIDTH, touched.center.y);
-                grabberMoving.center = CGPointMake(moving.center.x - SHAPE_WIDTH, moving.center.y);
-                break;
-            case 3:
-                touched.center = CGPointMake(grabberTouched.center.x, grabberTouched.center.y + SHAPE_WIDTH);
-                moving.center = CGPointMake(touched.center.x, touched.center.y + SHAPE_WIDTH);
-                grabberMoving.center = CGPointMake(moving.center.x, moving.center.y + SHAPE_WIDTH);
-                break;
-            default:
-                break;
-        }
-		[self checkBounds];
-    }
-    else if(grabberTouched == GrabberB)
-    {
-        grabberTouched.center = location;
-        touched = ItemB;
-        moving = ItemA;
-        grabberMoving = GrabberA;
-        switch (Orientation) 
-        {
-            case 0:
-                touched.center = CGPointMake(grabberTouched.center.x - SHAPE_WIDTH, grabberTouched.center.y);
-                moving.center = CGPointMake(touched.center.x - SHAPE_WIDTH, touched.center.y);
-                grabberMoving.center = CGPointMake(moving.center.x - SHAPE_WIDTH, moving.center.y);
-                break;
-            case 1:
-                touched.center = CGPointMake(grabberTouched.center.x, grabberTouched.center.y + SHAPE_WIDTH);
-                moving.center = CGPointMake(touched.center.x, touched.center.y + SHAPE_WIDTH);
-                grabberMoving.center = CGPointMake(moving.center.x, moving.center.y + SHAPE_WIDTH);
-                break;
-            case 2:
-                touched.center = CGPointMake(grabberTouched.center.x + SHAPE_WIDTH, grabberTouched.center.y);
-                moving.center = CGPointMake(touched.center.x + SHAPE_WIDTH, touched.center.y);
-                grabberMoving.center = CGPointMake(moving.center.x + SHAPE_WIDTH, moving.center.y);
-                break;
-            case 3:
-                touched.center = CGPointMake(grabberTouched.center.x, grabberTouched.center.y - SHAPE_WIDTH);
-                moving.center = CGPointMake(touched.center.x, touched.center.y - SHAPE_WIDTH);
-                grabberMoving.center = CGPointMake(moving.center.x, moving.center.y - SHAPE_WIDTH);
-                break;
-            default:
-                break;
-        }
-    }
-    
-    [self checkBounds];
-    
-}
-
 -(void)setShadow:(CGPoint)ShaddowALoc:(CGPoint)ShaddowBLoc{
     ShaddowA.center =  ShaddowALoc;
     ShaddowB.center = ShaddowBLoc;

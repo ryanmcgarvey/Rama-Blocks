@@ -31,21 +31,6 @@
 	[self dismissModalViewControllerAnimated:YES];
 }
 
--(IBAction)changeColor{
-	Rama_BlocksAppDelegate * appDelegate =  (Rama_BlocksAppDelegate *)[[UIApplication sharedApplication] delegate];
-	appDelegate.level.selectMaxColor = (int)colorSelect.value;
-	colorAmount.text = [NSString stringWithFormat:@"Maximum Colors Spawned: %d", (int)colorSelect.value];
-}
--(IBAction)changeShape{
-	Rama_BlocksAppDelegate * appDelegate =  (Rama_BlocksAppDelegate *)[[UIApplication sharedApplication] delegate];
-	appDelegate.level.selectMaxShape = (int)shapeSelect.value;
-	shapeAmount.text = [NSString stringWithFormat:@"Maximum Shapes Spawned: %d", (int)shapeSelect.value];
-}
--(IBAction)changeLock{
-	Rama_BlocksAppDelegate * appDelegate =  (Rama_BlocksAppDelegate *)[[UIApplication sharedApplication] delegate];
-	appDelegate.level.selectMaxLock = (int)lockSelect.value;
-	lockAmount.text = [NSString stringWithFormat:@"Maximum Locks Spawned: %d", (int)lockSelect.value];
-}
 
 -(IBAction)ChangeLevel{
     
@@ -93,9 +78,7 @@
     gameState.currentLevel = [NSNumber numberWithInt:level];
 }
 -(IBAction)PlayLevel{
-	[self changeLock];
-	[self changeColor];
-	[self changeShape];
+
 	[self presentModalViewController:[[GameBoardViewController alloc] initWithNibName:@"GameBoardViewController" bundle:nil] animated:YES];
 }
 - (void)viewWillAppear:(BOOL)animate{

@@ -16,8 +16,8 @@
     if (self = [super initWithFrame:frame]) {
         
 		ItemView = [[UIImageView alloc] initWithFrame:frame];
+		ItemView.image = [UIImage imageNamed:@"ItemC.png"];
 		[self addSubview:ItemView];
-		[self drawRect:frame];
     
 	}
     return self;
@@ -25,12 +25,6 @@
 
 
 - (void)drawRect:(CGRect)rect {
-    CGContextRef ctx = UIGraphicsGetCurrentContext();
-    CGContextClearRect(ctx, rect);
-	//CGContextSetRGBStrokeColor(ctx, 0, 0, 0, 1);
-	CGContextSetRGBFillColor(ctx, 255, 255, 255, 1);
-	CGContextFillEllipseInRect(ctx, CGRectMake(.5f, .5f, 90, 90));
-	//CGContextStrokeEllipseInRect(ctx, CGRectMake(15, 15, 90, 90));
 	
 	self.center = circleDrawingPoint;
 }

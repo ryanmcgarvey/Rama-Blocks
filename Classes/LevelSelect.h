@@ -38,8 +38,5 @@
 -(IBAction)ChangeLevel;
 -(IBAction)PlayLevel;
 
--(IBAction)changeColor;
--(IBAction)changeShape;
--(IBAction)changeLock;
 
 @end
