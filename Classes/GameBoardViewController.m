@@ -46,20 +46,36 @@
 	if(SpawnedPair==nil)
     {
 		SpawnedPair = [ItemPair new];
+		nextPair = [ItemPair new];
 		
-    }
+		SpawnedPair.ItemA = [[Shape alloc] initWithInfo:[currentLevel createRandomColor]: [currentLevel createShapeFromCollection] : CGPointMake(SPAWN_LOCATION_X,SPAWN_LOCATION_Y)];
+		SpawnedPair.ItemB = [[Shape alloc] initWithInfo:[currentLevel createRandomColor]: [currentLevel createShapeFromCollection] : CGPointMake(SPAWN_LOCATION_X,SPAWN_LOCATION_Y)];
+		
+		nextPair.ItemA = [[Shape alloc] initWithInfo:[currentLevel createRandomColor]: [currentLevel createShapeFromCollection] : CGPointMake(40,40)];
+		nextPair.ItemB = [[Shape alloc] initWithInfo:[currentLevel createRandomColor]: [currentLevel createShapeFromCollection] : CGPointMake(40,40)];
+	}else{
 	
-	
-    [SpawnedPair.ItemA release];
-	SpawnedPair.ItemA = nil;
-    SpawnedPair.ItemA = [[Shape alloc] initWithInfo:[currentLevel createRandomColor]: [currentLevel createShapeFromCollection] : CGPointMake(SPAWN_LOCATION_X,SPAWN_LOCATION_Y)];
-    
-    
-    [SpawnedPair.ItemB release];
-	SpawnedPair.ItemB = nil;
-    SpawnedPair.ItemB = [[Shape alloc] initWithInfo:[currentLevel createRandomColor]: [currentLevel createShapeFromCollection] : CGPointMake(SPAWN_LOCATION_X + SHAPE_WIDTH ,SPAWN_LOCATION_Y)];
-    
-	
+		[SpawnedPair.ItemA release];
+		SpawnedPair.ItemA = nil;
+		SpawnedPair.ItemA = nextPair.ItemA;
+		SpawnedPair.ItemA.center = CGPointMake(SPAWN_LOCATION_X,SPAWN_LOCATION_Y);
+		
+		
+		[SpawnedPair.ItemB release];
+		SpawnedPair.ItemB = nil;
+		SpawnedPair.ItemB = nextPair.ItemB;
+		SpawnedPair.ItemB.center = CGPointMake(SPAWN_LOCATION_X + 30.0f ,SPAWN_LOCATION_Y);
+		
+		[nextPair.ItemA release];
+		nextPair.ItemA = nil;
+		nextPair.ItemA = [[Shape alloc] initWithInfo:[currentLevel createRandomColor]: [currentLevel createShapeFromCollection] : CGPointMake(50,32)];
+		
+		[nextPair.ItemB release];
+		nextPair.ItemB = nil;
+		nextPair.ItemB = [[Shape alloc] initWithInfo:[currentLevel createRandomColor]: [currentLevel createShapeFromCollection] : CGPointMake(80,32)];
+		
+		[nextPair.ItemC release];
+	}
     [SpawnedPair Reset];
 	
 	[SpawnedPair.ItemC release];
@@ -75,6 +91,9 @@
 	[self.view addSubview:SpawnedPair.ItemC];
     [self.view addSubview:SpawnedPair.ItemA];
     [self.view addSubview:SpawnedPair.ItemB];
+	
+	[self.view addSubview:nextPair.ItemA];
+    [self.view addSubview:nextPair.ItemB];
 	
 	[self.view bringSubviewToFront: SpawnedPair.ItemA];
 	[self.view bringSubviewToFront: SpawnedPair.ItemB];
@@ -149,6 +168,12 @@
 	
 	itemCollection = [[ItemCollection alloc] init:NUMBER_OF_ROWS :NUMBER_OF_COLUMNS :SHAPE_WIDTH :SHAPE_WIDTH: currentLevel];
 	SpawnedPair = [[ItemPair new]retain];
+	nextPair = [[ItemPair new]retain];
+	
+	nextPair.ItemA = [[Shape alloc] initWithInfo:[currentLevel createRandomColor]: [currentLevel createShapeFromCollection] : CGPointMake(20,20)];
+	nextPair.ItemB = [[Shape alloc] initWithInfo:[currentLevel createRandomColor]: [currentLevel createShapeFromCollection] : CGPointMake(20,20)];
+	
+	
 	if([gameState.currentBoard.Active boolValue])
 	{
 		//[SpawnedPair.ItemC removeFromSuperview];
@@ -199,6 +224,9 @@
 		
 		[self.view addSubview:SpawnedPair.ShaddowA];
 		[self.view addSubview:SpawnedPair.ShaddowB];
+		
+		[self.view addSubview:nextPair.ItemA];
+		[self.view addSubview:nextPair.ItemB];
 		
 		
 	}else{

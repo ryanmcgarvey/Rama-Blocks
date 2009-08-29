@@ -39,6 +39,8 @@
     NSMutableArray * experimentArray;
 	
 	ItemPair * SpawnedPair;
+	ItemPair * nextPair;
+	
 	ItemCollection * itemCollection;
 	NSTimer *TouchTimer;
     UIDevice * CurrentDevice;
