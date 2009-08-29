@@ -32,10 +32,9 @@
     IBOutlet UIButton * buttonResume;
     IBOutlet UIButton * buttonOptions;
     IBOutlet UIButton * buttonMainMenu;
+	IBOutlet UIButton * discard;
     IBOutlet UILabel * attemptsString;
 	IBOutlet UILabel * timeToDrop;
-	
-	IBOutlet UILabel * bullshit;
 	
     NSMutableArray * experimentArray;
 	
@@ -53,9 +52,12 @@
 	
 	CGPoint startTouchPosition;
 	CGPoint currentTouchPosition;
+	CGPoint menuViewCenter;
     
     CFTimeInterval startTime;
-	//int countDown;
+	
+	CGAffineTransform spawnedShapeRotateTransformA;
+	
 	int discardCount;
 	int transformCount;
 	
@@ -67,6 +69,7 @@
 @property (nonatomic, retain) UIButton * buttonResume;
 @property (nonatomic, retain) UIButton * buttonOptions;
 @property (nonatomic, retain) UIButton * buttonMainMenu;
+@property (nonatomic, retain) UIButton * discard;
 @property (nonatomic, retain) UIView * menuView;
 @property (nonatomic, retain) UILabel * attemptsString;
 @property (nonatomic, retain) UILabel * timeToDrop;
@@ -74,12 +77,10 @@
 @property (readwrite, assign) CGPoint startTouchPosition;
 @property (readwrite, assign) CGPoint currentTouchPosition;
 @property (readwrite, assign) CGFloat touchDistanceToItemC;
+@property (readwrite, assign)CGAffineTransform spawnedShapeRotateTransformA;
 
 
 
-@property (nonatomic, retain) UILabel * bullshit;
-
-//@property (nonatomic, retain) NSMutableArray * experimentArray;
 
 -(void)resetTap:(NSTimer *)timer;
 -(void)SpawnShapes;
@@ -87,8 +88,6 @@
 -(void)didRotate:(NSNotification *)notification;
 -(void)SaveState;
 
--(void)timeUntilDrop;
--(void)timerDrop;
 -(CGFloat)isTouchWithinRange:(CGPoint)touch from:(CGPoint)center;
 
 -(IBAction)ClickReset;

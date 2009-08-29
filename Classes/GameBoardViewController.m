@@ -12,7 +12,7 @@
 @implementation GameBoardViewController
 @synthesize buttonMenu, buttonOptions, buttonMainMenu, buttonResume, menuView, attemptsString;
 @synthesize timeToDrop, drawingView, startTouchPosition, currentTouchPosition, touchDistanceToItemC;
-@synthesize bullshit, discardCount, transformCount;
+@synthesize discardCount, transformCount, discard, spawnedShapeRotateTransformA;
 
 
 -(void)SaveState{
@@ -46,22 +46,24 @@
 	if(SpawnedPair==nil)
     {
 		SpawnedPair = [ItemPair new];
+		
     }
-    [SpawnedPair.GrabberA removeFromSuperview];
-    [SpawnedPair.GrabberB removeFromSuperview];
 	
-	currentLevel = [currentLevel giveLevel];
 	
     [SpawnedPair.ItemA release];
+	SpawnedPair.ItemA = nil;
     SpawnedPair.ItemA = [[Shape alloc] initWithInfo:[currentLevel createRandomColor]: [currentLevel createShapeFromCollection] : CGPointMake(SPAWN_LOCATION_X,SPAWN_LOCATION_Y)];
     
     
     [SpawnedPair.ItemB release];
+	SpawnedPair.ItemB = nil;
     SpawnedPair.ItemB = [[Shape alloc] initWithInfo:[currentLevel createRandomColor]: [currentLevel createShapeFromCollection] : CGPointMake(SPAWN_LOCATION_X + SHAPE_WIDTH ,SPAWN_LOCATION_Y)];
     
 	
     [SpawnedPair Reset];
 	
+	[SpawnedPair.ItemC release];
+	SpawnedPair.ItemC = nil;
 	CGRect frame = CGRectMake(0.0f, 0.0f, 91, 91);
 	drawingView = [DrawingView alloc];
 	[drawingView makeCirclePoint:SpawnedPair.ItemA.center:SpawnedPair.ItemB.center];
@@ -71,9 +73,6 @@
 	SpawnedPair.ItemC = drawingView;
 	SpawnedPair.ItemC.alpha = 0.1f;
     
-    //[self.view addSubview:SpawnedPair.GrabberA];
-    //[self.view addSubview:SpawnedPair.GrabberB];
-    
 	[self.view addSubview:SpawnedPair.ItemC];
     [self.view addSubview:SpawnedPair.ItemA];
     [self.view addSubview:SpawnedPair.ItemB];
@@ -81,6 +80,15 @@
     
     [self.view addSubview:SpawnedPair.ShaddowA];
     [self.view addSubview:SpawnedPair.ShaddowB];
+	
+	
+	if(CurrentDevice.orientation != UIDeviceOrientationPortrait && CurrentDevice.orientation != UIDeviceOrientationUnknown ){
+		SpawnedPair.ItemA.transform = spawnedShapeRotateTransformA;
+		SpawnedPair.ItemB.transform = spawnedShapeRotateTransformA;
+		SpawnedPair.ShaddowA.transform = spawnedShapeRotateTransformA;
+		SpawnedPair.ShaddowB.transform = spawnedShapeRotateTransformA;
+	}
+	
 	
 }
 
@@ -124,6 +132,8 @@
 	[self.view sendSubviewToBack:buttonMenu];
 	[self.view addSubview:menuView];
 	
+	menuViewCenter = menuView.center;
+	
 	//add solution to view
 	
 	CurrentDevice = [UIDevice currentDevice];
@@ -133,27 +143,15 @@
 												 name:@"UIDeviceOrientationDidChangeNotification" object:nil];
 	
 	currentLevel = [[Level alloc] init:[gameState.currentLevel intValue]];
-	currentLevel.selectMaxColor = appDelegate.level.selectMaxColor;
-	currentLevel.selectMaxShape = appDelegate.level.selectMaxShape ;
-	currentLevel.selectMaxLock = appDelegate.level.selectMaxLock;
+
 	
 	itemCollection = [[ItemCollection alloc] init:NUMBER_OF_ROWS :NUMBER_OF_COLUMNS :SHAPE_WIDTH :SHAPE_WIDTH: currentLevel];
 	SpawnedPair = [[ItemPair new]retain];
 	if([gameState.currentBoard.Active boolValue])
 	{
-		NSArray * pair = [appDelegate FetchSpawnedItems];
-		ItemState * item = [pair objectAtIndex:0];
-		SpawnedPair.ItemA = [[Shape alloc] initWithInfo:
-							 [item.colorType intValue] :
-							 [item.shapeType intValue] : 
-							 CGPointMake(SPAWN_LOCATION_X,SPAWN_LOCATION_Y)];
+		//[SpawnedPair.ItemC removeFromSuperview];
+		[self SpawnShapes];
 		
-		item = [pair objectAtIndex:1];
-		
-		SpawnedPair.ItemB = [[Shape alloc] initWithInfo:
-							 [item.colorType intValue] :
-							 [item.shapeType intValue] : 
-							 CGPointMake(SPAWN_LOCATION_X + SHAPE_WIDTH ,SPAWN_LOCATION_Y)];
 		
 		for(ItemState * item in [appDelegate FetchLockItems])
 		{
@@ -183,34 +181,22 @@
 				[itemCollection SetItemToCell:shape : cell];
 				[self.view addSubview:shape];
 			}
+			
+		
 		}
+		
 		[itemCollection UpdateState];
-		[SpawnedPair.GrabberA removeFromSuperview];
-		[SpawnedPair.GrabberB removeFromSuperview];
 		
 		[SpawnedPair Reset];
 		
-		//[self.view addSubview:SpawnedPair.GrabberA];
-		//[self.view addSubview:SpawnedPair.GrabberB];
 		
-		CGRect frame = CGRectMake(0.0f, 0.0f, 91, 91);
-		drawingView = [DrawingView alloc];
-		[drawingView makeCirclePoint:SpawnedPair.ItemA.center:SpawnedPair.ItemB.center];
-		[drawingView initWithFrame: frame];
-		drawingView.backgroundColor = [UIColor clearColor];
-		SpawnedPair.ItemC = drawingView;
-		SpawnedPair.ItemC.alpha = 0.2f;
-		SpawnedPair.ItemC.tapped = 0;
-		//[SpawnedPair.ItemC setUserInteractionEnabled:FALSE];
 		
 		[self.view addSubview:SpawnedPair.ItemC];
-		[self.view bringSubviewToFront:SpawnedPair.ItemC];
-		[self.view addSubview:SpawnedPair.ItemA];
 		[self.view addSubview:SpawnedPair.ItemB];
+		[self.view addSubview:SpawnedPair.ItemA];
 		
 		[self.view addSubview:SpawnedPair.ShaddowA];
 		[self.view addSubview:SpawnedPair.ShaddowB];
-		
 		
 		
 	}else{
@@ -220,33 +206,8 @@
 	}
 	[currentLevel addSolutionToView:self.view];
 	
-	//lockSet = [[UIImageView alloc] initWithFrame:CGRectMake(LOCK_LOCATION_X + (30 * i) - 11, LOCK_LOCATION_Y  - 13, 23, 23)];
-	
-	//experimentArray = [[NSMutableArray alloc] init];
-	/*
-	 for(int i = 0; i < currentLevel.lockCount; i++){
-	 UIImageView * newLock = [[UIImageView alloc] initWithFrame:CGRectMake(LOCK_LOCATION_X + (30 * i) - 11, LOCK_LOCATION_Y  - 13, 23, 23)];
-	 
-	 for(int x = 1; x < 17; x++){
-	 NSString *theImage = [NSString stringWithFormat:@"exp%d.png", x];
-	 NSLog(@"%@", theImage); 
-	 UIImage *expImage = [UIImage imageNamed:theImage];
-	 [experimentArray addObject:expImage];
-	 
-	 
-	 }
-	 
-	 [newLock setAnimationImages:experimentArray];
-	 [newLock setAnimationDuration:1.0f + i];
-	 [newLock startAnimating];
-	 
-	 [self.view addSubview:newLock];
-	 //[self.view bringSubviewToFront:newLock];
-	 
-	 }
-	 */
 	[self didRotate:nil];
-	
+	[itemCollection ApplyGravity];
 	[super viewDidLoad];
 	
 	startTime = CFAbsoluteTimeGetCurrent();
@@ -260,15 +221,99 @@
     switch (CurrentDevice.orientation) {
         case UIInterfaceOrientationLandscapeRight:
             [itemCollection SetGravity:left];
+			[backGround.image release];
+			backGround.image = [[UIImage imageNamed:@"rotatedSideRight.png"] retain];
+			[self.view addSubview:backGround];
+			[self.view sendSubviewToBack:backGround];
+			[self.view sendSubviewToBack:buttonMenu];
+			
+			menuView.transform = CGAffineTransformIdentity;
+			menuView.transform = CGAffineTransformRotate(menuView.transform, rotate_xDegrees(90));
+			
+			SpawnedPair.ItemA.transform = CGAffineTransformIdentity;
+			spawnedShapeRotateTransformA = CGAffineTransformRotate(SpawnedPair.ShaddowA.transform, rotate_xDegrees(90));
+			SpawnedPair.ItemA.transform = spawnedShapeRotateTransformA;
+			
+			SpawnedPair.ItemB.transform = CGAffineTransformIdentity;
+			SpawnedPair.ItemB.transform = spawnedShapeRotateTransformA;
+			
+			SpawnedPair.ShaddowA.transform = CGAffineTransformIdentity;
+			SpawnedPair.ShaddowA.transform = spawnedShapeRotateTransformA;
+			
+			SpawnedPair.ShaddowB.transform = CGAffineTransformIdentity;
+			SpawnedPair.ShaddowB.transform = spawnedShapeRotateTransformA;
+			
+			menuView.center = menuViewCenter;
+			menuView.center = CGPointMake(menuView.center.x + 130, menuView.center.y - 105);
+			
             break;
         case UIInterfaceOrientationLandscapeLeft:
             [itemCollection SetGravity:right];
+			
+			[backGround.image release];
+			backGround.image = [[UIImage imageNamed:@"rotatedSide.png"] retain];
+			[self.view addSubview:backGround];
+			[self.view sendSubviewToBack:backGround];
+			[self.view sendSubviewToBack:buttonMenu];
+			menuView.transform = CGAffineTransformIdentity;
+			menuView.transform = CGAffineTransformRotate(menuView.transform, rotate_xDegrees(270));
+			
+			SpawnedPair.ItemA.transform = CGAffineTransformIdentity;
+			spawnedShapeRotateTransformA = CGAffineTransformRotate(SpawnedPair.ShaddowA.transform, rotate_xDegrees(270));
+			SpawnedPair.ItemA.transform = spawnedShapeRotateTransformA;
+			
+			SpawnedPair.ItemB.transform = CGAffineTransformIdentity;
+			SpawnedPair.ItemB.transform = spawnedShapeRotateTransformA;
+			
+			SpawnedPair.ShaddowA.transform = CGAffineTransformIdentity;
+			SpawnedPair.ShaddowA.transform = spawnedShapeRotateTransformA;
+			
+			SpawnedPair.ShaddowB.transform = CGAffineTransformIdentity;
+			SpawnedPair.ShaddowB.transform = spawnedShapeRotateTransformA;
+			
+			menuView.center = menuViewCenter;
+			menuView.center = CGPointMake(menuView.center.x + 80, menuView.center.y - 105);
             break;
         case UIInterfaceOrientationPortrait:
             [itemCollection SetGravity:down];
+			
+			[backGround.image release];
+			backGround.image = [[UIImage imageNamed:@"gameBoardGrid.png"] retain];
+			[self.view addSubview:backGround];
+			[self.view sendSubviewToBack:backGround];
+			[self.view sendSubviewToBack:buttonMenu];
+			menuView.transform = CGAffineTransformIdentity;
+			SpawnedPair.ItemA.transform = CGAffineTransformIdentity;
+			SpawnedPair.ItemB.transform = CGAffineTransformIdentity;
+			SpawnedPair.ShaddowA.transform = CGAffineTransformIdentity;
+			SpawnedPair.ShaddowB.transform = CGAffineTransformIdentity;
+			menuView.center = menuViewCenter;
             break;
         case UIInterfaceOrientationPortraitUpsideDown:
             [itemCollection SetGravity:up];
+			
+			[backGround.image release];
+			backGround.image = [[UIImage imageNamed:@"upsideDownBack.png"] retain];
+			[self.view addSubview:backGround];
+			[self.view sendSubviewToBack:backGround];
+			[self.view sendSubviewToBack:buttonMenu];
+			menuView.transform = CGAffineTransformIdentity;
+			menuView.transform = CGAffineTransformRotate(menuView.transform, rotate_xDegrees(180));
+			
+			SpawnedPair.ItemA.transform = CGAffineTransformIdentity;
+			spawnedShapeRotateTransformA = CGAffineTransformRotate(SpawnedPair.ShaddowA.transform, rotate_xDegrees(180));
+			SpawnedPair.ItemA.transform = spawnedShapeRotateTransformA;
+			
+			SpawnedPair.ItemB.transform = CGAffineTransformIdentity;
+			SpawnedPair.ItemB.transform = spawnedShapeRotateTransformA;
+			
+			SpawnedPair.ShaddowA.transform = CGAffineTransformIdentity;
+			SpawnedPair.ShaddowA.transform = spawnedShapeRotateTransformA;
+			
+			SpawnedPair.ShaddowB.transform = CGAffineTransformIdentity;
+			SpawnedPair.ShaddowB.transform = spawnedShapeRotateTransformA;
+			
+			menuView.center = menuViewCenter;
             break;            
         default:
             break;
@@ -288,7 +333,6 @@
 	[SpawnedPair release];
 	[itemCollection cleanBoard];
 	[itemCollection release];
-	[TouchTimer release];
 	SpawnedPair = nil;
 	itemCollection = nil;
 	TouchTimer = nil;
@@ -300,13 +344,14 @@
 -(IBAction)ClickButtonMenu{
     menuView.hidden = FALSE;
     menuView.userInteractionEnabled = TRUE;
-    [self.view bringSubviewToFront:menuView];
+	[self.view bringSubviewToFront:menuView];
+	
     NSLog(@"Button Clicked");
     
 }
 -(IBAction)ClickButtonResume {
     menuView.hidden = TRUE;
-    menuView.userInteractionEnabled = FALSE;
+    
     
 }
 -(IBAction)ClickButtonOptions{
@@ -350,12 +395,6 @@
 	return sqrt(x * x + y * y);
 }
 
-
-#define HORIZ_SWIPE_DRAG_MIN  55
-#define VERT_SWIPE_DRAG_MAX    15
-
-#define VERT_SWIPE_DRAG_MIN  55
-#define HORIZ_SWIPE_DRAG_MAX    15
 
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
 	UITouch *touch = [[event allTouches] anyObject];
@@ -418,22 +457,27 @@
 		
 	}
 	
-	if([[touch view] isKindOfClass: [Shape class]] && appDelegate.isAttaching == YES){
-		appDelegate.isAttaching = NO;
-		[powerItem makeAnchor:(Shape *)[touch view]];
+	if([[touch view] isKindOfClass: [Shape class]]){
+		if(appDelegate.isAttaching == YES){
+			appDelegate.isAttaching = NO;
+			[powerItem makeAnchor:(Shape *)[touch view]];
+			
+		}
+		if(appDelegate.isFiltering == YES){
+			appDelegate.isFiltering = NO;
+			[powerItem makeFilter:(Shape *)[touch view]];
+			
+		}
+		if(appDelegate.isUpgrading == YES){
+			appDelegate.isUpgrading = NO;
+			[powerItem makeUpgrader:(Shape *)[touch view]];
+			
+			
+		}
 		
 	}
-	if([[touch view] isKindOfClass: [Shape class]] && appDelegate.isFiltering == YES){
-		appDelegate.isFiltering = NO;
-		[powerItem makeFilter:(Shape *)[touch view]];
-
-	}
-	if([[touch view] isKindOfClass: [Shape class]] && appDelegate.isUpgrading == YES){
-		appDelegate.isUpgrading = NO;
-		[powerItem makeUpgrader:(Shape *)[touch view]];
-
-		
-	}
+	
+	
 	
 }
 
@@ -451,24 +495,14 @@
             shape.tapped = 0;
         }
     }
-    if([[touch view] isMemberOfClass:[UIImageView class]] && [touch view] != backGround && appDelegate.isAttaching == NO)
+    if([[touch view] isMemberOfClass:[DrawingView class]] && [touch view] != backGround && touchDistanceToItemC < 50.0f)
     {
-        [SpawnedPair move:[touch locationInView: self.view] :(UIImageView *)[touch view]];
-        [itemCollection DrawShadowForItemPair:SpawnedPair];
+        
+		[SpawnedPair airMove:[touch locationInView:[self view]]];
+		SpawnedPair.ItemC.alpha = 0.7f;
+		[itemCollection DrawShadowForItemPair:SpawnedPair];
+		
     }
-	
-	else{
-		
-		touchDistanceToItemC = [self isTouchWithinRange:[touch locationInView:self.view] from:SpawnedPair.ItemC.center];
-		if(touchDistanceToItemC < 50.0f){
-			[SpawnedPair airMove:[touch locationInView:[self view]]];
-			SpawnedPair.ItemC.alpha = 0.7f;
-			[itemCollection DrawShadowForItemPair:SpawnedPair];
-		}
-		
-		
-	}
-	
 	
 	
 }
@@ -479,33 +513,12 @@
 
 - (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event {
 	UITouch *touch = [[event allTouches] anyObject];
-	//Rama_BlocksAppDelegate * appDelegate =  (Rama_BlocksAppDelegate *)[[UIApplication sharedApplication] delegate];
 	SpawnedPair.ItemC.alpha = 0.1f;
-	/*
-	 if(![[touch view] isKindOfClass: [Shape class]]  && appDelegate.isAttaching == NO && [self isTouchWithinRange: startTouchPosition from: SpawnedPair.ItemC.center] < 160.0f && [self isTouchWithinRange: startTouchPosition from: SpawnedPair.ItemC.center] > 55.0f ){
-	 
-	 if (fabsf(startTouchPosition.x - currentTouchPosition.x) >= HORIZ_SWIPE_DRAG_MIN && fabsf(startTouchPosition.y - currentTouchPosition.y) <= VERT_SWIPE_DRAG_MAX){
-	 [SpawnedPair rotate:SpawnedPair.ItemA];
-	 SpawnedPair.ItemC.center = [drawingView makeCirclePoint:SpawnedPair.ItemA.center :SpawnedPair.ItemB.center];
-	 
-	 }
-	 
-	 }
-	 
-	 if(![[touch view] isKindOfClass: [Shape class]] && appDelegate.isAttaching == NO && [self isTouchWithinRange: startTouchPosition from: SpawnedPair.ItemC.center] < 130.0f && [self isTouchWithinRange: startTouchPosition from: SpawnedPair.ItemC.center] > 50.0f ){
-	 
-	 if (fabsf(startTouchPosition.y - currentTouchPosition.y) >= VERT_SWIPE_DRAG_MIN && fabsf(startTouchPosition.x - currentTouchPosition.x) <= HORIZ_SWIPE_DRAG_MAX){
-	 [SpawnedPair rotate:SpawnedPair.ItemB];
-	 SpawnedPair.ItemC.center = [drawingView makeCirclePoint:SpawnedPair.ItemA.center :SpawnedPair.ItemB.center];
-	 
-	 }
-	 
-	 }
-	 */
+	
 	
 	/* Shape was touched */
 	
-	if([SpawnedPair IsInGrid])
+	if([SpawnedPair IsInGrid] && [touch view] != backGround)
 	{
 		if([itemCollection AddItemPair:SpawnedPair])
 		{
@@ -521,14 +534,14 @@
 		}
 	}
 	
-	if([[touch view] isKindOfClass: [GameItem class]] && ![[touch view] isKindOfClass: [LockShape class]] )
-	{
-		GameItem * item = (GameItem *)[touch view];
+	if([[touch view] isKindOfClass: [GameItem class]] && ![[touch view] isKindOfClass: [LockShape class]]){
+	GameItem * item = (GameItem *)[touch view];
 		
-		if(SpawnedPair.ItemA.IsPaired && [self isTouchWithinRange: startTouchPosition from: SpawnedPair.ItemC.center] < 50.0f )
-		{
+		if(SpawnedPair.ItemA.IsPaired && [self isTouchWithinRange: startTouchPosition from: SpawnedPair.ItemC.center] < 50.0f && ![[touch view] isKindOfClass: [LockShape class]] && [[touch view] isKindOfClass: [GameItem class]]){
+			
+		
 			if (item.tapped == 1) 
-            {
+			{
 				item.tapped = 0;
 				
 				[SpawnedPair rotate:SpawnedPair.ItemA];
@@ -539,63 +552,48 @@
 				
 			}
 		}else
-        {
-            if(item.tapped > 0)
-            {
-                item.tapped = 0;
-                if([itemCollection TransformItem:item])
-                {	
+		{
+			if(item.tapped > 0)
+			{
+				item.tapped = 0;
+				if([itemCollection TransformItem:item])
+				{	
 					
-                }
-            }
-            else
-            {
-                if([itemCollection CheckSolution])
-                {
-                    [audio playVictory];
-                    Rama_BlocksAppDelegate * appDelegate =  (Rama_BlocksAppDelegate *)[[UIApplication sharedApplication] delegate];
-                    [self SaveState];
-                    if([gameState.currentLevel intValue] == [gameState.highestLevel intValue] && [gameState.highestLevel intValue] < 10)
-                    {
-                        
-                        LevelStatistics * stat = [appDelegate CreatePlayedLevel];
-                        stat.Level = [NSNumber numberWithInt:[gameState.currentLevel intValue]];
-                        stat.numberOfMoves = gameState.currentBoard.numberOfMovies;
-                        stat.numberOfTransforms = gameState.currentBoard.numberOfTransforms;
-                        stat.numerOfAttempts = gameState.currentBoard.numberOfAttempts;
-                        stat.timeToComplete = gameState.currentBoard.timePlayed;
-                        [gameState addPlayedLevelsObject:stat];
-                        gameState.highestLevel = [NSNumber numberWithInt:[gameState.highestLevel intValue] +1];
-                        gameState.currentLevel = [NSNumber numberWithInt:[gameState.highestLevel intValue]   ];
-                    }
-                    
-                    gameState.currentBoard.Active = [NSNumber numberWithBool:NO];
-                    [self dismissModalViewControllerAnimated:YES];
-                }
+				}
+			}
+			else
+			{
+				if([itemCollection CheckSolution])
+				{
+					[audio playVictory];
+					Rama_BlocksAppDelegate * appDelegate =  (Rama_BlocksAppDelegate *)[[UIApplication sharedApplication] delegate];
+					[self SaveState];
+					if([gameState.currentLevel intValue] == [gameState.highestLevel intValue] && [gameState.highestLevel intValue] < 10)
+					{
+						
+						LevelStatistics * stat = [appDelegate CreatePlayedLevel];
+						stat.Level = [NSNumber numberWithInt:[gameState.currentLevel intValue]];
+						stat.numberOfMoves = gameState.currentBoard.numberOfMovies;
+						stat.numberOfTransforms = gameState.currentBoard.numberOfTransforms;
+						stat.numerOfAttempts = gameState.currentBoard.numberOfAttempts;
+						stat.timeToComplete = gameState.currentBoard.timePlayed;
+						[gameState addPlayedLevelsObject:stat];
+						gameState.highestLevel = [NSNumber numberWithInt:[gameState.highestLevel intValue] +1];
+						gameState.currentLevel = [NSNumber numberWithInt:[gameState.highestLevel intValue]   ];
+					}
+					
+					gameState.currentBoard.Active = [NSNumber numberWithBool:NO];
+					[self dismissModalViewControllerAnimated:YES];
+				}
 				
-                //attemptsString.text = [[NSString alloc] initWithFormat:@" %d\n", currentLevel.attempts];
-            }
-        }
+				//attemptsString.text = [[NSString alloc] initWithFormat:@" %d\n", currentLevel.attempts];
+			}
+		}
+	
 	}
-    if([[touch view] isMemberOfClass:[UIView class]] && [touch view] != backGround)
-    {
-        if([SpawnedPair IsInGrid])
-        {
-            if([itemCollection AddItemPair:SpawnedPair])
-            {
-				SpawnedPair.ItemC = nil;
-				[SpawnedPair.ItemC release];
-				[SpawnedPair.ItemC removeFromSuperview];
-                [self SpawnShapes];
-				
-				
-            }else
-            {
-                [self ResetShapePair:SpawnedPair];
-            }
-        }
-    }
+	
     [itemCollection ClearSolution];
+	[NSTimer release];
 }
 
 

@@ -59,7 +59,6 @@
 			Cell *removeCell = [self GetCell:row :column];
 			[removeCell.ItemInCell removeFromSuperview];
 			removeCell.ItemInCell = nil;
-			//[removeCell.ItemInCell release];
 			
 			
 		}
@@ -123,8 +122,8 @@
 	columnB = (int)(itemPair.ItemB.center.x - GRID_LEFT_EDGE ) / (int)SHAPE_WIDTH;
 	
 	// Which column is each item in
-	rowA = (int)(GRID_Y_BOTTOM - itemPair.ItemA.center.y + (SHAPE_WIDTH / 2)) / (int)SHAPE_WIDTH;
-	rowB = (int)(GRID_Y_BOTTOM - itemPair.ItemB.center.y + (SHAPE_WIDTH / 2)) / (int)SHAPE_WIDTH;
+	rowA = (int)(GRID_Y_BOTTOM - 6 - itemPair.ItemA.center.y + (SHAPE_WIDTH / 2)) / (int)SHAPE_WIDTH;
+	rowB = (int)(GRID_Y_BOTTOM - 6 -itemPair.ItemB.center.y + (SHAPE_WIDTH / 2)) / (int)SHAPE_WIDTH;
 	if(rowA >= NUMBER_OF_ROWS)
     {
         rowA = NUMBER_OF_ROWS - 1;
@@ -269,8 +268,6 @@
 	return TRUE;
 }
 
-
-
 /**************************************
  TRANSFORMS
  **************************************/
@@ -302,7 +299,6 @@
 			
 			
 			[NSTimer timerWithTimeInterval:1 invocation:animateInvocation repeats:NO];
-			//[NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(RemoveFromCellsAndRefactor) userInfo:transFormGroup repeats:NO];
 			[NSTimer release];
 			
 			
@@ -323,6 +319,7 @@
         }
         [transFormGroup removeAllObjects];
 		transFormGroup = nil;
+		[transFormGroup release];
         [self ApplyGravity];
     }
     return couldTransform;
@@ -361,6 +358,26 @@
 			
 			
 			[UIView commitAnimations]; 
+			piece1 = nil;
+			piece2 = nil;
+			piece3 = nil;
+			piece4 = nil;
+			piece5 = nil;
+			
+			[piece1 release];
+			[piece2 release];
+			[piece3 release];
+			[piece4 release];
+			[piece5 release];
+			
+			[piece1 dealloc];
+			[piece2 dealloc];
+			[piece3 dealloc];
+			[piece4 dealloc];
+			[piece5 dealloc];
+			
+			cell.ItemInCell = nil;
+			[cell.ItemInCell release];
 		}
 		if(shape.colorType == Green){
 			cell.ItemInCell.ItemView.image = nil; 
@@ -392,6 +409,26 @@
 			
 			
 			[UIView commitAnimations]; 
+			piece1 = nil;
+			piece2 = nil;
+			piece3 = nil;
+			piece4 = nil;
+			piece5 = nil;
+			
+			[piece1 release];
+			[piece2 release];
+			[piece3 release];
+			[piece4 release];
+			[piece5 release];
+			
+			[piece1 dealloc];
+			[piece2 dealloc];
+			[piece3 dealloc];
+			[piece4 dealloc];
+			[piece5 dealloc];
+			
+			cell.ItemInCell = nil;
+			[cell.ItemInCell release];
 		}
 		if(shape.colorType == Blue){
 			cell.ItemInCell.ItemView.image = nil; 
@@ -423,6 +460,26 @@
 			
 			
 			[UIView commitAnimations]; 
+			piece1 = nil;
+			piece2 = nil;
+			piece3 = nil;
+			piece4 = nil;
+			piece5 = nil;
+			
+			[piece1 release];
+			[piece2 release];
+			[piece3 release];
+			[piece4 release];
+			[piece5 release];
+			
+			[piece1 dealloc];
+			[piece2 dealloc];
+			[piece3 dealloc];
+			[piece4 dealloc];
+			[piece5 dealloc];
+			
+			cell.ItemInCell = nil;
+			[cell.ItemInCell release];
 		}
 		if(shape.colorType == Yellow){
 			cell.ItemInCell.ItemView.image = nil; 
@@ -454,6 +511,27 @@
 			
 			
 			[UIView commitAnimations]; 
+			
+			piece1 = nil;
+			piece2 = nil;
+			piece3 = nil;
+			piece4 = nil;
+			piece5 = nil;
+			
+			[piece1 release];
+			[piece2 release];
+			[piece3 release];
+			[piece4 release];
+			[piece5 release];
+			
+			[piece1 dealloc];
+			[piece2 dealloc];
+			[piece3 dealloc];
+			[piece4 dealloc];
+			[piece5 dealloc];
+			
+			cell.ItemInCell = nil;
+			[cell.ItemInCell release];
 		}
 		if(shape.colorType == Purple){
 			cell.ItemInCell.ItemView.image = nil; 
@@ -507,6 +585,7 @@
 			[cell.ItemInCell release];
 			
 		}
+		
 		
 	}
 	
@@ -578,9 +657,6 @@
 	return [self CheckTransform:shape.Row : shape.Column];
 }
 
-
-
-
 /**************************************
  GRAVITY
  **************************************/
@@ -646,9 +722,6 @@
             break;
     }
 }
-
-
-
 
 -(void)ApplyGravityToCell:(Cell *)cell{
     if(cell.ItemInCell !=nil)
@@ -744,7 +817,6 @@
     }
 }
 
-
 /**************************************
  Solution
  **************************************/
@@ -812,35 +884,6 @@
 	item.Column = cell.Column;
 	[UIView commitAnimations];
 }
-
-/*
--(void)setShuffledArray:(NSMutableArray *)shuffledPieces{
-    
-	int i = 0;
-	int numberOfShapes = [shuffledPieces count];
-
-	for (row = 0; row <= NUMBER_OF_ROWS; row++) {
-		for (column =0; column <= NUMBER_OF_COLUMNS; column++) {
-			
-			if(i < numberOfShapes){
-				Cell *placedCell = [self GetCell:row :column];
-				Shape *shuffleShape = [shuffledPieces objectAtIndex:i];
-				[shuffleShape ChangeColorAndShape:shuffleShape.colorType :shuffleShape.shapeType];
-				placedCell.ItemInCell = shuffleShape;
-				placedCell.ItemInCell.ItemView = shuffleShape.ItemView;
-				[self ApplyGravity];
-
-			}
-			i++;
-			
-			
-		}
-	}
-	NSLog(@"adding");
-
-	
-}
-*/
 
 -(void)setShuffledArray:(NSMutableArray *)shuffledPieces{
     

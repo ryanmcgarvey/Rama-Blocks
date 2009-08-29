@@ -26,7 +26,7 @@
 
 - (void)drawRect:(CGRect)rect {
     CGContextRef ctx = UIGraphicsGetCurrentContext();
-    CGContextClearRect(ctx, rect);
+    //CGContextClearRect(ctx, rect);
 	//CGContextSetRGBStrokeColor(ctx, 0, 0, 0, 1);
 	CGContextSetRGBFillColor(ctx, 255, 255, 255, 1);
 	CGContextFillEllipseInRect(ctx, CGRectMake(.5f, .5f, 90, 90));

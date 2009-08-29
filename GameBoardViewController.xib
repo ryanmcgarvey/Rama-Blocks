@@ -138,7 +138,7 @@
 								<reference key="IBUINormalTitleShadowColor" ref="17469997"/>
 							</object>
 						</object>
-						<string key="NSFrame">{{195, 217}, {125, 212}}</string>
+						<string key="NSFrame">{{0, 102}, {125, 196}}</string>
 						<reference key="NSSuperview" ref="191373211"/>
 						<object class="NSColor" key="IBUIBackgroundColor">
 							<int key="NSColorSpace">2</int>
@@ -150,7 +150,7 @@
 					<object class="IBUIButton" id="188537377">
 						<reference key="NSNextResponder" ref="191373211"/>
 						<int key="NSvFlags">292</int>
-						<string key="NSFrame">{{265, 428}, {49, 43}}</string>
+						<string key="NSFrame">{{0, 58}, {49, 43}}</string>
 						<reference key="NSSuperview" ref="191373211"/>
 						<bool key="IBUIOpaque">NO</bool>
 						<bool key="IBUIClearsContextBeforeDrawing">NO</bool>
@@ -166,24 +166,10 @@
 						</object>
 						<reference key="IBUINormalTitleShadowColor" ref="17469997"/>
 					</object>
-					<object class="IBUIImageView" id="234915929">
-						<reference key="NSNextResponder" ref="191373211"/>
-						<int key="NSvFlags">292</int>
-						<string key="NSFrame">{{0, 395}, {320, 92}}</string>
-						<reference key="NSSuperview" ref="191373211"/>
-						<bool key="IBUIOpaque">NO</bool>
-						<bool key="IBUIClearsContextBeforeDrawing">NO</bool>
-						<int key="IBUIContentMode">4</int>
-						<bool key="IBUIUserInteractionEnabled">NO</bool>
-						<object class="NSCustomResource" key="IBUIImage">
-							<string key="NSClassName">NSImage</string>
-							<string key="NSResourceName">lockSet.png</string>
-						</object>
-					</object>
 					<object class="IBUIButton" id="762797150">
 						<reference key="NSNextResponder" ref="191373211"/>
 						<int key="NSvFlags">292</int>
-						<string key="NSFrame">{{215, 58}, {99, 50}}</string>
+						<string key="NSFrame">{{182, 58}, {66, 50}}</string>
 						<reference key="NSSuperview" ref="191373211"/>
 						<bool key="IBUIOpaque">NO</bool>
 						<bool key="IBUIClearsContextBeforeDrawing">NO</bool>
@@ -206,29 +192,6 @@
 							<string key="NSClassName">NSImage</string>
 							<string key="NSResourceName">Discard.png</string>
 						</object>
-					</object>
-					<object class="IBUILabel" id="339875644">
-						<reference key="NSNextResponder" ref="191373211"/>
-						<int key="NSvFlags">292</int>
-						<string key="NSFrame">{{224, 66}, {81, 33}}</string>
-						<reference key="NSSuperview" ref="191373211"/>
-						<bool key="IBUIOpaque">NO</bool>
-						<bool key="IBUIClipsSubviews">YES</bool>
-						<bool key="IBUIUserInteractionEnabled">NO</bool>
-						<string key="IBUIText">Discard</string>
-						<object class="NSFont" key="IBUIFont">
-							<string key="NSName">WalkwayUltraBoldRevOblique</string>
-							<double key="NSSize">1.700000e+01</double>
-							<int key="NSfFlags">16</int>
-						</object>
-						<object class="NSColor" key="IBUITextColor">
-							<int key="NSColorSpace">1</int>
-							<bytes key="NSRGB">MC4yNjM5ODg0NCAwLjEyMjY3MjgzIDAuMzE1MjE3MzgAA</bytes>
-						</object>
-						<nil key="IBUIHighlightedColor"/>
-						<int key="IBUIBaselineAdjustment">1</int>
-						<float key="IBUIMinimumFontSize">1.000000e+01</float>
-						<int key="IBUITextAlignment">1</int>
 					</object>
 				</object>
 				<string key="NSFrameSize">{320, 480}</string>
@@ -341,14 +304,6 @@
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBCocoaTouchOutletConnection" key="connection">
-						<string key="label">lockSet</string>
-						<reference key="source" ref="372490531"/>
-						<reference key="destination" ref="234915929"/>
-					</object>
-					<int key="connectionID">53</int>
-				</object>
-				<object class="IBConnectionRecord">
-					<object class="IBCocoaTouchOutletConnection" key="connection">
 						<string key="label">backGround</string>
 						<reference key="source" ref="372490531"/>
 						<reference key="destination" ref="568319411"/>
@@ -363,6 +318,14 @@
 						<int key="IBEventType">1</int>
 					</object>
 					<int key="connectionID">57</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchOutletConnection" key="connection">
+						<string key="label">discard</string>
+						<reference key="source" ref="372490531"/>
+						<reference key="destination" ref="762797150"/>
+					</object>
+					<int key="connectionID">58</int>
 				</object>
 			</object>
 			<object class="IBMutableOrderedSet" key="objectRecords">
@@ -382,11 +345,9 @@
 						<object class="NSMutableArray" key="children">
 							<bool key="EncodedWithXMLCoder">YES</bool>
 							<reference ref="568319411"/>
-							<reference ref="234915929"/>
 							<reference ref="188537377"/>
 							<reference ref="125638931"/>
 							<reference ref="762797150"/>
-							<reference ref="339875644"/>
 						</object>
 						<reference key="parent" ref="317526666"/>
 					</object>
@@ -444,18 +405,8 @@
 						<reference key="parent" ref="191373211"/>
 					</object>
 					<object class="IBObjectRecord">
-						<int key="objectID">46</int>
-						<reference key="object" ref="234915929"/>
-						<reference key="parent" ref="191373211"/>
-					</object>
-					<object class="IBObjectRecord">
 						<int key="objectID">55</int>
 						<reference key="object" ref="762797150"/>
-						<reference key="parent" ref="191373211"/>
-					</object>
-					<object class="IBObjectRecord">
-						<int key="objectID">56</int>
-						<reference key="object" ref="339875644"/>
 						<reference key="parent" ref="191373211"/>
 					</object>
 				</object>
@@ -476,9 +427,7 @@
 					<string>25.IBPluginDependency</string>
 					<string>42.IBPluginDependency</string>
 					<string>45.IBPluginDependency</string>
-					<string>46.IBPluginDependency</string>
 					<string>55.IBPluginDependency</string>
-					<string>56.IBPluginDependency</string>
 				</object>
 				<object class="NSMutableArray" key="dict.values">
 					<bool key="EncodedWithXMLCoder">YES</bool>
@@ -517,8 +466,6 @@
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
-					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
-					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 				</object>
 			</object>
 			<object class="NSMutableDictionary" key="unlocalizedProperties">
@@ -541,7 +488,7 @@
 				</object>
 			</object>
 			<nil key="sourceID"/>
-			<int key="maxID">57</int>
+			<int key="maxID">58</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<object class="NSMutableArray" key="referencedPartialClassDescriptions">
@@ -576,11 +523,11 @@
 							<bool key="EncodedWithXMLCoder">YES</bool>
 							<string>attemptsString</string>
 							<string>backGround</string>
-							<string>bullshit</string>
 							<string>buttonMainMenu</string>
 							<string>buttonMenu</string>
 							<string>buttonOptions</string>
 							<string>buttonResume</string>
+							<string>discard</string>
 							<string>lockSet</string>
 							<string>menuView</string>
 							<string>timeToDrop</string>
@@ -589,7 +536,7 @@
 							<bool key="EncodedWithXMLCoder">YES</bool>
 							<string>UILabel</string>
 							<string>UIImageView</string>
-							<string>UILabel</string>
+							<string>UIButton</string>
 							<string>UIButton</string>
 							<string>UIButton</string>
 							<string>UIButton</string>
