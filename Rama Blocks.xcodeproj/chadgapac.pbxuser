@@ -182,7 +182,7 @@
 	29B97313FDCFA39411CA2CEA /* Project object */ = {
 		activeBuildConfigurationName = Debug;
 		activeExecutable = C21FB30F103202CD00C1D29B /* Rama Blocks */;
-		activeSDKPreference = iphonesimulator3.0;
+		activeSDKPreference = iphoneos3.0;
 		activeTarget = 1D6058900D05DD3D006BFB54 /* Rama Blocks */;
 		addToTargets = (
 			1D6058900D05DD3D006BFB54 /* Rama Blocks */,
@@ -405,6 +405,7 @@
 			C26BBF1B1049D21100FFFDE6 /* PBXTextBookmark */ = C26BBF1B1049D21100FFFDE6 /* PBXTextBookmark */;
 			C26BBF1F1049D26F00FFFDE6 /* PBXTextBookmark */ = C26BBF1F1049D26F00FFFDE6 /* PBXTextBookmark */;
 			C26BBF211049D2B500FFFDE6 /* PBXTextBookmark */ = C26BBF211049D2B500FFFDE6 /* PBXTextBookmark */;
+			C26BBF251049D39B00FFFDE6 /* PBXTextBookmark */ = C26BBF251049D39B00FFFDE6 /* PBXTextBookmark */;
 		};
 		sourceControlManager = C21FB321103202EA00C1D29B /* Source Control */;
 		userBuildSettings = {
@@ -1486,6 +1487,16 @@
 		vrLen = 2602;
 		vrLoc = 12348;
 	};
+	C26BBF251049D39B00FFFDE6 /* PBXTextBookmark */ = {
+		isa = PBXTextBookmark;
+		fRef = FCEF16FA10214F0400A71C1C /* MainMenuViewController.m */;
+		name = "MainMenuViewController.m: 390";
+		rLen = 0;
+		rLoc = 14280;
+		rType = 0;
+		vrLen = 2690;
+		vrLoc = 12348;
+	};
 	C28096761044101E00240716 /* scrap.applescript */ = {
 		uiCtxt = {
 			sepNavIntBoundsRect = "{{0, 0}, {1036, 742}}";
@@ -1702,7 +1713,7 @@
 		uiCtxt = {
 			sepNavIntBoundsRect = "{{0, 0}, {1096, 6370}}";
 			sepNavSelRange = "{14280, 0}";
-			sepNavVisRange = "{12348, 2602}";
+			sepNavVisRange = "{12348, 2690}";
 		};
 	};
 	FCEF16FB10214F0400A71C1C /* GameBoardViewController.h */ = {
