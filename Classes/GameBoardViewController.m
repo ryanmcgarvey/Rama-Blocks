@@ -17,6 +17,7 @@
 
 -(void)SaveState{
     if([gameState.currentBoard.Active boolValue]){
+        
         CFTimeInterval totalTime = CFAbsoluteTimeGetCurrent() - startTime;
         
         [itemCollection SaveState];
@@ -208,8 +209,6 @@
 				[itemCollection SetItemToCell:shape : cell];
 				[self.view addSubview:shape];
 			}
-			
-		
 		}
 		
 		[itemCollection UpdateState];

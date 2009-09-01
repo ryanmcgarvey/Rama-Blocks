@@ -2,8 +2,8 @@
 //  BoardState.h
 //  Rama Blocks
 //
-//  Created by Ryan McGarvey on 8/31/09.
-//  Copyright 2009 Simplical. All rights reserved.
+//  Created by Chad Gapac on 8/29/09.
+//  Copyright 2009 __MyCompanyName__. All rights reserved.
 //
 
 #import <CoreData/CoreData.h>
@@ -15,11 +15,11 @@
 {
 }
 
-@property (nonatomic, retain) NSNumber * Active;
-@property (nonatomic, retain) NSNumber * timePlayed;
 @property (nonatomic, retain) NSNumber * numberOfAttempts;
 @property (nonatomic, retain) NSNumber * numberOfMovies;
 @property (nonatomic, retain) NSNumber * numberOfTransforms;
+@property (nonatomic, retain) NSNumber * Active;
+@property (nonatomic, retain) NSNumber * timePlayed;
 @property (nonatomic, retain) GameState * owningGameState;
 @property (nonatomic, retain) NSSet* items;
 

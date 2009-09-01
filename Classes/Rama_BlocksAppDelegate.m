@@ -115,8 +115,6 @@
             [gameState.currentBoard addItemsObject:item];
             
         }
-
-
         [managedObjectContext processPendingChanges];
     }
     return gameState;

@@ -14,10 +14,6 @@
 		288765A50DF7441C002DB57D /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 288765A40DF7441C002DB57D /* CoreGraphics.framework */; };
 		28C3AD8A0F43EF2300507BA6 /* Rama_Blocks.xcdatamodel in Sources */ = {isa = PBXBuildFile; fileRef = 28C3AD890F43EF2300507BA6 /* Rama_Blocks.xcdatamodel */; };
 		28D801B40F44B63D00FB423F /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 28D801B30F44B63D00FB423F /* CoreData.framework */; };
-		C206BCF7104947890048B035 /* GameState.m in Sources */ = {isa = PBXBuildFile; fileRef = C206BCF0104947890048B035 /* GameState.m */; };
-		C206BCF8104947890048B035 /* ItemState.m in Sources */ = {isa = PBXBuildFile; fileRef = C206BCF2104947890048B035 /* ItemState.m */; };
-		C206BCF9104947890048B035 /* BoardState.m in Sources */ = {isa = PBXBuildFile; fileRef = C206BCF4104947890048B035 /* BoardState.m */; };
-		C206BCFA104947890048B035 /* LevelStatistics.m in Sources */ = {isa = PBXBuildFile; fileRef = C206BCF6104947890048B035 /* LevelStatistics.m */; };
 		C206BD1B104954AC0048B035 /* level27.png in Resources */ = {isa = PBXBuildFile; fileRef = C206BD07104954AC0048B035 /* level27.png */; };
 		C206BD1C104954AC0048B035 /* level22.png in Resources */ = {isa = PBXBuildFile; fileRef = C206BD08104954AC0048B035 /* level22.png */; };
 		C206BD1D104954AC0048B035 /* level7.png in Resources */ = {isa = PBXBuildFile; fileRef = C206BD09104954AC0048B035 /* level7.png */; };
@@ -145,6 +141,10 @@
 		FC0B6C0D102537FB00F1BD5E /* correctColor.wav in Resources */ = {isa = PBXBuildFile; fileRef = FC0B6C09102537FB00F1BD5E /* correctColor.wav */; };
 		FC0B6C0E102537FB00F1BD5E /* correctShape.wav in Resources */ = {isa = PBXBuildFile; fileRef = FC0B6C0A102537FB00F1BD5E /* correctShape.wav */; };
 		FC0B6C0F102537FB00F1BD5E /* victory.wav in Resources */ = {isa = PBXBuildFile; fileRef = FC0B6C0B102537FB00F1BD5E /* victory.wav */; };
+		FC384AC1104C97E400E85205 /* GameState.m in Sources */ = {isa = PBXBuildFile; fileRef = FC384ABA104C97E400E85205 /* GameState.m */; };
+		FC384AC2104C97E400E85205 /* ItemState.m in Sources */ = {isa = PBXBuildFile; fileRef = FC384ABC104C97E400E85205 /* ItemState.m */; };
+		FC384AC3104C97E400E85205 /* LevelStatistics.m in Sources */ = {isa = PBXBuildFile; fileRef = FC384ABE104C97E400E85205 /* LevelStatistics.m */; };
+		FC384AC4104C97E400E85205 /* BoardState.m in Sources */ = {isa = PBXBuildFile; fileRef = FC384AC0104C97E400E85205 /* BoardState.m */; };
 		FC4072E4102EC451000B40E8 /* LevelSelect.m in Sources */ = {isa = PBXBuildFile; fileRef = FC4072E2102EC451000B40E8 /* LevelSelect.m */; };
 		FC4366B91024CDA000C1F3BE /* UIImage+Shapes.m in Sources */ = {isa = PBXBuildFile; fileRef = FC4366B71024CDA000C1F3BE /* UIImage+Shapes.m */; };
 		FC4CADC31026101E00C6F863 /* RamaIcon.png in Resources */ = {isa = PBXBuildFile; fileRef = FC4CADC21026101E00C6F863 /* RamaIcon.png */; };
@@ -174,14 +174,6 @@
 		29B97316FDCFA39411CA2CEA /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		32CA4F630368D1EE00C91783 /* Rama_Blocks_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Rama_Blocks_Prefix.pch; sourceTree = "<group>"; };
 		8D1107310486CEB800E47090 /* Rama_Blocks-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "Rama_Blocks-Info.plist"; sourceTree = "<group>"; };
-		C206BCEF104947890048B035 /* GameState.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GameState.h; sourceTree = "<group>"; };
-		C206BCF0104947890048B035 /* GameState.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GameState.m; sourceTree = "<group>"; };
-		C206BCF1104947890048B035 /* ItemState.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ItemState.h; sourceTree = "<group>"; };
-		C206BCF2104947890048B035 /* ItemState.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ItemState.m; sourceTree = "<group>"; };
-		C206BCF3104947890048B035 /* BoardState.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BoardState.h; sourceTree = "<group>"; };
-		C206BCF4104947890048B035 /* BoardState.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BoardState.m; sourceTree = "<group>"; };
-		C206BCF5104947890048B035 /* LevelStatistics.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LevelStatistics.h; sourceTree = "<group>"; };
-		C206BCF6104947890048B035 /* LevelStatistics.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LevelStatistics.m; sourceTree = "<group>"; };
 		C206BD07104954AC0048B035 /* level27.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = level27.png; sourceTree = "<group>"; };
 		C206BD08104954AC0048B035 /* level22.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = level22.png; sourceTree = "<group>"; };
 		C206BD09104954AC0048B035 /* level7.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = level7.png; sourceTree = "<group>"; };
@@ -314,6 +306,14 @@
 		FC0B6C09102537FB00F1BD5E /* correctColor.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = correctColor.wav; sourceTree = "<group>"; };
 		FC0B6C0A102537FB00F1BD5E /* correctShape.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = correctShape.wav; sourceTree = "<group>"; };
 		FC0B6C0B102537FB00F1BD5E /* victory.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = victory.wav; sourceTree = "<group>"; };
+		FC384AB9104C97E400E85205 /* GameState.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GameState.h; sourceTree = "<group>"; };
+		FC384ABA104C97E400E85205 /* GameState.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GameState.m; sourceTree = "<group>"; };
+		FC384ABB104C97E400E85205 /* ItemState.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ItemState.h; sourceTree = "<group>"; };
+		FC384ABC104C97E400E85205 /* ItemState.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ItemState.m; sourceTree = "<group>"; };
+		FC384ABD104C97E400E85205 /* LevelStatistics.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LevelStatistics.h; sourceTree = "<group>"; };
+		FC384ABE104C97E400E85205 /* LevelStatistics.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LevelStatistics.m; sourceTree = "<group>"; };
+		FC384ABF104C97E400E85205 /* BoardState.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BoardState.h; sourceTree = "<group>"; };
+		FC384AC0104C97E400E85205 /* BoardState.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BoardState.m; sourceTree = "<group>"; };
 		FC4072E1102EC451000B40E8 /* LevelSelect.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LevelSelect.h; sourceTree = "<group>"; };
 		FC4072E2102EC451000B40E8 /* LevelSelect.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LevelSelect.m; sourceTree = "<group>"; };
 		FC4366B61024CDA000C1F3BE /* UIImage+Shapes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+Shapes.h"; sourceTree = "<group>"; };
@@ -680,15 +680,15 @@
 		FC0B6C3410253A9100F1BD5E /* State */ = {
 			isa = PBXGroup;
 			children = (
+				FC384AB9104C97E400E85205 /* GameState.h */,
+				FC384ABA104C97E400E85205 /* GameState.m */,
+				FC384ABB104C97E400E85205 /* ItemState.h */,
+				FC384ABC104C97E400E85205 /* ItemState.m */,
+				FC384ABD104C97E400E85205 /* LevelStatistics.h */,
+				FC384ABE104C97E400E85205 /* LevelStatistics.m */,
+				FC384ABF104C97E400E85205 /* BoardState.h */,
+				FC384AC0104C97E400E85205 /* BoardState.m */,
 				28C3AD890F43EF2300507BA6 /* Rama_Blocks.xcdatamodel */,
-				C206BCEF104947890048B035 /* GameState.h */,
-				C206BCF0104947890048B035 /* GameState.m */,
-				C206BCF1104947890048B035 /* ItemState.h */,
-				C206BCF2104947890048B035 /* ItemState.m */,
-				C206BCF3104947890048B035 /* BoardState.h */,
-				C206BCF4104947890048B035 /* BoardState.m */,
-				C206BCF5104947890048B035 /* LevelStatistics.h */,
-				C206BCF6104947890048B035 /* LevelStatistics.m */,
 			);
 			name = State;
 			path = Classes;
@@ -1012,10 +1012,10 @@
 				FC0B6B7C10252E0A00F1BD5E /* SoundPlayer.m in Sources */,
 				FC4072E4102EC451000B40E8 /* LevelSelect.m in Sources */,
 				C2B29073103440D2001B31FA /* DrawingView.m in Sources */,
-				C206BCF7104947890048B035 /* GameState.m in Sources */,
-				C206BCF8104947890048B035 /* ItemState.m in Sources */,
-				C206BCF9104947890048B035 /* BoardState.m in Sources */,
-				C206BCFA104947890048B035 /* LevelStatistics.m in Sources */,
+				FC384AC1104C97E400E85205 /* GameState.m in Sources */,
+				FC384AC2104C97E400E85205 /* ItemState.m in Sources */,
+				FC384AC3104C97E400E85205 /* LevelStatistics.m in Sources */,
+				FC384AC4104C97E400E85205 /* BoardState.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1061,7 +1061,7 @@
 			buildSettings = {
 				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
 				CODE_SIGN_ENTITLEMENTS = dist.plist;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				GCC_C_LANGUAGE_STANDARD = c99;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
@@ -1076,7 +1076,7 @@
 			buildSettings = {
 				ARCHS = "$(ARCHS_UNIVERSAL_IPHONE_OS)";
 				CODE_SIGN_ENTITLEMENTS = dist.plist;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				GCC_C_LANGUAGE_STANDARD = c99;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
