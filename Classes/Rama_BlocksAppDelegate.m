@@ -154,41 +154,6 @@
     return fetchResults;
 }
 
--(NSArray *)FetchCircleStates{
-    
-    [self managedObjectContext];
-    NSError *fetchError = nil;
-    NSArray *fetchResults;
-    
-    
-    NSEntityDescription *entityDescription = [NSEntityDescription
-                                              entityForName:@"ItemState" 
-                                              inManagedObjectContext:managedObjectContext];
-    
-    NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc]
-                                        initWithKey:@"index" ascending:YES];
-    
-    NSPredicate *predicate = [NSPredicate predicateWithFormat:
-                              @"(owningBoardState == %@) and (ItemType == %d) ", gameState.currentBoard, DrawingItem ];
-    
-	
-    NSFetchRequest *request = [[[NSFetchRequest alloc] init] autorelease];
-    
-	
-    
-    [request setEntity:entityDescription];
-    [request setPredicate:predicate];
-    [request setSortDescriptors: [NSArray arrayWithObject:sortDescriptor]];
-	
-    
-    fetchResults = [managedObjectContext 
-                    executeFetchRequest:request 
-                    error:&fetchError];
-    
-    return fetchResults;
-}
-
-
 -(NSArray *)FetchLockItems{
     
     [self managedObjectContext];
@@ -251,6 +216,7 @@
                     error:&fetchError];
     return fetchResults;
 }
+
 -(LevelStatistics *)CreatePlayedLevel{
     [self managedObjectContext];
     LevelStatistics * stat = [NSEntityDescription
@@ -259,6 +225,8 @@
     
     return stat;
 }
+
+
 -(NSArray *)FetchPlayedLevels{
     [self managedObjectContext];
     NSError *fetchError = nil;

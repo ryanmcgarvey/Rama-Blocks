@@ -42,20 +42,26 @@
  GameBoard Behavior
  *****************************************************/
 
-
 -(void)SpawnShapes{
+    
+    Shape * ItemA = [[Shape alloc] initWithInfo:[currentLevel createRandomColor]: [currentLevel createShapeFromCollection] : CGPointMake(SPAWN_LOCATION_X,SPAWN_LOCATION_Y)];
+    Shape * ItemB = [[Shape alloc] initWithInfo:[currentLevel createRandomColor]: [currentLevel createShapeFromCollection] : CGPointMake(SPAWN_LOCATION_X,SPAWN_LOCATION_Y)];
+    [self SpawnShapes:ItemA : ItemB];
+}
+
+-(void)SpawnShapes:(Shape *)ItemA : (Shape *)ItemB{
 	if(SpawnedPair==nil)
     {
 		SpawnedPair = [ItemPair new];
 		nextPair = [ItemPair new];
 		
-		SpawnedPair.ItemA = [[Shape alloc] initWithInfo:[currentLevel createRandomColor]: [currentLevel createShapeFromCollection] : CGPointMake(SPAWN_LOCATION_X,SPAWN_LOCATION_Y)];
-		SpawnedPair.ItemB = [[Shape alloc] initWithInfo:[currentLevel createRandomColor]: [currentLevel createShapeFromCollection] : CGPointMake(SPAWN_LOCATION_X,SPAWN_LOCATION_Y)];
+		SpawnedPair.ItemA = [ItemA retain];
+		SpawnedPair.ItemB = [ItemB retain];
 		
 		nextPair.ItemA = [[Shape alloc] initWithInfo:[currentLevel createRandomColor]: [currentLevel createShapeFromCollection] : CGPointMake(40,40)];
 		nextPair.ItemB = [[Shape alloc] initWithInfo:[currentLevel createRandomColor]: [currentLevel createShapeFromCollection] : CGPointMake(40,40)];
 	}else{
-	
+        
 		[SpawnedPair.ItemA release];
 		SpawnedPair.ItemA = nil;
 		SpawnedPair.ItemA = nextPair.ItemA;
@@ -180,8 +186,15 @@
 	if([gameState.currentBoard.Active boolValue])
 	{
 		//[SpawnedPair.ItemC removeFromSuperview];
-		[self SpawnShapes];
-		
+		        
+        NSArray * spawnedItems = [appDelegate FetchSpawnedItems];
+        ItemState * itemA = [spawnedItems objectAtIndex:0];
+        ItemState * itemB = [spawnedItems objectAtIndex:1];
+        
+        Shape * shapeA = [[[Shape alloc] initWithInfo:[itemA.colorType intValue] :[itemA.shapeType intValue] : CGPointMake(SPAWN_LOCATION_X,SPAWN_LOCATION_Y)]retain];
+        Shape * shapeB = [[[Shape alloc] initWithInfo:[itemB.colorType intValue] :[itemB.shapeType intValue] : CGPointMake(SPAWN_LOCATION_X,SPAWN_LOCATION_Y)]retain];
+		[self SpawnShapes:shapeA : shapeB];
+
 		
 		for(ItemState * item in [appDelegate FetchLockItems])
 		{
