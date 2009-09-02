@@ -23,8 +23,9 @@
 		
 		buttonGraphic = [[UIImageView alloc]init];
 		backGroundMenu = [[UIImageView alloc]init];
+		backGround = [[UIImageView alloc]init];
 		
-		zoomBack = [[UIImageView alloc] initWithFrame:CGRectMake(140, 200, 40, 60)]; 
+		zoomBack = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 320, 480)]; 
 		zoomBack.image = [UIImage imageNamed:@"mainMenuBackGround.png"];
 		zoomBack.alpha = 0.3f;
 		
@@ -389,12 +390,9 @@
 	 
 	 backGround.bounds = CGRectMake(0, 0, 640, 960);
 	 backGround.contentMode = UIViewContentModeScaleToFill;
-	 zoomBack.bounds = CGRectMake(0, 0, 320, 480);
 	 zoomBack.alpha = 1;
-	 zoomBack.center = CGPointMake(zoomBack.center.x,zoomBack.center.y + 10.5);
 	 
 	 [UIView commitAnimations];
-	 
 	 
 	 [NSTimer scheduledTimerWithTimeInterval:2.1f target:self selector:@selector(actualLoadGameBoard) userInfo:nil repeats:NO];
 	 [NSTimer scheduledTimerWithTimeInterval:5 target:self selector:@selector(restoreCenters) userInfo:nil repeats:NO];
