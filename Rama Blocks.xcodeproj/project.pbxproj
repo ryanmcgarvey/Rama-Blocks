@@ -144,7 +144,7 @@
 		FC384AC1104C97E400E85205 /* GameState.m in Sources */ = {isa = PBXBuildFile; fileRef = FC384ABA104C97E400E85205 /* GameState.m */; };
 		FC384AC2104C97E400E85205 /* ItemState.m in Sources */ = {isa = PBXBuildFile; fileRef = FC384ABC104C97E400E85205 /* ItemState.m */; };
 		FC384AC3104C97E400E85205 /* LevelStatistics.m in Sources */ = {isa = PBXBuildFile; fileRef = FC384ABE104C97E400E85205 /* LevelStatistics.m */; };
-		FC384AC4104C97E400E85205 /* BoardState.m in Sources */ = {isa = PBXBuildFile; fileRef = FC384AC0104C97E400E85205 /* BoardState.m */; };
+		FC384B49104DFB9600E85205 /* BoardState.m in Sources */ = {isa = PBXBuildFile; fileRef = FC384B48104DFB9600E85205 /* BoardState.m */; };
 		FC4072E4102EC451000B40E8 /* LevelSelect.m in Sources */ = {isa = PBXBuildFile; fileRef = FC4072E2102EC451000B40E8 /* LevelSelect.m */; };
 		FC4366B91024CDA000C1F3BE /* UIImage+Shapes.m in Sources */ = {isa = PBXBuildFile; fileRef = FC4366B71024CDA000C1F3BE /* UIImage+Shapes.m */; };
 		FC4CADC31026101E00C6F863 /* RamaIcon.png in Resources */ = {isa = PBXBuildFile; fileRef = FC4CADC21026101E00C6F863 /* RamaIcon.png */; };
@@ -312,8 +312,8 @@
 		FC384ABC104C97E400E85205 /* ItemState.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ItemState.m; sourceTree = "<group>"; };
 		FC384ABD104C97E400E85205 /* LevelStatistics.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LevelStatistics.h; sourceTree = "<group>"; };
 		FC384ABE104C97E400E85205 /* LevelStatistics.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LevelStatistics.m; sourceTree = "<group>"; };
-		FC384ABF104C97E400E85205 /* BoardState.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BoardState.h; sourceTree = "<group>"; };
-		FC384AC0104C97E400E85205 /* BoardState.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BoardState.m; sourceTree = "<group>"; };
+		FC384B47104DFB9600E85205 /* BoardState.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BoardState.h; sourceTree = "<group>"; };
+		FC384B48104DFB9600E85205 /* BoardState.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BoardState.m; sourceTree = "<group>"; };
 		FC4072E1102EC451000B40E8 /* LevelSelect.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LevelSelect.h; sourceTree = "<group>"; };
 		FC4072E2102EC451000B40E8 /* LevelSelect.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LevelSelect.m; sourceTree = "<group>"; };
 		FC4366B61024CDA000C1F3BE /* UIImage+Shapes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+Shapes.h"; sourceTree = "<group>"; };
@@ -680,14 +680,14 @@
 		FC0B6C3410253A9100F1BD5E /* State */ = {
 			isa = PBXGroup;
 			children = (
+				FC384B47104DFB9600E85205 /* BoardState.h */,
+				FC384B48104DFB9600E85205 /* BoardState.m */,
 				FC384AB9104C97E400E85205 /* GameState.h */,
 				FC384ABA104C97E400E85205 /* GameState.m */,
 				FC384ABB104C97E400E85205 /* ItemState.h */,
 				FC384ABC104C97E400E85205 /* ItemState.m */,
 				FC384ABD104C97E400E85205 /* LevelStatistics.h */,
 				FC384ABE104C97E400E85205 /* LevelStatistics.m */,
-				FC384ABF104C97E400E85205 /* BoardState.h */,
-				FC384AC0104C97E400E85205 /* BoardState.m */,
 				28C3AD890F43EF2300507BA6 /* Rama_Blocks.xcdatamodel */,
 			);
 			name = State;
@@ -1015,7 +1015,7 @@
 				FC384AC1104C97E400E85205 /* GameState.m in Sources */,
 				FC384AC2104C97E400E85205 /* ItemState.m in Sources */,
 				FC384AC3104C97E400E85205 /* LevelStatistics.m in Sources */,
-				FC384AC4104C97E400E85205 /* BoardState.m in Sources */,
+				FC384B49104DFB9600E85205 /* BoardState.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -2,7 +2,7 @@
 //  BoardState.h
 //  Rama Blocks
 //
-//  Created by Ryan McGarvey on 9/1/09.
+//  Created by Ryan McGarvey on 8/31/09.
 //  Copyright 2009 Simplical. All rights reserved.
 //
 
