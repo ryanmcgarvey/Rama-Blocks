@@ -934,8 +934,11 @@
 }
 
 - (void)dealloc {
+    for(int i = 0; i <NUMBER_OF_ROWS * NUMBER_OF_COLUMNS; i++)
+    {
+        free(cells[i]);
+    }
     free(cells);
-    
     [solution dealloc];
     [currentLevel dealloc];
     [super dealloc];
