@@ -86,6 +86,7 @@
 
 -(void)resetTap:(NSTimer *)timer;
 -(void)SpawnShapes;
+-(void)SpawnShapes:(Shape *)ItemA : (Shape *)ItemB;
 -(void)ResetShapePair:(ItemPair *)pair;
 -(void)didRotate:(NSNotification *)notification;
 -(void)SaveState;
