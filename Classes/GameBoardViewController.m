@@ -244,8 +244,9 @@
 		
 		
 	}else{
+        [self SpawnShapes];
 		gameState.currentBoard.Active = [NSNumber numberWithBool:YES];
-		[self SpawnShapes];
+		
 		
 	}
 	[currentLevel addSolutionToView:self.view];
