@@ -13,7 +13,7 @@
 
 @implementation MainMenuViewController
 
-@synthesize zoomBack, backGroundMenu;
+@synthesize zoomBack, backGroundMenu, backGround;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil{
     
@@ -387,9 +387,8 @@
 	 [self.view addSubview:zoomBack];
 	 [self.view bringSubviewToFront:zoomBack];
 	 
-	 backGroundMenu.bounds = CGRectMake(0, 0, 640, 960);
-	 backGroundMenu.contentMode = UIViewContentModeScaleToFill;
-	 //backGroundMenu.center = CGPointMake(behindButtonGraphic.center.x,behindButtonGraphic.center.y + 10.5);
+	 backGround.bounds = CGRectMake(0, 0, 640, 960);
+	 backGround.contentMode = UIViewContentModeScaleToFill;
 	 zoomBack.bounds = CGRectMake(0, 0, 320, 480);
 	 zoomBack.alpha = 1;
 	 zoomBack.center = CGPointMake(zoomBack.center.x,zoomBack.center.y + 10.5);
@@ -409,7 +408,7 @@
 	 behindButtonGraphic.center = behindButtonCenter;
 	 [zoomBack removeFromSuperview];
 	 zoomBack.alpha = 0.3f;
-	 backGroundMenu.bounds = CGRectMake(0, 0, 320, 480);
+	 backGround.bounds = CGRectMake(0, 0, 320, 480);
 	 
 	 [level1 removeFromSuperview];
 	 [level2 removeFromSuperview];
@@ -454,7 +453,7 @@
 		
 		if(level > [gameState.highestLevel intValue])
 		{
-			touchedItem.alpha = 0.5f;
+			//touchedItem.alpha = 0.5f;
 			return;
 		}
 		if(level <= [gameState.highestLevel intValue]){

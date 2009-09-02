@@ -67,11 +67,13 @@
 		SpawnedPair.ItemB = nextPair.ItemB;
 		SpawnedPair.ItemB.center = CGPointMake(SPAWN_LOCATION_X + 30.0f ,SPAWN_LOCATION_Y);
 		
-		[nextPair.ItemA release];
+		[nextPair.ItemA removeFromSuperview];
+		//[nextPair.ItemA release];
 		nextPair.ItemA = nil;
 		nextPair.ItemA = [[Shape alloc] initWithInfo:[currentLevel createRandomColor]: [currentLevel createShapeFromCollection] : CGPointMake(50,32)];
 		
-		[nextPair.ItemB release];
+		[nextPair.ItemA removeFromSuperview];
+		//[nextPair.ItemB release];
 		nextPair.ItemB = nil;
 		nextPair.ItemB = [[Shape alloc] initWithInfo:[currentLevel createRandomColor]: [currentLevel createShapeFromCollection] : CGPointMake(80,32)];
 		

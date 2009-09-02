@@ -32,6 +32,7 @@
 	IBOutlet UIImageView *titleGraphic;
 	IBOutlet UIImageView *behindButtonGraphic;
 	IBOutlet UIImageView *backGroundMenu;
+	IBOutlet UIImageView *backGround;
 	
 	UIImageView *zoomBack;
 	UIImageView *levelNumbers;
@@ -79,6 +80,7 @@
 
 @property (nonatomic, retain) UIImageView *zoomBack;
 @property (nonatomic, retain) UIImageView *backGroundMenu;
+@property (nonatomic, retain) UIImageView *backGround;
 
 
 - (IBAction)loadGameBoard:(id)sender;

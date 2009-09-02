@@ -17,6 +17,7 @@
         
 		ItemView = [[UIImageView alloc] initWithFrame:frame];
 		ItemView.image = [UIImage imageNamed:@"ItemC.png"];
+		//ItemView.backgroundColor = [UIColor whiteColor];
 		[self addSubview:ItemView];
     
 	}
