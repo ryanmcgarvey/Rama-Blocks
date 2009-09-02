@@ -13,7 +13,7 @@
 
 @implementation MainMenuViewController
 
-@synthesize zoomBack, backGroundMenu;
+@synthesize zoomBack, backGroundMenu, backGround;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil{
     
@@ -23,8 +23,9 @@
 		
 		buttonGraphic = [[UIImageView alloc]init];
 		backGroundMenu = [[UIImageView alloc]init];
+		backGround = [[UIImageView alloc]init];
 		
-		zoomBack = [[UIImageView alloc] initWithFrame:CGRectMake(140, 200, 40, 60)]; 
+		zoomBack = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 320, 480)]; 
 		zoomBack.image = [UIImage imageNamed:@"mainMenuBackGround.png"];
 		zoomBack.alpha = 0.3f;
 		
@@ -387,15 +388,11 @@
 	 [self.view addSubview:zoomBack];
 	 [self.view bringSubviewToFront:zoomBack];
 	 
-	 backGroundMenu.bounds = CGRectMake(0, 0, 640, 960);
-	 backGroundMenu.contentMode = UIViewContentModeScaleToFill;
-	 //backGroundMenu.center = CGPointMake(behindButtonGraphic.center.x,behindButtonGraphic.center.y + 10.5);
-	 zoomBack.bounds = CGRectMake(0, 0, 320, 480);
+	 backGround.bounds = CGRectMake(0, 0, 640, 960);
+	 backGround.contentMode = UIViewContentModeScaleToFill;
 	 zoomBack.alpha = 1;
-	 zoomBack.center = CGPointMake(zoomBack.center.x,zoomBack.center.y + 10.5);
 	 
 	 [UIView commitAnimations];
-	 
 	 
 	 [NSTimer scheduledTimerWithTimeInterval:2.1f target:self selector:@selector(actualLoadGameBoard) userInfo:nil repeats:NO];
 	 [NSTimer scheduledTimerWithTimeInterval:5 target:self selector:@selector(restoreCenters) userInfo:nil repeats:NO];
@@ -409,7 +406,7 @@
 	 behindButtonGraphic.center = behindButtonCenter;
 	 [zoomBack removeFromSuperview];
 	 zoomBack.alpha = 0.3f;
-	 backGroundMenu.bounds = CGRectMake(0, 0, 320, 480);
+	 backGround.bounds = CGRectMake(0, 0, 320, 480);
 	 
 	 [level1 removeFromSuperview];
 	 [level2 removeFromSuperview];
@@ -454,7 +451,7 @@
 		
 		if(level > [gameState.highestLevel intValue])
 		{
-			touchedItem.alpha = 0.5f;
+			//touchedItem.alpha = 0.5f;
 			return;
 		}
 		if(level <= [gameState.highestLevel intValue]){
