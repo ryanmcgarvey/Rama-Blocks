@@ -57,7 +57,7 @@
 		level5 = [[UIImageView alloc] initWithFrame:CGRectMake(244.5f, 79, 38, 35)]; 
 		level5.image = [UIImage imageNamed:@"level5.png"];
 		level5.center = CGPointMake(level5.center.x - 320,level5.center.y - 250);
-		/*
+		
 		level6 = [[UIImageView alloc] initWithFrame:CGRectMake(60.5f, 134.5f, 23, 26)]; 
 		level6.image = [UIImage imageNamed:@"level6.png"];
 		level6.center = CGPointMake(level6.center.x - 320,level6.center.y - 250);
@@ -122,7 +122,7 @@
 		level21.image = [UIImage imageNamed:@"level21.png"];
 		level21.center = CGPointMake(level21.center.x - 320,level21.center.y - 250);
 		
-		*/
+		
 		
 		[self.view addSubview:levelNumbers];
 		[self.view addSubview:levelSelectText];
@@ -248,7 +248,7 @@
 	level5.center = CGPointMake(level5.center.x + 320,level5.center.y + 250);
 	level5.tag = 5;
 	level5.userInteractionEnabled = TRUE;
-	/*
+	
 	level6.center = CGPointMake(level6.center.x + 320,level6.center.y + 250);
 	level6.tag = 6;
 	level6.userInteractionEnabled = TRUE;
@@ -312,14 +312,14 @@
 	level21.center = CGPointMake(level21.center.x + 320,level21.center.y + 250);
 	level21.tag = 21;
 	level21.userInteractionEnabled = TRUE;
-	*/
+	
 	[self.view addSubview:level1];
 	[self.view addSubview:level2];
 	[self.view addSubview:level3];
 	[self.view addSubview:level4];
 	[self.view addSubview:level5];
 	
-	/*
+	
 	[self.view addSubview:level6];
 	[self.view addSubview:level7];
 	[self.view addSubview:level8];
@@ -336,7 +336,7 @@
 	[self.view addSubview:level19];
 	[self.view addSubview:level20];
 	[self.view addSubview:level21];
-	*/
+	
 	[self.view addSubview:levelNumbers];
 	[self.view addSubview:levelSelectText];
 	[self.view addSubview:levelSelectGrayBox];
@@ -366,7 +366,6 @@
 	 level3.center = CGPointMake(level3.center.x - 320,level3.center.y - 250);
 	 level4.center = CGPointMake(level4.center.x - 320,level4.center.y - 250);
 	 level5.center = CGPointMake(level5.center.x - 320,level5.center.y - 250);
-	 /*
 	 level6.center = CGPointMake(level6.center.x - 320,level6.center.y - 250);
 	 level7.center = CGPointMake(level7.center.x - 320,level7.center.y - 250);
 	 level8.center = CGPointMake(level8.center.x - 320,level8.center.y - 250);
@@ -383,7 +382,7 @@
 	 level19.center = CGPointMake(level19.center.x - 320,level19.center.y - 250);
 	 level20.center = CGPointMake(level20.center.x - 320,level20.center.y - 250);
 	 level21.center = CGPointMake(level21.center.x - 320,level21.center.y - 250);
-	 */
+	 
 	 
 	 [self.view addSubview:zoomBack];
 	 [self.view bringSubviewToFront:zoomBack];
@@ -413,7 +412,6 @@
 	 [level3 removeFromSuperview];
 	 [level4 removeFromSuperview];
 	 [level5 removeFromSuperview];
-	 /*
 	 [level6 removeFromSuperview];
 	 [level7 removeFromSuperview];
 	 [level8 removeFromSuperview];
@@ -430,7 +428,6 @@
 	 [level19 removeFromSuperview];
 	 [level20 removeFromSuperview];
 	 [level21 removeFromSuperview];
-	  */
 	 
 	 [levelNumbers removeFromSuperview];
 	 [levelSelectText removeFromSuperview];

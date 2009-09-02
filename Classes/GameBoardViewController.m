@@ -383,6 +383,7 @@
 	TouchTimer = nil;
 	
 	[self viewDidLoad];
+	
     NSLog(@"Reset View");
     
 }
@@ -403,6 +404,7 @@
     [self presentModalViewController:[[Options alloc] initWithNibName:@"Options" bundle:nil] animated:YES];
 }
 -(IBAction)ClickButtonMainMenu{
+	gameState.currentBoard.Active = [NSNumber numberWithBool:NO];
     [self dismissModalViewControllerAnimated:YES];
 	
 }
