@@ -51,7 +51,6 @@ typedef enum enum_Gravity {
 	
 }
 
-@property id * cells;
 
 -(id)init: (int) rows : (int) columns : (int)rowPixelLength : (int)columnPixelLength : (Level *)level;
 -(void)cleanBoard;

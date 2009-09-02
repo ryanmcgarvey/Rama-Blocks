@@ -380,7 +380,6 @@
 	[SpawnedPair release];
 	[nextPair release];
 	[itemCollection cleanBoard];
-	free(itemCollection.cells);
 	[itemCollection dealloc];
 	[powerItem dealloc];
 	SpawnedPair = nil;

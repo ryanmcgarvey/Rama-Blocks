@@ -230,6 +230,8 @@
 			<key>Layout</key>
 			<array>
 				<dict>
+					<key>BecomeActive</key>
+					<true/>
 					<key>ContentConfiguration</key>
 					<dict>
 						<key>PBXBottomSmartGroupGIDs</key>
@@ -283,8 +285,9 @@
 							<key>PBXSmartGroupTreeModuleOutlineStateSelectionKey</key>
 							<array>
 								<array>
-									<integer>43</integer>
-									<integer>33</integer>
+									<integer>21</integer>
+									<integer>17</integer>
+									<integer>3</integer>
 									<integer>1</integer>
 									<integer>0</integer>
 								</array>
@@ -320,14 +323,12 @@
 					<key>Dock</key>
 					<array>
 						<dict>
-							<key>BecomeActive</key>
-							<true/>
 							<key>ContentConfiguration</key>
 							<dict>
 								<key>PBXProjectModuleGUID</key>
 								<string>1CE0B20306471E060097A5F4</string>
 								<key>PBXProjectModuleLabel</key>
-								<string>GameBoardViewController.m</string>
+								<string>ItemCollection.m</string>
 								<key>PBXSplitModuleInNavigatorKey</key>
 								<dict>
 									<key>Split0</key>
@@ -335,11 +336,11 @@
 										<key>PBXProjectModuleGUID</key>
 										<string>1CE0B20406471E060097A5F4</string>
 										<key>PBXProjectModuleLabel</key>
-										<string>GameBoardViewController.m</string>
+										<string>ItemCollection.m</string>
 										<key>_historyCapacity</key>
 										<integer>0</integer>
 										<key>bookmark</key>
-										<string>C26BC073104E226500FFFDE6</string>
+										<string>C26BC080104E230600FFFDE6</string>
 										<key>history</key>
 										<array>
 											<string>C25094C61049B70F000E912F</string>
@@ -364,9 +365,9 @@
 											<string>C26BBFD2104E122400FFFDE6</string>
 											<string>C26BBFD3104E122400FFFDE6</string>
 											<string>C26BC04B104E208700FFFDE6</string>
-											<string>C26BC068104E222000FFFDE6</string>
-											<string>C26BC069104E222000FFFDE6</string>
-											<string>C26BC06A104E222000FFFDE6</string>
+											<string>C26BC077104E230600FFFDE6</string>
+											<string>C26BC078104E230600FFFDE6</string>
+											<string>C26BC079104E230600FFFDE6</string>
 										</array>
 										<key>prevStack</key>
 										<array>
@@ -466,6 +467,12 @@
 											<string>C26BC06E104E222000FFFDE6</string>
 											<string>C26BC06F104E222000FFFDE6</string>
 											<string>C26BC070104E222000FFFDE6</string>
+											<string>C26BC07A104E230600FFFDE6</string>
+											<string>C26BC07B104E230600FFFDE6</string>
+											<string>C26BC07C104E230600FFFDE6</string>
+											<string>C26BC07D104E230600FFFDE6</string>
+											<string>C26BC07E104E230600FFFDE6</string>
+											<string>C26BC07F104E230600FFFDE6</string>
 										</array>
 									</dict>
 									<key>SplitCount</key>

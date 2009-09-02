@@ -10,7 +10,6 @@
 #import "Rama_BlocksAppDelegate.h"
 
 @implementation ItemCollection
-@synthesize cells;
 
 -(id)init: (int) rows : (int) columns : (int)rowPixelLength : (int)columnPixelLength : (Level *) level{	
 	
