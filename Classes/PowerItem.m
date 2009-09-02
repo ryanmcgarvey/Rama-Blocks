@@ -105,7 +105,7 @@
 	Cell * cell = [itemCollection GetCell:item.Row :item.Column];
 	cell.ItemInCell.IsAnchored = YES;
 	cell.ItemInCell.ItemView.backgroundColor = [UIColor purpleColor];
-	//[itemCollection createNewWithSelf:itemCollection];
+	
 	
 }
 

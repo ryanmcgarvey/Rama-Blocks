@@ -176,8 +176,8 @@
 
 	
 	itemCollection = [[ItemCollection alloc] init:NUMBER_OF_ROWS :NUMBER_OF_COLUMNS :SHAPE_WIDTH :SHAPE_WIDTH: currentLevel];
-	SpawnedPair = [[ItemPair new]retain];
-	nextPair = [[ItemPair new]retain];
+	SpawnedPair = [ItemPair new];
+	nextPair = [ItemPair new];
 	
 	nextPair.ItemA = [[Shape alloc] initWithInfo:[currentLevel createRandomColor]: [currentLevel createShapeFromCollection] : CGPointMake(20,20)];
 	nextPair.ItemB = [[Shape alloc] initWithInfo:[currentLevel createRandomColor]: [currentLevel createShapeFromCollection] : CGPointMake(20,20)];
@@ -373,13 +373,18 @@
 	[SpawnedPair.ItemA removeFromSuperview];
 	[SpawnedPair.ItemB removeFromSuperview];
 	[SpawnedPair.ItemC removeFromSuperview];
+	[nextPair.ItemA removeFromSuperview];
+	[nextPair.ItemB removeFromSuperview];
 	[SpawnedPair.ShaddowA removeFromSuperview];
 	[SpawnedPair.ShaddowB removeFromSuperview];
 	[SpawnedPair release];
+	[nextPair release];
 	[itemCollection cleanBoard];
-	[itemCollection release];
+	free(itemCollection.cells);
+	[itemCollection dealloc];
+	[powerItem dealloc];
 	SpawnedPair = nil;
-	itemCollection = nil;
+	nextPair = nil;
 	TouchTimer = nil;
 	
 	[self viewDidLoad];

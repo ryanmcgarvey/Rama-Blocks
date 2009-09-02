@@ -162,14 +162,14 @@
 - (void)setItemA:(GameItem *) itemA {
     ItemA = itemA;
     ItemA.IsPaired = TRUE;
-    ShaddowA.image = [[UIImage imageWithCGImage:[ItemA.ItemView.image CGImage]] retain];
+    ShaddowA.image = [UIImage imageWithCGImage:[ItemA.ItemView.image CGImage]];
     ShaddowA.alpha = 0.0f;
 }
 
 - (void)setItemB:(GameItem *) itemB {
     ItemB = itemB;
     ItemB.IsPaired = TRUE;
-    ShaddowB.image = [[UIImage imageWithCGImage:[ItemB.ItemView.image CGImage]] retain];
+    ShaddowB.image = [UIImage imageWithCGImage:[ItemB.ItemView.image CGImage]];
     ShaddowB.alpha = 0.0f;
 }
 @end

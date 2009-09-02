@@ -10,13 +10,14 @@
 #import "Rama_BlocksAppDelegate.h"
 
 @implementation ItemCollection
+@synthesize cells;
 
 -(id)init: (int) rows : (int) columns : (int)rowPixelLength : (int)columnPixelLength : (Level *) level{	
 	
     Rama_BlocksAppDelegate * appDelegate =  (Rama_BlocksAppDelegate *)[[UIApplication sharedApplication] delegate];
     gameState = [appDelegate FetchGameState];
 	
-    currentLevel = [level retain];
+    currentLevel = level;
     solution = [NSMutableArray new];
 	gravityDirection = down;
 	RowLength = rows;
@@ -40,13 +41,9 @@
 		}
 	}
     
-	
 	return self;
 }
 
--(void)createNewWithSelf:(ItemCollection *)newCollection{
-	self = newCollection;
-}
 
 -(void)cleanBoard{
 	int row = 0;
@@ -650,6 +647,7 @@
             cell.IsTransforming = FALSE;
         }
 	}
+	[TransformGroup autorelease];
 	return TransformGroup;	
 	
 }
