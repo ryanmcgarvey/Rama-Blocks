@@ -230,7 +230,7 @@
 -(NSArray *)FetchPlayedLevels{
     [self managedObjectContext];
     NSError *fetchError = nil;
-    NSArray *fetchResults;
+    NSArray * fetchResults;
     
     
     NSEntityDescription *entityDescription = [NSEntityDescription
