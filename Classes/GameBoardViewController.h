@@ -25,29 +25,35 @@
 
 
 @interface GameBoardViewController : UIViewController{
-	IBOutlet UIImageView *backGround;
-	IBOutlet UIImageView *lockSet;
-    IBOutlet UIButton * buttonMenu;
+	
     IBOutlet UIView * menuView;
+    IBOutlet UIImageView *backGround;
+	IBOutlet UIImageView *lockSet;
+    IBOutlet UIImageView *lockFeedBack;
+    UIImageView * guessView;
+    
+    IBOutlet UILabel * attemptsString;
+	IBOutlet UILabel * timeToDrop;
+    
     IBOutlet UIButton * buttonResume;
     IBOutlet UIButton * buttonOptions;
     IBOutlet UIButton * buttonMainMenu;
+    IBOutlet UIButton * buttonMenu;
 	IBOutlet UIButton * discard;
-    IBOutlet UILabel * attemptsString;
-	IBOutlet UILabel * timeToDrop;
+    IBOutlet UIButton * checkLock;
+    IBOutlet UIButton * closeLock;
 	
+    UIDevice * CurrentDevice;
+    
     NSMutableArray * experimentArray;
 	
 	ItemPair * SpawnedPair;
 	ItemPair * nextPair;
-	
 	ItemCollection * itemCollection;
-	NSTimer *TouchTimer;
-    UIDevice * CurrentDevice;
     Level * currentLevel;
     SoundEffects * audio;
     GameState * gameState;
-	DrawingView *drawingView;
+	DrawingView *drawingView; 
 	PowerItem *powerItem;
 	
 	CGFloat touchDistanceToItemC;
@@ -57,28 +63,37 @@
 	CGPoint menuViewCenter;
     
     CFTimeInterval startTime;
+    NSTimer *TouchTimer;
 	
 	CGAffineTransform spawnedShapeRotateTransformA;
 	
 	int discardCount;
 	int transformCount;
+    BOOL lockMode;
 	
 }
 //@property (readwrite, assign)int countDown;
 @property (readwrite, assign)int discardCount;
 @property (readwrite, assign)int transformCount;
+
 @property (nonatomic, retain) UIButton * buttonMenu;
 @property (nonatomic, retain) UIButton * buttonResume;
 @property (nonatomic, retain) UIButton * buttonOptions;
 @property (nonatomic, retain) UIButton * buttonMainMenu;
 @property (nonatomic, retain) UIButton * discard;
+@property (nonatomic, retain) UIButton * checkLock;
+@property (nonatomic, retain) UIButton * closeLock;
+
 @property (nonatomic, retain) UIView * menuView;
+@property (readwrite, retain) DrawingView *drawingView;
+
 @property (nonatomic, retain) UILabel * attemptsString;
 @property (nonatomic, retain) UILabel * timeToDrop;
-@property (readwrite, retain) DrawingView *drawingView;
+
 @property (readwrite, assign) CGPoint startTouchPosition;
 @property (readwrite, assign) CGPoint currentTouchPosition;
 @property (readwrite, assign) CGFloat touchDistanceToItemC;
+
 @property (readwrite, assign)CGAffineTransform spawnedShapeRotateTransformA;
 
 
@@ -98,6 +113,8 @@
 -(IBAction)ClickButtonResume;
 -(IBAction)ClickButtonOptions;
 -(IBAction)ClickButtonMainMenu;
+-(IBAction)ClickButtonLockTab;
+-(IBAction)ClickButtonCloseLockTab;
 -(IBAction)discardPiece;
 
 

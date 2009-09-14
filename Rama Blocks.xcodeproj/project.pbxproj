@@ -147,6 +147,8 @@
 		FC384B49104DFB9600E85205 /* BoardState.m in Sources */ = {isa = PBXBuildFile; fileRef = FC384B48104DFB9600E85205 /* BoardState.m */; };
 		FC4072E4102EC451000B40E8 /* LevelSelect.m in Sources */ = {isa = PBXBuildFile; fileRef = FC4072E2102EC451000B40E8 /* LevelSelect.m */; };
 		FC4366B91024CDA000C1F3BE /* UIImage+Shapes.m in Sources */ = {isa = PBXBuildFile; fileRef = FC4366B71024CDA000C1F3BE /* UIImage+Shapes.m */; };
+		FC487028105EC70300E2C37F /* lockTab.png in Resources */ = {isa = PBXBuildFile; fileRef = FC487027105EC70300E2C37F /* lockTab.png */; };
+		FC4870AE105ED96200E2C37F /* lockFeedBack.png in Resources */ = {isa = PBXBuildFile; fileRef = FC4870AD105ED96200E2C37F /* lockFeedBack.png */; };
 		FC4CADC31026101E00C6F863 /* RamaIcon.png in Resources */ = {isa = PBXBuildFile; fileRef = FC4CADC21026101E00C6F863 /* RamaIcon.png */; };
 		FC79C872102F76BA0041930A /* dist.plist in Resources */ = {isa = PBXBuildFile; fileRef = FC79C871102F76BA0041930A /* dist.plist */; };
 		FCEF155A102118A800A71C1C /* GameItem.m in Sources */ = {isa = PBXBuildFile; fileRef = FCEF1559102118A800A71C1C /* GameItem.m */; };
@@ -319,6 +321,8 @@
 		FC4366B61024CDA000C1F3BE /* UIImage+Shapes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+Shapes.h"; sourceTree = "<group>"; };
 		FC4366B71024CDA000C1F3BE /* UIImage+Shapes.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+Shapes.m"; sourceTree = "<group>"; };
 		FC4366B81024CDA000C1F3BE /* GlobalDefines.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GlobalDefines.h; sourceTree = "<group>"; };
+		FC487027105EC70300E2C37F /* lockTab.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = lockTab.png; sourceTree = "<group>"; };
+		FC4870AD105ED96200E2C37F /* lockFeedBack.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = lockFeedBack.png; sourceTree = "<group>"; };
 		FC4CADC21026101E00C6F863 /* RamaIcon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = RamaIcon.png; sourceTree = "<group>"; };
 		FC79C871102F76BA0041930A /* dist.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = dist.plist; sourceTree = "<group>"; };
 		FCEF1558102118A800A71C1C /* GameItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GameItem.h; sourceTree = "<group>"; };
@@ -583,6 +587,8 @@
 			isa = PBXGroup;
 			children = (
 				C2B8FB9B1044A1AE00D36DD3 /* Discard.png */,
+				FC4870AD105ED96200E2C37F /* lockFeedBack.png */,
+				FC487027105EC70300E2C37F /* lockTab.png */,
 				C2BD29811049019E007F05CB /* upsideDownBack.png */,
 				C2E26EC2104982080031A17B /* ItemC.png */,
 				C2BD2983104901D3007F05CB /* rotatedSideRight.png */,
@@ -982,6 +988,8 @@
 				C206BD2E104954AC0048B035 /* level28.png in Resources */,
 				C206BD30104954B50048B035 /* level8.png in Resources */,
 				C2E26EC3104982080031A17B /* ItemC.png in Resources */,
+				FC487028105EC70300E2C37F /* lockTab.png in Resources */,
+				FC4870AE105ED96200E2C37F /* lockFeedBack.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1061,12 +1069,12 @@
 			buildSettings = {
 				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
 				CODE_SIGN_ENTITLEMENTS = dist.plist;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Ryan McGarvey (LELSNRL4WS)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				GCC_C_LANGUAGE_STANDARD = c99;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				PREBINDING = NO;
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "40CAC7FF-8704-48D0-923B-BEB6338F2093";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
 				SDKROOT = iphoneos3.0;
 			};
 			name = Debug;

@@ -12,7 +12,7 @@
 @implementation GameBoardViewController
 @synthesize buttonMenu, buttonOptions, buttonMainMenu, buttonResume, menuView, attemptsString;
 @synthesize timeToDrop, drawingView, startTouchPosition, currentTouchPosition, touchDistanceToItemC;
-@synthesize discardCount, transformCount, discard, spawnedShapeRotateTransformA;
+@synthesize discardCount, transformCount, discard, spawnedShapeRotateTransformA, checkLock, closeLock;
 
 
 -(void)SaveState{
@@ -153,14 +153,26 @@
 	backGround.image = [[UIImage imageNamed:@"gameBoardGrid.png"] retain];
 	backGround.userInteractionEnabled = FALSE;
 	self.view.backgroundColor = [UIColor blackColor];
-
+    
+    
+    lockSet = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"lockTab.png"]];
+    lockSet.center = CGPointMake(lockSet.center.x, lockSet.center.y - 180);
+    closeLock.center = CGPointMake(closeLock.center.x, closeLock.center.y - 180);
+    lockFeedBack = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"lockFeedBack.png"]];
+    lockFeedBack.center = CGPointMake(lockSet.center.x, lockSet.center.y);
+    guessView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"lockFeedBack.png"]];
 	
 	[self.view addSubview:backGround];
-	
 	[self.view sendSubviewToBack:backGround];
 	[self.view addSubview:buttonMenu];
 	[self.view sendSubviewToBack:buttonMenu];
-	[self.view addSubview:menuView];
+    [self.view addSubview:buttonMenu];
+	[self.view addSubview:checkLock];
+    [self.view addSubview:lockSet];
+    [self.view addSubview:closeLock];
+    [self.view addSubview:lockFeedBack];
+    
+    
 	
 	menuViewCenter = menuView.center;
 	
@@ -413,6 +425,41 @@
 	
 }
 
+-(IBAction)ClickButtonLockTab{
+    lockMode = TRUE;
+    
+    [UIView beginAnimations:nil context:nil]; 
+    [UIView setAnimationDuration:0.5f];
+    [UIView setAnimationDelegate:self];
+    
+    [self.view bringSubviewToFront:lockSet];
+    lockSet.center = CGPointMake(lockSet.center.x, lockSet.center.y + 180);
+    
+    [self.view bringSubviewToFront:closeLock];
+    closeLock.center = CGPointMake(closeLock.center.x, closeLock.center.y + 180);
+    
+    [self.view bringSubviewToFront:lockFeedBack];
+    lockFeedBack.center = CGPointMake(lockFeedBack.center.x, lockFeedBack.center.y + 180);
+    
+    [UIView commitAnimations];
+}
+
+-(IBAction)ClickButtonCloseLockTab{
+    lockMode = FALSE;
+    
+    [UIView beginAnimations:nil context:nil]; 
+    [UIView setAnimationDuration:0.5f];
+    [UIView setAnimationDelegate:self];
+    
+    lockSet.center = CGPointMake(lockSet.center.x, lockSet.center.y - 180);
+    closeLock.center = CGPointMake(closeLock.center.x, closeLock.center.y - 180);
+    lockFeedBack.center = CGPointMake(lockFeedBack.center.x, lockFeedBack.center.y - 180);
+    
+    
+    
+    [UIView commitAnimations];
+}
+
 -(IBAction)discardPiece{
 	if(transformCount >= 10){
 		transformCount = 0;
@@ -452,199 +499,236 @@
 	startTouchPosition = [touch locationInView:self.view];
 	Rama_BlocksAppDelegate * appDelegate =  (Rama_BlocksAppDelegate *)[[UIApplication sharedApplication] delegate];
 	appDelegate.isMoving = YES;
-	
-	if([[touch view] isKindOfClass: [GameItem class]] && appDelegate.isAttaching == NO){
-		GameItem * touchedItem = (GameItem *)[touch view];
-		Shape * powerTouchItem = (Shape *)touchedItem;
-		
-		if([[touch view] isKindOfClass:[Shape class]] && powerTouchItem.shapeType == Vortex){
-			
-			
-			if(powerTouchItem.colorType == Red){
-				[powerItem makeCollection:itemCollection];
-				[powerItem useBombItem:powerTouchItem];
-			}
-			if(powerTouchItem.colorType == Purple){
-				[[UIApplication sharedApplication] beginIgnoringInteractionEvents];
-				[powerItem makeCollection:itemCollection];
-				[powerItem placeAnchor:powerTouchItem];
-			}
-			if(powerTouchItem.colorType == Yellow){
-				[[UIApplication sharedApplication] beginIgnoringInteractionEvents];
-				[powerItem makeCollection:itemCollection];
-				[powerItem stopGravity:powerTouchItem];
-			}
-			if(powerTouchItem.colorType == Green){
-				[[UIApplication sharedApplication] beginIgnoringInteractionEvents];
-				[powerItem makeCollection:itemCollection];
-				[powerItem placeFilter:powerTouchItem];
-				
-			}
-			/*
-			if(powerTouchItem.colorType == Blue){
-				[[UIApplication sharedApplication] beginIgnoringInteractionEvents];
-				[powerItem makeCollection:itemCollection];
-				[powerItem placeUpgrader:powerTouchItem];
-			}
-			 */
-			if(powerTouchItem.colorType == Blue){
-				[powerItem makeCollection:itemCollection];
-				[powerItem shuffleBoard:powerTouchItem];
-				[self SaveState];
-				[SpawnedPair.ItemA removeFromSuperview];
-				[SpawnedPair.ItemB removeFromSuperview];
-				[SpawnedPair.ItemC removeFromSuperview];
-				[SpawnedPair.ShaddowA removeFromSuperview];
-				[SpawnedPair.ShaddowB removeFromSuperview];
-				[self viewDidLoad];
-				[itemCollection ApplyGravity];
-
-			}
-			
-		}
-		
-        touchedItem.tapped++;
-        TouchTimer = [NSTimer scheduledTimerWithTimeInterval:TAP_WAIT_TIME target:self selector:@selector(resetTap:) userInfo:touchedItem repeats:NO];
-		
-	}
-	
-	if([[touch view] isKindOfClass: [Shape class]]){
-		if(appDelegate.isAttaching == YES){
-			appDelegate.isAttaching = NO;
-			[powerItem makeAnchor:(Shape *)[touch view]];
-			
-		}
-		if(appDelegate.isFiltering == YES){
-			appDelegate.isFiltering = NO;
-			[powerItem makeFilter:(Shape *)[touch view]];
-			
-		}
-		if(appDelegate.isUpgrading == YES){
-			appDelegate.isUpgrading = NO;
-			[powerItem makeUpgrader:(Shape *)[touch view]];
-			
-			
-		}
-		
-	}
-	
-	
-	
+    GameItem * touchedGuessItem;
+    if (lockMode == FALSE) {
+        if([[touch view] isKindOfClass: [GameItem class]] && appDelegate.isAttaching == NO){
+            GameItem * touchedItem = (GameItem *)[touch view];
+            Shape * powerTouchItem = (Shape *)touchedItem;
+            
+            if([[touch view] isKindOfClass:[Shape class]] && powerTouchItem.shapeType == Vortex){
+                
+                
+                if(powerTouchItem.colorType == Red){
+                    [powerItem makeCollection:itemCollection];
+                    [powerItem useBombItem:powerTouchItem];
+                }
+                if(powerTouchItem.colorType == Purple){
+                    [[UIApplication sharedApplication] beginIgnoringInteractionEvents];
+                    [powerItem makeCollection:itemCollection];
+                    [powerItem placeAnchor:powerTouchItem];
+                }
+                if(powerTouchItem.colorType == Yellow){
+                    [[UIApplication sharedApplication] beginIgnoringInteractionEvents];
+                    [powerItem makeCollection:itemCollection];
+                    [powerItem stopGravity:powerTouchItem];
+                }
+                if(powerTouchItem.colorType == Green){
+                    [[UIApplication sharedApplication] beginIgnoringInteractionEvents];
+                    [powerItem makeCollection:itemCollection];
+                    [powerItem placeFilter:powerTouchItem];
+                    
+                }
+                /*
+                 if(powerTouchItem.colorType == Blue){
+                 [[UIApplication sharedApplication] beginIgnoringInteractionEvents];
+                 [powerItem makeCollection:itemCollection];
+                 [powerItem placeUpgrader:powerTouchItem];
+                 }
+                 */
+                if(powerTouchItem.colorType == Blue){
+                    [powerItem makeCollection:itemCollection];
+                    [powerItem shuffleBoard:powerTouchItem];
+                    [self SaveState];
+                    [SpawnedPair.ItemA removeFromSuperview];
+                    [SpawnedPair.ItemB removeFromSuperview];
+                    [SpawnedPair.ItemC removeFromSuperview];
+                    [SpawnedPair.ShaddowA removeFromSuperview];
+                    [SpawnedPair.ShaddowB removeFromSuperview];
+                    [self viewDidLoad];
+                    [itemCollection ApplyGravity];
+                    
+                }
+                
+            }
+            
+            touchedItem.tapped++;
+            TouchTimer = [NSTimer scheduledTimerWithTimeInterval:TAP_WAIT_TIME target:self selector:@selector(resetTap:) userInfo:touchedItem repeats:NO];
+            
+        }
+        
+        if([[touch view] isKindOfClass: [Shape class]]){
+            if(appDelegate.isAttaching == YES){
+                appDelegate.isAttaching = NO;
+                [powerItem makeAnchor:(Shape *)[touch view]];
+                
+            }
+            if(appDelegate.isFiltering == YES){
+                appDelegate.isFiltering = NO;
+                [powerItem makeFilter:(Shape *)[touch view]];
+                
+            }
+            if(appDelegate.isUpgrading == YES){
+                appDelegate.isUpgrading = NO;
+                [powerItem makeUpgrader:(Shape *)[touch view]];
+                
+                
+            }
+            
+        }
+        
+        
+        
+    }
+    
+    else {
+        
+        if([[touch view] isKindOfClass: [Shape class]]){
+            touchedGuessItem = (GameItem *)[touch view];
+            guessView.image = touchedGuessItem.ItemView.image;
+            guessView.center = CGPointMake([touch locationInView:self.view].x - 55, [touch locationInView:self.view].y - 55);
+            [self.view addSubview:guessView];
+            appDelegate.isMoving = TRUE;
+            
+        }
+        
+    }
+ 
+    
+    
 }
+	
+	
 
 - (void)touchesMoved:(NSSet *)touches withEvent:(UIEvent *)event {
 	UITouch *touch = [[event allTouches] anyObject];
 	Rama_BlocksAppDelegate * appDelegate =  (Rama_BlocksAppDelegate *)[[UIApplication sharedApplication] delegate];
 	currentTouchPosition = [touch locationInView:self.view];
-    if(![[touch view] isKindOfClass: [LockShape class]] && appDelegate.isAttaching == NO)
-    {
-        GameItem * highlightItem = [itemCollection GetItemFromCoordinate:[touch locationInView:backGround]]; 
-        if([highlightItem isKindOfClass:[Shape class]] && ! highlightItem.IsPaired && SpawnedPair.ItemC.alpha != 1)
+    
+    if (lockMode == FALSE) {
+    
+        if(![[touch view] isKindOfClass: [LockShape class]] && appDelegate.isAttaching == NO)
         {
-            Shape * shape = (Shape *) highlightItem;
-            [itemCollection AddShapeToSolution:shape];
-            shape.tapped = 0;
+            GameItem * highlightItem = [itemCollection GetItemFromCoordinate:[touch locationInView:backGround]]; 
+            if([highlightItem isKindOfClass:[Shape class]] && ! highlightItem.IsPaired && SpawnedPair.ItemC.alpha != 1)
+            {
+                Shape * shape = (Shape *) highlightItem;
+                [itemCollection AddShapeToSolution:shape];
+                shape.tapped = 0;
+            }
         }
-    }
-    if([[touch view] isMemberOfClass:[DrawingView class]] && [touch view] != backGround && touchDistanceToItemC < 55.0f)
-    {
-        
-		[SpawnedPair airMove:[touch locationInView:[self view]]];
-		SpawnedPair.ItemC.alpha = 1;
-		[itemCollection DrawShadowForItemPair:SpawnedPair];
-		
-    }
+        if([[touch view] isMemberOfClass:[DrawingView class]] && [touch view] != backGround && touchDistanceToItemC < 55.0f)
+        {
+            
+            [SpawnedPair airMove:[touch locationInView:[self view]]];
+            SpawnedPair.ItemC.alpha = 1;
+            [itemCollection DrawShadowForItemPair:SpawnedPair];
+            
+        }
 	
 	
+    }
+    if (lockMode == TRUE && appDelegate.isMoving == TRUE) {
+        GameItem * touchedGuessItem;
+        touchedGuessItem = (GameItem *)[touch view];
+        guessView.center = CGPointMake([touch locationInView:self.view].x - 55, [touch locationInView:self.view].y - 55);
+    }
+
 }
-
-
 
 
 
 - (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event {
 	UITouch *touch = [[event allTouches] anyObject];
+    Rama_BlocksAppDelegate * appDelegate =  (Rama_BlocksAppDelegate *)[[UIApplication sharedApplication] delegate];
 	SpawnedPair.ItemC.center = CGPointMake((SpawnedPair.ItemA.center.x + SpawnedPair.ItemB.center.x)/2, (SpawnedPair.ItemA.center.y + SpawnedPair.ItemB.center.y)/2);
 	SpawnedPair.ItemC.alpha = 0.25f;
 	
 	
 	/* Shape was touched */
 	
-	if([SpawnedPair IsInGrid] && [touch view] != backGround)
-	{
-		if([itemCollection AddItemPair:SpawnedPair])
-		{
-			[SpawnedPair.ItemC release];
-			[SpawnedPair.ItemC removeFromSuperview];
-			SpawnedPair.ItemC = nil;
-			[self SpawnShapes];
-			return;
-			
-			
-		}else
-		{
-			[self ResetShapePair:SpawnedPair];
-			return;
-		}
-	}
-	
-	if([[touch view] isKindOfClass: [GameItem class]] && ![[touch view] isKindOfClass: [LockShape class]]){
-	GameItem * item = (GameItem *)[touch view];
-		
-		if(SpawnedPair.ItemA.IsPaired && [self isTouchWithinRange: startTouchPosition from: SpawnedPair.ItemC.center] < 50.0f && ![[touch view] isKindOfClass: [LockShape class]] && [[touch view] isKindOfClass: [GameItem class]]){
-			
-		
-			if (item.tapped == 1) 
-			{
-				item.tapped = 0;
-				
-				[SpawnedPair rotate:SpawnedPair.ItemA];
-				SpawnedPair.ItemC.center = [drawingView makeCirclePoint:SpawnedPair.ItemA.center :SpawnedPair.ItemB.center];
-				return;
-				
-				
-				
-			}
-		}else
-		{
-			if(item.tapped > 0)
-			{
-				item.tapped = 0;
-				if([itemCollection TransformItem:item])
-				{	
-					return;
-				}
-			}
-			else
-			{
-				if([itemCollection CheckSolution])
-				{
-					[audio playVictory];
-					Rama_BlocksAppDelegate * appDelegate =  (Rama_BlocksAppDelegate *)[[UIApplication sharedApplication] delegate];
-					[self SaveState];
-					if([gameState.currentLevel intValue] == [gameState.highestLevel intValue] && [gameState.highestLevel intValue] < 10)
-					{
-						
-						LevelStatistics * stat = [appDelegate CreatePlayedLevel];
-						stat.Level = [NSNumber numberWithInt:[gameState.currentLevel intValue]];
-						stat.numberOfMoves = gameState.currentBoard.numberOfMovies;
-						stat.numberOfTransforms = gameState.currentBoard.numberOfTransforms;
-						stat.numerOfAttempts = gameState.currentBoard.numberOfAttempts;
-						stat.timeToComplete = gameState.currentBoard.timePlayed;
-						[gameState addPlayedLevelsObject:stat];
-						gameState.highestLevel = [NSNumber numberWithInt:[gameState.highestLevel intValue] +1];
-						gameState.currentLevel = [NSNumber numberWithInt:[gameState.highestLevel intValue]   ];
-					}
-					
-					gameState.currentBoard.Active = [NSNumber numberWithBool:NO];
-					[self dismissModalViewControllerAnimated:YES];
-				}
-				
-				//attemptsString.text = [[NSString alloc] initWithFormat:@" %d\n", currentLevel.attempts];
-			}
-		}
-	
-	}
+    if (lockMode == FALSE) {
+        
+        if([SpawnedPair IsInGrid] && [touch view] != backGround)
+        {
+            if([itemCollection AddItemPair:SpawnedPair])
+            {
+                [SpawnedPair.ItemC release];
+                [SpawnedPair.ItemC removeFromSuperview];
+                SpawnedPair.ItemC = nil;
+                [self SpawnShapes];
+                return;
+                
+                
+            }else
+            {
+                [self ResetShapePair:SpawnedPair];
+                return;
+            }
+        }
+        
+        if([[touch view] isKindOfClass: [GameItem class]] && ![[touch view] isKindOfClass: [LockShape class]]){
+        GameItem * item = (GameItem *)[touch view];
+            
+            if(SpawnedPair.ItemA.IsPaired && [self isTouchWithinRange: startTouchPosition from: SpawnedPair.ItemC.center] < 50.0f && ![[touch view] isKindOfClass: [LockShape class]] && [[touch view] isKindOfClass: [GameItem class]]){
+                
+            
+                if (item.tapped == 1) 
+                {
+                    item.tapped = 0;
+                    
+                    [SpawnedPair rotate:SpawnedPair.ItemA];
+                    SpawnedPair.ItemC.center = [drawingView makeCirclePoint:SpawnedPair.ItemA.center :SpawnedPair.ItemB.center];
+                    return;
+                    
+                    
+                    
+                }
+            }else
+            {
+                if(item.tapped > 0)
+                {
+                    item.tapped = 0;
+                    if([itemCollection TransformItem:item])
+                    {	
+                        return;
+                    }
+                }
+                else
+                {
+                    if([itemCollection CheckSolution])
+                    {
+                        [audio playVictory];
+                        Rama_BlocksAppDelegate * appDelegate =  (Rama_BlocksAppDelegate *)[[UIApplication sharedApplication] delegate];
+                        [self SaveState];
+                        if([gameState.currentLevel intValue] == [gameState.highestLevel intValue] && [gameState.highestLevel intValue] < 10)
+                        {
+                            
+                            LevelStatistics * stat = [appDelegate CreatePlayedLevel];
+                            stat.Level = [NSNumber numberWithInt:[gameState.currentLevel intValue]];
+                            stat.numberOfMoves = gameState.currentBoard.numberOfMovies;
+                            stat.numberOfTransforms = gameState.currentBoard.numberOfTransforms;
+                            stat.numerOfAttempts = gameState.currentBoard.numberOfAttempts;
+                            stat.timeToComplete = gameState.currentBoard.timePlayed;
+                            [gameState addPlayedLevelsObject:stat];
+                            gameState.highestLevel = [NSNumber numberWithInt:[gameState.highestLevel intValue] +1];
+                            gameState.currentLevel = [NSNumber numberWithInt:[gameState.highestLevel intValue]   ];
+                        }
+                        
+                        gameState.currentBoard.Active = [NSNumber numberWithBool:NO];
+                        [self dismissModalViewControllerAnimated:YES];
+                    }
+                    
+                    //attemptsString.text = [[NSString alloc] initWithFormat:@" %d\n", currentLevel.attempts];
+                }
+            }
+        
+        }
+    }
+    if (lockMode == TRUE && appDelegate.isMoving == TRUE) {
+        appDelegate.isMoving = FALSE;
+        [guessView removeFromSuperview];
+         
+    }
 	
     [itemCollection ClearSolution];
 	[NSTimer release];
