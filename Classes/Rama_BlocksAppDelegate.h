@@ -37,6 +37,7 @@
 	BOOL isFiltering;
 	BOOL isUpgrading;
 	BOOL allowGravity;
+	BOOL yShift;
 }
 
 @property (nonatomic, retain) IBOutlet UIWindow *window;
@@ -46,6 +47,7 @@
 @property (readwrite, assign) BOOL isFiltering;
 @property (readwrite, assign) BOOL isAttaching;
 @property (readwrite, assign) BOOL isUpgrading;
+@property (readwrite, assign) BOOL yShift;
 @property (nonatomic, retain, readonly) NSManagedObjectModel *managedObjectModel;
 @property (nonatomic, retain, readonly) NSManagedObjectContext *managedObjectContext;
 @property (nonatomic, retain, readonly) NSPersistentStoreCoordinator *persistentStoreCoordinator;

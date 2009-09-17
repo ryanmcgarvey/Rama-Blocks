@@ -12,7 +12,7 @@
 @implementation Rama_BlocksAppDelegate
 
 @synthesize window;
-@synthesize isMoving, isAttaching, isFiltering, isUpgrading, allowGravity, level;
+@synthesize isMoving, isAttaching, isFiltering, isUpgrading, allowGravity, level, yShift;
 
 - (void)applicationDidFinishLaunching:(UIApplication *)application {
     
@@ -28,6 +28,7 @@
 	isFiltering = NO;
 	isUpgrading = NO;
 	allowGravity = YES;
+	yShift = NO;
 	
 	level = [[Level alloc] init:[gameState.currentLevel intValue]];
 }

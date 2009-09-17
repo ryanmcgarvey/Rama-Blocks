@@ -43,10 +43,14 @@ typedef enum enum_Gravity {
     Level * currentLevel;
     GameState * gameState;
 	
+	UIDevice * CurrentDevice;
     
     int numberOfAttempts;
     int numberOfTransforms;
     int numberOfMoves;
+	
+	int maxY;
+	
     
 	
 }

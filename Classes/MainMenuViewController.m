@@ -150,8 +150,13 @@
 }
 - (void)viewDidLoad {
 	
+	[UIView beginAnimations:nil context:nil]; 
+	[UIView setAnimationDuration:30];
+	backGround.center = CGPointMake(backGround.center.x + 400, backGround.center.y + 300);
 	
-	[super viewDidLoad];
+	[UIView commitAnimations];
+	
+	
     
 }
 

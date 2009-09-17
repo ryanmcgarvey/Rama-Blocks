@@ -29,7 +29,9 @@
     IBOutlet UIView * menuView;
     IBOutlet UIImageView *backGround;
 	IBOutlet UIImageView *lockSet;
-    IBOutlet UIImageView *lockFeedBack;
+    IBOutlet UIImageView *lockFeedBackA;
+	IBOutlet UIImageView *lockFeedBackB;
+	IBOutlet UIImageView *lockFeedBackC;
     UIImageView * guessView;
     
     IBOutlet UILabel * attemptsString;
@@ -69,6 +71,14 @@
 	
 	int discardCount;
 	int transformCount;
+	
+	int spawnX;
+	int spawnY;
+	int spawnNextX;
+	int spawnNextY;
+	int rightPix;
+	int upPix;
+	
     BOOL lockMode;
 	
 }

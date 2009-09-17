@@ -328,7 +328,7 @@
 		if(shape.colorType == Red){
 			cell.ItemInCell.ItemView.image = nil; 
 			
-			cell.ItemInCell.ItemView.contentMode = UIViewContentModeRedraw;
+			cell.ItemInCell.ItemView.contentMode = UIViewContentModeScaleAspectFit;
 			
 			[UIView beginAnimations:nil context:nil]; 
 			[UIView setAnimationDuration:1];
@@ -379,7 +379,7 @@
 		if(shape.colorType == Green){
 			cell.ItemInCell.ItemView.image = nil; 
 			
-			cell.ItemInCell.ItemView.contentMode = UIViewContentModeRedraw;
+			cell.ItemInCell.ItemView.contentMode = UIViewContentModeScaleAspectFit;
 			
 			[UIView beginAnimations:nil context:nil]; 
 			[UIView setAnimationDuration:1];
@@ -430,7 +430,7 @@
 		if(shape.colorType == Blue){
 			cell.ItemInCell.ItemView.image = nil; 
 			
-			cell.ItemInCell.ItemView.contentMode = UIViewContentModeRedraw;
+			cell.ItemInCell.ItemView.contentMode = UIViewContentModeScaleAspectFit;
 			
 			[UIView beginAnimations:nil context:nil]; 
 			[UIView setAnimationDuration:1];
@@ -481,7 +481,7 @@
 		if(shape.colorType == Yellow){
 			cell.ItemInCell.ItemView.image = nil; 
 			
-			cell.ItemInCell.ItemView.contentMode = UIViewContentModeRedraw;
+			cell.ItemInCell.ItemView.contentMode = UIViewContentModeScaleAspectFit;
 			
 			[UIView beginAnimations:nil context:nil]; 
 			[UIView setAnimationDuration:1];
@@ -533,7 +533,7 @@
 		if(shape.colorType == Purple){
 			cell.ItemInCell.ItemView.image = nil; 
 			
-			cell.ItemInCell.ItemView.contentMode = UIViewContentModeRedraw;
+			cell.ItemInCell.ItemView.contentMode = UIViewContentModeScaleAspectFit;
 			
 			[UIView beginAnimations:nil context:nil]; 
 			[UIView setAnimationDuration:1];
