@@ -137,22 +137,17 @@
     if([gameState.currentBoard.Active boolValue])
     {
         
-        [GameBoardButton setTitle: @"Play Puzzle Mode" forState:UIControlStateNormal];
     }
-    /*
-	 else{
-	 [GameBoardButton setTitle: @"Play" forState:UIControlStateNormal];
-	 }
-	 */
-    [GameBoardButton.titleLabel setNeedsLayout];
 	
     [super viewWillAppear:animate];
 }
 - (void)viewDidLoad {
-	
+	//backGround.center = CGPointMake(320, 480);
 	[UIView beginAnimations:nil context:nil]; 
 	[UIView setAnimationDuration:30];
-	backGround.center = CGPointMake(backGround.center.x + 400, backGround.center.y + 300);
+	backGround.center = CGPointMake(backGround.center.x - 400, backGround.center.y);
+	backGround.transform = CGAffineTransformIdentity;
+	backGround.transform = CGAffineTransformRotate(backGround.transform, rotate_xDegrees(180));
 	
 	[UIView commitAnimations];
 	
@@ -209,6 +204,7 @@
 		 buttonCenter = buttonGraphic.center;
 		 titleCenter = titleGraphic.center;
 		 behindButtonCenter = behindButtonGraphic.center;
+		 backGroundCenter = backGround.center;
 		 
 		 [UIView beginAnimations:nil context:nil]; 
 		 [UIView setAnimationDuration:1.0f];
@@ -407,6 +403,7 @@
  -(void)restoreCenters{
 	 buttonGraphic.center = buttonCenter;
 	 titleGraphic.center = titleCenter;
+	 backGround.center = backGroundCenter;
 	 behindButtonGraphic.center = behindButtonCenter;
 	 [zoomBack removeFromSuperview];
 	 zoomBack.alpha = 0.3f;

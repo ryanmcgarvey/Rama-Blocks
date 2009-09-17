@@ -74,6 +74,7 @@
 	CGPoint buttonCenter;
 	CGPoint titleCenter;
 	CGPoint behindButtonCenter;
+	CGPoint backGroundCenter;
 	
 	
 }
