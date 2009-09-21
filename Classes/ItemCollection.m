@@ -269,7 +269,15 @@
  TRANSFORMS
  **************************************/
 -(BOOL)TransformItem:(GameItem*)item{
+	Rama_BlocksAppDelegate * appDelegate =  (Rama_BlocksAppDelegate *)[[UIApplication sharedApplication] delegate];
     BOOL couldTransform = FALSE;
+	
+	if([item isKindOfClass: [Shape class]] && appDelegate.isUpgrading == YES){
+		Shape * shape = (Shape *)item;
+		if(shape.shapeType != NUMBER_OF_SHAPES){
+			[shape TransForm];
+		}
+	}
 	NSMutableArray * transFormGroup = [self CheckTransform : item];
 	
 	SEL  arraySelector;
@@ -314,6 +322,7 @@
             couldTransform = TRUE;
             numberOfTransforms ++;
         }
+		
         [transFormGroup removeAllObjects];
 		transFormGroup = nil;
 		[transFormGroup release];
@@ -866,10 +875,7 @@
 }
 
 -(void)SetItemToCell:(GameItem *)item : (Cell *) cell{
-    if(cell == nil || cell.ItemInCell == item){
-		
-        return;
-    }
+   
     if(cell.ItemInCell != nil){
         
         [cell.ItemInCell release];
@@ -885,21 +891,21 @@
 
 -(void)setShuffledArray:(NSMutableArray *)shuffledPieces{
     
-	int i;
+	int i = 0;
 	int row;
 	int column;
 	int numberOfShapes = [shuffledPieces count];
 	
-	for (row = 0; row <= NUMBER_OF_ROWS; row++) {
-		for (column =0; column <= NUMBER_OF_COLUMNS; column++) {
+	for (row = 0; row < NUMBER_OF_ROWS; row++) {
+		for (column =0; column < NUMBER_OF_COLUMNS; column++) {
 			
 			if(i < numberOfShapes){
 				Cell *placedCell = [self GetCell:row :column];
 				Shape *shuffleShape = [shuffledPieces objectAtIndex:i];
 				[shuffleShape ChangeColorAndShape:shuffleShape.colorType :shuffleShape.shapeType];
 				placedCell.ItemInCell = shuffleShape;
-				placedCell.ItemInCell.ItemView = shuffleShape.ItemView;
-				[self ApplyGravity];
+				[self SetItemToCell:shuffleShape :placedCell];
+				//[self ApplyGravity];
 				
 			}
 			i++;

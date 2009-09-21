@@ -106,7 +106,7 @@
 }
 
 - (BOOL)checkBounds{
-    /*
+    
 	if( (ItemA.center.x > (GRID_RIGHT_EDGE - (SHAPE_WIDTH/2))) || // Shape A is close to the right edge
 	   (ItemB.center.x > (GRID_RIGHT_EDGE - (SHAPE_WIDTH/2))) || (ItemC.center.x > (GRID_RIGHT_EDGE - 15)) )  // Shape B is close to the right edge
 	{
@@ -158,7 +158,7 @@
 		}
 	}
     return TRUE;
-	 */
+	 
 }
 
 - (void)setItemA:(GameItem *) itemA {

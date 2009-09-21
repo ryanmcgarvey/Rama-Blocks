@@ -407,7 +407,7 @@
 	 behindButtonGraphic.center = behindButtonCenter;
 	 [zoomBack removeFromSuperview];
 	 zoomBack.alpha = 0.3f;
-	 backGround.bounds = CGRectMake(0, 0, 320, 480);
+	 backGround.center = CGPointMake(160,240);
 	 
 	 [level1 removeFromSuperview];
 	 [level2 removeFromSuperview];

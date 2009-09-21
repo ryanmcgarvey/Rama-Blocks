@@ -86,51 +86,6 @@
 }
 
 
--(void)placeAnchor:(GameItem *)item{
-	Rama_BlocksAppDelegate * appDelegate =  (Rama_BlocksAppDelegate *)[[UIApplication sharedApplication] delegate];
-	NSMutableArray * anchorArray = [[NSMutableArray alloc] initWithCapacity:NUMBER_OF_ROWS * NUMBER_OF_COLUMNS];
-	Cell * cell = [itemCollection GetCell:item.Row :item.Column];
-	
-	appDelegate.isAttaching = YES;
-	
-	[anchorArray addObject:cell];
-	[[UIApplication sharedApplication] endIgnoringInteractionEvents];
-	[itemCollection RemoveFromCellsAndRefactor:anchorArray];
-	
-	[anchorArray release];
-}
-
--(void)makeAnchor:(GameItem *)item{
-	
-	Cell * cell = [itemCollection GetCell:item.Row :item.Column];
-	cell.ItemInCell.IsAnchored = YES;
-	cell.ItemInCell.ItemView.backgroundColor = [UIColor purpleColor];
-	
-	
-}
-
--(void)placeUpgrader:(GameItem *)item{
-	Rama_BlocksAppDelegate * appDelegate =  (Rama_BlocksAppDelegate *)[[UIApplication sharedApplication] delegate];
-	NSMutableArray * upgradeArray = [[NSMutableArray alloc] initWithCapacity:NUMBER_OF_ROWS * NUMBER_OF_COLUMNS];
-	Cell * cell = [itemCollection GetCell:item.Row :item.Column];
-	
-	appDelegate.isUpgrading = YES;
-	
-	[upgradeArray addObject:cell];
-	[[UIApplication sharedApplication] endIgnoringInteractionEvents];
-	[itemCollection RemoveFromCellsAndRefactor:upgradeArray];
-	
-	[upgradeArray release];
-}
-
--(void)makeUpgrader:(GameItem *)item{
-	
-	Cell * cell = [itemCollection GetCell:item.Row :item.Column];
-	[itemCollection TransformItem:cell.ItemInCell];
-	
-	
-}
-
 -(void)shuffleBoard:(GameItem *)item{
 	
 	int row = 0;

@@ -12,7 +12,7 @@
 @implementation Rama_BlocksAppDelegate
 
 @synthesize window;
-@synthesize isMoving, isAttaching, isFiltering, isUpgrading, allowGravity, level, yShift;
+@synthesize isMoving, isBombing, isFiltering, isUpgrading, allowGravity, level, yShift;
 
 - (void)applicationDidFinishLaunching:(UIApplication *)application {
     
@@ -24,7 +24,7 @@
 	[window makeKeyAndVisible];
 	
 	isMoving = NO;
-	isAttaching = NO;
+	isBombing = NO;
 	isFiltering = NO;
 	isUpgrading = NO;
 	allowGravity = YES;

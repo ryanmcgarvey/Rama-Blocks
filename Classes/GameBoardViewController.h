@@ -29,25 +29,41 @@
     IBOutlet UIView * menuView;
     IBOutlet UIImageView *backGround;
 	IBOutlet UIImageView *lockSet;
-    IBOutlet UIImageView *lockFeedBackA;
-	IBOutlet UIImageView *lockFeedBackB;
-	IBOutlet UIImageView *lockFeedBackC;
+    UIImageView *lockFeedBackA;
+	UIImageView *lockFeedBackB;
+	UIImageView *lockFeedBackC;
     UIImageView * guessView;
-    
+    IBOutlet UIImageView *discardCountImage;
+	IBOutlet UIImageView *bombCountImage;
+	IBOutlet UIImageView *reshuffleCountImage;
+	IBOutlet UIImageView *upgradeCountImage;
+	
+	
     IBOutlet UILabel * attemptsString;
-	IBOutlet UILabel * timeToDrop;
+	IBOutlet UILabel * scoreLabel;
     
     IBOutlet UIButton * buttonResume;
     IBOutlet UIButton * buttonOptions;
     IBOutlet UIButton * buttonMainMenu;
     IBOutlet UIButton * buttonMenu;
-	IBOutlet UIButton * discard;
     IBOutlet UIButton * checkLock;
     IBOutlet UIButton * closeLock;
+	IBOutlet UIButton * checkRecipe;
+	
+    IBOutlet UIButton * discardButton;
+	IBOutlet UIButton * bombButton;
+	IBOutlet UIButton * reshuffleButton;
+	IBOutlet UIButton * upgradeButton;
 	
     UIDevice * CurrentDevice;
     
     NSMutableArray * experimentArray;
+	
+	Shape * touchedGuessItemShape;
+	
+	Shape * shapeA;
+	Shape * shapeB;
+	Shape * shapeC;
 	
 	ItemPair * SpawnedPair;
 	ItemPair * nextPair;
@@ -67,10 +83,15 @@
     CFTimeInterval startTime;
     NSTimer *TouchTimer;
 	
-	CGAffineTransform spawnedShapeRotateTransformA;
+	CGAffineTransform spawnedShapeRotateTransform;
 	
 	int discardCount;
+	int bombCount;
+	int reshuffleCount;
+	int upgradeCount;
+	
 	int transformCount;
+	int score;
 	
 	int spawnX;
 	int spawnY;
@@ -85,26 +106,33 @@
 //@property (readwrite, assign)int countDown;
 @property (readwrite, assign)int discardCount;
 @property (readwrite, assign)int transformCount;
+@property (readwrite, assign)int reshuffleCount;
+@property (readwrite, assign)int upgradeCount;
+@property (readwrite, assign)int score;
 
 @property (nonatomic, retain) UIButton * buttonMenu;
 @property (nonatomic, retain) UIButton * buttonResume;
 @property (nonatomic, retain) UIButton * buttonOptions;
 @property (nonatomic, retain) UIButton * buttonMainMenu;
-@property (nonatomic, retain) UIButton * discard;
 @property (nonatomic, retain) UIButton * checkLock;
 @property (nonatomic, retain) UIButton * closeLock;
+@property (nonatomic, retain) UIButton * checkRecipe;
+@property (nonatomic, retain) UIButton * discardButton;
+@property (nonatomic, retain) UIButton * bombButton;
+@property (nonatomic, retain) UIButton * reshuffleButton;
+@property (nonatomic, retain) UIButton * upgradeButton;
 
 @property (nonatomic, retain) UIView * menuView;
 @property (readwrite, retain) DrawingView *drawingView;
 
 @property (nonatomic, retain) UILabel * attemptsString;
-@property (nonatomic, retain) UILabel * timeToDrop;
+@property (nonatomic, retain) UILabel * scoreLabel;
 
 @property (readwrite, assign) CGPoint startTouchPosition;
 @property (readwrite, assign) CGPoint currentTouchPosition;
 @property (readwrite, assign) CGFloat touchDistanceToItemC;
 
-@property (readwrite, assign)CGAffineTransform spawnedShapeRotateTransformA;
+@property (readwrite, assign)CGAffineTransform spawnedShapeRotateTransform;
 
 
 
@@ -116,6 +144,8 @@
 -(void)didRotate:(NSNotification *)notification;
 -(void)SaveState;
 
+-(void)setButtons;
+
 -(CGFloat)isTouchWithinRange:(CGPoint)touch from:(CGPoint)center;
 
 -(IBAction)ClickReset;
@@ -125,7 +155,11 @@
 -(IBAction)ClickButtonMainMenu;
 -(IBAction)ClickButtonLockTab;
 -(IBAction)ClickButtonCloseLockTab;
--(IBAction)discardPiece;
+-(IBAction)ClickButtonCheckRecipe;
+-(IBAction)ClickButtonDiscard;
+-(IBAction)ClickButtonUpgrade;
+-(IBAction)ClickButtonBomb;
+-(IBAction)ClickButtonShuffle;
 
 
 

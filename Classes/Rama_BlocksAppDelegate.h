@@ -33,11 +33,12 @@
     UIWindow *window;
 
 	BOOL isMoving;
-	BOOL isAttaching;
+	BOOL isBombing;
 	BOOL isFiltering;
 	BOOL isUpgrading;
 	BOOL allowGravity;
 	BOOL yShift;
+
 }
 
 @property (nonatomic, retain) IBOutlet UIWindow *window;
@@ -45,7 +46,7 @@
 @property (readwrite, assign) BOOL isMoving;
 @property (readwrite, assign) BOOL allowGravity;
 @property (readwrite, assign) BOOL isFiltering;
-@property (readwrite, assign) BOOL isAttaching;
+@property (readwrite, assign) BOOL isBombing;
 @property (readwrite, assign) BOOL isUpgrading;
 @property (readwrite, assign) BOOL yShift;
 @property (nonatomic, retain, readonly) NSManagedObjectModel *managedObjectModel;
