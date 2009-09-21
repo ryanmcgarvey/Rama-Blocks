@@ -196,8 +196,6 @@
 	
 	menuViewCenter = menuView.center;
 	
-	//add solution to view
-	
 	CurrentDevice = [UIDevice currentDevice];
 	[CurrentDevice beginGeneratingDeviceOrientationNotifications];
 	[[NSNotificationCenter defaultCenter] addObserver:self
@@ -217,7 +215,6 @@
 	
 	if([gameState.currentBoard.Active boolValue])
 	{
-		//[SpawnedPair.ItemC removeFromSuperview];
 		
         NSArray * spawnedItems = [appDelegate FetchSpawnedItems];
         ItemState * itemA = [spawnedItems objectAtIndex:0];
@@ -227,23 +224,6 @@
         Shape * spawnB = [[[Shape alloc] initWithInfo:[itemB.colorType intValue] :[itemB.shapeType intValue] : CGPointMake(spawnX,spawnY)]retain];
 		[self SpawnShapes:spawnA : spawnB];
 		
-		
-		for(ItemState * item in [appDelegate FetchLockItems])
-		{
-			if([item.shapeType intValue] != -1 && [item.colorType intValue] != -1)
-			{
-				
-				LockShape * lockShape = [[LockShape alloc] initWithInfo:[item.colorType intValue] :
-										 [item.shapeType intValue] :
-										 CGPointMake(spawnX,spawnY)];
-				lockShape.canSeeColor = 
-				[item.canSeeColor boolValue];
-				lockShape.canSeeShape = 
-				[item.canSeeItem boolValue];
-				
-				[currentLevel SetLockAtIndex:lockShape : [item.index intValue]];
-			}
-		}
 		
 		for(ItemState * item in [appDelegate FetchCollectionItemStates])
 		{
@@ -283,7 +263,6 @@
 		
 		
 	}
-	[currentLevel addSolutionToView:self.view];
 	
 	[self didRotate:nil];
 	[itemCollection ApplyGravity];
@@ -942,17 +921,20 @@
                 appDelegate.isBombing = NO;
 				[powerItem makeCollection:itemCollection];
                 [powerItem useBombItem:powerTouchItem];
+				[self setButtons];
                 
             }
             if(appDelegate.isFiltering == YES){
                 appDelegate.isFiltering = NO;
                 [powerItem makeFilter:(Shape *)[touch view]];
+				[self setButtons];
                 
             }
             if(appDelegate.isUpgrading == YES){
                 Cell * cell = [itemCollection GetCell:touchedItem.Row :touchedItem.Column];
 				[itemCollection TransformItem:cell.ItemInCell];
 				appDelegate.isUpgrading = NO;
+				[self setButtons];
 				                
                 
             }
@@ -987,28 +969,13 @@
 	Rama_BlocksAppDelegate * appDelegate =  (Rama_BlocksAppDelegate *)[[UIApplication sharedApplication] delegate];
 	currentTouchPosition = [touch locationInView:self.view];
     
-    if (lockMode == FALSE) {
-		
-        if(![[touch view] isKindOfClass: [LockShape class]] && appDelegate.isBombing == NO)
-        {
-            GameItem * highlightItem = [itemCollection GetItemFromCoordinate:[touch locationInView:backGround]]; 
-            if([highlightItem isKindOfClass:[Shape class]] && ! highlightItem.IsPaired && SpawnedPair.ItemC.alpha != 1)
-            {
-                Shape * shape = (Shape *) highlightItem;
-                [itemCollection AddShapeToSolution:shape];
-                shape.tapped = 0;
-            }
-        }
-        if([[touch view] isMemberOfClass:[DrawingView class]] && [touch view] != backGround && touchDistanceToItemC < 55.0f)
-        {
+    
+	if([[touch view] isMemberOfClass:[DrawingView class]] && [touch view] != backGround && touchDistanceToItemC < 55.0f && lockMode == FALSE && appDelegate.isBombing == NO){
             
-            [SpawnedPair airMove:[touch locationInView:[self view]]];
-            SpawnedPair.ItemC.alpha = 1;
-            [itemCollection DrawShadowForItemPair:SpawnedPair];
+		[SpawnedPair airMove:[touch locationInView:[self view]]];
+		SpawnedPair.ItemC.alpha = 1;
+		[itemCollection DrawShadowForItemPair:SpawnedPair];
             
-        }
-		
-		
     }
     if (lockMode == TRUE && appDelegate.isMoving == TRUE) {
         GameItem * touchedGuessItem;
@@ -1047,11 +1014,11 @@
 }
 }
 
-if([[touch view] isKindOfClass: [GameItem class]] && ![[touch view] isKindOfClass: [LockShape class]]){
+if([[touch view] isKindOfClass: [GameItem class]]){
 	GameItem * item = (GameItem *)[touch view];
 	Shape * itemShape = (Shape *)[touch view];
 	
-	    if(SpawnedPair.ItemA.IsPaired && [self isTouchWithinRange: startTouchPosition from: SpawnedPair.ItemC.center] < 50.0f && ![[touch view] isKindOfClass: [LockShape class]] && [[touch view] isKindOfClass: [GameItem class]]){
+	    if(SpawnedPair.ItemA.IsPaired && [self isTouchWithinRange: startTouchPosition from: SpawnedPair.ItemC.center] < 50.0f && [[touch view] isKindOfClass: [GameItem class]]){
                 
 				
                 if (item.tapped == 1) 
@@ -1100,50 +1067,28 @@ if([[touch view] isKindOfClass: [GameItem class]] && ![[touch view] isKindOfClas
                         return;
                     }
                 }
-                else
-                {
-                    if([itemCollection CheckSolution])
-                    {
-                        [audio playVictory];
-                        Rama_BlocksAppDelegate * appDelegate =  (Rama_BlocksAppDelegate *)[[UIApplication sharedApplication] delegate];
-                        [self SaveState];
-                        if([gameState.currentLevel intValue] == [gameState.highestLevel intValue] && [gameState.highestLevel intValue] < 10)
-                        {
-                            
-                            LevelStatistics * stat = [appDelegate CreatePlayedLevel];
-                            stat.Level = [NSNumber numberWithInt:[gameState.currentLevel intValue]];
-                            stat.numberOfMoves = gameState.currentBoard.numberOfMovies;
-                            stat.numberOfTransforms = gameState.currentBoard.numberOfTransforms;
-                            stat.numerOfAttempts = gameState.currentBoard.numberOfAttempts;
-                            stat.timeToComplete = gameState.currentBoard.timePlayed;
-                            [gameState addPlayedLevelsObject:stat];
-                            gameState.highestLevel = [NSNumber numberWithInt:[gameState.highestLevel intValue] +1];
-                            gameState.currentLevel = [NSNumber numberWithInt:[gameState.highestLevel intValue]   ];
-                        }
-                        
-                        gameState.currentBoard.Active = [NSNumber numberWithBool:NO];
-                        [self dismissModalViewControllerAnimated:YES];
-                    }
-                    
-                    //attemptsString.text = [[NSString alloc] initWithFormat:@" %d\n", currentLevel.attempts];
-                }
+                
             }
 			
         }
     }
-    if (lockMode == TRUE && guessView.center.y < 133 ) {
+    if (lockMode == TRUE) {
         
-		if(guessView.center.x < 105 - 55){
+		if(guessView.center.x < 105 - 55 && guessView.center.y < 133 ){
 			lockFeedBackC.image = guessView.image;
 			shapeB = touchedGuessItemShape;
+			cellB = [itemCollection GetCell:shapeB.Row :shapeB.Column];
+			
 		}
-		if(guessView.center.x > 108 - 55 && guessView.center.x < 210 - 55){
+		if(guessView.center.x > 108 - 55 && guessView.center.x < 210 - 55 && guessView.center.y < 133 ){
 			lockFeedBackA.image = guessView.image;
 			shapeA = touchedGuessItemShape;
+			cellA = [itemCollection GetCell:shapeA.Row :shapeA.Column];
 		}
-		if(guessView.center.x > 211 - 55){
+		if(guessView.center.x > 211 - 55 && guessView.center.y < 133 ){
 			lockFeedBackB.image = guessView.image;
 			shapeC = touchedGuessItemShape;
+			cellC = [itemCollection GetCell:shapeC.Row :shapeC.Column];
 		}
 		appDelegate.isMoving = FALSE;
         [guessView removeFromSuperview];

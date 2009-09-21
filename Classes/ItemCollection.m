@@ -90,16 +90,7 @@
 			itemState.colorType = [NSNumber numberWithInt:-1];
 		}
     }
-    items = [appDelegate FetchLockItems];
-    for(int i = 0; i < currentLevel.lockCount; i++)
-    {
-        ItemState * itemState = [items objectAtIndex:i];
-        LockShape * lock = [currentLevel GetLockAtIndex:i];
-        itemState.shapeType = [NSNumber numberWithInt:lock.shapeType];
-        itemState.colorType = [NSNumber numberWithInt:lock.colorType];
-        itemState.canSeeColor = [NSNumber numberWithBool:lock.canSeeColor];
-        itemState.canSeeItem = [NSNumber numberWithBool:lock.canSeeShape];
-    }
+   
     gameState.currentBoard.numberOfMovies = [NSNumber numberWithInt:numberOfMoves];
     gameState.currentBoard.numberOfTransforms = [NSNumber numberWithInt:numberOfTransforms];
     gameState.currentBoard.numberOfAttempts = [NSNumber numberWithInt:numberOfAttempts];

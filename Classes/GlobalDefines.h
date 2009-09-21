@@ -24,9 +24,6 @@
 #define SPAWN_LOCATION_X 145.0f
 #define SPAWN_LOCATION_Y 110.0f
 
-#define LOCK_LOCATION_X 86.5f
-#define LOCK_LOCATION_Y  451.5f
-
 #define SHAPE_WIDTH 30.0f
 
 #define TAP_WAIT_TIME 0.17

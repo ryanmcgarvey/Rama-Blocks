@@ -9,7 +9,6 @@
 #import <Foundation/Foundation.h>
 #import "Shape.h"
 #import "GlobalDefines.h"
-#import "LockShape.h"
 #import "GameState.h"
 
 @interface Level : NSObject {
@@ -21,29 +20,17 @@
     
     ColorType maxColor;
     ShapeType maxShape;
-    int lockCount;
-    
-    int attempts;
     
     GameState * gameState;
     
 }
 
 @property (readonly) int difficulty;
-@property int attempts;
-@property int lockCount;
+
+
 
 
 -(id)init:(int)predefinedDifficulty;
-
--(void)SetLockAtIndex:(LockShape *)lock : (int) index;
-
--(LockShape *)GetLockAtIndex:(int)index;
-
--(BOOL)checkSolution:(NSMutableArray *)shapes;
-
--(BOOL)addSolutionToView:(UIView *)view;
-
 
 -(void)addItem: (GameItem *) item;
 -(void)removeItem:(GameItem *) item;
@@ -52,7 +39,6 @@
 -(void)updateView;
 
 -(ShapeType)createShapeFromCollection;
-
 
 -(ShapeType)createRandomShape;
 -(ColorType)createRandomColor;

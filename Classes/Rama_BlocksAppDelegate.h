@@ -63,7 +63,6 @@
 
 -(NSArray *)FetchCollectionItemStates;
 -(NSArray *)FetchSpawnedItems;
--(NSArray *)FetchLockItems;
 -(NSArray *)FetchPlayedLevels;
 
 -(LevelStatistics *)CreatePlayedLevel;

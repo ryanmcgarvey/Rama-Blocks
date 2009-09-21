@@ -146,7 +146,6 @@
 		C2BD29821049019E007F05CB /* upsideDownBack.png in Resources */ = {isa = PBXBuildFile; fileRef = C2BD29811049019E007F05CB /* upsideDownBack.png */; };
 		C2BD2984104901D3007F05CB /* rotatedSideRight.png in Resources */ = {isa = PBXBuildFile; fileRef = C2BD2983104901D3007F05CB /* rotatedSideRight.png */; };
 		C2E26EC3104982080031A17B /* ItemC.png in Resources */ = {isa = PBXBuildFile; fileRef = C2E26EC2104982080031A17B /* ItemC.png */; };
-		FC0B6AA110251BDE00F1BD5E /* LockShape.m in Sources */ = {isa = PBXBuildFile; fileRef = FC0B6AA010251BDE00F1BD5E /* LockShape.m */; };
 		FC0B6B7910252C6000F1BD5E /* SoundEffects.m in Sources */ = {isa = PBXBuildFile; fileRef = FC0B6B7810252C6000F1BD5E /* SoundEffects.m */; };
 		FC0B6B7C10252E0A00F1BD5E /* SoundPlayer.m in Sources */ = {isa = PBXBuildFile; fileRef = FC0B6B7B10252E0A00F1BD5E /* SoundPlayer.m */; };
 		FC0B6B8B102531B600F1BD5E /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FC0B6B8A102531B600F1BD5E /* AVFoundation.framework */; };
@@ -323,8 +322,6 @@
 		C2BD29811049019E007F05CB /* upsideDownBack.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = upsideDownBack.png; sourceTree = "<group>"; };
 		C2BD2983104901D3007F05CB /* rotatedSideRight.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = rotatedSideRight.png; sourceTree = "<group>"; };
 		C2E26EC2104982080031A17B /* ItemC.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ItemC.png; sourceTree = "<group>"; };
-		FC0B6A9F10251BDE00F1BD5E /* LockShape.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LockShape.h; sourceTree = "<group>"; };
-		FC0B6AA010251BDE00F1BD5E /* LockShape.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LockShape.m; sourceTree = "<group>"; };
 		FC0B6B7710252C6000F1BD5E /* SoundEffects.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SoundEffects.h; sourceTree = "<group>"; };
 		FC0B6B7810252C6000F1BD5E /* SoundEffects.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SoundEffects.m; sourceTree = "<group>"; };
 		FC0B6B7A10252E0A00F1BD5E /* SoundPlayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SoundPlayer.h; sourceTree = "<group>"; };
@@ -764,8 +761,6 @@
 			children = (
 				C2B29071103440D2001B31FA /* DrawingView.h */,
 				C2B29072103440D2001B31FA /* DrawingView.m */,
-				FC0B6A9F10251BDE00F1BD5E /* LockShape.h */,
-				FC0B6AA010251BDE00F1BD5E /* LockShape.m */,
 				FCEF1558102118A800A71C1C /* GameItem.h */,
 				FCEF1559102118A800A71C1C /* GameItem.m */,
 				FCEF155B102118F200A71C1C /* Shape.h */,
@@ -1059,7 +1054,6 @@
 				FCEF176610215A7400A71C1C /* ItemCollection.m in Sources */,
 				FC4366B91024CDA000C1F3BE /* UIImage+Shapes.m in Sources */,
 				FCFD28401024F04B000313B3 /* Level.m in Sources */,
-				FC0B6AA110251BDE00F1BD5E /* LockShape.m in Sources */,
 				FC0B6B7910252C6000F1BD5E /* SoundEffects.m in Sources */,
 				FC0B6B7C10252E0A00F1BD5E /* SoundPlayer.m in Sources */,
 				FC4072E4102EC451000B40E8 /* LevelSelect.m in Sources */,

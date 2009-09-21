@@ -65,6 +65,10 @@
 	Shape * shapeB;
 	Shape * shapeC;
 	
+	Cell * cellA;
+	Cell * cellB;
+	Cell * cellC;
+	
 	ItemPair * SpawnedPair;
 	ItemPair * nextPair;
 	ItemCollection * itemCollection;
@@ -73,6 +77,7 @@
     GameState * gameState;
 	DrawingView *drawingView; 
 	PowerItem *powerItem;
+
 	
 	CGFloat touchDistanceToItemC;
 	
