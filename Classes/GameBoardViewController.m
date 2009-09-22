@@ -265,6 +265,12 @@
 	}
 	
 	[self didRotate:nil];
+	NSMutableArray * blocks = [[NSMutableArray alloc] initWithCapacity:NUMBER_OF_ROWS * NUMBER_OF_COLUMNS];
+	blocks = [itemCollection fillBlocksForDifficulty];
+	
+	for(Shape * block in blocks){
+		[self.view addSubview:block];
+	}
 	[itemCollection ApplyGravity];
 	[super viewDidLoad];
 	
@@ -1042,28 +1048,59 @@ if([[touch view] isKindOfClass: [GameItem class]]){
 						if(itemShape.shapeType == Square){
 							score = score + 50;
 							scoreLabel.text = [NSString stringWithFormat:@"%d" , score];
-							return;
+							//return;
 						}
 						if(itemShape.shapeType == Pentagon){
 							score = score + 250;
 							scoreLabel.text = [NSString stringWithFormat:@"%d" , score];
-							return;
+							//return;
 						}
 						if(itemShape.shapeType == Hexagon){
 							score = score + 1500;
 							scoreLabel.text = [NSString stringWithFormat:@"%d" , score];
-							return;
+							//return;
 						}
 						if(itemShape.shapeType == Circle){
 							score = score + 7000;
-							return;
+							//return;
 							scoreLabel.text = [NSString stringWithFormat:@"%d" , score];
 						}
 						if(itemShape.shapeType == Vortex){
 							score = score + 40000;
-							return;
+							//return;
 							scoreLabel.text = [NSString stringWithFormat:@"%d" , score];
 						}
+						if (score > 0 && currentLevel.difficulty == 1){
+							[self changeLevel];
+						}
+						if (score > 250 && currentLevel.difficulty == 2){
+							[self changeLevel];
+						}
+						if (score > 500 && currentLevel.difficulty == 3){
+							[self changeLevel];
+						}
+						if (score > 1500 && currentLevel.difficulty == 4){
+							[self changeLevel];
+						}
+						if (score > 2000 && currentLevel.difficulty == 5){
+							[self changeLevel];
+						}
+						if (score > 2500 && currentLevel.difficulty == 6){
+							[self changeLevel];
+						}
+						if (score > 3000 && currentLevel.difficulty == 7){
+							[self changeLevel];
+						}
+						if (score > 4000 && currentLevel.difficulty == 8){
+							[self changeLevel];
+						}
+						if (score > 5000 && currentLevel.difficulty == 9){
+							[self changeLevel];
+						}
+						if (score > 10000 && currentLevel.difficulty == 10){
+							[self changeLevel];
+						}
+							
                         return;
                     }
                 }
@@ -1099,6 +1136,27 @@ if([[touch view] isKindOfClass: [GameItem class]]){
 	[NSTimer release];
 }
 
+-(void)changeLevel{
+	[audio playVictory];
+	Rama_BlocksAppDelegate * appDelegate =  (Rama_BlocksAppDelegate *)[[UIApplication sharedApplication] delegate];
+	[self SaveState];
+	if([gameState.currentLevel intValue] == [gameState.highestLevel intValue] && [gameState.highestLevel intValue] < 10)
+	{
+		
+		LevelStatistics * stat = [appDelegate CreatePlayedLevel];
+		stat.Level = [NSNumber numberWithInt:[gameState.currentLevel intValue]];
+		stat.numberOfMoves = gameState.currentBoard.numberOfMovies;
+		stat.numberOfTransforms = gameState.currentBoard.numberOfTransforms;
+		stat.numerOfAttempts = gameState.currentBoard.numberOfAttempts;
+		stat.timeToComplete = gameState.currentBoard.timePlayed;
+		[gameState addPlayedLevelsObject:stat];
+		gameState.highestLevel = [NSNumber numberWithInt:[gameState.highestLevel intValue] +1];
+		gameState.currentLevel = [NSNumber numberWithInt:[gameState.highestLevel intValue]   ];
+	}
+	[currentLevel setDifficulty:currentLevel.difficulty + 1];
+	[itemCollection removeBlocksForDifficulty];
+	
+}
 
 /*****************************************************
  Tear down and maintenance

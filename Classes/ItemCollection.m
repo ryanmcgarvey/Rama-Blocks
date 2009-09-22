@@ -43,6 +43,71 @@
 	return self;
 }
 
+-(NSMutableArray *)fillBlocksForDifficulty{
+	
+	int row;
+	int column;
+	
+	NSMutableArray * blocks = [[NSMutableArray alloc] initWithCapacity:NUMBER_OF_ROWS * NUMBER_OF_COLUMNS];
+	
+	for (row = 0; row < RowLength; row++) 
+	{
+		for (column =0; column < ColumnLength; column++) 
+		{
+			Cell * cell = [self GetCell: row : column];
+			Shape * shape = [[[Shape alloc] initWithInfo: Red : Block : cell.Center]retain]; 
+			//[self SetItemToCell:shape : cell];
+			//[self.view addSubview:shape];
+			if(column < currentLevel.columnsBlockedLow || row < currentLevel.rowsBlockedLow){ 
+				[blocks addObject:shape];
+				[self SetItemToCell:shape : cell];
+			}
+			if(column > currentLevel.columnsBlockedHigh || row < currentLevel.rowsBlockedLow){ 
+				[blocks addObject:shape];
+				[self SetItemToCell:shape : cell];
+			}
+			if(row > currentLevel.rowsBlockedHigh){ 
+				[blocks addObject:shape];
+				[self SetItemToCell:shape : cell];
+			}
+		}
+		
+	}
+	
+	//[blocks autorelease];
+	//[blocksToRemove autorelease];
+	return blocks;
+}
+
+-(void)removeBlocksForDifficulty{
+	
+	int row;
+	int column;
+	
+	NSMutableArray * blocksToRemove = [[NSMutableArray alloc] initWithCapacity:NUMBER_OF_ROWS * NUMBER_OF_COLUMNS];
+	
+	for (row = 0; row < RowLength; row++) 
+	{
+		for (column =0; column < ColumnLength; column++) 
+		{
+			Cell * cell = [self GetCell: row : column];
+			Shape * shape = (Shape *) cell.ItemInCell; 
+			if(column >= currentLevel.columnsBlockedLow && column <= currentLevel.columnsBlockedHigh && shape.shapeType == Block){ 
+				if(row <= currentLevel.rowsBlockedHigh && row >= currentLevel.rowsBlockedLow){
+					[blocksToRemove addObject:cell];
+				}
+			}
+			//if(row <= currentLevel.rowsBlockedHigh && row >= currentLevel.rowsBlockedLow && shape.shapeType == Block){
+			//		[blocksToRemove addObject:cell];
+			//}
+		}
+		
+	}
+	
+	[self RemoveFromCellsAndRefactor: blocksToRemove];
+	
+	//[blocksToRemove autorelease];
+}
 
 -(void)cleanBoard{
 	int row = 0;
@@ -673,7 +738,10 @@
                 {
                     Cell * cell = [self GetCell:row : column];
 					if(cell.ItemInCell != 0 && cell.ItemInCell.IsAnchored == NO){
-						[self ApplyGravityToCell:cell];
+						Shape * shape = (Shape *) cell.ItemInCell;
+						if(shape.shapeType != Block){
+							[self ApplyGravityToCell:cell];
+						}
 					}
                 }
             }
@@ -685,7 +753,10 @@
                 {
                     Cell * cell = [self GetCell:row : column];
 					if(cell.ItemInCell != 0 && cell.ItemInCell.IsAnchored == NO){
-						[self ApplyGravityToCell:cell];
+						Shape * shape = (Shape *) cell.ItemInCell;
+						if(shape.shapeType != Block){
+							[self ApplyGravityToCell:cell];
+						}
 					}
                 }
             }
@@ -697,7 +768,10 @@
                 {
                     Cell * cell = [self GetCell:row : column];
 					if(cell.ItemInCell != 0 && cell.ItemInCell.IsAnchored == NO){
-						[self ApplyGravityToCell:cell];
+						Shape * shape = (Shape *) cell.ItemInCell;
+						if(shape.shapeType != Block){
+							[self ApplyGravityToCell:cell];
+						}
 					}
                 }
             }
@@ -709,7 +783,10 @@
                 {
                     Cell * cell = [self GetCell:row : column];
 					if(cell.ItemInCell != 0 && cell.ItemInCell.IsAnchored == NO){
-						[self ApplyGravityToCell:cell];
+						Shape * shape = (Shape *) cell.ItemInCell;
+						if(shape.shapeType != Block){
+							[self ApplyGravityToCell:cell];
+						}
 					}
                 }
             }
@@ -849,12 +926,6 @@
 }
 
 -(BOOL)CheckSolution{
-    
-    BOOL isCorrect = [currentLevel checkSolution:solution];
-    numberOfAttempts ++;
-    [self ClearSolution];
-    
-    return isCorrect;
 }
 
 /**************************************

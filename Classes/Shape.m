@@ -37,7 +37,7 @@
 }
 
 -(BOOL)TransForm{
-	shapeType = shapeType ++ % NUMBER_OF_SHAPES;
+	shapeType = shapeType ++ % NUMBER_OF_SHAPES - 1;
 	[self ChangeColorAndShape:colorType :shapeType];
 	return TRUE;
 }

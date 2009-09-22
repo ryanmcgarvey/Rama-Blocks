@@ -11,7 +11,7 @@
 
 
 @implementation Level
-@synthesize difficulty;
+@synthesize difficulty, rowsBlockedHigh, columnsBlockedHigh , rowsBlockedLow, columnsBlockedLow;
 
 
 /*****************************************************
@@ -131,48 +131,89 @@
 	
     
     switch (difficulty) {
-        case 0:
-            maxColor = 5;
-            maxShape = Triangle;
-            break;
+        
         case 1:
             maxColor = 3;
             maxShape = Triangle;
+			rowsBlockedHigh = 6;
+			rowsBlockedLow = 3;
+			columnsBlockedHigh = 6;
+			columnsBlockedLow = 3;
             break;
             
         case 2:
             maxColor = 3;
             maxShape = Square;
+			rowsBlockedHigh = 7;
+			rowsBlockedLow = 2;
+			columnsBlockedHigh = 6;
+			columnsBlockedLow = 3;
             break;
         case 3:
             maxColor = 4;
             maxShape = Square;
+			rowsBlockedHigh = 7;
+			rowsBlockedLow = 2;
+			columnsBlockedHigh = 7;
+			columnsBlockedLow = 2;
             break;
         case 4:
             maxColor = 4;
             maxShape = Pentagon;
+			rowsBlockedHigh = 7;
+			rowsBlockedLow = 1;
+			columnsBlockedHigh = 7;
+			columnsBlockedLow = 2;
             break;
         case 5:
             maxColor = 5;
             maxShape = Pentagon;
+			rowsBlockedHigh = 8;
+			rowsBlockedLow = 1;
+			columnsBlockedHigh = 7;
+			columnsBlockedLow = 2;
             break;
             
         case 6:
             maxColor = 5;
             maxShape = Hexagon;
+			rowsBlockedHigh = 8;
+			rowsBlockedLow = 1;
+			columnsBlockedHigh = 8;
+			columnsBlockedLow = 1;
             break;
         case 7:
             maxColor = 5;
             maxShape = Hexagon;
+			rowsBlockedHigh = 8;
+			rowsBlockedLow = 0;
+			columnsBlockedHigh = 8;
+			columnsBlockedLow = 1;
             break;
             
         case 8:
             maxColor = 5;
             maxShape = Circle;
+			rowsBlockedHigh = 9;
+			rowsBlockedLow = 0;
+			columnsBlockedHigh = 8;
+			columnsBlockedLow = 1;
             break;
         case 9:
             maxColor = 5;
             maxShape = Circle;
+			rowsBlockedHigh = 9;
+			rowsBlockedLow = 0;
+			columnsBlockedHigh = 9;
+			columnsBlockedLow = 0;
+            break;
+		case 0:
+            maxColor = 5;
+            maxShape = Triangle;
+			rowsBlockedHigh = 9;
+			rowsBlockedLow = 0;
+			columnsBlockedHigh = 9;
+			columnsBlockedLow = 0;
             break;
     }
 }

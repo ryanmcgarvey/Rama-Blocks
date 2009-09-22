@@ -57,6 +57,8 @@ typedef enum enum_Gravity {
 
 
 -(id)init: (int) rows : (int) columns : (int)rowPixelLength : (int)columnPixelLength : (Level *)level;
+-(void)removeBlocksForDifficulty;
+-(NSMutableArray *)fillBlocksForDifficulty;
 -(void)cleanBoard;
 
 -(BOOL)DrawShadowForItemPair: (ItemPair *)itemPair;

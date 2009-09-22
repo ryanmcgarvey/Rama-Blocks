@@ -27,7 +27,9 @@
 				case Circle:
 					return [UIImage imageNamed:@"redcircle.png"];
 				case Vortex:
-					return [UIImage imageNamed:@"redvortex.png"];					
+					return [UIImage imageNamed:@"redvortex.png"];
+				case Block:
+					return [UIImage imageNamed:@"block.png"];
 				default:
 					return nil;
 			}
@@ -45,6 +47,8 @@
 					return [UIImage imageNamed:@"purplecircle.png"];
 				case Vortex:
 					return [UIImage imageNamed:@"purplevortex.png"];
+				case Block:
+					return [UIImage imageNamed:@"block.png"];
 				default:
 					return nil;
 			}
@@ -62,6 +66,8 @@
 					return [UIImage imageNamed:@"yellowcircle.png"];
 				case Vortex:
 					return [UIImage imageNamed:@"yellowvortex.png"];
+				case Block:
+					return [UIImage imageNamed:@"block.png"];
 				default:
 					return nil;
 			}
@@ -79,6 +85,8 @@
 					return [UIImage imageNamed:@"greencircle.png"];
 				case Vortex:
 					return [UIImage imageNamed:@"greenvortex.png"];
+				case Block:
+					return [UIImage imageNamed:@"block.png"];
 				default:
 					return nil;
 			}
@@ -96,6 +104,8 @@
 					return [UIImage imageNamed:@"bluecircle.png"];
 				case Vortex:
 					return [UIImage imageNamed:@"bluevortex.png"];
+				case Block:
+					return [UIImage imageNamed:@"block.png"];
 				default:
 					return nil;
 			}

@@ -23,10 +23,20 @@
     
     GameState * gameState;
     
+	int rowsBlockedHigh;
+	int rowsBlockedLow;
+	int columnsBlockedHigh;
+	int columnsBlockedLow;
+	
 }
 
 @property (readonly) int difficulty;
 
+
+@property (readwrite, assign) int rowsBlockedHigh;
+@property (readwrite, assign) int rowsBlockedLow;
+@property (readwrite, assign) int columnsBlockedHigh;
+@property (readwrite, assign) int columnsBlockedLow;
 
 
 

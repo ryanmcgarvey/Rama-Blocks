@@ -166,7 +166,7 @@
 -(IBAction)ClickButtonBomb;
 -(IBAction)ClickButtonShuffle;
 
-
+-(void)changeLevel;
 
 
 

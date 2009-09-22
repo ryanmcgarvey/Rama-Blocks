@@ -15,6 +15,7 @@ typedef enum enum_ShapeType {
 	Hexagon,
 	Circle, 
 	Vortex,
+	Block,
 } ShapeType;
 
 

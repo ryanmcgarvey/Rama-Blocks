@@ -89,6 +89,7 @@
 		C2809B3610447CAF00240716 /* purplepiece3.png in Resources */ = {isa = PBXBuildFile; fileRef = C2809B3310447CAF00240716 /* purplepiece3.png */; };
 		C2809B3810447CB700240716 /* purplepiece2.png in Resources */ = {isa = PBXBuildFile; fileRef = C2809B3710447CB700240716 /* purplepiece2.png */; };
 		C2809B3A10447CBC00240716 /* purplepiece1.png in Resources */ = {isa = PBXBuildFile; fileRef = C2809B3910447CBC00240716 /* purplepiece1.png */; };
+		C28389DC106827FE0060CB82 /* block.png in Resources */ = {isa = PBXBuildFile; fileRef = C28389DB106827FE0060CB82 /* block.png */; };
 		C2A2369E1043A52A0095019B /* yellowpentagon.png in Resources */ = {isa = PBXBuildFile; fileRef = C2A2365B1043A5290095019B /* yellowpentagon.png */; };
 		C2A2369F1043A52A0095019B /* yellowcircle.png in Resources */ = {isa = PBXBuildFile; fileRef = C2A2365C1043A5290095019B /* yellowcircle.png */; };
 		C2A236A01043A52A0095019B /* yellowsquare.png in Resources */ = {isa = PBXBuildFile; fileRef = C2A2365D1043A5290095019B /* yellowsquare.png */; };
@@ -264,6 +265,7 @@
 		C2809B3310447CAF00240716 /* purplepiece3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = purplepiece3.png; sourceTree = "<group>"; };
 		C2809B3710447CB700240716 /* purplepiece2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = purplepiece2.png; sourceTree = "<group>"; };
 		C2809B3910447CBC00240716 /* purplepiece1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = purplepiece1.png; sourceTree = "<group>"; };
+		C28389DB106827FE0060CB82 /* block.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = block.png; sourceTree = "<group>"; };
 		C2A2365B1043A5290095019B /* yellowpentagon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = yellowpentagon.png; sourceTree = "<group>"; };
 		C2A2365C1043A5290095019B /* yellowcircle.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = yellowcircle.png; sourceTree = "<group>"; };
 		C2A2365D1043A5290095019B /* yellowsquare.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = yellowsquare.png; sourceTree = "<group>"; };
@@ -395,7 +397,6 @@
 				FCEF1555102117B200A71C1C /* Models */,
 				FCEF156810211DDF00A71C1C /* Delegates */,
 				FCEF1572102129E800A71C1C /* Frameworks */,
-				FCEF156D102128C700A71C1C /* Helpers */,
 				FCEF1556102117BC00A71C1C /* Controllers */,
 			);
 			path = Classes;
@@ -483,6 +484,7 @@
 			isa = PBXGroup;
 			children = (
 				C2B78E3A10624A1900DD401D /* trippyBack.png */,
+				C28389DB106827FE0060CB82 /* block.png */,
 				C2809B1010447C5800240716 /* Purple Pieces */,
 				C2809B0F10447C4D00240716 /* Yellow Pieces */,
 				C2809B0E10447C4500240716 /* Blue Pieces */,
@@ -746,8 +748,10 @@
 				FC4072E2102EC451000B40E8 /* LevelSelect.m */,
 				FCEF16F510214F0400A71C1C /* Tutorial.h */,
 				FCEF16F610214F0400A71C1C /* Tutorial.m */,
+				1D3623250D0F684500981E51 /* Rama_BlocksAppDelegate.m */,
 				FCEF16F710214F0400A71C1C /* Options.h */,
 				FCEF16F810214F0400A71C1C /* Options.m */,
+				FCEF156D102128C700A71C1C /* Helpers */,
 				FCEF16F910214F0400A71C1C /* MainMenuViewController.h */,
 				FCEF16FA10214F0400A71C1C /* MainMenuViewController.m */,
 				FCEF16FB10214F0400A71C1C /* GameBoardViewController.h */,
@@ -777,7 +781,6 @@
 			isa = PBXGroup;
 			children = (
 				1D3623240D0F684500981E51 /* Rama_BlocksAppDelegate.h */,
-				1D3623250D0F684500981E51 /* Rama_BlocksAppDelegate.m */,
 			);
 			name = Delegates;
 			sourceTree = "<group>";
@@ -1029,6 +1032,7 @@
 				C204777A10679F7C00D7C42B /* 0shuffle.png in Resources */,
 				C204777B10679F7C00D7C42B /* 0Discard.png in Resources */,
 				C204777D10679F8300D7C42B /* 0bomb.png in Resources */,
+				C28389DC106827FE0060CB82 /* block.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
