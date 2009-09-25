@@ -2,8 +2,8 @@
 //  GameState.h
 //  Rama Blocks
 //
-//  Created by Ryan McGarvey on 8/31/09.
-//  Copyright 2009 Simplical. All rights reserved.
+//  Created by Chad Gapac on 9/25/09.
+//  Copyright 2009 __MyCompanyName__. All rights reserved.
 //
 
 #import <CoreData/CoreData.h>
@@ -15,8 +15,8 @@
 {
 }
 
-@property (nonatomic, retain) NSNumber * currentLevel;
 @property (nonatomic, retain) NSNumber * sfxVolume;
+@property (nonatomic, retain) NSNumber * currentLevel;
 @property (nonatomic, retain) NSNumber * highestLevel;
 @property (nonatomic, retain) NSNumber * musicVolume;
 @property (nonatomic, retain) BoardState * currentBoard;

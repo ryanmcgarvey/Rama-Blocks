@@ -98,10 +98,19 @@
 	}
 	
 -(void)setShadow:(CGPoint)ShaddowALoc:(CGPoint)ShaddowBLoc{
-    ShaddowA.center =  ShaddowALoc;
-    ShaddowB.center = ShaddowBLoc;
-    ShaddowA.alpha = 0.4f;
-    ShaddowB.alpha = 0.4f;
+    Rama_BlocksAppDelegate * appDelegate =  (Rama_BlocksAppDelegate *)[[UIApplication sharedApplication] delegate];
+	if(appDelegate.allowGravity == TRUE){
+		ShaddowA.center =  ShaddowALoc;
+		ShaddowB.center = ShaddowBLoc;
+		ShaddowA.alpha = 0.4f;
+		ShaddowB.alpha = 0.4f;
+	}
+	if(appDelegate.allowGravity == FALSE){
+		ShaddowA.center =  ShaddowALoc;
+		ShaddowB.center = ShaddowBLoc;
+		ShaddowA.alpha = 0.0f;
+		ShaddowB.alpha = 0.0f;
+	}
         
 }
 

@@ -2,8 +2,8 @@
 //  ItemState.m
 //  Rama Blocks
 //
-//  Created by Ryan McGarvey on 8/31/09.
-//  Copyright 2009 Simplical. All rights reserved.
+//  Created by Chad Gapac on 9/25/09.
+//  Copyright 2009 __MyCompanyName__. All rights reserved.
 //
 
 #import "ItemState.h"
@@ -12,14 +12,14 @@
 
 @implementation ItemState 
 
-@dynamic Column;
-@dynamic canSeeColor;
 @dynamic ItemType;
 @dynamic shapeType;
 @dynamic colorType;
 @dynamic canSeeItem;
-@dynamic Row;
 @dynamic index;
+@dynamic Column;
+@dynamic canSeeColor;
+@dynamic Row;
 @dynamic owningBoardState;
 
 @end

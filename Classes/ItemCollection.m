@@ -97,9 +97,7 @@
 					[blocksToRemove addObject:cell];
 				}
 			}
-			//if(row <= currentLevel.rowsBlockedHigh && row >= currentLevel.rowsBlockedLow && shape.shapeType == Block){
-			//		[blocksToRemove addObject:cell];
-			//}
+			
 		}
 		
 	}
@@ -129,9 +127,7 @@
 
 -(void)UpdateState{
     numberOfMoves = [gameState.currentBoard.numberOfMovies intValue];
-    numberOfTransforms = [gameState.currentBoard.numberOfTransforms intValue];
-    numberOfAttempts = [gameState.currentBoard.numberOfAttempts intValue];
-}
+    numberOfTransforms = [gameState.currentBoard.numberOfTransforms intValue];}
 
 -(void)SaveState {
     Rama_BlocksAppDelegate * appDelegate =  (Rama_BlocksAppDelegate *)[[UIApplication sharedApplication] delegate];
@@ -158,7 +154,6 @@
    
     gameState.currentBoard.numberOfMovies = [NSNumber numberWithInt:numberOfMoves];
     gameState.currentBoard.numberOfTransforms = [NSNumber numberWithInt:numberOfTransforms];
-    gameState.currentBoard.numberOfAttempts = [NSNumber numberWithInt:numberOfAttempts];
 }
 
 /**************************************
@@ -409,11 +404,11 @@
 			[cell.ItemInCell addSubview:piece4];
 			[cell.ItemInCell addSubview:piece5];
 			
-			piece1.center = CGPointMake(piece1.center.x + ((float)((uint)arc4random())/0xFFFFFFFF * 10),piece1.center.x + ((float)((uint)arc4random())/0xFFFFFFFF * 10));
-			piece2.center = CGPointMake(piece2.center.x - ((float)((uint)arc4random())/0xFFFFFFFF * 10),piece2.center.x - ((float)((uint)arc4random())/0xFFFFFFFF * 10));
-			piece3.center = CGPointMake(piece3.center.x - ((float)((uint)arc4random())/0xFFFFFFFF * 10),piece3.center.x + ((float)((uint)arc4random())/0xFFFFFFFF * 10));
-			piece4.center = CGPointMake(piece4.center.x + ((float)((uint)arc4random())/0xFFFFFFFF * 10),piece4.center.x - ((float)((uint)arc4random())/0xFFFFFFFF * 10));
-			piece5.center = CGPointMake(piece5.center.x + ((float)((uint)arc4random())/0xFFFFFFFF * 5),piece5.center.x + ((float)((uint)arc4random())/0xFFFFFFFF * 5));
+			piece1.center = CGPointMake(piece1.center.x + 5,piece1.center.x + 5);
+			piece2.center = CGPointMake(piece2.center.x - 5,piece2.center.x - 5);
+			piece3.center = CGPointMake(piece3.center.x - 5,piece3.center.x + 5);
+			piece4.center = CGPointMake(piece4.center.x + 5,piece4.center.x - 5);
+			piece5.center = CGPointMake(piece5.center.x + 2,piece5.center.x + 2);
 			[cell.ItemInCell setNeedsDisplay];
 			cell.ItemInCell.alpha = 0;
 			cell.ItemInCell = nil;
@@ -460,11 +455,11 @@
 			[cell.ItemInCell addSubview:piece4];
 			[cell.ItemInCell addSubview:piece5];
 			
-			piece1.center = CGPointMake(piece1.center.x + ((float)((uint)arc4random())/0xFFFFFFFF * 10),piece1.center.x + ((float)((uint)arc4random())/0xFFFFFFFF * 10));
-			piece2.center = CGPointMake(piece2.center.x - ((float)((uint)arc4random())/0xFFFFFFFF * 10),piece2.center.x - ((float)((uint)arc4random())/0xFFFFFFFF * 10));
-			piece3.center = CGPointMake(piece3.center.x - ((float)((uint)arc4random())/0xFFFFFFFF * 10),piece3.center.x + ((float)((uint)arc4random())/0xFFFFFFFF * 10));
-			piece4.center = CGPointMake(piece4.center.x + ((float)((uint)arc4random())/0xFFFFFFFF * 10),piece4.center.x - ((float)((uint)arc4random())/0xFFFFFFFF * 10));
-			piece5.center = CGPointMake(piece5.center.x + ((float)((uint)arc4random())/0xFFFFFFFF * 5),piece5.center.x + ((float)((uint)arc4random())/0xFFFFFFFF * 5));
+			piece1.center = CGPointMake(piece1.center.x + 5,piece1.center.x + 5);
+			piece2.center = CGPointMake(piece2.center.x - 5,piece2.center.x - 5);
+			piece3.center = CGPointMake(piece3.center.x - 5,piece3.center.x + 5);
+			piece4.center = CGPointMake(piece4.center.x + 5,piece4.center.x - 5);
+			piece5.center = CGPointMake(piece5.center.x + 2,piece5.center.x + 2);
 			[cell.ItemInCell setNeedsDisplay];
 			cell.ItemInCell.alpha = 0;
 			cell.ItemInCell = nil;
@@ -511,11 +506,11 @@
 			[cell.ItemInCell addSubview:piece4];
 			[cell.ItemInCell addSubview:piece5];
 			
-			piece1.center = CGPointMake(piece1.center.x + ((float)((uint)arc4random())/0xFFFFFFFF * 10),piece1.center.x + ((float)((uint)arc4random())/0xFFFFFFFF * 10));
-			piece2.center = CGPointMake(piece2.center.x - ((float)((uint)arc4random())/0xFFFFFFFF * 10),piece2.center.x - ((float)((uint)arc4random())/0xFFFFFFFF * 10));
-			piece3.center = CGPointMake(piece3.center.x - ((float)((uint)arc4random())/0xFFFFFFFF * 10),piece3.center.x + ((float)((uint)arc4random())/0xFFFFFFFF * 10));
-			piece4.center = CGPointMake(piece4.center.x + ((float)((uint)arc4random())/0xFFFFFFFF * 10),piece4.center.x - ((float)((uint)arc4random())/0xFFFFFFFF * 10));
-			piece5.center = CGPointMake(piece5.center.x + ((float)((uint)arc4random())/0xFFFFFFFF * 5),piece5.center.x + ((float)((uint)arc4random())/0xFFFFFFFF * 5));
+			piece1.center = CGPointMake(piece1.center.x + 5,piece1.center.x + 5);
+			piece2.center = CGPointMake(piece2.center.x - 5,piece2.center.x - 5);
+			piece3.center = CGPointMake(piece3.center.x - 5,piece3.center.x + 5);
+			piece4.center = CGPointMake(piece4.center.x + 5,piece4.center.x - 5);
+			piece5.center = CGPointMake(piece5.center.x + 2,piece5.center.x + 2);
 			[cell.ItemInCell setNeedsDisplay];
 			cell.ItemInCell.alpha = 0;
 			cell.ItemInCell = nil;
@@ -562,11 +557,11 @@
 			[cell.ItemInCell addSubview:piece4];
 			[cell.ItemInCell addSubview:piece5];
 			
-			piece1.center = CGPointMake(piece1.center.x + ((float)((uint)arc4random())/0xFFFFFFFF * 10),piece1.center.x + ((float)((uint)arc4random())/0xFFFFFFFF * 10));
-			piece2.center = CGPointMake(piece2.center.x - ((float)((uint)arc4random())/0xFFFFFFFF * 10),piece2.center.x - ((float)((uint)arc4random())/0xFFFFFFFF * 10));
-			piece3.center = CGPointMake(piece3.center.x - ((float)((uint)arc4random())/0xFFFFFFFF * 10),piece3.center.x + ((float)((uint)arc4random())/0xFFFFFFFF * 10));
-			piece4.center = CGPointMake(piece4.center.x + ((float)((uint)arc4random())/0xFFFFFFFF * 10),piece4.center.x - ((float)((uint)arc4random())/0xFFFFFFFF * 10));
-			piece5.center = CGPointMake(piece5.center.x + ((float)((uint)arc4random())/0xFFFFFFFF * 5),piece5.center.x + ((float)((uint)arc4random())/0xFFFFFFFF * 5));
+			piece1.center = CGPointMake(piece1.center.x + 5,piece1.center.x + 5);
+			piece2.center = CGPointMake(piece2.center.x - 5,piece2.center.x - 5);
+			piece3.center = CGPointMake(piece3.center.x - 5,piece3.center.x + 5);
+			piece4.center = CGPointMake(piece4.center.x + 5,piece4.center.x - 5);
+			piece5.center = CGPointMake(piece5.center.x + 2,piece5.center.x + 2);
 			[cell.ItemInCell setNeedsDisplay];
 			cell.ItemInCell.alpha = 0;
 			cell.ItemInCell = nil;
@@ -614,11 +609,11 @@
 			[cell.ItemInCell addSubview:piece4];
 			[cell.ItemInCell addSubview:piece5];
 			
-			piece1.center = CGPointMake(piece1.center.x + ((float)((uint)arc4random())/0xFFFFFFFF * 10),piece1.center.x + ((float)((uint)arc4random())/0xFFFFFFFF * 10));
-			piece2.center = CGPointMake(piece2.center.x - ((float)((uint)arc4random())/0xFFFFFFFF * 10),piece2.center.x - ((float)((uint)arc4random())/0xFFFFFFFF * 10));
-			piece3.center = CGPointMake(piece3.center.x - ((float)((uint)arc4random())/0xFFFFFFFF * 10),piece3.center.x + ((float)((uint)arc4random())/0xFFFFFFFF * 10));
-			piece4.center = CGPointMake(piece4.center.x + ((float)((uint)arc4random())/0xFFFFFFFF * 10),piece4.center.x - ((float)((uint)arc4random())/0xFFFFFFFF * 10));
-			piece5.center = CGPointMake(piece5.center.x + ((float)((uint)arc4random())/0xFFFFFFFF * 5),piece5.center.x + ((float)((uint)arc4random())/0xFFFFFFFF * 5));
+			piece1.center = CGPointMake(piece1.center.x + 5,piece1.center.x + 5);
+			piece2.center = CGPointMake(piece2.center.x - 5,piece2.center.x - 5);
+			piece3.center = CGPointMake(piece3.center.x - 5,piece3.center.x + 5);
+			piece4.center = CGPointMake(piece4.center.x + 5,piece4.center.x - 5);
+			piece5.center = CGPointMake(piece5.center.x + 2,piece5.center.x + 2);
 			[cell.ItemInCell setNeedsDisplay];
 			cell.ItemInCell.alpha = 0;
 			
@@ -656,7 +651,6 @@
 
 -(void)RemoveFromCellsAndRefactor:(NSMutableArray *)TransFormGroup{
     [currentLevel removeItems:TransFormGroup];
-	//[self animateTransform:TransFormGroup];
 	for(Cell * cell in TransFormGroup)
     {	
 		[cell.ItemInCell removeFromSuperview];
@@ -730,72 +724,75 @@
 
 -(void)ApplyGravity{
     int row;int column;
-    switch (gravityDirection) {
-        case left:
-            for(row = 0; row < NUMBER_OF_ROWS; row++)
-            {
-                for(column = 0; column < NUMBER_OF_COLUMNS; column ++)
-                {
-                    Cell * cell = [self GetCell:row : column];
-					if(cell.ItemInCell != 0 && cell.ItemInCell.IsAnchored == NO){
-						Shape * shape = (Shape *) cell.ItemInCell;
-						if(shape.shapeType != Block){
-							[self ApplyGravityToCell:cell];
+	 Rama_BlocksAppDelegate * appDelegate =  (Rama_BlocksAppDelegate *)[[UIApplication sharedApplication] delegate];
+	if(appDelegate.allowGravity == TRUE){
+		switch (gravityDirection) {
+			case left:
+				for(row = 0; row < NUMBER_OF_ROWS; row++)
+				{
+					for(column = 0; column < NUMBER_OF_COLUMNS; column ++)
+					{
+						Cell * cell = [self GetCell:row : column];
+						if(cell.ItemInCell != 0 && cell.ItemInCell.IsAnchored == NO){
+							Shape * shape = (Shape *) cell.ItemInCell;
+							if(shape.shapeType != Block){
+								[self ApplyGravityToCell:cell];
+							}
 						}
 					}
-                }
-            }
-            return;
-        case right:
-            for(row = 0; row < NUMBER_OF_ROWS; row++)
-            {
-                for(column = NUMBER_OF_COLUMNS - 1; column >= 0; column --)
-                {
-                    Cell * cell = [self GetCell:row : column];
-					if(cell.ItemInCell != 0 && cell.ItemInCell.IsAnchored == NO){
-						Shape * shape = (Shape *) cell.ItemInCell;
-						if(shape.shapeType != Block){
+				}
+				return;
+			case right:
+				for(row = 0; row < NUMBER_OF_ROWS; row++)
+				{
+					for(column = NUMBER_OF_COLUMNS - 1; column >= 0; column --)
+					{
+						Cell * cell = [self GetCell:row : column];
+						if(cell.ItemInCell != 0 && cell.ItemInCell.IsAnchored == NO){
+							Shape * shape = (Shape *) cell.ItemInCell;
+							if(shape.shapeType != Block){
 							[self ApplyGravityToCell:cell];
+							}
 						}
 					}
-                }
-            }
-            return;
-        case down:
-            for(column = 0; column < NUMBER_OF_COLUMNS; column ++)
-            {
-                for(row = 0; row < NUMBER_OF_ROWS; row++)
-                {
-                    Cell * cell = [self GetCell:row : column];
-					if(cell.ItemInCell != 0 && cell.ItemInCell.IsAnchored == NO){
-						Shape * shape = (Shape *) cell.ItemInCell;
-						if(shape.shapeType != Block){
+				}
+				return;
+			case down:
+				for(column = 0; column < NUMBER_OF_COLUMNS; column ++)
+				{
+					for(row = 0; row < NUMBER_OF_ROWS; row++)
+					{
+						Cell * cell = [self GetCell:row : column];
+						if(cell.ItemInCell != 0 && cell.ItemInCell.IsAnchored == NO){
+							Shape * shape = (Shape *) cell.ItemInCell;
+							if(shape.shapeType != Block){
 							[self ApplyGravityToCell:cell];
+							}
 						}
 					}
-                }
-            }
-            return;
-        case up:
-            for(column = 0; column < NUMBER_OF_COLUMNS; column ++)
-            {
-                for(row = NUMBER_OF_ROWS -1 ; row >= 0; row--)
-                {
-                    Cell * cell = [self GetCell:row : column];
-					if(cell.ItemInCell != 0 && cell.ItemInCell.IsAnchored == NO){
-						Shape * shape = (Shape *) cell.ItemInCell;
-						if(shape.shapeType != Block){
-							[self ApplyGravityToCell:cell];
+				}
+				return;
+			case up:
+				for(column = 0; column < NUMBER_OF_COLUMNS; column ++)
+				{
+					for(row = NUMBER_OF_ROWS -1 ; row >= 0; row--)
+					{
+						Cell * cell = [self GetCell:row : column];
+						if(cell.ItemInCell != 0 && cell.ItemInCell.IsAnchored == NO){
+							Shape * shape = (Shape *) cell.ItemInCell;
+							if(shape.shapeType != Block){
+								[self ApplyGravityToCell:cell];
+							}
 						}
 					}
-                }
-            }
-            return;
-        case zero:
-            return;
-        default:
-            break;
-    }
+				}
+				return;
+			case zero:
+				return;
+			default:
+				break;
+		}
+	}
 }
 
 -(void)ApplyGravityToCell:(Cell *)cell{
@@ -809,27 +806,23 @@
 				rotatedShape.transform = CGAffineTransformIdentity;
 				rotatedShape.transform = CGAffineTransformRotate(cell.ItemInCell.transform, rotate_xDegrees(90));
 				cell.ItemInCell = rotatedShape;
-				rotatedShape = nil;
 				break;
 			case right:
 				
 				rotatedShape.transform = CGAffineTransformIdentity;
 				rotatedShape.transform = CGAffineTransformRotate(cell.ItemInCell.transform, rotate_xDegrees(270));
 				cell.ItemInCell = rotatedShape;
-				rotatedShape = nil;
 				break;
 			case up:
 				
 				rotatedShape.transform = CGAffineTransformIdentity;
 				rotatedShape.transform = CGAffineTransformRotate(cell.ItemInCell.transform, rotate_xDegrees(180));
 				cell.ItemInCell = rotatedShape;
-				rotatedShape = nil;
 				break;
 			case down:
 				
 				rotatedShape.transform = CGAffineTransformIdentity;
 				cell.ItemInCell = rotatedShape;
-				rotatedShape = nil;
 				break;
 				
 		}
@@ -890,42 +883,6 @@
         default:
             return nil;
     }
-}
-
-/**************************************
- Solution
- **************************************/
-
--(void)HighLightShapes{
-    for(Shape * shape in solution)
-    {
-        [shape setBackgroundColor:[UIColor lightGrayColor]];
-    }
-}
--(void)UnHighLightShapes{
-    for(Shape * shape in solution)
-    {
-        [shape setBackgroundColor:[UIColor clearColor]];
-    }
-}
--(void)AddShapeToSolution:(Shape *)shape{
-    
-    if(shape != nil)
-    {
-        if([solution count] ==0 || [shape IsNeighbor:[solution lastObject]] &&![solution containsObject:shape]  )
-        {
-            [solution addObject:shape];
-            [self HighLightShapes];
-        }
-    }
-}
-
--(void)ClearSolution{
-    [self UnHighLightShapes];
-    [solution removeAllObjects];
-}
-
--(BOOL)CheckSolution{
 }
 
 /**************************************

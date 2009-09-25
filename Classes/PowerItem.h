@@ -29,7 +29,7 @@
 -(void)returnGravity;
 
 -(void)placeFilter:(GameItem *)item;
--(void)makeFilter:(GameItem *)item;
+-(void)makeFilter:(Shape *)shape;
 
 -(void)shuffleBoard:(GameItem *)item;
 

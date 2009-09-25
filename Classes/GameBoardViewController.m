@@ -36,6 +36,7 @@
         item.shapeType = [NSNumber numberWithInt:shape.shapeType];
         
         gameState.currentBoard.timePlayed = [NSNumber numberWithDouble:[gameState.currentBoard.timePlayed doubleValue] + totalTime];
+		gameState.currentBoard.numberOfAttempts = [NSNumber numberWithInt:score];
     }
 }
 
@@ -102,6 +103,9 @@
 	SpawnedPair.ItemB.ItemView.contentMode = UIViewContentModeScaleAspectFit;
 	SpawnedPair.ItemC.ItemView.contentMode = UIViewContentModeScaleAspectFit;
 	
+	nextPair.ItemA.transform = spawnedShapeRotateTransform;
+	nextPair.ItemB.transform = spawnedShapeRotateTransform;
+	
 	[self.view addSubview:SpawnedPair.ItemC];
     [self.view addSubview:SpawnedPair.ItemA];
     [self.view addSubview:SpawnedPair.ItemB];
@@ -131,70 +135,109 @@
 /*****************************************************
  UIController Delegates
  *****************************************************/
-- (void)viewDidLoad {   
-    Rama_BlocksAppDelegate * appDelegate =  (Rama_BlocksAppDelegate *)[[UIApplication sharedApplication] delegate];
+-(void)viewDidLoad {   
+    	Rama_BlocksAppDelegate * appDelegate =  (Rama_BlocksAppDelegate *)[[UIApplication sharedApplication] delegate];
 	gameState = [appDelegate FetchGameState];
+	score = [gameState.currentBoard.numberOfAttempts intValue];
 	powerItem = [[PowerItem alloc]init];
 	
 	audio = [appDelegate FetchAudio];
 	discardCount = 0;
 	transformCount = 0;
+	didShuffle = FALSE;
+	
 	spawnX = SPAWN_LOCATION_X;
 	spawnY = SPAWN_LOCATION_Y;
+	
 	spawnNextX = SPAWN_LOCATION_X;
 	spawnNextY = SPAWN_LOCATION_Y - 78;
+	
 	rightPix = 30;
 	upPix = 0;
+	spawnedShapeRotateTransform = CGAffineTransformIdentity;
 	
 	//// Create background
-	backGround = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 480, 480)];
+	backGround = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 320, 480)];
 	backGround.clipsToBounds = YES;
 	backGround.autoresizesSubviews = NO;
 	backGround.contentMode = UIViewContentModeTopLeft;
-	backGround.image = [[UIImage imageNamed:@"gameBoardGrid.png"] retain];
+	backGround.image = [UIImage imageNamed:@"gameBoardGrid.png"];
 	backGround.userInteractionEnabled = FALSE;
 	self.view.backgroundColor = [UIColor blackColor];
+	
+	backGroundStars = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 960, 640)];
+	backGroundStars.clipsToBounds = YES;
+	backGroundStars.autoresizesSubviews = NO;
+	backGroundStars.contentMode = UIViewContentModeTopLeft;
+	backGroundStars.image = [UIImage imageNamed:@"BigBackground.png"];
+	backGroundStars.userInteractionEnabled = FALSE;
+	
+	backGroundCloudsA = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 960, 640)];
+	backGroundCloudsA.clipsToBounds = YES;
+	backGroundCloudsA.autoresizesSubviews = NO;
+	backGroundCloudsA.contentMode = UIViewContentModeTopLeft;
+	backGroundCloudsA.image = [UIImage imageNamed:@"magentaClouds.png"];
+	backGroundCloudsA.userInteractionEnabled = FALSE;
+	
+	backGroundCloudsB = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 960, 640)];
+	backGroundCloudsB.clipsToBounds = YES;
+	backGroundCloudsB.autoresizesSubviews = NO;
+	backGroundCloudsB.image = [UIImage imageNamed:@"orangeClouds.png"];
+	backGroundCloudsB.userInteractionEnabled = FALSE;
     
+	backGroundCloudsB.center = CGPointMake(backGroundCloudsB.center.x - 640,backGroundCloudsB.center.y - 160);
+	
+	backGroundCloudsA.alpha = 0.0f;
+	backGroundCloudsB.alpha = 0.0f;
+	backGroundStars.alpha = 0.0f;
+	
+	
+	[self moveCloudsOne];
+	
+	powerBack = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 100, 100)];
+	powerBack.center = CGPointMake(spawnX + 15,spawnY);
+	//powerBack.alpha = 0.5f;
+	powerBack.userInteractionEnabled = FALSE;
+	
     lockSet = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"lockTab.png"]];
     lockSet.center = CGPointMake(lockSet.center.x, lockSet.center.y - 180);
     closeLock.center = CGPointMake(closeLock.center.x, closeLock.center.y - 180);
 	checkRecipe.center = CGPointMake(checkRecipe.center.x, checkRecipe.center.y - 180);
-    lockFeedBackA = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"lockFeedBack.png"]];
+	checkLock.center = CGPointMake(252, 25);
+	
+    lockFeedBackA = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 100, 100)];
+	lockFeedBackA.image = [UIImage imageNamed:@"lockFeedBack.png"];
     lockFeedBackA.center = CGPointMake(lockSet.center.x, lockSet.center.y);
-	lockFeedBackB = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"lockFeedBack.png"]];
+	
+	
+	lockFeedBackB = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 100, 100)];
+	lockFeedBackB.image = [UIImage imageNamed:@"lockFeedBack.png"];
     lockFeedBackB.center = CGPointMake(lockSet.center.x + 100, lockSet.center.y);
-	lockFeedBackC = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"lockFeedBack.png"]];
+	
+	lockFeedBackC = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 100, 100)];
+	lockFeedBackC.image = [UIImage imageNamed:@"lockFeedBack.png"];
     lockFeedBackC.center = CGPointMake(lockSet.center.x - 100, lockSet.center.y);
-    guessView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"lockFeedBack.png"]];
+    
+	guessView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"lockFeedBack.png"]];
 	
 	scoreLabel.text = [NSString stringWithFormat:@"%d" , score];
 	scoreLabel.center = CGPointMake(64,31);
+	buttonMenu.center = CGPointMake(305,24);
 	
-	upgradeButton.center = CGPointMake(18,99);
-	discardButton.center = CGPointMake(38,99);
-	bombButton.center = CGPointMake(58,99);
-	reshuffleButton.center = CGPointMake(78,99);
+	upgradeButton.frame = CGRectMake(0, 0, 40, 40);
+	discardButton.frame = CGRectMake(0, 0, 40, 40);
+	bombButton.frame = CGRectMake(0, 0, 40, 40);
+	reshuffleButton.frame = CGRectMake(0, 0, 40, 40);
 	
-	upgradeCountImage.center = upgradeButton.center;
-	discardCountImage.center = discardButton.center;
-	bombCountImage.center = bombButton.center;
-	reshuffleCountImage.center = reshuffleButton.center;
+	upgradeCountImage.center = CGPointMake(26,76);
+	discardCountImage.center = CGPointMake(293,76);
+	bombCountImage.center = CGPointMake(76,76);
+	reshuffleCountImage.center = CGPointMake(244,76);
 	
-	[self.view addSubview:backGround];
-	[self.view sendSubviewToBack:backGround];
-	[self.view addSubview:buttonMenu];
-    [self.view addSubview:buttonMenu];
-	[self.view addSubview:checkLock];
-    [self.view addSubview:lockSet];
-    [self.view addSubview:closeLock];
-	[self.view addSubview:checkRecipe];
-    [self.view addSubview:lockFeedBackA];
-	[self.view addSubview:lockFeedBackB];
-	[self.view addSubview:lockFeedBackC];
-    [self.view sendSubviewToBack:buttonMenu];
-    
-	
-	menuViewCenter = menuView.center;
+	upgradeButton.center = CGPointMake(26,116);
+	discardButton.center = CGPointMake(294,116);
+	bombButton.center = CGPointMake(76,116);
+	reshuffleButton.center = CGPointMake(245,116);
 	
 	CurrentDevice = [UIDevice currentDevice];
 	[CurrentDevice beginGeneratingDeviceOrientationNotifications];
@@ -204,6 +247,75 @@
 	
 	currentLevel = [[Level alloc] init:[gameState.currentLevel intValue]];
 	
+	if (currentLevel.difficulty == 2){
+		backGroundCloudsA.image = [UIImage imageNamed:@"redClouds.png"];
+		backGroundCloudsB.image = [UIImage imageNamed:@"blueClouds.png"];
+		
+	}
+	if (currentLevel.difficulty == 3){
+		backGroundCloudsA.image = [UIImage imageNamed:@"cyanClouds.png"];
+		backGroundCloudsB.image = [UIImage imageNamed:@"yellowClouds.png"];
+	}
+	if (currentLevel.difficulty == 4){
+		backGroundCloudsA.image = [UIImage imageNamed:@"greenClouds.png"];
+		backGroundCloudsB.image = [UIImage imageNamed:@"violetClouds.png"];
+	}
+	if (currentLevel.difficulty == 5){
+		backGroundCloudsA.image = [UIImage imageNamed:@"cyanBlueClouds.png"];
+		backGroundCloudsB.image = [UIImage imageNamed:@"orangeClouds.png"];
+	}
+	if (currentLevel.difficulty == 6){
+		backGroundCloudsA.image = [UIImage imageNamed:@"yellowClouds.png"];
+		backGroundCloudsB.image = [UIImage imageNamed:@"magentaClouds.png"];
+	}
+	if (currentLevel.difficulty == 7){
+		backGroundCloudsA.image = [UIImage imageNamed:@"redClouds.png"];
+		backGroundCloudsB.image = [UIImage imageNamed:@"greenClouds.png"];
+	}
+	if (currentLevel.difficulty == 8){
+		backGroundCloudsA.image = [UIImage imageNamed:@"blueClouds.png"];
+		backGroundCloudsB.image = [UIImage imageNamed:@"violetClouds.png"];
+	}
+	if (currentLevel.difficulty == 9){
+		backGroundCloudsA.image = [UIImage imageNamed:@"cyanBlueClouds.png"];
+		backGroundCloudsB.image = [UIImage imageNamed:@"greenClouds.png"];
+	}
+	if (currentLevel.difficulty == 10){
+		backGroundCloudsA.image = [UIImage imageNamed:@"cyanClouds.png"];
+		backGroundCloudsB.image = [UIImage imageNamed:@"yellowClouds.png"];
+	}
+	if (currentLevel.difficulty == 1){
+		backGroundCloudsA.image = [UIImage imageNamed:@"magentaClouds.png"];
+		backGroundCloudsB.image = [UIImage imageNamed:@"orangeClouds.png"];
+	}
+	
+	[self.view addSubview:backGroundCloudsA];
+	[self.view sendSubviewToBack:backGroundCloudsA];
+	[self.view addSubview:backGroundCloudsB];
+	[self.view sendSubviewToBack:backGroundCloudsB];
+	[self.view addSubview:backGroundStars];
+	[self.view sendSubviewToBack:backGroundStars];
+	[self.view addSubview:powerBack];
+	[self.view addSubview:buttonMenu];
+	[self.view addSubview:checkLock];
+    [self.view addSubview:lockSet];
+    [self.view addSubview:closeLock];
+	[self.view addSubview:checkRecipe];
+    [self.view addSubview:lockFeedBackA];
+	[self.view addSubview:lockFeedBackB];
+	[self.view addSubview:lockFeedBackC];
+    [self.view sendSubviewToBack:buttonMenu];
+	[self.view addSubview:backGround];
+	[self.view bringSubviewToFront:backGround];
+	[self.view bringSubviewToFront:powerBack];
+    
+	
+	menuView.center = CGPointMake(160,240);
+	statsView.center = CGPointMake(160,240);
+	statsView.hidden = TRUE;
+	
+	recipeLabel.center = CGPointMake(160,240);
+	recipeLabel.hidden = TRUE;
 	
 	itemCollection = [[ItemCollection alloc] init:NUMBER_OF_ROWS :NUMBER_OF_COLUMNS :SHAPE_WIDTH :SHAPE_WIDTH: currentLevel];
 	SpawnedPair = [ItemPair new];
@@ -246,6 +358,13 @@
 		SpawnedPair.ItemB.ItemView.contentMode = UIViewContentModeScaleAspectFit;
 		SpawnedPair.ItemC.ItemView.contentMode = UIViewContentModeScaleAspectFit;
 		
+		SpawnedPair.ItemA.ItemView.alpha = 0.0f;
+		SpawnedPair.ItemB.ItemView.alpha = 0.0f;
+		SpawnedPair.ItemC.ItemView.alpha = 0.0f;
+		
+		nextPair.ItemA.ItemView.alpha = 0.0f;
+		nextPair.ItemB.ItemView.alpha = 0.0f;
+		
 		[self.view addSubview:SpawnedPair.ItemC];
 		[self.view addSubview:SpawnedPair.ItemB];
 		[self.view addSubview:SpawnedPair.ItemA];
@@ -266,7 +385,7 @@
 	
 	[self didRotate:nil];
 	NSMutableArray * blocks = [[NSMutableArray alloc] initWithCapacity:NUMBER_OF_ROWS * NUMBER_OF_COLUMNS];
-	blocks = [itemCollection fillBlocksForDifficulty];
+	//blocks = [itemCollection fillBlocksForDifficulty];
 	
 	for(Shape * block in blocks){
 		[self.view addSubview:block];
@@ -276,9 +395,23 @@
 	
 	startTime = CFAbsoluteTimeGetCurrent();
 	
-	
-	
 	[self setButtons];
+	
+	[UIView beginAnimations:nil context:nil]; 
+	[UIView setAnimationDuration:3.0f];
+	
+	backGroundCloudsA.alpha = 1;
+	backGroundCloudsB.alpha = 1;
+	backGroundStars.alpha = 1;
+	SpawnedPair.ItemA.ItemView.alpha = 1;
+	SpawnedPair.ItemB.ItemView.alpha = 1;
+	SpawnedPair.ItemC.ItemView.alpha = 1;
+	
+	nextPair.ItemA.ItemView.alpha = 1;
+	nextPair.ItemB.ItemView.alpha = 1;
+	
+	[blocks autorelease];
+	[UIView commitAnimations];
 }
 
 -(void)setButtons{
@@ -299,23 +432,79 @@
 	upgradeCountImage.image = upgradeImage;
 }
 
+-(void)moveCloudsOne{
+	[movingTimer invalidate];
+	[UIView beginAnimations:nil context:nil]; 
+	[UIView setAnimationDuration:60.0f];
+	[UIView setAnimationDelegate:self];
+	[UIView setAnimationDidStopSelector:@selector(animateBoard)];
+	backGroundCloudsA.center = CGPointMake(backGroundCloudsA.center.x - 640,backGroundCloudsA.center.y - 160);
+	backGroundCloudsB.center = CGPointMake(backGroundCloudsB.center.x + 640,backGroundCloudsB.center.y + 160);
+	[UIView commitAnimations];
+	
+	movingTimer = [NSTimer scheduledTimerWithTimeInterval: 60.1f target:self selector:@selector(moveCloudsTwo) userInfo:nil repeats: NO];
+	
+}
+
+-(void)moveCloudsTwo{
+	[movingTimer invalidate];
+	[UIView beginAnimations:nil context:nil]; 
+	[UIView setAnimationDuration:60.0f];
+	[UIView setAnimationDelegate:self];
+	[UIView setAnimationDidStopSelector:@selector(animateBoard)];
+	backGroundCloudsA.center = CGPointMake(backGroundCloudsA.center.x + 640,backGroundCloudsA.center.y);
+	backGroundCloudsB.center = CGPointMake(backGroundCloudsB.center.x - 640,backGroundCloudsB.center.y);
+	[UIView commitAnimations];
+	movingTimer = [NSTimer scheduledTimerWithTimeInterval: 60.1f target:self selector:@selector(moveCloudsThree) userInfo:nil repeats: NO];
+}
+
+-(void)moveCloudsThree{
+	
+	[movingTimer invalidate];
+	[UIView beginAnimations:nil context:nil]; 
+	[UIView setAnimationDuration:60.0f];
+	[UIView setAnimationDelegate:self];
+	[UIView setAnimationDidStopSelector:@selector(animateBoard)];
+	backGroundCloudsA.center = CGPointMake(backGroundCloudsA.center.x - 640,backGroundCloudsA.center.y + 160);
+	backGroundCloudsB.center = CGPointMake(backGroundCloudsB.center.x + 640,backGroundCloudsB.center.y - 160);
+	[UIView commitAnimations];
+	movingTimer = [NSTimer scheduledTimerWithTimeInterval: 60.1f target:self selector:@selector(moveCloudsFour) userInfo:nil repeats: NO];
+}
+
+-(void)moveCloudsFour{
+	
+	[movingTimer invalidate];
+	[UIView beginAnimations:nil context:nil]; 
+	[UIView setAnimationDuration:60.0f];
+	[UIView setAnimationDelegate:self];
+	[UIView setAnimationDidStopSelector:@selector(animateBoard)];
+	backGroundCloudsA.center = CGPointMake(backGroundCloudsA.center.x + 640,backGroundCloudsA.center.y);
+	backGroundCloudsB.center = CGPointMake(backGroundCloudsB.center.x - 640,backGroundCloudsB.center.y);
+	[UIView commitAnimations];
+	movingTimer = [NSTimer scheduledTimerWithTimeInterval: 60.1f target:self selector:@selector(moveCloudsOne) userInfo:nil repeats: NO];
+
+}
+
 -(void)didRotate:(NSNotification *)notification{
     switch (CurrentDevice.orientation) {
         case UIInterfaceOrientationLandscapeRight:
             spawnX = 234;
 			spawnY = 96;
 			
-			spawnNextX = 152;
-			spawnNextY = 68;
+			spawnNextX = 234;
+			spawnNextY = 18;
 			
-			rightPix = 0;
-			upPix = 30;
+			rightPix = 30;
+			upPix = 0;
 			
 			[itemCollection SetGravity:left];
 			[backGround.image release];
 			backGround.image = [[UIImage imageNamed:@"rotatedSideRight.png"] retain];
 			[self.view addSubview:backGround];
 			[self.view sendSubviewToBack:backGround];
+			[self.view sendSubviewToBack:backGroundCloudsA];
+			[self.view sendSubviewToBack:backGroundCloudsB];
+			[self.view sendSubviewToBack:backGroundStars];
 			[self.view sendSubviewToBack:buttonMenu];
 			spawnedShapeRotateTransform = CGAffineTransformRotate(CGAffineTransformIdentity, rotate_xDegrees(90));
 			
@@ -327,37 +516,33 @@
 			nextPair.ItemA.center = CGPointMake(spawnNextX,spawnNextY);
 			nextPair.ItemB.center = CGPointMake(spawnNextX + rightPix,spawnNextY + upPix);
 			
-			menuView.center = menuViewCenter;
-			menuView.center = CGPointMake(menuView.center.x + 130, menuView.center.y - 105);
+			checkLock.center = CGPointMake(106,13 - 30);
+			buttonMenu.center = CGPointMake(35,24);
+			scoreLabel.center = CGPointMake(153,52);
 			
-			checkLock.center = CGPointMake(181,21);
+			upgradeCountImage.center = CGPointMake(47,152);
+			discardCountImage.center = CGPointMake(47,84);
+			bombCountImage.center = CGPointMake(106,152);
+			reshuffleCountImage.center = CGPointMake(106,84);
 			
-			scoreLabel.center = CGPointMake(38,87);
-			
-			upgradeButton.center = CGPointMake(276,13);
-			discardButton.center = CGPointMake(253,13);
-			bombButton.center = CGPointMake(230,13);
-			reshuffleButton.center = CGPointMake(207,13);
-			
-			upgradeCountImage.center = upgradeButton.center;
-			discardCountImage.center = discardButton.center;
-			bombCountImage.center = bombButton.center;
-			reshuffleCountImage.center = reshuffleButton.center;
+			upgradeButton.center = CGPointMake(47,120);
+			discardButton.center = CGPointMake(47,51);
+			bombButton.center = CGPointMake(106,120);
+			reshuffleButton.center = CGPointMake(106,51);
 			
 			
-			upgradeCountImage.transform = spawnedShapeRotateTransform;
-			discardCountImage.transform = spawnedShapeRotateTransform;
-			bombCountImage.transform = spawnedShapeRotateTransform;
-			reshuffleCountImage.transform = spawnedShapeRotateTransform;
-			checkLock.transform = spawnedShapeRotateTransform;
-			scoreLabel.transform = spawnedShapeRotateTransform;
-			menuView.transform = spawnedShapeRotateTransform;
-			SpawnedPair.ItemA.transform = spawnedShapeRotateTransform;
-			SpawnedPair.ItemB.transform = spawnedShapeRotateTransform;
-			SpawnedPair.ShaddowA.transform = spawnedShapeRotateTransform;
-			SpawnedPair.ShaddowB.transform = spawnedShapeRotateTransform;
-			nextPair.ItemA.transform = spawnedShapeRotateTransform;
-			nextPair.ItemB.transform = spawnedShapeRotateTransform;
+			upgradeCountImage.transform = CGAffineTransformRotate(CGAffineTransformIdentity, rotate_xDegrees(90));
+			discardCountImage.transform = CGAffineTransformRotate(CGAffineTransformIdentity, rotate_xDegrees(90));
+			bombCountImage.transform = CGAffineTransformRotate(CGAffineTransformIdentity, rotate_xDegrees(90));
+			reshuffleCountImage.transform = CGAffineTransformRotate(CGAffineTransformIdentity, rotate_xDegrees(90));
+			scoreLabel.transform = CGAffineTransformRotate(CGAffineTransformIdentity, rotate_xDegrees(90));
+			menuView.transform = CGAffineTransformRotate(CGAffineTransformIdentity, rotate_xDegrees(90));
+			SpawnedPair.ItemA.transform = CGAffineTransformRotate(CGAffineTransformIdentity, rotate_xDegrees(90));
+			SpawnedPair.ItemB.transform = CGAffineTransformRotate(CGAffineTransformIdentity, rotate_xDegrees(90));
+			SpawnedPair.ShaddowA.transform = CGAffineTransformRotate(CGAffineTransformIdentity, rotate_xDegrees(90));
+			SpawnedPair.ShaddowB.transform = CGAffineTransformRotate(CGAffineTransformIdentity, rotate_xDegrees(90));
+			nextPair.ItemA.transform = CGAffineTransformRotate(CGAffineTransformIdentity, rotate_xDegrees(90));
+			nextPair.ItemB.transform = CGAffineTransformRotate(CGAffineTransformIdentity, rotate_xDegrees(90));
 			
 			
 			
@@ -367,11 +552,11 @@
             spawnX = 56;
 			spawnY = 98;
 			
-			spawnNextX = 167;
-			spawnNextY = 49;
+			spawnNextX = 56;
+			spawnNextY = 18;
 			
-			rightPix = 0;
-			upPix = 30;
+			rightPix = 30;
+			upPix = 0;
 			
 			[itemCollection SetGravity:right];
 			
@@ -379,6 +564,9 @@
 			backGround.image = [[UIImage imageNamed:@"rotatedSide.png"] retain];
 			[self.view addSubview:backGround];
 			[self.view sendSubviewToBack:backGround];
+			[self.view sendSubviewToBack:backGroundCloudsA];
+			[self.view sendSubviewToBack:backGroundCloudsB];
+			[self.view sendSubviewToBack:backGroundStars];
 			[self.view sendSubviewToBack:buttonMenu];
 			spawnedShapeRotateTransform = CGAffineTransformRotate(CGAffineTransformIdentity, rotate_xDegrees(270));
 			
@@ -389,36 +577,32 @@
 			nextPair.ItemA.center = CGPointMake(spawnNextX,spawnNextY);
 			nextPair.ItemB.center = CGPointMake(spawnNextX + rightPix,spawnNextY + upPix);
 			
-			menuView.center = menuViewCenter;
-			menuView.center = CGPointMake(menuView.center.x + 80, menuView.center.y - 105);
+			checkLock.center = CGPointMake(210,13 - 30);
+			buttonMenu.center = CGPointMake(305,24);
+			scoreLabel.center = CGPointMake(153,52);
 			
-			checkLock.center = CGPointMake(141,21);
+			upgradeCountImage.center = CGPointMake(272,152);
+			discardCountImage.center = CGPointMake(273,84);
+			bombCountImage.center = CGPointMake(213,152);
+			reshuffleCountImage.center = CGPointMake(214,84);
 			
-			scoreLabel.center = CGPointMake(282,52);
+			upgradeButton.center = CGPointMake(272,120);
+			discardButton.center = CGPointMake(273,51);
+			bombButton.center = CGPointMake(213,120);
+			reshuffleButton.center = CGPointMake(213,51);
 			
-			upgradeButton.center = CGPointMake(43,13);
-			discardButton.center = CGPointMake(66,13);
-			bombButton.center = CGPointMake(89,13);
-			reshuffleButton.center = CGPointMake(112,13);
-			
-			upgradeCountImage.center = upgradeButton.center;
-			discardCountImage.center = discardButton.center;
-			bombCountImage.center = bombButton.center;
-			reshuffleCountImage.center = reshuffleButton.center;
-			
-			upgradeCountImage.transform = spawnedShapeRotateTransform;
-			discardCountImage.transform = spawnedShapeRotateTransform;
-			bombCountImage.transform = spawnedShapeRotateTransform;
-			reshuffleCountImage.transform = spawnedShapeRotateTransform;
-			checkLock.transform = spawnedShapeRotateTransform;
-			scoreLabel.transform = spawnedShapeRotateTransform;
-			menuView.transform = spawnedShapeRotateTransform;
-			SpawnedPair.ItemA.transform = spawnedShapeRotateTransform;
-			SpawnedPair.ItemB.transform = spawnedShapeRotateTransform;
-			SpawnedPair.ShaddowA.transform = spawnedShapeRotateTransform;
-			SpawnedPair.ShaddowB.transform = spawnedShapeRotateTransform;
-			nextPair.ItemA.transform = spawnedShapeRotateTransform;
-			nextPair.ItemB.transform = spawnedShapeRotateTransform;
+			upgradeCountImage.transform = CGAffineTransformRotate(CGAffineTransformIdentity, rotate_xDegrees(270));
+			discardCountImage.transform = CGAffineTransformRotate(CGAffineTransformIdentity, rotate_xDegrees(270));
+			bombCountImage.transform = CGAffineTransformRotate(CGAffineTransformIdentity, rotate_xDegrees(270));
+			reshuffleCountImage.transform = CGAffineTransformRotate(CGAffineTransformIdentity, rotate_xDegrees(270));
+			scoreLabel.transform = CGAffineTransformRotate(CGAffineTransformIdentity, rotate_xDegrees(270));
+			menuView.transform = CGAffineTransformRotate(CGAffineTransformIdentity, rotate_xDegrees(270));
+			SpawnedPair.ItemA.transform = CGAffineTransformRotate(CGAffineTransformIdentity, rotate_xDegrees(270));
+			SpawnedPair.ItemB.transform = CGAffineTransformRotate(CGAffineTransformIdentity, rotate_xDegrees(270));
+			SpawnedPair.ShaddowA.transform = CGAffineTransformRotate(CGAffineTransformIdentity, rotate_xDegrees(270));
+			SpawnedPair.ShaddowB.transform = CGAffineTransformRotate(CGAffineTransformIdentity, rotate_xDegrees(270));
+			nextPair.ItemA.transform = CGAffineTransformRotate(CGAffineTransformIdentity, rotate_xDegrees(270));
+			nextPair.ItemB.transform = CGAffineTransformRotate(CGAffineTransformIdentity, rotate_xDegrees(270));
 			
 			
             break;
@@ -439,35 +623,37 @@
 			
 			[self.view addSubview:backGround];
 			[self.view sendSubviewToBack:backGround];
+			[self.view sendSubviewToBack:backGroundCloudsA];
+			[self.view sendSubviewToBack:backGroundCloudsB];
+			[self.view sendSubviewToBack:backGroundStars];
 			[self.view sendSubviewToBack:buttonMenu];
 			
-			SpawnedPair.ItemA.center = CGPointMake(SPAWN_LOCATION_X,SPAWN_LOCATION_Y);
-			SpawnedPair.ItemB.center = CGPointMake(SPAWN_LOCATION_X + 30,SPAWN_LOCATION_Y);
-			SpawnedPair.ItemC.center = CGPointMake(SPAWN_LOCATION_X + 15,SPAWN_LOCATION_Y);
+			SpawnedPair.ItemA.center = CGPointMake(spawnX,spawnY);
+			SpawnedPair.ItemB.center = CGPointMake(spawnX + 30,spawnY);
+			SpawnedPair.ItemC.center = CGPointMake(spawnX + 15,spawnY);
 			
 			nextPair.ItemA.center = CGPointMake(spawnNextX,spawnNextY);
 			nextPair.ItemB.center = CGPointMake(spawnNextX + rightPix,spawnNextY + upPix);
+			spawnedShapeRotateTransform = CGAffineTransformIdentity;
 			
-			checkLock.center = CGPointMake(284,83);
+			upgradeCountImage.center = CGPointMake(26,76);
+			discardCountImage.center = CGPointMake(293,76);
+			bombCountImage.center = CGPointMake(76,76);
+			reshuffleCountImage.center = CGPointMake(244,76);
+			
+			upgradeButton.center = CGPointMake(26,116);
+			discardButton.center = CGPointMake(293,116);
+			bombButton.center = CGPointMake(76,116);
+			reshuffleButton.center = CGPointMake(244,116);
+			buttonMenu.center = CGPointMake(305,24);
+			checkLock.center = CGPointMake(252, 25 - 20);
 			scoreLabel.center = CGPointMake(64,31);
-			menuView.center = menuViewCenter;
-			
-			upgradeButton.center = CGPointMake(18,99);
-			discardButton.center = CGPointMake(38,99);
-			bombButton.center = CGPointMake(58,99);
-			reshuffleButton.center = CGPointMake(78,99);
-			
-			upgradeCountImage.center = upgradeButton.center;
-			discardCountImage.center = discardButton.center;
-			bombCountImage.center = bombButton.center;
-			reshuffleCountImage.center = reshuffleButton.center;
 			
 			scoreLabel.transform = CGAffineTransformIdentity;
 			upgradeCountImage.transform = CGAffineTransformIdentity;
 			discardCountImage.transform = CGAffineTransformIdentity;
 			bombCountImage.transform = CGAffineTransformIdentity;
 			reshuffleCountImage.transform = CGAffineTransformIdentity;
-			checkLock.transform = CGAffineTransformIdentity;
 			menuView.transform = CGAffineTransformIdentity;
 			SpawnedPair.ItemA.transform = CGAffineTransformIdentity;
 			SpawnedPair.ItemB.transform = CGAffineTransformIdentity;
@@ -494,36 +680,71 @@
 			backGround.image = [[UIImage imageNamed:@"upsideDownBack.png"] retain];
 			[self.view addSubview:backGround];
 			[self.view sendSubviewToBack:backGround];
+			[self.view sendSubviewToBack:backGroundCloudsA];
+			[self.view sendSubviewToBack:backGroundCloudsB];
+			[self.view sendSubviewToBack:backGroundStars];
 			[self.view sendSubviewToBack:buttonMenu];
 			
-			SpawnedPair.ItemA.center = CGPointMake(SPAWN_LOCATION_X,SPAWN_LOCATION_Y);
-			SpawnedPair.ItemB.center = CGPointMake(SPAWN_LOCATION_X + 30,SPAWN_LOCATION_Y);
-			SpawnedPair.ItemC.center = CGPointMake(SPAWN_LOCATION_X + 15,SPAWN_LOCATION_Y);
+			SpawnedPair.ItemA.center = CGPointMake(spawnX,spawnY);
+			SpawnedPair.ItemB.center = CGPointMake(spawnX + 30,spawnY);
+			SpawnedPair.ItemC.center = CGPointMake(spawnX + 15,spawnY);
 			spawnedShapeRotateTransform = CGAffineTransformRotate(CGAffineTransformIdentity, rotate_xDegrees(180));
 			
 			nextPair.ItemA.center = CGPointMake(spawnNextX,spawnNextY);
 			nextPair.ItemB.center = CGPointMake(spawnNextX + rightPix,spawnNextY + upPix);
 			
-			checkLock.center = CGPointMake(284,83);
+			checkLock.center = CGPointMake(252, 25 - 20);
 			scoreLabel.center = CGPointMake(64,31);
-			menuView.center = menuViewCenter;
+			buttonMenu.center = CGPointMake(305,24);
+			upgradeCountImage.center = CGPointMake(26,76);
+			discardCountImage.center = CGPointMake(293,76);
+			bombCountImage.center = CGPointMake(76,76);
+			reshuffleCountImage.center = CGPointMake(244,76);
 			
-			upgradeButton.center = CGPointMake(78,99);
-			discardButton.center = CGPointMake(58,99);
-			bombButton.center = CGPointMake(38,99);
-			reshuffleButton.center = CGPointMake(18,99);
+			upgradeButton.center = CGPointMake(26,116);
+			discardButton.center = CGPointMake(293,116);
+			bombButton.center = CGPointMake(76,116);
+			reshuffleButton.center = CGPointMake(244,116);
 			
-			upgradeCountImage.center = upgradeButton.center;
-			discardCountImage.center = discardButton.center;
-			bombCountImage.center = bombButton.center;
-			reshuffleCountImage.center = reshuffleButton.center;
+			upgradeCountImage.transform = CGAffineTransformRotate(CGAffineTransformIdentity, rotate_xDegrees(180));
+			discardCountImage.transform = CGAffineTransformRotate(CGAffineTransformIdentity, rotate_xDegrees(180));
+			bombCountImage.transform = CGAffineTransformRotate(CGAffineTransformIdentity, rotate_xDegrees(180));
+			reshuffleCountImage.transform = CGAffineTransformRotate(CGAffineTransformIdentity, rotate_xDegrees(180));
+			scoreLabel.transform = CGAffineTransformRotate(CGAffineTransformIdentity, rotate_xDegrees(180));
+			menuView.transform = CGAffineTransformRotate(CGAffineTransformIdentity, rotate_xDegrees(180));
+			SpawnedPair.ItemA.transform = CGAffineTransformRotate(CGAffineTransformIdentity, rotate_xDegrees(180));
+			SpawnedPair.ItemB.transform = CGAffineTransformRotate(CGAffineTransformIdentity, rotate_xDegrees(180));
+			SpawnedPair.ShaddowA.transform = CGAffineTransformRotate(CGAffineTransformIdentity, rotate_xDegrees(180));
+			SpawnedPair.ShaddowB.transform = CGAffineTransformRotate(CGAffineTransformIdentity, rotate_xDegrees(180));
+			nextPair.ItemA.transform = CGAffineTransformRotate(CGAffineTransformIdentity, rotate_xDegrees(180));
+			nextPair.ItemB.transform = CGAffineTransformRotate(CGAffineTransformIdentity, rotate_xDegrees(180));
 			
+			[self.view bringSubviewToFront:SpawnedPair.ItemA];
+			[self.view bringSubviewToFront:SpawnedPair.ItemB];
+			
+            break;            
+        default:
+			
+			[self.view addSubview:backGround];
+			[self.view sendSubviewToBack:backGround];
+			[self.view sendSubviewToBack:backGroundCloudsA];
+			[self.view sendSubviewToBack:backGroundCloudsB];
+			[self.view sendSubviewToBack:backGroundStars];
+			[self.view sendSubviewToBack:buttonMenu];
+			
+			SpawnedPair.ItemA.center = CGPointMake(spawnX,spawnY);
+			SpawnedPair.ItemB.center = CGPointMake(spawnX + 30,spawnY);
+			SpawnedPair.ItemC.center = CGPointMake(spawnX + 15,spawnY);
+			
+			
+			nextPair.ItemA.center = CGPointMake(spawnNextX,spawnNextY);
+			nextPair.ItemB.center = CGPointMake(spawnNextX + rightPix,spawnNextY + upPix);
+			
+			scoreLabel.transform = spawnedShapeRotateTransform;
 			upgradeCountImage.transform = spawnedShapeRotateTransform;
 			discardCountImage.transform = spawnedShapeRotateTransform;
 			bombCountImage.transform = spawnedShapeRotateTransform;
 			reshuffleCountImage.transform = spawnedShapeRotateTransform;
-			checkLock.transform = spawnedShapeRotateTransform;
-			scoreLabel.transform = spawnedShapeRotateTransform;
 			menuView.transform = spawnedShapeRotateTransform;
 			SpawnedPair.ItemA.transform = spawnedShapeRotateTransform;
 			SpawnedPair.ItemB.transform = spawnedShapeRotateTransform;
@@ -532,63 +753,15 @@
 			nextPair.ItemA.transform = spawnedShapeRotateTransform;
 			nextPair.ItemB.transform = spawnedShapeRotateTransform;
 			
-			
-            break;            
-        default:
-			spawnX = SPAWN_LOCATION_X;
-			spawnY = SPAWN_LOCATION_Y;
-			
-			spawnNextX = SPAWN_LOCATION_X;
-			spawnNextY = SPAWN_LOCATION_Y - 78;
-			
-			rightPix = 30;
-			upPix = 0;
-			
-			[itemCollection SetGravity:down];
-			
-			[backGround.image release];
-			backGround.image = [[UIImage imageNamed:@"gameBoardGrid.png"] retain];
-			
-			[self.view addSubview:backGround];
-			[self.view sendSubviewToBack:backGround];
-			[self.view sendSubviewToBack:buttonMenu];
-			
-			SpawnedPair.ItemA.center = CGPointMake(SPAWN_LOCATION_X,SPAWN_LOCATION_Y);
-			SpawnedPair.ItemB.center = CGPointMake(SPAWN_LOCATION_X + 30,SPAWN_LOCATION_Y);
-			SpawnedPair.ItemC.center = CGPointMake(SPAWN_LOCATION_X + 15,SPAWN_LOCATION_Y);
-			
-			nextPair.ItemA.center = CGPointMake(spawnNextX,spawnNextY);
-			nextPair.ItemB.center = CGPointMake(spawnNextX + rightPix,spawnNextY + upPix);
-			
-			checkLock.center = CGPointMake(284,83);
-			scoreLabel.center = CGPointMake(64,31);
-			
-			upgradeButton.center = CGPointMake(18,99);
-			discardButton.center = CGPointMake(38,99);
-			bombButton.center = CGPointMake(58,99);
-			reshuffleButton.center = CGPointMake(78,99);
-			
-			upgradeCountImage.center = upgradeButton.center;
-			discardCountImage.center = discardButton.center;
-			bombCountImage.center = bombButton.center;
-			reshuffleCountImage.center = reshuffleButton.center;
-			
-			scoreLabel.transform = CGAffineTransformIdentity;
-			upgradeCountImage.transform = CGAffineTransformIdentity;
-			discardCountImage.transform = CGAffineTransformIdentity;
-			bombCountImage.transform = CGAffineTransformIdentity;
-			reshuffleCountImage.transform = CGAffineTransformIdentity;
-			checkLock.transform = CGAffineTransformIdentity;
-			menuView.transform = CGAffineTransformIdentity;
-			SpawnedPair.ItemA.transform = CGAffineTransformIdentity;
-			SpawnedPair.ItemB.transform = CGAffineTransformIdentity;
-			SpawnedPair.ShaddowA.transform = CGAffineTransformIdentity;
-			SpawnedPair.ShaddowB.transform = CGAffineTransformIdentity;
             break;
+			 
     }
 }
 
 -(IBAction)ClickReset{
+	score = 0;
+	scoreLabel.text = [NSString stringWithFormat:@"%@" , score ];
+	[self SaveState];
     menuView.hidden = FALSE;
     menuView.userInteractionEnabled = TRUE;
 	gameState.currentBoard.Active = FALSE;
@@ -608,6 +781,7 @@
 	SpawnedPair = nil;
 	nextPair = nil;
 	TouchTimer = nil;
+	
 	
 	[self viewDidLoad];
 	
@@ -632,7 +806,7 @@
 }
 -(IBAction)ClickButtonMainMenu{
 	gameState.currentBoard.Active = [NSNumber numberWithBool:NO];
-    [self dismissModalViewControllerAnimated:YES];
+    [self dismissModalViewControllerAnimated:NO];
 	
 }
 -(IBAction)ClickButtonLockTab{
@@ -674,10 +848,21 @@
 	lockFeedBackB.center = CGPointMake(lockFeedBackB.center.x, lockFeedBackB.center.y - 180);
 	lockFeedBackC.center = CGPointMake(lockFeedBackC.center.x, lockFeedBackC.center.y - 180);
     
-    
+    lockFeedBackA.image = [UIImage imageNamed:@"lockFeedBack.png"];
+	lockFeedBackB.image = [UIImage imageNamed:@"lockFeedBack.png"];
+	lockFeedBackC.image = [UIImage imageNamed:@"lockFeedBack.png"];
+	
+	cellA.ItemInCell.userInteractionEnabled = TRUE;
+	cellB.ItemInCell.userInteractionEnabled = TRUE;
+	cellC.ItemInCell.userInteractionEnabled = TRUE;
+	
+	cellA.ItemInCell.alpha = 1;
+	cellB.ItemInCell.alpha = 1;
+	cellC.ItemInCell.alpha = 1;
     
     [UIView commitAnimations];
 }
+
 -(IBAction)ClickButtonDiscard{
 	if(discardCount > 0){
 		[SpawnedPair.ItemA removeFromSuperview];
@@ -690,11 +875,14 @@
 		[self ResetShapePair:SpawnedPair];
 		
 		discardCount = discardCount - 1;
+		//powerBack.image = [UIImage imageNamed:@"discardIcon.png"];
+		//SpawnedPair.ItemA.hidden = TRUE;
+		//SpawnedPair.ItemB.hidden = TRUE;
+		//SpawnedPair.ItemC.hidden = TRUE;
 		[self setButtons];
 	}
 		
 }
-
 -(IBAction)ClickButtonUpgrade{
 	if(upgradeCount > 0){
 		Rama_BlocksAppDelegate * appDelegate =  (Rama_BlocksAppDelegate *)[[UIApplication sharedApplication] delegate];
@@ -702,107 +890,185 @@
 		appDelegate.isUpgrading = YES;
 		
 		upgradeCount = upgradeCount - 1;
+		powerBack.image = [UIImage imageNamed:@"upgradeIcon.png"];
+		SpawnedPair.ItemA.hidden = TRUE;
+		SpawnedPair.ItemB.hidden = TRUE;
+		SpawnedPair.ItemC.hidden = TRUE;
 		[self setButtons];
 	}
 }
 -(IBAction)ClickButtonBomb{
-	if(bombCount > 0){
+	//if(bombCount > 0){
 		Rama_BlocksAppDelegate * appDelegate =  (Rama_BlocksAppDelegate *)[[UIApplication sharedApplication] delegate];
 		appDelegate.isBombing = YES;
-	}
+		powerBack.image = [UIImage imageNamed:@"bombIcon.png"];
+		SpawnedPair.ItemA.hidden = TRUE;
+		SpawnedPair.ItemB.hidden = TRUE;
+		SpawnedPair.ItemC.hidden = TRUE;
+	//}
 }
-
 -(IBAction)ClickButtonShuffle{
 	Rama_BlocksAppDelegate * appDelegate =  (Rama_BlocksAppDelegate *)[[UIApplication sharedApplication] delegate];
-	if(reshuffleCount > 0){	
-		int row = 0;
-		int column = 0;
+	
+	if(didShuffle == TRUE){
+		if(reshuffleCount > 0){	
+			int row = 0;
+			int column = 0;
 		
-		NSMutableArray * shuffleArray = [[NSMutableArray alloc] initWithCapacity:100];
+			NSMutableArray * shuffleArray = [[NSMutableArray alloc] initWithCapacity:100];
 		
-		for (row = 0; row < NUMBER_OF_ROWS; row++) {
-			for (column =0; column < NUMBER_OF_COLUMNS; column++) {
+			for (row = 0; row < NUMBER_OF_ROWS; row++) {
+				for (column =0; column < NUMBER_OF_COLUMNS; column++) {
 				
-				Cell *removeCell = [itemCollection GetCell:row :column];
+					Cell *removeCell = [itemCollection GetCell:row :column];
 
-				if(removeCell.ItemInCell != nil){
+					if(removeCell.ItemInCell != nil){
 					[shuffleArray addObject:removeCell.ItemInCell];
+					}
 				}
 			}
-		}
 		
-		int i,j;
-		int numberOfShapes = [shuffleArray count];
+			int i,j;
+			int numberOfShapes = [shuffleArray count];
 		
-		for( i = 0; i < numberOfShapes; i++ ){
-			j = rand() % numberOfShapes;
-			[shuffleArray exchangeObjectAtIndex:i withObjectAtIndex:j];
-		}
-		
-		[itemCollection cleanBoard];
-		[itemCollection setShuffledArray:shuffleArray];
-		[shuffleArray release];
-
-		
-		[self SaveState];
-		
-		for(ItemState * item in [appDelegate FetchCollectionItemStates])
-		{
-			if([item.shapeType intValue] != -1 && [item.colorType intValue] != -1)
-			{
-				
-				Shape * shape = [[[Shape alloc] initWithInfo:[item.colorType intValue] :[item.shapeType intValue] : CGPointMake(spawnX,spawnY)]retain];
-				
-				Cell * cell = [itemCollection GetCell:[item.Row intValue] : [item.Column intValue]];
-				[itemCollection SetItemToCell:shape : cell];
-				[self.view addSubview:shape];
+			for( i = 0; i < numberOfShapes; i++ ){
+				j = rand() % numberOfShapes;
+				[shuffleArray exchangeObjectAtIndex:i withObjectAtIndex:j];
 			}
-		}
-	}
+		
+			[itemCollection cleanBoard];
+			[itemCollection setShuffledArray:shuffleArray];
+			[shuffleArray release];
 
+		
+			[self SaveState];
+			
+			for(ItemState * item in [appDelegate FetchCollectionItemStates])
+			{
+				if([item.shapeType intValue] != -1 && [item.colorType intValue] != -1)
+				{
+				
+					Shape * shape = [[[Shape alloc] initWithInfo:[item.colorType intValue] :[item.shapeType intValue] : CGPointMake(spawnX,spawnY)]retain];
+				
+					Cell * cell = [itemCollection GetCell:[item.Row intValue] : [item.Column intValue]];
+					[itemCollection SetItemToCell:shape : cell];
+					[self.view addSubview:shape];
+				}
+			}
+			didShuffle = FALSE;
+			SpawnedPair.ItemA.hidden = FALSE;
+			SpawnedPair.ItemB.hidden = FALSE;
+			SpawnedPair.ItemC.hidden = FALSE;
+			powerBack.image = nil;
+		return;
+		}
+		if(didShuffle == FALSE){
+			didShuffle = TRUE;
+			powerBack.image = [UIImage imageNamed:@"shuffleIcon.png"];
+			SpawnedPair.ItemA.hidden = TRUE;
+			SpawnedPair.ItemB.hidden = TRUE;
+			SpawnedPair.ItemC.hidden = TRUE;
+		
+	}
+	
+	}
 }
 
-
 -(IBAction)ClickButtonCheckRecipe{
+	NSMutableArray * correctRecipe = [[NSMutableArray alloc] initWithCapacity:3];
 	if(shapeA.shapeType == shapeB.shapeType && shapeB.shapeType == shapeC.shapeType){
 		if(shapeA.colorType == shapeB.colorType && shapeB.colorType == shapeC.colorType){	
 			if(shapeA.shapeType == Square){
 				discardCount++;
+				
 				//all squares same color
 				NSLog(@"1 extra discard");
+				recipeLabel.text = [NSString stringWithFormat:@"You built 1 extra discard"];
+				recipeLabel.hidden = FALSE;
+				[correctRecipe addObject:cellA];
+				[correctRecipe addObject:cellB];
+				[correctRecipe addObject:cellC];
+				[itemCollection RemoveFromCellsAndRefactor: correctRecipe];
+				
 			}
 			if(shapeA.shapeType == Pentagon){
 				bombCount++;
 				//all pentagons same color
 				NSLog(@"1 extra bomb");
+				recipeLabel.text = [NSString stringWithFormat:@"You built 1 extra bomb"];
+				recipeLabel.hidden = FALSE;
+				[correctRecipe addObject:cellA];
+				[correctRecipe addObject:cellB];
+				[correctRecipe addObject:cellC];
+				[itemCollection RemoveFromCellsAndRefactor: correctRecipe];
 			}
 			if(shapeA.shapeType == Hexagon){
 				discardCount = discardCount + 2;
-				NSLog(@"3 extra discards");
+				NSLog(@"2 extra discards");
+				recipeLabel.text = [NSString stringWithFormat:@"You built 2 extra discards"];
+				recipeLabel.hidden = FALSE;
+				[correctRecipe addObject:cellA];
+				[correctRecipe addObject:cellB];
+				[correctRecipe addObject:cellC];
+				[itemCollection RemoveFromCellsAndRefactor: correctRecipe];
 				//all hexs same color
 			}
 			if(shapeA.shapeType == Circle){
 				NSLog(@"destroy all of that color on the board");
+				recipeLabel.text = [NSString stringWithFormat:@"You destroyed all of that color on the board"];
+				recipeLabel.hidden = FALSE;
+				[correctRecipe addObject:cellA];
+				[correctRecipe addObject:cellB];
+				[correctRecipe addObject:cellC];
+				[itemCollection RemoveFromCellsAndRefactor: correctRecipe];
+				[powerItem makeCollection: itemCollection];
+				[powerItem makeFilter: shapeA];
 				//all circle same color
 			}
 		}
 		if(shapeA.colorType != shapeB.colorType && shapeA.colorType != shapeC.colorType && shapeB.colorType != shapeC.colorType){
 			if(shapeA.shapeType == Square){
+				upgradeCount++;
 				NSLog(@"1 piece instant upgrade");
+				recipeLabel.text = [NSString stringWithFormat:@"You built 1 piece instant upgrade"];
+				recipeLabel.hidden = FALSE;
+				[correctRecipe addObject:cellA];
+				[correctRecipe addObject:cellB];
+				[correctRecipe addObject:cellC];
+				[itemCollection RemoveFromCellsAndRefactor: correctRecipe];
 				//all squares dif color
 			}
 			if(shapeA.shapeType == Pentagon){
-				NSLog(@"3 piece instant upgrade");
+				NSLog(@"2 piece instant upgrade");
+				recipeLabel.text = [NSString stringWithFormat:@"You built 2 piece instant upgrades"];
+				recipeLabel.hidden = FALSE;
+				[correctRecipe addObject:cellA];
+				[correctRecipe addObject:cellB];
+				[correctRecipe addObject:cellC];
+				upgradeCount = upgradeCount + 2;
+				[itemCollection RemoveFromCellsAndRefactor: correctRecipe];
 				//all pentagons dif color
 			}
 			if(shapeA.shapeType == Hexagon){
 				reshuffleCount++;
 				NSLog(@"1 reshuffle");
+				recipeLabel.text = [NSString stringWithFormat:@"You built 1 reshuffle"];
+				recipeLabel.hidden = FALSE;
+				[correctRecipe addObject:cellA];
+				[correctRecipe addObject:cellB];
+				[correctRecipe addObject:cellC];
+				[itemCollection RemoveFromCellsAndRefactor: correctRecipe];
 				//all hexs dif color
 			}
 			if(shapeA.shapeType == Circle){
-				bombCount = bombCount + 5;
-				NSLog(@"5 extra bombs");
+				bombCount = bombCount + 4;
+				NSLog(@"4 extra bombs");
+				recipeLabel.text = [NSString stringWithFormat:@"You built 4 extra bombs"];
+				recipeLabel.hidden = FALSE;
+				[correctRecipe addObject:cellA];
+				[correctRecipe addObject:cellB];
+				[correctRecipe addObject:cellC];
+				[itemCollection RemoveFromCellsAndRefactor: correctRecipe];
 				//all circles dif color
 			}	
 		}
@@ -812,7 +1078,14 @@
 			if(shapeA.shapeType == Pentagon || shapeB.shapeType == Pentagon || shapeC.shapeType == Pentagon){
 				if(shapeA.shapeType == Hexagon || shapeB.shapeType == Hexagon || shapeC.shapeType == Hexagon){
 					//Square, pentagon, hexagon of same color
-					NSLog(@"5 piece instant upgrade");
+					NSLog(@"3 piece instant upgrade");
+					recipeLabel.text = [NSString stringWithFormat:@"You built 3 instant upgrades"];
+					recipeLabel.hidden = FALSE;
+					upgradeCount = upgradeCount + 3;
+					[correctRecipe addObject:cellA];
+					[correctRecipe addObject:cellB];
+					[correctRecipe addObject:cellC];
+					[itemCollection RemoveFromCellsAndRefactor: correctRecipe];
 				}
 			}
 		}
@@ -821,17 +1094,30 @@
 				if(shapeA.shapeType == Pentagon || shapeB.shapeType == Pentagon || shapeC.shapeType == Pentagon){
 					bombCount = bombCount + 2;
 					//Triangle, square, pentagon of same color
-					NSLog(@"2 bombs");
+					NSLog(@"2 bombs");
+					recipeLabel.text = [NSString stringWithFormat:@"You built 2 bombs"];
+					recipeLabel.hidden = FALSE;
+					[correctRecipe addObject:cellA];
+					[correctRecipe addObject:cellB];
+					[correctRecipe addObject:cellC];
+					[itemCollection RemoveFromCellsAndRefactor: correctRecipe];
 				}
 			}
 		}
 		if(shapeA.shapeType == Pentagon || shapeB.shapeType == Pentagon || shapeC.shapeType == Pentagon){
 			if(shapeA.shapeType == Hexagon || shapeB.shapeType == Hexagon || shapeC.shapeType == Hexagon){
 				if(shapeA.shapeType == Circle || shapeB.shapeType == Circle || shapeC.shapeType == Circle){
-					bombCount = bombCount + 2;
+					[powerItem makeCollection: itemCollection];
+					[powerItem stopGravity:nil];
 					//Pentagon, Hexagon, Circle of same color
 					//30 seconds no-gravity
 					NSLog(@"30 seconds no gravity ");
+					recipeLabel.text = [NSString stringWithFormat:@"You stopped gravity for 30 seconds, HURRY!"];
+					recipeLabel.hidden = FALSE;
+					[correctRecipe addObject:cellA];
+					[correctRecipe addObject:cellB];
+					[correctRecipe addObject:cellC];
+					[itemCollection RemoveFromCellsAndRefactor: correctRecipe];
 				}
 			}
 		}
@@ -843,25 +1129,43 @@
 					reshuffleCount++;
 					//Square, pentagon, hexagon dif color
 					NSLog(@"1 reshuffle");
+					recipeLabel.text = [NSString stringWithFormat:@"You built 1 reshuffle"];
+					recipeLabel.hidden = FALSE;
+					[correctRecipe addObject:cellA];
+					[correctRecipe addObject:cellB];
+					[correctRecipe addObject:cellC];
+					[itemCollection RemoveFromCellsAndRefactor: correctRecipe];
 				}
 			}
 		}
 		if(shapeA.shapeType == Triangle || shapeB.shapeType == Triangle || shapeC.shapeType == Triangle){
 			if(shapeA.shapeType == Square || shapeB.shapeType == Square || shapeC.shapeType == Square){
 				if(shapeA.shapeType == Pentagon || shapeB.shapeType == Pentagon || shapeC.shapeType == Pentagon){
-					discardCount = discardCount + 3;
+					discardCount = discardCount + 2;
 					//Triangle, square, pentagon dif color
 					NSLog(@"3 discards");
+					recipeLabel.text = [NSString stringWithFormat:@"You built 3 discards"];
+					recipeLabel.hidden = FALSE;
+					[correctRecipe addObject:cellA];
+					[correctRecipe addObject:cellB];
+					[correctRecipe addObject:cellC];
+					[itemCollection RemoveFromCellsAndRefactor: correctRecipe];
 				}
 			}
 		}
 		if(shapeA.shapeType == Pentagon || shapeB.shapeType == Pentagon || shapeC.shapeType == Pentagon){
 			if(shapeA.shapeType == Hexagon || shapeB.shapeType == Hexagon || shapeC.shapeType == Hexagon){
 				if(shapeA.shapeType == Circle || shapeB.shapeType == Circle || shapeC.shapeType == Circle){
-					bombCount = bombCount + 3;
+					bombCount = bombCount + 2;
 					//Pentagon, hexagon, circle dif color
 					//30 seconds no-gravity
-					NSLog(@"3 extra bombs");
+					NSLog(@"2 extra bombs");
+					recipeLabel.text = [NSString stringWithFormat:@"You built 2 extra bombs"];
+					recipeLabel.hidden = FALSE;
+					[correctRecipe addObject:cellA];
+					[correctRecipe addObject:cellB];
+					[correctRecipe addObject:cellC];
+					[itemCollection RemoveFromCellsAndRefactor: correctRecipe];
 				}
 			}
 		}
@@ -873,6 +1177,10 @@
 	lockFeedBackA.image = [UIImage imageNamed:@"lockFeedBack.png"];
 	lockFeedBackB.image = [UIImage imageNamed:@"lockFeedBack.png"];
 	lockFeedBackC.image = [UIImage imageNamed:@"lockFeedBack.png"];
+	
+	cellA.ItemInCell.alpha = 1;
+	cellB.ItemInCell.alpha = 1;
+	cellC.ItemInCell.alpha = 1;
 	
 	if(discardCount > 5){
 		discardCount = 5;
@@ -887,6 +1195,7 @@
 		upgradeCount = 5;
 	}
 	[self setButtons];
+	[correctRecipe autorelease];
 	
 }
 
@@ -905,6 +1214,8 @@
 
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
 	UITouch *touch = [[event allTouches] anyObject];
+	statsView.hidden = TRUE;
+	recipeLabel.hidden = TRUE;
 	startTouchPosition = [touch locationInView:self.view];
 	Rama_BlocksAppDelegate * appDelegate =  (Rama_BlocksAppDelegate *)[[UIApplication sharedApplication] delegate];
 	appDelegate.isMoving = YES;
@@ -927,12 +1238,20 @@
                 appDelegate.isBombing = NO;
 				[powerItem makeCollection:itemCollection];
                 [powerItem useBombItem:powerTouchItem];
+				SpawnedPair.ItemA.hidden = FALSE;
+				SpawnedPair.ItemB.hidden = FALSE;
+				SpawnedPair.ItemC.hidden = FALSE;
+				powerBack.image = nil;
 				[self setButtons];
                 
             }
             if(appDelegate.isFiltering == YES){
                 appDelegate.isFiltering = NO;
                 [powerItem makeFilter:(Shape *)[touch view]];
+				SpawnedPair.ItemA.hidden = FALSE;
+				SpawnedPair.ItemB.hidden = FALSE;
+				SpawnedPair.ItemC.hidden = FALSE;
+				powerBack.image = nil;
 				[self setButtons];
                 
             }
@@ -940,6 +1259,10 @@
                 Cell * cell = [itemCollection GetCell:touchedItem.Row :touchedItem.Column];
 				[itemCollection TransformItem:cell.ItemInCell];
 				appDelegate.isUpgrading = NO;
+				SpawnedPair.ItemA.hidden = FALSE;
+				SpawnedPair.ItemB.hidden = FALSE;
+				SpawnedPair.ItemC.hidden = FALSE;
+				powerBack.image = nil;
 				[self setButtons];
 				                
                 
@@ -956,11 +1279,12 @@
         if([[touch view] isKindOfClass: [Shape class]]){
             touchedGuessItem = (GameItem *)[touch view];
 			touchedGuessItemShape = (Shape *)touchedGuessItem;
-            guessView.image = touchedGuessItem.ItemView.image;
+            
+			guessView.image = touchedGuessItem.ItemView.image;
+			guessView.center = CGPointMake([touch locationInView:self.view].x - 55, [touch locationInView:self.view].y - 55);
+			[self.view addSubview:guessView];
+			appDelegate.isMoving = TRUE;
 			
-            guessView.center = CGPointMake([touch locationInView:self.view].x - 55, [touch locationInView:self.view].y - 55);
-            [self.view addSubview:guessView];
-            appDelegate.isMoving = TRUE;
             
         }
         
@@ -1070,35 +1394,56 @@ if([[touch view] isKindOfClass: [GameItem class]]){
 							//return;
 							scoreLabel.text = [NSString stringWithFormat:@"%d" , score];
 						}
-						if (score > 0 && currentLevel.difficulty == 1){
+						if (score > 1000 && currentLevel.difficulty == 1){
 							[self changeLevel];
+							backGroundCloudsA.image = [UIImage imageNamed:@"redClouds.png"];
+							backGroundCloudsB.image = [UIImage imageNamed:@"blueClouds.png"];
+							
 						}
-						if (score > 250 && currentLevel.difficulty == 2){
+						if (score > 3000 && currentLevel.difficulty == 2){
 							[self changeLevel];
+							backGroundCloudsA.image = [UIImage imageNamed:@"cyanClouds.png"];
+							backGroundCloudsB.image = [UIImage imageNamed:@"yellowClouds.png"];
 						}
-						if (score > 500 && currentLevel.difficulty == 3){
+						if (score > 7000 && currentLevel.difficulty == 3){
 							[self changeLevel];
+							backGroundCloudsA.image = [UIImage imageNamed:@"greenClouds.png"];
+							backGroundCloudsB.image = [UIImage imageNamed:@"violetClouds.png"];
 						}
-						if (score > 1500 && currentLevel.difficulty == 4){
+						if (score > 15000 && currentLevel.difficulty == 4){
 							[self changeLevel];
+							backGroundCloudsA.image = [UIImage imageNamed:@"cyanBlueClouds.png"];
+							backGroundCloudsB.image = [UIImage imageNamed:@"orangeClouds.png"];
 						}
-						if (score > 2000 && currentLevel.difficulty == 5){
+						if (score > 20000 && currentLevel.difficulty == 5){
 							[self changeLevel];
+							backGroundCloudsA.image = [UIImage imageNamed:@"yellowClouds.png"];
+							backGroundCloudsB.image = [UIImage imageNamed:@"magentaClouds.png"];
 						}
-						if (score > 2500 && currentLevel.difficulty == 6){
+						if (score > 25000 && currentLevel.difficulty == 6){
 							[self changeLevel];
+							backGroundCloudsA.image = [UIImage imageNamed:@"redClouds.png"];
+							backGroundCloudsB.image = [UIImage imageNamed:@"greenClouds.png"];
 						}
-						if (score > 3000 && currentLevel.difficulty == 7){
+						if (score > 35000 && currentLevel.difficulty == 7){
 							[self changeLevel];
+							backGroundCloudsA.image = [UIImage imageNamed:@"blueClouds.png"];
+							backGroundCloudsB.image = [UIImage imageNamed:@"violetClouds.png"];
 						}
-						if (score > 4000 && currentLevel.difficulty == 8){
+						if (score > 45000 && currentLevel.difficulty == 8){
 							[self changeLevel];
+							backGroundCloudsA.image = [UIImage imageNamed:@"cyanBlueClouds.png"];
+							backGroundCloudsB.image = [UIImage imageNamed:@"greenClouds.png"];
 						}
-						if (score > 5000 && currentLevel.difficulty == 9){
+						if (score > 70000 && currentLevel.difficulty == 9){
 							[self changeLevel];
+							backGroundCloudsA.image = [UIImage imageNamed:@"cyanClouds.png"];
+							backGroundCloudsB.image = [UIImage imageNamed:@"yellowClouds.png"];
 						}
-						if (score > 10000 && currentLevel.difficulty == 10){
+						if (score > 100000 && currentLevel.difficulty == 10){
 							[self changeLevel];
+							backGroundCloudsA.image = [UIImage imageNamed:@"magentaClouds.png"];
+							backGroundCloudsB.image = [UIImage imageNamed:@"orangeClouds.png"];
 						}
 							
                         return;
@@ -1111,33 +1456,49 @@ if([[touch view] isKindOfClass: [GameItem class]]){
     }
     if (lockMode == TRUE) {
         
-		if(guessView.center.x < 105 - 55 && guessView.center.y < 133 ){
-			lockFeedBackC.image = guessView.image;
+		if(guessView.center.x < 105 - 55 && guessView.center.y < 133 && guessView.image != nil){
+			cellB.ItemInCell.userInteractionEnabled = TRUE;
 			shapeB = touchedGuessItemShape;
 			cellB = [itemCollection GetCell:shapeB.Row :shapeB.Column];
+			cellB.ItemInCell.userInteractionEnabled = FALSE;
+			cellB.ItemInCell.alpha = 0.3f;
+			lockFeedBackC.image = guessView.image;
+			guessView.image = nil;
+			
+			
 			
 		}
-		if(guessView.center.x > 108 - 55 && guessView.center.x < 210 - 55 && guessView.center.y < 133 ){
-			lockFeedBackA.image = guessView.image;
+		if(guessView.center.x > 108 - 55 && guessView.center.x < 210 - 55 && guessView.center.y < 133 && guessView.image != nil){
+			cellA.ItemInCell.userInteractionEnabled = TRUE;
 			shapeA = touchedGuessItemShape;
 			cellA = [itemCollection GetCell:shapeA.Row :shapeA.Column];
+			cellA.ItemInCell.userInteractionEnabled = FALSE;
+			cellA.ItemInCell.alpha = 0.3f;
+			lockFeedBackA.image = guessView.image;
+			guessView.image = nil;
+			
 		}
-		if(guessView.center.x > 211 - 55 && guessView.center.y < 133 ){
-			lockFeedBackB.image = guessView.image;
+		if(guessView.center.x > 211 - 55 && guessView.center.y < 133 && guessView.image != nil){
+			cellC.ItemInCell.userInteractionEnabled = TRUE;
 			shapeC = touchedGuessItemShape;
 			cellC = [itemCollection GetCell:shapeC.Row :shapeC.Column];
+			cellC.ItemInCell.userInteractionEnabled = FALSE;
+			cellC.ItemInCell.alpha = 0.3f;
+			lockFeedBackB.image = guessView.image;
+			guessView.image = nil;
+			
 		}
 		appDelegate.isMoving = FALSE;
         [guessView removeFromSuperview];
 		
     }
 	
-    [itemCollection ClearSolution];
 	[NSTimer release];
 }
 
 -(void)changeLevel{
 	[audio playVictory];
+	[currentLevel setDifficulty:currentLevel.difficulty + 1];
 	Rama_BlocksAppDelegate * appDelegate =  (Rama_BlocksAppDelegate *)[[UIApplication sharedApplication] delegate];
 	[self SaveState];
 	if([gameState.currentLevel intValue] == [gameState.highestLevel intValue] && [gameState.highestLevel intValue] < 10)
@@ -1152,9 +1513,25 @@ if([[touch view] isKindOfClass: [GameItem class]]){
 		[gameState addPlayedLevelsObject:stat];
 		gameState.highestLevel = [NSNumber numberWithInt:[gameState.highestLevel intValue] +1];
 		gameState.currentLevel = [NSNumber numberWithInt:[gameState.highestLevel intValue]   ];
+		
 	}
-	[currentLevel setDifficulty:currentLevel.difficulty + 1];
-	[itemCollection removeBlocksForDifficulty];
+	
+	LevelStatistics * stat = [appDelegate CreatePlayedLevel];
+	stat.Level = [NSNumber numberWithInt:[gameState.currentLevel intValue]];
+	stat.numberOfMoves = gameState.currentBoard.numberOfMovies;
+	stat.numberOfTransforms = gameState.currentBoard.numberOfTransforms;
+	stat.numerOfAttempts = gameState.currentBoard.numberOfAttempts;
+	stat.timeToComplete = gameState.currentBoard.timePlayed;
+	gameState.currentLevel = [NSNumber numberWithInt:currentLevel.difficulty]; 
+	[gameState addPlayedLevelsObject:stat];
+	
+	
+	currentLevelLabel.text = [NSString stringWithFormat:@"%@" , gameState.currentLevel ];
+	movesLabel.text = [NSString stringWithFormat:@"%@" , gameState.currentBoard.numberOfMovies ];
+	transformsLabel.text = [NSString stringWithFormat:@"%@" , gameState.currentBoard.numberOfTransforms];
+	timeLabel.text = [NSString stringWithFormat:@"%@" , gameState.currentBoard.timePlayed ];
+	statsView.hidden = FALSE;
+	//[itemCollection removeBlocksForDifficulty];
 	
 }
 

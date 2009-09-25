@@ -27,12 +27,17 @@
 @interface GameBoardViewController : UIViewController{
 	
     IBOutlet UIView * menuView;
+	IBOutlet UIView * statsView;
     IBOutlet UIImageView *backGround;
+	UIImageView *backGroundStars;
+	UIImageView *backGroundCloudsA;
+	UIImageView *backGroundCloudsB;
 	IBOutlet UIImageView *lockSet;
     UIImageView *lockFeedBackA;
 	UIImageView *lockFeedBackB;
 	UIImageView *lockFeedBackC;
     UIImageView * guessView;
+	UIImageView * powerBack;
     IBOutlet UIImageView *discardCountImage;
 	IBOutlet UIImageView *bombCountImage;
 	IBOutlet UIImageView *reshuffleCountImage;
@@ -41,13 +46,20 @@
 	
     IBOutlet UILabel * attemptsString;
 	IBOutlet UILabel * scoreLabel;
-    
+	
+	IBOutlet UILabel * currentLevelLabel;
+	IBOutlet UILabel * movesLabel;
+    IBOutlet UILabel * transformsLabel;
+	IBOutlet UILabel * timeLabel;
+	IBOutlet UILabel * recipeLabel;
+	
     IBOutlet UIButton * buttonResume;
     IBOutlet UIButton * buttonOptions;
     IBOutlet UIButton * buttonMainMenu;
     IBOutlet UIButton * buttonMenu;
     IBOutlet UIButton * checkLock;
     IBOutlet UIButton * closeLock;
+	IBOutlet UIButton * lockButton;
 	IBOutlet UIButton * checkRecipe;
 	
     IBOutlet UIButton * discardButton;
@@ -87,6 +99,7 @@
     
     CFTimeInterval startTime;
     NSTimer *TouchTimer;
+	NSTimer *movingTimer;
 	
 	CGAffineTransform spawnedShapeRotateTransform;
 	
@@ -106,6 +119,8 @@
 	int upPix;
 	
     BOOL lockMode;
+	
+	BOOL didShuffle;
 	
 }
 //@property (readwrite, assign)int countDown;
@@ -150,6 +165,11 @@
 -(void)SaveState;
 
 -(void)setButtons;
+
+-(void)moveCloudsOne;
+-(void)moveCloudsTwo;
+-(void)moveCloudsThree;
+-(void)moveCloudsFour;
 
 -(CGFloat)isTouchWithinRange:(CGPoint)touch from:(CGPoint)center;
 

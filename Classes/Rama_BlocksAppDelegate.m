@@ -12,7 +12,7 @@
 @implementation Rama_BlocksAppDelegate
 
 @synthesize window;
-@synthesize isMoving, isBombing, isFiltering, isUpgrading, allowGravity, level, yShift;
+@synthesize isMoving, isAttaching, isFiltering, isUpgrading, allowGravity, level, yShift, isBombing;
 
 - (void)applicationDidFinishLaunching:(UIApplication *)application {
     
@@ -24,9 +24,10 @@
 	[window makeKeyAndVisible];
 	
 	isMoving = NO;
-	isBombing = NO;
+	isAttaching = NO;
 	isFiltering = NO;
 	isUpgrading = NO;
+	isBombing = NO;
 	allowGravity = YES;
 	yShift = NO;
 	
@@ -152,10 +153,44 @@
                     executeFetchRequest:request 
                     error:&fetchError];
     
-    return fetchResults;
+    [sortDescriptor release];
+	return fetchResults;
 }
 
+-(NSArray *)FetchLockItems{
+    
+    [self managedObjectContext];
+    NSError *fetchError = nil;
+    NSArray *fetchResults;
+    
+    
+    NSEntityDescription *entityDescription = [NSEntityDescription
+                                              entityForName:@"ItemState" 
+                                              inManagedObjectContext:managedObjectContext];
 
+    
+    NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc]
+                                        initWithKey:@"index" ascending:YES];
+    
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:
+                              @" (owningBoardState == %@) and (ItemType == %d) ", gameState.currentBoard, LockShapeItem ];
+    
+    
+    NSFetchRequest *request = [[[NSFetchRequest alloc] init] autorelease];
+    
+    [request setEntity:entityDescription];
+    [request setPredicate:predicate];
+    [request setSortDescriptors: [NSArray arrayWithObject:sortDescriptor]];
+    
+    
+    fetchResults = [managedObjectContext 
+                    executeFetchRequest:request 
+                    error:&fetchError];
+    [sortDescriptor release];
+	return fetchResults;
+	
+	
+}
 
 -(NSArray *)FetchSpawnedItems{
     
@@ -185,7 +220,8 @@
     fetchResults = [managedObjectContext 
                     executeFetchRequest:request 
                     error:&fetchError];
-    return fetchResults;
+    [sortDescriptor release];
+	return fetchResults;
 }
 
 -(LevelStatistics *)CreatePlayedLevel{
@@ -226,6 +262,8 @@
                     executeFetchRequest:request 
                     error:&fetchError];
     return fetchResults;
+	[sortDescriptor release];
+	return fetchResults;
 }
 
 ////////////////////////////////////////////////////////////////

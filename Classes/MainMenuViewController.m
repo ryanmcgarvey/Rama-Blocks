@@ -26,7 +26,7 @@
 		backGround = [[UIImageView alloc]init];
 		
 		zoomBack = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 320, 480)]; 
-		zoomBack.image = [UIImage imageNamed:@"mainMenuBackGround.png"];
+		zoomBack.image = [UIImage imageNamed:@"BigBackground.png"];
 		zoomBack.alpha = 0.3f;
 		
 		levelNumbers = [[UIImageView alloc] initWithFrame:CGRectMake(321, -50, 290, 360)]; 
@@ -77,7 +77,7 @@
 		level10 = [[UIImageView alloc] initWithFrame:CGRectMake(226, 126, 56, 35)]; 
 		level10.image = [UIImage imageNamed:@"level10.png"];
 		level10.center = CGPointMake(level10.center.x - 320,level10.center.y - 250);
-		
+		/*
 		level11 = [[UIImageView alloc] initWithFrame:CGRectMake(52.5f, 166, 27, 27)]; 
 		level11.image = [UIImage imageNamed:@"level11.png"];
 		level11.center = CGPointMake(level11.center.x - 320,level11.center.y - 250);
@@ -122,7 +122,7 @@
 		level21.image = [UIImage imageNamed:@"level21.png"];
 		level21.center = CGPointMake(level21.center.x - 320,level21.center.y - 250);
 		
-		
+		*/
 		
 		[self.view addSubview:levelNumbers];
 		[self.view addSubview:levelSelectText];
@@ -136,23 +136,19 @@
 - (void)viewWillAppear:(BOOL)animate{
     if([gameState.currentBoard.Active boolValue])
     {
+		
         
     }
+	[UIView beginAnimations:nil context:nil]; 
+	[UIView setAnimationDuration:45.0f];
+	backGround.center = CGPointMake(backGround.center.x - 280, backGround.center.y - 300);
 	
+	[UIView commitAnimations];
     [super viewWillAppear:animate];
 }
 - (void)viewDidLoad {
-	//backGround.center = CGPointMake(320, 480);
-	[UIView beginAnimations:nil context:nil]; 
-	[UIView setAnimationDuration:30];
-	backGround.center = CGPointMake(backGround.center.x - 400, backGround.center.y);
-	backGround.transform = CGAffineTransformIdentity;
-	backGround.transform = CGAffineTransformRotate(backGround.transform, rotate_xDegrees(180));
-	
-	[UIView commitAnimations];
 	
 	
-    
 }
 
 - (void)didReceiveMemoryWarning {
@@ -189,7 +185,7 @@
 
 - (void)actualLoadGameBoard
 {
-
+	backGround.center = CGPointMake(backGround.center.x + 280, backGround.center.y + 300);
 	[self presentModalViewController:[[GameBoardViewController alloc] initWithNibName:@"GameBoardViewController" bundle:nil] animated:NO];
 }
 
@@ -269,7 +265,7 @@
 	level10.center = CGPointMake(level10.center.x + 320,level10.center.y + 250);
 	level10.tag = 10;
 	level10.userInteractionEnabled = TRUE;
-	
+	/*
 	level11.center = CGPointMake(level11.center.x + 320,level11.center.y + 250);
 	level11.tag = 11;
 	level11.userInteractionEnabled = TRUE;
@@ -313,19 +309,18 @@
 	level21.center = CGPointMake(level21.center.x + 320,level21.center.y + 250);
 	level21.tag = 21;
 	level21.userInteractionEnabled = TRUE;
-	
+	*/
 	[self.view addSubview:level1];
 	[self.view addSubview:level2];
 	[self.view addSubview:level3];
 	[self.view addSubview:level4];
 	[self.view addSubview:level5];
-	
-	
 	[self.view addSubview:level6];
 	[self.view addSubview:level7];
 	[self.view addSubview:level8];
 	[self.view addSubview:level9];
 	[self.view addSubview:level10];
+	/*
 	[self.view addSubview:level11];
 	[self.view addSubview:level12];
 	[self.view addSubview:level13];
@@ -337,7 +332,7 @@
 	[self.view addSubview:level19];
 	[self.view addSubview:level20];
 	[self.view addSubview:level21];
-	
+	*/
 	[self.view addSubview:levelNumbers];
 	[self.view addSubview:levelSelectText];
 	[self.view addSubview:levelSelectGrayBox];
@@ -372,6 +367,7 @@
 	 level8.center = CGPointMake(level8.center.x - 320,level8.center.y - 250);
 	 level9.center = CGPointMake(level9.center.x - 320,level9.center.y - 250);
 	 level10.center = CGPointMake(level10.center.x - 320,level10.center.y - 250);
+	 /*
 	 level11.center = CGPointMake(level11.center.x - 320,level11.center.y - 250);
 	 level12.center = CGPointMake(level12.center.x - 320,level12.center.y - 250);
 	 level13.center = CGPointMake(level13.center.x - 320,level13.center.y - 250);
@@ -383,7 +379,7 @@
 	 level19.center = CGPointMake(level19.center.x - 320,level19.center.y - 250);
 	 level20.center = CGPointMake(level20.center.x - 320,level20.center.y - 250);
 	 level21.center = CGPointMake(level21.center.x - 320,level21.center.y - 250);
-	 
+	 */
 	 
 	 [self.view addSubview:zoomBack];
 	 [self.view bringSubviewToFront:zoomBack];
@@ -418,7 +414,7 @@
 	 [level7 removeFromSuperview];
 	 [level8 removeFromSuperview];
 	 [level9 removeFromSuperview];
-	 [level10 removeFromSuperview];
+	 [level10 removeFromSuperview];/*
 	 [level11 removeFromSuperview];
 	 [level12 removeFromSuperview];
 	 [level13 removeFromSuperview];
@@ -430,7 +426,7 @@
 	 [level19 removeFromSuperview];
 	 [level20 removeFromSuperview];
 	 [level21 removeFromSuperview];
-	 
+	 */
 	 [levelNumbers removeFromSuperview];
 	 [levelSelectText removeFromSuperview];
 	 [levelSelectGrayBox removeFromSuperview];
@@ -450,7 +446,7 @@
 		
 		if(level > [gameState.highestLevel intValue])
 		{
-			//touchedItem.alpha = 0.5f;
+			touchedItem.alpha = 0.5f;
 			return;
 		}
 		if(level <= [gameState.highestLevel intValue]){

@@ -28,7 +28,7 @@
 	Rama_BlocksAppDelegate * appDelegate =  (Rama_BlocksAppDelegate *)[[UIApplication sharedApplication] delegate];
 	
 	appDelegate.allowGravity = NO;
-	[NSTimer scheduledTimerWithTimeInterval:10 target:self selector:@selector(returnGravity) userInfo:nil repeats:NO];
+	[NSTimer scheduledTimerWithTimeInterval:30 target:self selector:@selector(returnGravity) userInfo:nil repeats:NO];
 	
 	Cell * cell = [itemCollection GetCell:item.Row :item.Column];
 	[gravityArray addObject:cell];
@@ -44,6 +44,7 @@
 	Rama_BlocksAppDelegate * appDelegate =  (Rama_BlocksAppDelegate *)[[UIApplication sharedApplication] delegate];
 	
 	appDelegate.allowGravity = YES;
+	[itemCollection ApplyGravity];
 	
 }
 
@@ -61,12 +62,11 @@
 	[filterArray release];
 }
 
--(void)makeFilter:(GameItem *)item{
+-(void)makeFilter:(Shape *)shape{
 	
 	int row = 0;
 	int column = 0;
     
-	Shape * shape = (Shape *) item;
 	NSMutableArray * filterArray = [[NSMutableArray alloc] initWithCapacity:NUMBER_OF_ROWS * NUMBER_OF_COLUMNS];
 	
 	for (row = 0; row <= NUMBER_OF_ROWS; row++) 
@@ -75,7 +75,7 @@
 		{
 			Cell *removeCell = [itemCollection GetCell:row :column];
 			Shape * shapeToFilter = (Shape *) removeCell.ItemInCell;
-			if(shapeToFilter.shapeType == shape.shapeType && shapeToFilter.colorType == shape.colorType){
+			if(shapeToFilter.colorType == shape.colorType){
 				[filterArray addObject:removeCell];
 				[itemCollection RemoveFromCellsAndRefactor:filterArray];
 			}
@@ -96,7 +96,6 @@
 	Cell * shuffleCell = [itemCollection GetCell:item.Row :item.Column];
 	[itemCollection RemoveFromCellsAndRefactor:removeShuffleArray];
 	
-	removeShuffleArray = nil;
 	removeShuffleArray = [[NSMutableArray alloc] initWithCapacity:NUMBER_OF_ROWS * NUMBER_OF_COLUMNS];
 	
 	[removeShuffleArray addObject:shuffleCell];
