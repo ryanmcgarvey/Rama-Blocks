@@ -152,6 +152,9 @@
 	spawnNextX = SPAWN_LOCATION_X;
 	spawnNextY = SPAWN_LOCATION_Y - 78;
 	
+	//cloudA;
+	//cloudB;
+	
 	rightPix = 30;
 	upPix = 0;
 	spawnedShapeRotateTransform = CGAffineTransformIdentity;
@@ -165,21 +168,21 @@
 	backGround.userInteractionEnabled = FALSE;
 	self.view.backgroundColor = [UIColor blackColor];
 	
-	backGroundStars = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 960, 640)];
+	backGroundStars = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 600, 400)];
 	backGroundStars.clipsToBounds = YES;
 	backGroundStars.autoresizesSubviews = NO;
 	backGroundStars.contentMode = UIViewContentModeTopLeft;
 	backGroundStars.image = [UIImage imageNamed:@"BigBackground.png"];
 	backGroundStars.userInteractionEnabled = FALSE;
 	
-	backGroundCloudsA = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 960, 640)];
+	backGroundCloudsA = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 600, 400)];
 	backGroundCloudsA.clipsToBounds = YES;
 	backGroundCloudsA.autoresizesSubviews = NO;
 	backGroundCloudsA.contentMode = UIViewContentModeTopLeft;
 	backGroundCloudsA.image = [UIImage imageNamed:@"magentaClouds.png"];
 	backGroundCloudsA.userInteractionEnabled = FALSE;
 	
-	backGroundCloudsB = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 960, 640)];
+	backGroundCloudsB = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 600, 400)];
 	backGroundCloudsB.clipsToBounds = YES;
 	backGroundCloudsB.autoresizesSubviews = NO;
 	backGroundCloudsB.image = [UIImage imageNamed:@"orangeClouds.png"];
@@ -192,7 +195,7 @@
 	backGroundStars.alpha = 0.0f;
 	
 	
-	[self moveCloudsOne];
+	//[self moveCloudsOne];
 	
 	powerBack = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 100, 100)];
 	powerBack.center = CGPointMake(spawnX + 15,spawnY);
@@ -248,45 +251,45 @@
 	currentLevel = [[Level alloc] init:[gameState.currentLevel intValue]];
 	
 	if (currentLevel.difficulty == 2){
-		backGroundCloudsA.image = [UIImage imageNamed:@"redClouds.png"];
-		backGroundCloudsB.image = [UIImage imageNamed:@"blueClouds.png"];
+		//backGroundCloudsA.image = [UIImage imageNamed:@"redClouds.png"];
+		//backGroundCloudsB.image = [UIImage imageNamed:@"blueClouds.png"];
 		
 	}
 	if (currentLevel.difficulty == 3){
-		backGroundCloudsA.image = [UIImage imageNamed:@"cyanClouds.png"];
-		backGroundCloudsB.image = [UIImage imageNamed:@"yellowClouds.png"];
+		//backGroundCloudsA.image = [UIImage imageNamed:@"cyanClouds.png"];
+		//backGroundCloudsB.image = [UIImage imageNamed:@"yellowClouds.png"];
 	}
 	if (currentLevel.difficulty == 4){
-		backGroundCloudsA.image = [UIImage imageNamed:@"greenClouds.png"];
-		backGroundCloudsB.image = [UIImage imageNamed:@"violetClouds.png"];
+		//backGroundCloudsA.image = [UIImage imageNamed:@"greenClouds.png"];
+		//backGroundCloudsB.image = [UIImage imageNamed:@"violetClouds.png"];
 	}
 	if (currentLevel.difficulty == 5){
-		backGroundCloudsA.image = [UIImage imageNamed:@"cyanBlueClouds.png"];
-		backGroundCloudsB.image = [UIImage imageNamed:@"orangeClouds.png"];
+		//backGroundCloudsA.image = [UIImage imageNamed:@"cyanBlueClouds.png"];
+		//backGroundCloudsB.image = [UIImage imageNamed:@"orangeClouds.png"];
 	}
 	if (currentLevel.difficulty == 6){
-		backGroundCloudsA.image = [UIImage imageNamed:@"yellowClouds.png"];
-		backGroundCloudsB.image = [UIImage imageNamed:@"magentaClouds.png"];
+		//backGroundCloudsA.image = [UIImage imageNamed:@"yellowClouds.png"];
+		//backGroundCloudsB.image = [UIImage imageNamed:@"magentaClouds.png"];
 	}
 	if (currentLevel.difficulty == 7){
-		backGroundCloudsA.image = [UIImage imageNamed:@"redClouds.png"];
-		backGroundCloudsB.image = [UIImage imageNamed:@"greenClouds.png"];
+		//backGroundCloudsA.image = [UIImage imageNamed:@"redClouds.png"];
+		//backGroundCloudsB.image = [UIImage imageNamed:@"greenClouds.png"];
 	}
 	if (currentLevel.difficulty == 8){
-		backGroundCloudsA.image = [UIImage imageNamed:@"blueClouds.png"];
-		backGroundCloudsB.image = [UIImage imageNamed:@"violetClouds.png"];
+		//backGroundCloudsA.image = [UIImage imageNamed:@"blueClouds.png"];
+		//backGroundCloudsB.image = [UIImage imageNamed:@"violetClouds.png"];
 	}
 	if (currentLevel.difficulty == 9){
-		backGroundCloudsA.image = [UIImage imageNamed:@"cyanBlueClouds.png"];
-		backGroundCloudsB.image = [UIImage imageNamed:@"greenClouds.png"];
+		//backGroundCloudsA.image = [UIImage imageNamed:@"cyanBlueClouds.png"];
+		//backGroundCloudsB.image = [UIImage imageNamed:@"greenClouds.png"];
 	}
 	if (currentLevel.difficulty == 10){
-		backGroundCloudsA.image = [UIImage imageNamed:@"cyanClouds.png"];
-		backGroundCloudsB.image = [UIImage imageNamed:@"yellowClouds.png"];
+		//backGroundCloudsA.image = [UIImage imageNamed:@"cyanClouds.png"];
+		//backGroundCloudsB.image = [UIImage imageNamed:@"yellowClouds.png"];
 	}
 	if (currentLevel.difficulty == 1){
-		backGroundCloudsA.image = [UIImage imageNamed:@"magentaClouds.png"];
-		backGroundCloudsB.image = [UIImage imageNamed:@"orangeClouds.png"];
+		//backGroundCloudsA.image = [UIImage imageNamed:@"magentaClouds.png"];
+		//backGroundCloudsB.image = [UIImage imageNamed:@"orangeClouds.png"];
 	}
 	
 	[self.view addSubview:backGroundCloudsA];
@@ -433,6 +436,7 @@
 }
 
 -(void)moveCloudsOne{
+	
 	[movingTimer invalidate];
 	[UIView beginAnimations:nil context:nil]; 
 	[UIView setAnimationDuration:60.0f];
@@ -1281,7 +1285,7 @@
 			touchedGuessItemShape = (Shape *)touchedGuessItem;
             
 			guessView.image = touchedGuessItem.ItemView.image;
-			guessView.center = CGPointMake([touch locationInView:self.view].x - 55, [touch locationInView:self.view].y - 55);
+			guessView.center = CGPointMake([touch locationInView:self.view].x - 25, [touch locationInView:self.view].y - 25);
 			[self.view addSubview:guessView];
 			appDelegate.isMoving = TRUE;
 			
@@ -1458,6 +1462,7 @@ if([[touch view] isKindOfClass: [GameItem class]]){
         
 		if(guessView.center.x < 105 - 55 && guessView.center.y < 133 && guessView.image != nil){
 			cellB.ItemInCell.userInteractionEnabled = TRUE;
+			cellB.ItemInCell.alpha = 1;
 			shapeB = touchedGuessItemShape;
 			cellB = [itemCollection GetCell:shapeB.Row :shapeB.Column];
 			cellB.ItemInCell.userInteractionEnabled = FALSE;
@@ -1470,6 +1475,7 @@ if([[touch view] isKindOfClass: [GameItem class]]){
 		}
 		if(guessView.center.x > 108 - 55 && guessView.center.x < 210 - 55 && guessView.center.y < 133 && guessView.image != nil){
 			cellA.ItemInCell.userInteractionEnabled = TRUE;
+			cellA.ItemInCell.alpha = 1;
 			shapeA = touchedGuessItemShape;
 			cellA = [itemCollection GetCell:shapeA.Row :shapeA.Column];
 			cellA.ItemInCell.userInteractionEnabled = FALSE;
@@ -1480,6 +1486,7 @@ if([[touch view] isKindOfClass: [GameItem class]]){
 		}
 		if(guessView.center.x > 211 - 55 && guessView.center.y < 133 && guessView.image != nil){
 			cellC.ItemInCell.userInteractionEnabled = TRUE;
+			cellC.ItemInCell.alpha = 1;
 			shapeC = touchedGuessItemShape;
 			cellC = [itemCollection GetCell:shapeC.Row :shapeC.Column];
 			cellC.ItemInCell.userInteractionEnabled = FALSE;

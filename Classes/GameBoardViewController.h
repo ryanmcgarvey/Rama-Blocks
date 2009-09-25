@@ -43,6 +43,8 @@
 	IBOutlet UIImageView *reshuffleCountImage;
 	IBOutlet UIImageView *upgradeCountImage;
 	
+	UIImage * cloudA;
+	UIImage * cloudB;
 	
     IBOutlet UILabel * attemptsString;
 	IBOutlet UILabel * scoreLabel;
@@ -53,11 +55,11 @@
 	IBOutlet UILabel * timeLabel;
 	IBOutlet UILabel * recipeLabel;
 	
-    IBOutlet UIButton * buttonResume;
-    IBOutlet UIButton * buttonOptions;
-    IBOutlet UIButton * buttonMainMenu;
-    IBOutlet UIButton * buttonMenu;
-    IBOutlet UIButton * checkLock;
+    UIButton * buttonResume;
+    UIButton * buttonOptions;
+    UIButton * buttonMainMenu;
+    UIButton * buttonMenu;
+    UIButton * checkLock;
     IBOutlet UIButton * closeLock;
 	IBOutlet UIButton * lockButton;
 	IBOutlet UIButton * checkRecipe;
