@@ -13,7 +13,6 @@
 
 @interface Level : NSObject {
     int difficulty;
-    NSMutableArray * solution;
 	
     float shapeSpawnProbability [NUMBER_OF_SHAPES];
     int totalShapes [NUMBER_OF_SHAPES];

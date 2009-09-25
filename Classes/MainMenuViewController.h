@@ -49,6 +49,7 @@
 	UIImageView *level8;
 	UIImageView *level9;
 	UIImageView *level10;
+	/*
 	UIImageView *level11;
 	UIImageView *level12;
 	UIImageView *level13;
@@ -69,7 +70,7 @@
 	UIImageView *level28;
 	UIImageView *level29;
 	UIImageView *level30;
-	
+	*/
 	
 	CGPoint buttonCenter;
 	CGPoint titleCenter;

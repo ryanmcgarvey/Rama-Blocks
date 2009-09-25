@@ -17,7 +17,6 @@
     gameState = [appDelegate FetchGameState];
 	
     currentLevel = level;
-    solution = [NSMutableArray new];
 	gravityDirection = down;
 	RowLength = rows;
 	ColumnLength = columns;
@@ -327,6 +326,7 @@
 		Shape * shape = (Shape *)item;
 		if(shape.shapeType != NUMBER_OF_SHAPES){
 			[shape TransForm];
+			return TRUE;
 		}
 	}
 	NSMutableArray * transFormGroup = [self CheckTransform : item];
@@ -435,6 +435,7 @@
 			
 			cell.ItemInCell = nil;
 			[cell.ItemInCell release];
+			
 		}
 		if(shape.colorType == Green){
 			cell.ItemInCell.ItemView.image = nil; 
@@ -486,6 +487,7 @@
 			
 			cell.ItemInCell = nil;
 			[cell.ItemInCell release];
+			
 		}
 		if(shape.colorType == Blue){
 			cell.ItemInCell.ItemView.image = nil; 
@@ -537,6 +539,7 @@
 			
 			cell.ItemInCell = nil;
 			[cell.ItemInCell release];
+			
 		}
 		if(shape.colorType == Yellow){
 			cell.ItemInCell.ItemView.image = nil; 
@@ -589,6 +592,7 @@
 			
 			cell.ItemInCell = nil;
 			[cell.ItemInCell release];
+			
 		}
 		if(shape.colorType == Purple){
 			cell.ItemInCell.ItemView.image = nil; 
@@ -734,10 +738,8 @@
 					{
 						Cell * cell = [self GetCell:row : column];
 						if(cell.ItemInCell != 0 && cell.ItemInCell.IsAnchored == NO){
-							Shape * shape = (Shape *) cell.ItemInCell;
-							if(shape.shapeType != Block){
-								[self ApplyGravityToCell:cell];
-							}
+							[self ApplyGravityToCell:cell];
+							
 						}
 					}
 				}
@@ -749,10 +751,8 @@
 					{
 						Cell * cell = [self GetCell:row : column];
 						if(cell.ItemInCell != 0 && cell.ItemInCell.IsAnchored == NO){
-							Shape * shape = (Shape *) cell.ItemInCell;
-							if(shape.shapeType != Block){
 							[self ApplyGravityToCell:cell];
-							}
+							
 						}
 					}
 				}
@@ -764,10 +764,8 @@
 					{
 						Cell * cell = [self GetCell:row : column];
 						if(cell.ItemInCell != 0 && cell.ItemInCell.IsAnchored == NO){
-							Shape * shape = (Shape *) cell.ItemInCell;
-							if(shape.shapeType != Block){
 							[self ApplyGravityToCell:cell];
-							}
+							
 						}
 					}
 				}
@@ -779,10 +777,8 @@
 					{
 						Cell * cell = [self GetCell:row : column];
 						if(cell.ItemInCell != 0 && cell.ItemInCell.IsAnchored == NO){
-							Shape * shape = (Shape *) cell.ItemInCell;
-							if(shape.shapeType != Block){
-								[self ApplyGravityToCell:cell];
-							}
+							[self ApplyGravityToCell:cell];
+							
 						}
 					}
 				}
@@ -899,7 +895,7 @@
         
         [cell.ItemInCell release];
     }
-	cell.ItemInCell = [item retain];
+	cell.ItemInCell = item;
 	[UIView beginAnimations:nil context:nil]; 
 	[UIView setAnimationDuration:0.15];
     item.center = cell.Center;
@@ -964,7 +960,6 @@
         free(cells[i]);
     }
     free(cells);
-    [solution dealloc];
     [currentLevel dealloc];
     [super dealloc];
     

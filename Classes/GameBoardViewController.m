@@ -141,7 +141,7 @@
 	score = [gameState.currentBoard.numberOfAttempts intValue];
 	powerItem = [[PowerItem alloc]init];
 	
-	audio = [appDelegate FetchAudio];
+	//audio = [appDelegate FetchAudio];
 	discardCount = 0;
 	transformCount = 0;
 	didShuffle = FALSE;
@@ -152,45 +152,37 @@
 	spawnNextX = SPAWN_LOCATION_X;
 	spawnNextY = SPAWN_LOCATION_Y - 78;
 	
+	//cloudA;
+	//cloudB;
+	
 	rightPix = 30;
 	upPix = 0;
 	spawnedShapeRotateTransform = CGAffineTransformIdentity;
 	
 	//// Create background
 	backGround = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 320, 480)];
-	backGround.clipsToBounds = YES;
-	backGround.autoresizesSubviews = NO;
-	backGround.contentMode = UIViewContentModeTopLeft;
 	backGround.image = [UIImage imageNamed:@"gameBoardGrid.png"];
-	backGround.userInteractionEnabled = FALSE;
+	//backGround.userInteractionEnabled = FALSE;
 	self.view.backgroundColor = [UIColor blackColor];
 	
 	backGroundStars = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 960, 640)];
-	backGroundStars.clipsToBounds = YES;
-	backGroundStars.autoresizesSubviews = NO;
-	backGroundStars.contentMode = UIViewContentModeTopLeft;
 	backGroundStars.image = [UIImage imageNamed:@"BigBackground.png"];
 	backGroundStars.userInteractionEnabled = FALSE;
 	
 	backGroundCloudsA = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 960, 640)];
-	backGroundCloudsA.clipsToBounds = YES;
-	backGroundCloudsA.autoresizesSubviews = NO;
-	backGroundCloudsA.contentMode = UIViewContentModeTopLeft;
 	backGroundCloudsA.image = [UIImage imageNamed:@"magentaClouds.png"];
 	backGroundCloudsA.userInteractionEnabled = FALSE;
 	
 	backGroundCloudsB = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 960, 640)];
-	backGroundCloudsB.clipsToBounds = YES;
-	backGroundCloudsB.autoresizesSubviews = NO;
 	backGroundCloudsB.image = [UIImage imageNamed:@"orangeClouds.png"];
 	backGroundCloudsB.userInteractionEnabled = FALSE;
     
 	backGroundCloudsB.center = CGPointMake(backGroundCloudsB.center.x - 640,backGroundCloudsB.center.y - 160);
-	
+	/*
 	backGroundCloudsA.alpha = 0.0f;
 	backGroundCloudsB.alpha = 0.0f;
 	backGroundStars.alpha = 0.0f;
-	
+	*/
 	
 	[self moveCloudsOne];
 	
@@ -357,14 +349,14 @@
 		SpawnedPair.ItemA.ItemView.contentMode = UIViewContentModeScaleAspectFit;
 		SpawnedPair.ItemB.ItemView.contentMode = UIViewContentModeScaleAspectFit;
 		SpawnedPair.ItemC.ItemView.contentMode = UIViewContentModeScaleAspectFit;
-		
+		/*
 		SpawnedPair.ItemA.ItemView.alpha = 0.0f;
 		SpawnedPair.ItemB.ItemView.alpha = 0.0f;
 		SpawnedPair.ItemC.ItemView.alpha = 0.0f;
 		
 		nextPair.ItemA.ItemView.alpha = 0.0f;
 		nextPair.ItemB.ItemView.alpha = 0.0f;
-		
+		*/
 		[self.view addSubview:SpawnedPair.ItemC];
 		[self.view addSubview:SpawnedPair.ItemB];
 		[self.view addSubview:SpawnedPair.ItemA];
@@ -384,19 +376,14 @@
 	}
 	
 	[self didRotate:nil];
-	NSMutableArray * blocks = [[NSMutableArray alloc] initWithCapacity:NUMBER_OF_ROWS * NUMBER_OF_COLUMNS];
-	//blocks = [itemCollection fillBlocksForDifficulty];
 	
-	for(Shape * block in blocks){
-		[self.view addSubview:block];
-	}
 	[itemCollection ApplyGravity];
 	[super viewDidLoad];
 	
 	startTime = CFAbsoluteTimeGetCurrent();
 	
 	[self setButtons];
-	
+	/*
 	[UIView beginAnimations:nil context:nil]; 
 	[UIView setAnimationDuration:3.0f];
 	
@@ -412,6 +399,7 @@
 	
 	[blocks autorelease];
 	[UIView commitAnimations];
+	 */
 }
 
 -(void)setButtons{
@@ -433,6 +421,7 @@
 }
 
 -(void)moveCloudsOne{
+	
 	[movingTimer invalidate];
 	[UIView beginAnimations:nil context:nil]; 
 	[UIView setAnimationDuration:60.0f];
@@ -1281,7 +1270,7 @@
 			touchedGuessItemShape = (Shape *)touchedGuessItem;
             
 			guessView.image = touchedGuessItem.ItemView.image;
-			guessView.center = CGPointMake([touch locationInView:self.view].x - 55, [touch locationInView:self.view].y - 55);
+			guessView.center = CGPointMake([touch locationInView:self.view].x - 25, [touch locationInView:self.view].y - 25);
 			[self.view addSubview:guessView];
 			appDelegate.isMoving = TRUE;
 			
@@ -1458,6 +1447,7 @@ if([[touch view] isKindOfClass: [GameItem class]]){
         
 		if(guessView.center.x < 105 - 55 && guessView.center.y < 133 && guessView.image != nil){
 			cellB.ItemInCell.userInteractionEnabled = TRUE;
+			cellB.ItemInCell.alpha = 1;
 			shapeB = touchedGuessItemShape;
 			cellB = [itemCollection GetCell:shapeB.Row :shapeB.Column];
 			cellB.ItemInCell.userInteractionEnabled = FALSE;
@@ -1470,6 +1460,7 @@ if([[touch view] isKindOfClass: [GameItem class]]){
 		}
 		if(guessView.center.x > 108 - 55 && guessView.center.x < 210 - 55 && guessView.center.y < 133 && guessView.image != nil){
 			cellA.ItemInCell.userInteractionEnabled = TRUE;
+			cellA.ItemInCell.alpha = 1;
 			shapeA = touchedGuessItemShape;
 			cellA = [itemCollection GetCell:shapeA.Row :shapeA.Column];
 			cellA.ItemInCell.userInteractionEnabled = FALSE;
@@ -1480,6 +1471,7 @@ if([[touch view] isKindOfClass: [GameItem class]]){
 		}
 		if(guessView.center.x > 211 - 55 && guessView.center.y < 133 && guessView.image != nil){
 			cellC.ItemInCell.userInteractionEnabled = TRUE;
+			cellC.ItemInCell.alpha = 1;
 			shapeC = touchedGuessItemShape;
 			cellC = [itemCollection GetCell:shapeC.Row :shapeC.Column];
 			cellC.ItemInCell.userInteractionEnabled = FALSE;
@@ -1497,7 +1489,7 @@ if([[touch view] isKindOfClass: [GameItem class]]){
 }
 
 -(void)changeLevel{
-	[audio playVictory];
+	//[audio playVictory];
 	[currentLevel setDifficulty:currentLevel.difficulty + 1];
 	Rama_BlocksAppDelegate * appDelegate =  (Rama_BlocksAppDelegate *)[[UIApplication sharedApplication] delegate];
 	[self SaveState];

@@ -39,7 +39,6 @@ typedef enum enum_Gravity {
 	int RowPixelLength;
 	int ColumnPixelLength;
     Gravity gravityDirection;
-    NSMutableArray * solution;
     Level * currentLevel;
     GameState * gameState;
 	
