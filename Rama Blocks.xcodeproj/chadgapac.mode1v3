@@ -311,7 +311,7 @@
 							<real>275</real>
 						</array>
 						<key>RubberWindowFrame</key>
-						<string>398 151 1296 992 0 0 1920 1178 </string>
+						<string>398 179 1296 992 0 0 1920 1178 </string>
 					</dict>
 					<key>Module</key>
 					<string>PBXSmartGroupTreeModule</string>
@@ -341,7 +341,7 @@
 										<key>_historyCapacity</key>
 										<integer>0</integer>
 										<key>bookmark</key>
-										<string>C2FE2516106D674800231F5D</string>
+										<string>C2FE251D106D680B00231F5D</string>
 										<key>history</key>
 										<array>
 											<string>C25094F41049BAD3000E912F</string>
@@ -408,7 +408,7 @@
 											<string>C280E1C7106D3FEC0044BB88</string>
 											<string>C280E1C8106D3FEC0044BB88</string>
 											<string>C280E1DD106D450E0044BB88</string>
-											<string>C280E1E2106D45740044BB88</string>
+											<string>C2FE2516106D674800231F5D</string>
 										</array>
 										<key>prevStack</key>
 										<array>
@@ -490,7 +490,7 @@
 								<key>Frame</key>
 								<string>{{0, 0}, {999, 688}}</string>
 								<key>RubberWindowFrame</key>
-								<string>398 151 1296 992 0 0 1920 1178 </string>
+								<string>398 179 1296 992 0 0 1920 1178 </string>
 							</dict>
 							<key>Module</key>
 							<string>PBXNavigatorGroup</string>
@@ -510,7 +510,7 @@
 								<key>Frame</key>
 								<string>{{0, 693}, {999, 258}}</string>
 								<key>RubberWindowFrame</key>
-								<string>398 151 1296 992 0 0 1920 1178 </string>
+								<string>398 179 1296 992 0 0 1920 1178 </string>
 							</dict>
 							<key>Module</key>
 							<string>XCDetailModule</string>
@@ -534,9 +534,9 @@
 			</array>
 			<key>TableOfContents</key>
 			<array>
-				<string>C2FE24EA106D466400231F5D</string>
+				<string>C2FE251E106D680B00231F5D</string>
 				<string>1CE0B1FE06471DED0097A5F4</string>
-				<string>C2FE24EB106D466400231F5D</string>
+				<string>C2FE251F106D680B00231F5D</string>
 				<string>1CE0B20306471E060097A5F4</string>
 				<string>1CE0B20506471E060097A5F4</string>
 			</array>
@@ -670,15 +670,13 @@
 	<integer>5</integer>
 	<key>WindowOrderList</key>
 	<array>
-		<string>C2FE24F4106D466400231F5D</string>
-		<string>C2FE24F5106D466400231F5D</string>
 		<string>C21FB318103202EA00C1D29B</string>
-		<string>/Users/chadgapac/Desktop/chad's grahic edits/Rama/Rama Blocks.xcodeproj</string>
 		<string>1CD10A99069EF8BA00B06720</string>
+		<string>/Users/chadgapac/Desktop/Rama/Rama Blocks.xcodeproj</string>
 		<string>1C78EAAD065D492600B07095</string>
 	</array>
 	<key>WindowString</key>
-	<string>398 151 1296 992 0 0 1920 1178 </string>
+	<string>398 179 1296 992 0 0 1920 1178 </string>
 	<key>WindowToolsV3</key>
 	<array>
 		<dict>
@@ -755,7 +753,7 @@
 			<key>TableOfContents</key>
 			<array>
 				<string>C21FB318103202EA00C1D29B</string>
-				<string>C2FE24EC106D466400231F5D</string>
+				<string>C2FE2520106D680B00231F5D</string>
 				<string>1CD0528F0623707200166675</string>
 				<string>XCMainBuildResultsModuleGUID</string>
 			</array>
@@ -875,13 +873,13 @@
 			<key>TableOfContents</key>
 			<array>
 				<string>1CD10A99069EF8BA00B06720</string>
-				<string>C2FE24ED106D466400231F5D</string>
+				<string>C2FE2521106D680B00231F5D</string>
 				<string>1C162984064C10D400B95A72</string>
-				<string>C2FE24EE106D466400231F5D</string>
-				<string>C2FE24EF106D466400231F5D</string>
-				<string>C2FE24F0106D466400231F5D</string>
-				<string>C2FE24F1106D466400231F5D</string>
-				<string>C2FE24F2106D466400231F5D</string>
+				<string>C2FE2522106D680B00231F5D</string>
+				<string>C2FE2523106D680B00231F5D</string>
+				<string>C2FE2524106D680B00231F5D</string>
+				<string>C2FE2525106D680B00231F5D</string>
+				<string>C2FE2526106D680B00231F5D</string>
 			</array>
 			<key>ToolbarConfiguration</key>
 			<string>xcode.toolbar.config.debugV3</string>
@@ -1037,7 +1035,7 @@
 			<key>TableOfContents</key>
 			<array>
 				<string>1C78EAAD065D492600B07095</string>
-				<string>C2FE24F3106D466400231F5D</string>
+				<string>C2FE2527106D680B00231F5D</string>
 				<string>1C78EAAC065D492600B07095</string>
 			</array>
 			<key>ToolbarConfiguration</key>
