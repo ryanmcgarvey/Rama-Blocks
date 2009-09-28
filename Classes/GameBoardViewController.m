@@ -467,8 +467,22 @@
             break;            
         default:
 			
-            gravity = down;
+            gravity = [itemCollection gravityDirection];
             backGroundToLoad = @"gameBoardGrid.png";
+            
+            spawnedShapeRotateTransform = CGAffineTransformRotate(CGAffineTransformIdentity, rotate_xDegrees(degrees));
+            upgradeCountImage.transform = CGAffineTransformRotate(CGAffineTransformIdentity, rotate_xDegrees(degrees));
+            discardCountImage.transform = CGAffineTransformRotate(CGAffineTransformIdentity, rotate_xDegrees(degrees));
+            bombCountImage.transform = CGAffineTransformRotate(CGAffineTransformIdentity, rotate_xDegrees(degrees));
+            reshuffleCountImage.transform = CGAffineTransformRotate(CGAffineTransformIdentity, rotate_xDegrees(degrees));
+            scoreLabel.transform = CGAffineTransformRotate(CGAffineTransformIdentity, rotate_xDegrees(degrees));
+            menuView.transform = CGAffineTransformRotate(CGAffineTransformIdentity, rotate_xDegrees(degrees));
+            SpawnedPair.ItemA.transform = CGAffineTransformRotate(CGAffineTransformIdentity, rotate_xDegrees(degrees));
+            SpawnedPair.ItemB.transform = CGAffineTransformRotate(CGAffineTransformIdentity, rotate_xDegrees(degrees));
+            SpawnedPair.ShaddowA.transform = CGAffineTransformRotate(CGAffineTransformIdentity, rotate_xDegrees(degrees));
+            SpawnedPair.ShaddowB.transform = CGAffineTransformRotate(CGAffineTransformIdentity, rotate_xDegrees(degrees));
+            nextPair.ItemA.transform = CGAffineTransformRotate(CGAffineTransformIdentity, rotate_xDegrees(degrees));
+            nextPair.ItemB.transform = CGAffineTransformRotate(CGAffineTransformIdentity, rotate_xDegrees(degrees));
 
             break;
 			 
