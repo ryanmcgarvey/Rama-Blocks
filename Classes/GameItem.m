@@ -17,6 +17,8 @@
         tapped = 0;
         IsPaired = FALSE;
 		IsAnchored = NO;
+        self.clearsContextBeforeDrawing = YES;
+
     }
     return self;
 }

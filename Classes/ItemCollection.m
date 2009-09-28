@@ -729,14 +729,15 @@
 -(void)ApplyGravity{
     int row;int column;
 	 Rama_BlocksAppDelegate * appDelegate =  (Rama_BlocksAppDelegate *)[[UIApplication sharedApplication] delegate];
-	if(appDelegate.allowGravity == TRUE){
+	Cell * cell;
+    if(appDelegate.allowGravity == TRUE){
 		switch (gravityDirection) {
 			case left:
 				for(row = 0; row < NUMBER_OF_ROWS; row++)
 				{
 					for(column = 0; column < NUMBER_OF_COLUMNS; column ++)
 					{
-						Cell * cell = [self GetCell:row : column];
+						cell = [self GetCell:row : column];
 						if(cell.ItemInCell != 0 && cell.ItemInCell.IsAnchored == NO){
 							[self ApplyGravityToCell:cell];
 							
@@ -749,7 +750,7 @@
 				{
 					for(column = NUMBER_OF_COLUMNS - 1; column >= 0; column --)
 					{
-						Cell * cell = [self GetCell:row : column];
+						cell = [self GetCell:row : column];
 						if(cell.ItemInCell != 0 && cell.ItemInCell.IsAnchored == NO){
 							[self ApplyGravityToCell:cell];
 							
@@ -762,7 +763,7 @@
 				{
 					for(row = 0; row < NUMBER_OF_ROWS; row++)
 					{
-						Cell * cell = [self GetCell:row : column];
+						cell = [self GetCell:row : column];
 						if(cell.ItemInCell != 0 && cell.ItemInCell.IsAnchored == NO){
 							[self ApplyGravityToCell:cell];
 							
@@ -775,7 +776,7 @@
 				{
 					for(row = NUMBER_OF_ROWS -1 ; row >= 0; row--)
 					{
-						Cell * cell = [self GetCell:row : column];
+						cell = [self GetCell:row : column];
 						if(cell.ItemInCell != 0 && cell.ItemInCell.IsAnchored == NO){
 							[self ApplyGravityToCell:cell];
 							
@@ -789,36 +790,25 @@
 				break;
 		}
 	}
+    [cell release];
 }
 
 -(void)ApplyGravityToCell:(Cell *)cell{
     if(cell.ItemInCell !=nil)
     {
-		//GameItem *rotatedShape = [GameItem new];
 		GameItem * rotatedShape = cell.ItemInCell;
 		switch (gravityDirection) {
 			case left:
-				
-				rotatedShape.transform = CGAffineTransformIdentity;
 				rotatedShape.transform = CGAffineTransformRotate(cell.ItemInCell.transform, rotate_xDegrees(90));
-				cell.ItemInCell = rotatedShape;
 				break;
 			case right:
-				
-				rotatedShape.transform = CGAffineTransformIdentity;
 				rotatedShape.transform = CGAffineTransformRotate(cell.ItemInCell.transform, rotate_xDegrees(270));
-				cell.ItemInCell = rotatedShape;
 				break;
 			case up:
-				
-				rotatedShape.transform = CGAffineTransformIdentity;
 				rotatedShape.transform = CGAffineTransformRotate(cell.ItemInCell.transform, rotate_xDegrees(180));
-				cell.ItemInCell = rotatedShape;
 				break;
 			case down:
-				
 				rotatedShape.transform = CGAffineTransformIdentity;
-				cell.ItemInCell = rotatedShape;
 				break;
 				
 		}
@@ -832,6 +822,7 @@
 		
         [self SetItemToCell:cell.ItemInCell :cellToMoveTo];
 		
+        //[cell.ItemInCell release];
         cell.ItemInCell = nil;
     }
 }
@@ -865,8 +856,7 @@
                 row--;
                 cell = [self GetCell:row : item.Column];
             }
-            cell = [self GetCell:row +1 : item.Column];
-            return cell;
+            return [self GetCell:row +1 : item.Column];
         case up:
             row = item.Row;
             while(cell.ItemInCell == nil && row < NUMBER_OF_ROWS)
@@ -874,8 +864,7 @@
                 row++;
                 cell = [self GetCell:row : item.Column];
             }
-            cell = [self GetCell:row -1 : item.Column];
-            return cell;
+            return [self GetCell:row -1 : item.Column];
         default:
             return nil;
     }
@@ -896,12 +885,18 @@
         [cell.ItemInCell release];
     }
 	cell.ItemInCell = item;
+    
 	[UIView beginAnimations:nil context:nil]; 
 	[UIView setAnimationDuration:0.15];
+
+    
     item.center = cell.Center;
+    [UIView commitAnimations];
+    
+    
 	item.Row = cell.Row;
 	item.Column = cell.Column;
-	[UIView commitAnimations];
+
 }
 
 -(void)setShuffledArray:(NSMutableArray *)shuffledPieces{
@@ -919,18 +914,14 @@
 				Shape *shuffleShape = [shuffledPieces objectAtIndex:i];
 				[shuffleShape ChangeColorAndShape:shuffleShape.colorType :shuffleShape.shapeType];
 				placedCell.ItemInCell = shuffleShape;
-				[self SetItemToCell:shuffleShape :placedCell];
-				//[self ApplyGravity];
-				
+				[self SetItemToCell:shuffleShape :placedCell];				
 			}
 			i++;
 			
 			
 		}
 	}
-	NSLog(@"adding");
-	
-	
+	NSLog(@"adding");	
 }
 
 -(Cell *)GetCell:(int)row : (int)column{
@@ -955,6 +946,7 @@
 }
 
 - (void)dealloc {
+    
     for(int i = 0; i <NUMBER_OF_ROWS * NUMBER_OF_COLUMNS; i++)
     {
         free(cells[i]);

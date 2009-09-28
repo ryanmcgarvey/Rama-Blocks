@@ -190,6 +190,12 @@
 
 -(void)changeLevel;
 
+//HELPERS
+-(void) SetupBackground:(int)difficulty;
+-(void) SetupUI;
+
+-(void)changeScore:(Shape *) item;
+
 
 
 @end
