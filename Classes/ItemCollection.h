@@ -54,6 +54,7 @@ typedef enum enum_Gravity {
 	
 }
 
+@property(assign)Gravity gravityDirection;
 
 -(id)init: (int) rows : (int) columns : (int)rowPixelLength : (int)columnPixelLength : (Level *)level;
 -(void)removeBlocksForDifficulty;

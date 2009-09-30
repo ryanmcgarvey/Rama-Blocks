@@ -10,6 +10,7 @@
 #import "Rama_BlocksAppDelegate.h"
 
 @implementation ItemCollection
+@synthesize gravityDirection;
 
 -(id)init: (int) rows : (int) columns : (int)rowPixelLength : (int)columnPixelLength : (Level *) level{	
 	

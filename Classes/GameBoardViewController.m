@@ -141,7 +141,7 @@
 	score = [gameState.currentBoard.numberOfAttempts intValue];
 	
     powerItem = [[PowerItem alloc]init];
-	
+	backGroundToLoad = @"gameBoardGrid.png";
 
 	discardCount = 0;
 	transformCount = 0;
@@ -199,7 +199,6 @@
 	statsView.center = CGPointMake(160,240);
 	statsView.hidden = TRUE;
 	
-	recipeLabel.center = CGPointMake(160,240);
 	recipeLabel.hidden = TRUE;
 	
 
@@ -298,6 +297,7 @@
 	[blocks autorelease];
 	[UIView commitAnimations];
 	 */
+	spawnedShapeRotateTransform = CGAffineTransformIdentity;
 }
 
 -(void)setButtons{
@@ -373,7 +373,8 @@
 }
 
 -(void)didRotate:(NSNotification *)notification{
-    NSString * backGroundToLoad;
+    
+	
     int degrees = 0;
     Gravity gravity = down;
     switch (CurrentDevice.orientation) {
@@ -397,7 +398,9 @@
 			discardButton.center = CGPointMake(47,51);
 			bombButton.center = CGPointMake(106,120);
 			reshuffleButton.center = CGPointMake(106,51);
-			degrees = degrees;
+			degrees = 90;
+			spawnedShapeRotateTransform = CGAffineTransformIdentity;
+			spawnedShapeRotateTransform = CGAffineTransformRotate(CGAffineTransformIdentity, rotate_xDegrees(90));
             break;
         case UIInterfaceOrientationLandscapeLeft:
             spawnX = 56;
@@ -420,6 +423,8 @@
 			bombButton.center = CGPointMake(213,120);
 			reshuffleButton.center = CGPointMake(213,51);
             degrees = 270;
+			spawnedShapeRotateTransform = CGAffineTransformIdentity;
+			spawnedShapeRotateTransform = CGAffineTransformRotate(CGAffineTransformIdentity, rotate_xDegrees(270));
             break;
         case UIInterfaceOrientationPortrait:
             spawnX = SPAWN_LOCATION_X;
@@ -442,6 +447,8 @@
 			checkLock.center = CGPointMake(252, 25 - 20);
 			scoreLabel.center = CGPointMake(64,31);
             degrees = 0;
+			spawnedShapeRotateTransform = CGAffineTransformIdentity;
+			spawnedShapeRotateTransform = CGAffineTransformRotate(CGAffineTransformIdentity, rotate_xDegrees(0));
             break;
         case UIInterfaceOrientationPortraitUpsideDown:
 			spawnX = SPAWN_LOCATION_X;
@@ -464,25 +471,24 @@
 			bombButton.center = CGPointMake(76,116);
 			reshuffleButton.center = CGPointMake(244,116);
             degrees = 180;
+			spawnedShapeRotateTransform = CGAffineTransformIdentity;
+			spawnedShapeRotateTransform = CGAffineTransformRotate(CGAffineTransformIdentity, rotate_xDegrees(180));
             break;            
         default:
 			
-            gravity = [itemCollection gravityDirection];
-            backGroundToLoad = @"gameBoardGrid.png";
             
-            spawnedShapeRotateTransform = CGAffineTransformRotate(CGAffineTransformIdentity, rotate_xDegrees(degrees));
-            upgradeCountImage.transform = CGAffineTransformRotate(CGAffineTransformIdentity, rotate_xDegrees(degrees));
-            discardCountImage.transform = CGAffineTransformRotate(CGAffineTransformIdentity, rotate_xDegrees(degrees));
-            bombCountImage.transform = CGAffineTransformRotate(CGAffineTransformIdentity, rotate_xDegrees(degrees));
-            reshuffleCountImage.transform = CGAffineTransformRotate(CGAffineTransformIdentity, rotate_xDegrees(degrees));
-            scoreLabel.transform = CGAffineTransformRotate(CGAffineTransformIdentity, rotate_xDegrees(degrees));
-            menuView.transform = CGAffineTransformRotate(CGAffineTransformIdentity, rotate_xDegrees(degrees));
-            SpawnedPair.ItemA.transform = CGAffineTransformRotate(CGAffineTransformIdentity, rotate_xDegrees(degrees));
-            SpawnedPair.ItemB.transform = CGAffineTransformRotate(CGAffineTransformIdentity, rotate_xDegrees(degrees));
-            SpawnedPair.ShaddowA.transform = CGAffineTransformRotate(CGAffineTransformIdentity, rotate_xDegrees(degrees));
-            SpawnedPair.ShaddowB.transform = CGAffineTransformRotate(CGAffineTransformIdentity, rotate_xDegrees(degrees));
-            nextPair.ItemA.transform = CGAffineTransformRotate(CGAffineTransformIdentity, rotate_xDegrees(degrees));
-            nextPair.ItemB.transform = CGAffineTransformRotate(CGAffineTransformIdentity, rotate_xDegrees(degrees));
+            upgradeCountImage.transform = spawnedShapeRotateTransform;
+            discardCountImage.transform = spawnedShapeRotateTransform;
+            bombCountImage.transform = spawnedShapeRotateTransform;
+            reshuffleCountImage.transform = spawnedShapeRotateTransform;
+            scoreLabel.transform = spawnedShapeRotateTransform;
+            menuView.transform = spawnedShapeRotateTransform;
+            SpawnedPair.ItemA.transform = spawnedShapeRotateTransform;
+            SpawnedPair.ItemB.transform = spawnedShapeRotateTransform;
+            SpawnedPair.ShaddowA.transform = spawnedShapeRotateTransform;
+            SpawnedPair.ShaddowB.transform = spawnedShapeRotateTransform;
+            nextPair.ItemA.transform = spawnedShapeRotateTransform;
+            nextPair.ItemB.transform = spawnedShapeRotateTransform;
 
             break;
 			 
@@ -497,9 +503,9 @@
     
     [itemCollection SetGravity:gravity];
         
-    [backGround.image release];
+    //[backGround.image release];
     
-    backGround.image = [[UIImage imageNamed:backGroundToLoad] retain];
+    backGround.image = [UIImage imageNamed:backGroundToLoad];
 
     [backGroundToLoad release];
     [self.view addSubview:backGround];
@@ -509,25 +515,23 @@
     [self.view sendSubviewToBack:backGroundStars];
     [self.view sendSubviewToBack:buttonMenu];
     
-    spawnedShapeRotateTransform = CGAffineTransformRotate(CGAffineTransformIdentity, rotate_xDegrees(degrees));
-    upgradeCountImage.transform = CGAffineTransformRotate(CGAffineTransformIdentity, rotate_xDegrees(degrees));
-    discardCountImage.transform = CGAffineTransformRotate(CGAffineTransformIdentity, rotate_xDegrees(degrees));
-    bombCountImage.transform = CGAffineTransformRotate(CGAffineTransformIdentity, rotate_xDegrees(degrees));
-    reshuffleCountImage.transform = CGAffineTransformRotate(CGAffineTransformIdentity, rotate_xDegrees(degrees));
-    scoreLabel.transform = CGAffineTransformRotate(CGAffineTransformIdentity, rotate_xDegrees(degrees));
-    menuView.transform = CGAffineTransformRotate(CGAffineTransformIdentity, rotate_xDegrees(degrees));
-    SpawnedPair.ItemA.transform = CGAffineTransformRotate(CGAffineTransformIdentity, rotate_xDegrees(degrees));
-    SpawnedPair.ItemB.transform = CGAffineTransformRotate(CGAffineTransformIdentity, rotate_xDegrees(degrees));
-    SpawnedPair.ShaddowA.transform = CGAffineTransformRotate(CGAffineTransformIdentity, rotate_xDegrees(degrees));
-    SpawnedPair.ShaddowB.transform = CGAffineTransformRotate(CGAffineTransformIdentity, rotate_xDegrees(degrees));
-    nextPair.ItemA.transform = CGAffineTransformRotate(CGAffineTransformIdentity, rotate_xDegrees(degrees));
-    nextPair.ItemB.transform = CGAffineTransformRotate(CGAffineTransformIdentity, rotate_xDegrees(degrees));
-
+    spawnedShapeRotateTransform = spawnedShapeRotateTransform;
+    upgradeCountImage.transform = spawnedShapeRotateTransform;
+    discardCountImage.transform = spawnedShapeRotateTransform;
+    bombCountImage.transform = spawnedShapeRotateTransform;
+    reshuffleCountImage.transform = spawnedShapeRotateTransform;
+    scoreLabel.transform = spawnedShapeRotateTransform;
+    menuView.transform = spawnedShapeRotateTransform;
+    SpawnedPair.ItemA.transform = spawnedShapeRotateTransform;
+    SpawnedPair.ItemB.transform = spawnedShapeRotateTransform;
+    SpawnedPair.ShaddowA.transform = spawnedShapeRotateTransform;
+    SpawnedPair.ShaddowB.transform = spawnedShapeRotateTransform;
+    nextPair.ItemA.transform = spawnedShapeRotateTransform;
+    nextPair.ItemB.transform = spawnedShapeRotateTransform;
+	 
     [self.view bringSubviewToFront:SpawnedPair.ItemA];
     [self.view bringSubviewToFront:SpawnedPair.ItemB];
 }
-
-
 
 /*****************************************************
  Helpers
@@ -546,7 +550,7 @@
         [backGroundStars removeFromSuperview];
         [backGroundStars release];
     }
-    backGroundStars = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 600, 400)];
+    backGroundStars = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 960, 640)];
     backGroundStars.clipsToBounds = YES;
     backGroundStars.autoresizesSubviews = NO;
     backGroundStars.contentMode = UIViewContentModeTopLeft;
@@ -557,7 +561,7 @@
         [backGroundCloudsA removeFromSuperview];
         [backGroundCloudsA release];
     }
-    backGroundCloudsA = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 600, 400)];
+    backGroundCloudsA = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 960, 640)];
     backGroundCloudsA.clipsToBounds = YES;
     backGroundCloudsA.autoresizesSubviews = NO;
     backGroundCloudsA.contentMode = UIViewContentModeTopLeft;
@@ -568,7 +572,7 @@
         [backGroundCloudsB removeFromSuperview];
         [backGroundCloudsB release];
     }
-    backGroundCloudsB = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 600, 400)];
+    backGroundCloudsB = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 960, 640)];
     backGroundCloudsB.clipsToBounds = YES;
     backGroundCloudsB.autoresizesSubviews = NO;
     backGroundCloudsB.image = [UIImage imageNamed:@"orangeClouds.png"];
@@ -578,44 +582,44 @@
 
     switch (difficulty) {
         case 1:
-            //backGroundCloudsA.image = [UIImage imageNamed:@"magentaClouds.png"];
-            //backGroundCloudsB.image = [UIImage imageNamed:@"orangeClouds.png"];
+            backGroundCloudsA.image = [UIImage imageNamed:@"magentaClouds.png"];
+            backGroundCloudsB.image = [UIImage imageNamed:@"orangeClouds.png"];
             break;
         case 2:
-                //backGroundCloudsA.image = [UIImage imageNamed:@"redClouds.png"];
-                //backGroundCloudsB.image = [UIImage imageNamed:@"blueClouds.png"]; 10^27
+			backGroundCloudsA.image = [UIImage imageNamed:@"redClouds.png"];
+			backGroundCloudsB.image = [UIImage imageNamed:@"blueClouds.png"];
             break;
         case 3:
-                //backGroundCloudsA.image = [UIImage imageNamed:@"cyanClouds.png"];
-                //backGroundCloudsB.image = [UIImage imageNamed:@"yellowClouds.png"];
+			backGroundCloudsA.image = [UIImage imageNamed:@"cyanClouds.png"];
+			backGroundCloudsB.image = [UIImage imageNamed:@"yellowClouds.png"];
             break;
         case 4:
-                //backGroundCloudsA.image = [UIImage imageNamed:@"greenClouds.png"];
-                //backGroundCloudsB.image = [UIImage imageNamed:@"violetClouds.png"];
+			backGroundCloudsA.image = [UIImage imageNamed:@"greenClouds.png"];
+			backGroundCloudsB.image = [UIImage imageNamed:@"violetClouds.png"];
             break;
         case 5:
-                //backGroundCloudsA.image = [UIImage imageNamed:@"cyanBlueClouds.png"];
-                //backGroundCloudsB.image = [UIImage imageNamed:@"orangeClouds.png"];
+			backGroundCloudsA.image = [UIImage imageNamed:@"cyanBlueClouds.png"];
+			backGroundCloudsB.image = [UIImage imageNamed:@"orangeClouds.png"];
             break;
         case 6:
-                //backGroundCloudsA.image = [UIImage imageNamed:@"yellowClouds.png"];
-                //backGroundCloudsB.image = [UIImage imageNamed:@"magentaClouds.png"];
+			backGroundCloudsA.image = [UIImage imageNamed:@"yellowClouds.png"];
+			backGroundCloudsB.image = [UIImage imageNamed:@"magentaClouds.png"];
             break;
         case 7:
-                //backGroundCloudsA.image = [UIImage imageNamed:@"redClouds.png"];
-                //backGroundCloudsB.image = [UIImage imageNamed:@"greenClouds.png"];
+			backGroundCloudsA.image = [UIImage imageNamed:@"redClouds.png"];
+			backGroundCloudsB.image = [UIImage imageNamed:@"greenClouds.png"];
             break;
         case 8:
-                //backGroundCloudsA.image = [UIImage imageNamed:@"blueClouds.png"];
-                //backGroundCloudsB.image = [UIImage imageNamed:@"violetClouds.png"];
+			backGroundCloudsA.image = [UIImage imageNamed:@"blueClouds.png"];
+			backGroundCloudsB.image = [UIImage imageNamed:@"violetClouds.png"];
             break;
         case 9:
-                //backGroundCloudsA.image = [UIImage imageNamed:@"cyanBlueClouds.png"];
-                //backGroundCloudsB.image = [UIImage imageNamed:@"greenClouds.png"];
+			backGroundCloudsA.image = [UIImage imageNamed:@"cyanBlueClouds.png"];
+			backGroundCloudsB.image = [UIImage imageNamed:@"greenClouds.png"];
             break;
         case 10:
-                //backGroundCloudsA.image = [UIImage imageNamed:@"cyanClouds.png"];
-                //backGroundCloudsB.image = [UIImage imageNamed:@"yellowClouds.png"];
+			backGroundCloudsA.image = [UIImage imageNamed:@"cyanClouds.png"];
+			backGroundCloudsB.image = [UIImage imageNamed:@"yellowClouds.png"];
             break;
         default:
             break;
@@ -632,7 +636,6 @@
 
     powerBack = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 100, 100)];
     powerBack.center = CGPointMake(spawnX + 15,spawnY);
-    //powerBack.alpha = 0.5f;
     powerBack.userInteractionEnabled = FALSE;
 
     lockSet = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"lockTab.png"]];
@@ -640,6 +643,10 @@
     closeLock.center = CGPointMake(closeLock.center.x, closeLock.center.y - 180);
     checkRecipe.center = CGPointMake(checkRecipe.center.x, checkRecipe.center.y - 180);
     checkLock.center = CGPointMake(252, 25);
+	
+	recipeLabel.center = CGPointMake(160, 155);
+	recipeLabel.backgroundColor = [UIColor clearColor];
+	recipeLabel.textColor = [UIColor purpleColor];
 
     lockFeedBackA = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 100, 100)];
     lockFeedBackA.image = [UIImage imageNamed:@"lockFeedBack.png"];
@@ -908,106 +915,119 @@ if([[touch view] isKindOfClass: [GameItem class]]){
         if(itemShape.shapeType == Square){
             score = score + 50;
             scoreLabel.text = [NSString stringWithFormat:@"%d" , score];
-            //return;
+			[self checkLevel];
+            return;
         }
         if(itemShape.shapeType == Pentagon){
             score = score + 250;
             scoreLabel.text = [NSString stringWithFormat:@"%d" , score];
-            //return;
+            [self checkLevel];
+            return;
         }
         if(itemShape.shapeType == Hexagon){
             score = score + 1500;
             scoreLabel.text = [NSString stringWithFormat:@"%d" , score];
-            //return;
+            [self checkLevel];
+            return;
         }
         if(itemShape.shapeType == Circle){
             score = score + 7000;
-            //return;
             scoreLabel.text = [NSString stringWithFormat:@"%d" , score];
+			[self checkLevel];
+            return;
         }
         if(itemShape.shapeType == Vortex){
             score = score + 40000;
-            //return;
             scoreLabel.text = [NSString stringWithFormat:@"%d" , score];
+			[self checkLevel];
+            return;
         }
-        if (score > 100 && currentLevel.difficulty == 1){
-            [self changeLevel];
-
-            backGroundCloudsA.image = [UIImage imageNamed:@"redClouds.png"];
-            backGroundCloudsB.image = [UIImage imageNamed:@"blueClouds.png"];
-            [backGroundCloudsA.image release];
-            [backGroundCloudsB.image release];
-            
-        }
-        if (score > 200 && currentLevel.difficulty == 2){
-            [self changeLevel];
-            backGroundCloudsA.image = [UIImage imageNamed:@"cyanClouds.png"];
-            backGroundCloudsB.image = [UIImage imageNamed:@"yellowClouds.png"];
-            [backGroundCloudsA.image release];
-            [backGroundCloudsB.image release];
-        }
-        if (score > 300 && currentLevel.difficulty == 3){
-            [self changeLevel];
-            backGroundCloudsA.image = [UIImage imageNamed:@"greenClouds.png"];
-            backGroundCloudsB.image = [UIImage imageNamed:@"violetClouds.png"];
-            [backGroundCloudsA.image release];
-            [backGroundCloudsB.image release];
-        }
-        if (score > 400 && currentLevel.difficulty == 4){
-            [self changeLevel];
-            backGroundCloudsA.image = [UIImage imageNamed:@"cyanBlueClouds.png"];
-            backGroundCloudsB.image = [UIImage imageNamed:@"orangeClouds.png"];
-            [backGroundCloudsA.image release];
-            [backGroundCloudsB.image release];
-        }
-        if (score > 500 && currentLevel.difficulty == 5){
-            [self changeLevel];
-            backGroundCloudsA.image = [UIImage imageNamed:@"yellowClouds.png"];
-            backGroundCloudsB.image = [UIImage imageNamed:@"magentaClouds.png"];
-            [backGroundCloudsA.image release];
-            [backGroundCloudsB.image release];
-        }
-        if (score > 600 && currentLevel.difficulty == 6){
-            [self changeLevel];
-            backGroundCloudsA.image = [UIImage imageNamed:@"redClouds.png"];
-            backGroundCloudsB.image = [UIImage imageNamed:@"greenClouds.png"];    
-            [backGroundCloudsA.image release];
-            [backGroundCloudsB.image release];
-            
-        }
-        if (score > 35000 && currentLevel.difficulty == 7){
-            [self changeLevel];
-            backGroundCloudsA.image = [UIImage imageNamed:@"blueClouds.png"];
-            backGroundCloudsB.image = [UIImage imageNamed:@"violetClouds.png"];
-            [backGroundCloudsA.image release];
-            [backGroundCloudsB.image release];
-        }
-        if (score > 700 && currentLevel.difficulty == 8){
-            [self changeLevel];
-            backGroundCloudsA.image = [UIImage imageNamed:@"cyanBlueClouds.png"];
-            backGroundCloudsB.image = [UIImage imageNamed:@"greenClouds.png"];
-            [backGroundCloudsA.image release];
-            [backGroundCloudsB.image release];
-        }
-        if (score > 800 && currentLevel.difficulty == 9){
-            [self changeLevel];
-            backGroundCloudsA.image = [UIImage imageNamed:@"cyanClouds.png"];
-            backGroundCloudsB.image = [UIImage imageNamed:@"yellowClouds.png"];
-            [backGroundCloudsA.image release];
-            [backGroundCloudsB.image release];
-        }
-        if (score > 900 && currentLevel.difficulty == 10){
-            [self changeLevel];
-            backGroundCloudsA.image = [UIImage imageNamed:@"magentaClouds.png"];
-            backGroundCloudsB.image = [UIImage imageNamed:@"orangeClouds.png"];
-            [backGroundCloudsA.image release];
-            [backGroundCloudsB.image release];
-        }
-        
         return;
 }   
     
-
+-(void)checkLevel{
+	if (score > 1000 && currentLevel.difficulty == 1){
+		[self changeLevel];
+		backGroundCloudsA.image = [UIImage imageNamed:@"redClouds.png"];
+		backGroundCloudsB.image = [UIImage imageNamed:@"blueClouds.png"];
+		[backGroundCloudsA.image release];
+		[backGroundCloudsB.image release];
+		return;
+	}
+	if (score > 3000 && currentLevel.difficulty == 2){
+		[self changeLevel];
+		backGroundCloudsA.image = [UIImage imageNamed:@"cyanClouds.png"];
+		backGroundCloudsB.image = [UIImage imageNamed:@"yellowClouds.png"];
+		[backGroundCloudsA.image release];
+		[backGroundCloudsB.image release];
+		return;
+	}
+	if (score > 6000 && currentLevel.difficulty == 3){
+		[self changeLevel];
+		backGroundCloudsA.image = [UIImage imageNamed:@"greenClouds.png"];
+		backGroundCloudsB.image = [UIImage imageNamed:@"violetClouds.png"];
+		[backGroundCloudsA.image release];
+		[backGroundCloudsB.image release];
+		return;
+	}
+	if (score > 10000 && currentLevel.difficulty == 4){
+		[self changeLevel];
+		backGroundCloudsA.image = [UIImage imageNamed:@"cyanBlueClouds.png"];
+		backGroundCloudsB.image = [UIImage imageNamed:@"orangeClouds.png"];
+		[backGroundCloudsA.image release];
+		[backGroundCloudsB.image release];
+		return;
+	}
+	if (score > 15000 && currentLevel.difficulty == 5){
+		[self changeLevel];
+		backGroundCloudsA.image = [UIImage imageNamed:@"yellowClouds.png"];
+		backGroundCloudsB.image = [UIImage imageNamed:@"magentaClouds.png"];
+		[backGroundCloudsA.image release];
+		[backGroundCloudsB.image release];
+		return;
+	}
+	if (score > 25000 && currentLevel.difficulty == 6){
+		[self changeLevel];
+		backGroundCloudsA.image = [UIImage imageNamed:@"redClouds.png"];
+		backGroundCloudsB.image = [UIImage imageNamed:@"greenClouds.png"];    
+		[backGroundCloudsA.image release];
+		[backGroundCloudsB.image release];
+		return;
+		
+	}
+	if (score > 35000 && currentLevel.difficulty == 7){
+		[self changeLevel];
+		backGroundCloudsA.image = [UIImage imageNamed:@"blueClouds.png"];
+		backGroundCloudsB.image = [UIImage imageNamed:@"violetClouds.png"];
+		[backGroundCloudsA.image release];
+		[backGroundCloudsB.image release];
+		return;
+	}
+	if (score > 50000 && currentLevel.difficulty == 8){
+		[self changeLevel];
+		backGroundCloudsA.image = [UIImage imageNamed:@"cyanBlueClouds.png"];
+		backGroundCloudsB.image = [UIImage imageNamed:@"greenClouds.png"];
+		[backGroundCloudsA.image release];
+		[backGroundCloudsB.image release];
+		return;
+	}
+	if (score > 70000 && currentLevel.difficulty == 9){
+		[self changeLevel];
+		backGroundCloudsA.image = [UIImage imageNamed:@"cyanClouds.png"];
+		backGroundCloudsB.image = [UIImage imageNamed:@"yellowClouds.png"];
+		[backGroundCloudsA.image release];
+		[backGroundCloudsB.image release];
+		return;
+	}
+	if (score > 100000 && currentLevel.difficulty == 10){
+		[self changeLevel];
+		backGroundCloudsA.image = [UIImage imageNamed:@"magentaClouds.png"];
+		backGroundCloudsB.image = [UIImage imageNamed:@"orangeClouds.png"];
+		[backGroundCloudsA.image release];
+		[backGroundCloudsB.image release];
+		return;
+	}
+}
 -(void)changeLevel{
 	//[audio playVictory];
 	[currentLevel setDifficulty:currentLevel.difficulty + 1];
@@ -1154,7 +1174,6 @@ if([[touch view] isKindOfClass: [GameItem class]]){
     
     [UIView commitAnimations];
 }
-
 -(IBAction)ClickButtonDiscard{
 	if(discardCount > 0){
 		[SpawnedPair.ItemA removeFromSuperview];
@@ -1281,7 +1300,7 @@ if([[touch view] isKindOfClass: [GameItem class]]){
 				[correctRecipe addObject:cellB];
 				[correctRecipe addObject:cellC];
 				[itemCollection RemoveFromCellsAndRefactor: correctRecipe];
-				
+				[self ClickButtonCloseLockTab];
 			}
 			if(shapeA.shapeType == Pentagon){
 				bombCount++;
@@ -1293,6 +1312,7 @@ if([[touch view] isKindOfClass: [GameItem class]]){
 				[correctRecipe addObject:cellB];
 				[correctRecipe addObject:cellC];
 				[itemCollection RemoveFromCellsAndRefactor: correctRecipe];
+				[self ClickButtonCloseLockTab];
 			}
 			if(shapeA.shapeType == Hexagon){
 				discardCount = discardCount + 2;
@@ -1303,6 +1323,7 @@ if([[touch view] isKindOfClass: [GameItem class]]){
 				[correctRecipe addObject:cellB];
 				[correctRecipe addObject:cellC];
 				[itemCollection RemoveFromCellsAndRefactor: correctRecipe];
+				[self ClickButtonCloseLockTab];
 				//all hexs same color
 			}
 			if(shapeA.shapeType == Circle){
@@ -1315,6 +1336,7 @@ if([[touch view] isKindOfClass: [GameItem class]]){
 				[itemCollection RemoveFromCellsAndRefactor: correctRecipe];
 				[powerItem makeCollection: itemCollection];
 				[powerItem makeFilter: shapeA];
+				[self ClickButtonCloseLockTab];
 				//all circle same color
 			}
 		}
@@ -1328,6 +1350,7 @@ if([[touch view] isKindOfClass: [GameItem class]]){
 				[correctRecipe addObject:cellB];
 				[correctRecipe addObject:cellC];
 				[itemCollection RemoveFromCellsAndRefactor: correctRecipe];
+				[self ClickButtonCloseLockTab];
 				//all squares dif color
 			}
 			if(shapeA.shapeType == Pentagon){
@@ -1339,6 +1362,7 @@ if([[touch view] isKindOfClass: [GameItem class]]){
 				[correctRecipe addObject:cellC];
 				upgradeCount = upgradeCount + 2;
 				[itemCollection RemoveFromCellsAndRefactor: correctRecipe];
+				[self ClickButtonCloseLockTab];
 				//all pentagons dif color
 			}
 			if(shapeA.shapeType == Hexagon){
@@ -1350,6 +1374,7 @@ if([[touch view] isKindOfClass: [GameItem class]]){
 				[correctRecipe addObject:cellB];
 				[correctRecipe addObject:cellC];
 				[itemCollection RemoveFromCellsAndRefactor: correctRecipe];
+				[self ClickButtonCloseLockTab];
 				//all hexs dif color
 			}
 			if(shapeA.shapeType == Circle){
@@ -1361,6 +1386,7 @@ if([[touch view] isKindOfClass: [GameItem class]]){
 				[correctRecipe addObject:cellB];
 				[correctRecipe addObject:cellC];
 				[itemCollection RemoveFromCellsAndRefactor: correctRecipe];
+				[self ClickButtonCloseLockTab];
 				//all circles dif color
 			}	
 		}
@@ -1378,6 +1404,7 @@ if([[touch view] isKindOfClass: [GameItem class]]){
 					[correctRecipe addObject:cellB];
 					[correctRecipe addObject:cellC];
 					[itemCollection RemoveFromCellsAndRefactor: correctRecipe];
+					[self ClickButtonCloseLockTab];
 				}
 			}
 		}
@@ -1393,6 +1420,7 @@ if([[touch view] isKindOfClass: [GameItem class]]){
 					[correctRecipe addObject:cellB];
 					[correctRecipe addObject:cellC];
 					[itemCollection RemoveFromCellsAndRefactor: correctRecipe];
+					[self ClickButtonCloseLockTab];
 				}
 			}
 		}
@@ -1410,6 +1438,7 @@ if([[touch view] isKindOfClass: [GameItem class]]){
 					[correctRecipe addObject:cellB];
 					[correctRecipe addObject:cellC];
 					[itemCollection RemoveFromCellsAndRefactor: correctRecipe];
+					[self ClickButtonCloseLockTab];
 				}
 			}
 		}
@@ -1427,6 +1456,7 @@ if([[touch view] isKindOfClass: [GameItem class]]){
 					[correctRecipe addObject:cellB];
 					[correctRecipe addObject:cellC];
 					[itemCollection RemoveFromCellsAndRefactor: correctRecipe];
+					[self ClickButtonCloseLockTab];
 				}
 			}
 		}
@@ -1442,6 +1472,7 @@ if([[touch view] isKindOfClass: [GameItem class]]){
 					[correctRecipe addObject:cellB];
 					[correctRecipe addObject:cellC];
 					[itemCollection RemoveFromCellsAndRefactor: correctRecipe];
+					[self ClickButtonCloseLockTab];
 				}
 			}
 		}
@@ -1458,6 +1489,7 @@ if([[touch view] isKindOfClass: [GameItem class]]){
 					[correctRecipe addObject:cellB];
 					[correctRecipe addObject:cellC];
 					[itemCollection RemoveFromCellsAndRefactor: correctRecipe];
+					[self ClickButtonCloseLockTab];
 				}
 			}
 		}

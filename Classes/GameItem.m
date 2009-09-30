@@ -30,7 +30,7 @@
 
 
 - (void)dealloc {
-    [ItemView release];
+    //[ItemView release];
     [super dealloc];
 }
 

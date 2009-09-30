@@ -70,7 +70,7 @@
 	IBOutlet UIButton * upgradeButton;
 	
     UIDevice * CurrentDevice;
-    
+    NSString * backGroundToLoad;
     NSMutableArray * experimentArray;
 	
 	Shape * touchedGuessItemShape;
@@ -188,6 +188,7 @@
 -(IBAction)ClickButtonBomb;
 -(IBAction)ClickButtonShuffle;
 
+-(void)checkLevel;
 -(void)changeLevel;
 
 //HELPERS
