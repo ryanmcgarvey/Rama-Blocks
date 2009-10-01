@@ -1517,6 +1517,10 @@ if([[touch view] isKindOfClass: [GameItem class]]){
 	cellB.ItemInCell.alpha = 1;
 	cellC.ItemInCell.alpha = 1;
 	
+	cellA.ItemInCell.userInteractionEnabled = TRUE;
+	cellB.ItemInCell.userInteractionEnabled = TRUE;
+	cellC.ItemInCell.userInteractionEnabled = TRUE;
+	
 	if(discardCount > 5){
 		discardCount = 5;
 	}
