@@ -85,7 +85,6 @@
 	[filterArray release];
 }
 
-
 -(void)shuffleBoard:(GameItem *)item{
 	
 	int row = 0;
@@ -179,14 +178,6 @@
 	
 	[BombArray release];
 }
-
-
-
-
-- (void)drawRect:(CGRect)rect {
-    // Drawing code
-}
-
 
 - (void)dealloc {
     [super dealloc];

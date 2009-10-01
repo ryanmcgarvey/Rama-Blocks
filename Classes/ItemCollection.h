@@ -43,7 +43,7 @@ typedef enum enum_Gravity {
     GameState * gameState;
 	
 	UIDevice * CurrentDevice;
-    
+    CGAffineTransform spawnedShapeRotateTransform;
     int numberOfAttempts;
     int numberOfTransforms;
     int numberOfMoves;

@@ -23,17 +23,14 @@
     return self;
 }
 
-
 - (void)drawRect:(CGRect)rect{
 
 }
-
 
 - (void)dealloc {
     //[ItemView release];
     [super dealloc];
 }
-
 
 -(void)SnapShape:(int)newRow : (int)newColumn {
 	Row = Row;

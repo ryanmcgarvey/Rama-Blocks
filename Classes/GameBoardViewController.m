@@ -146,6 +146,7 @@
 	discardCount = 0;
 	transformCount = 0;
 	didShuffle = FALSE;
+	gravity = down;
 	
 	spawnX = SPAWN_LOCATION_X;
 	spawnY = SPAWN_LOCATION_Y;
@@ -376,7 +377,8 @@
     
 	
     int degrees = 0;
-    Gravity gravity = down;
+    
+	
     switch (CurrentDevice.orientation) {
         case UIInterfaceOrientationLandscapeRight:
             spawnX = 234;
@@ -476,7 +478,6 @@
             break;            
         default:
 			
-            
             upgradeCountImage.transform = spawnedShapeRotateTransform;
             discardCountImage.transform = spawnedShapeRotateTransform;
             bombCountImage.transform = spawnedShapeRotateTransform;

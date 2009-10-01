@@ -42,13 +42,9 @@
 	return TRUE;
 }
 
-
-
-
 - (void)dealloc {    
     //[super dealloc];
 }
-
 
 -(BOOL)Equals:(Shape *)shape{
     

@@ -24,7 +24,7 @@
 	RowPixelLength = rowPixelLength;
 	ColumnPixelLength = columnPixelLength;
 	cells = malloc((rows * columns)*sizeof(Cell *));
-    
+    spawnedShapeRotateTransform = CGAffineTransformIdentity;
     
 	int row = 0;
 	int column = 0;
@@ -262,7 +262,6 @@
     
     return TRUE;
 }
-
 
 -(BOOL)AddItemPair: (ItemPair *)itemPair;{
 	
@@ -785,32 +784,43 @@
 					}
 				}
 				return;
-			case zero:
-				return;
-			default:
-				break;
+			//case zero:
+			//	return;
+			//default:
+			//	break;
 		}
 	}
     [cell release];
 }
 
 -(void)ApplyGravityToCell:(Cell *)cell{
-    if(cell.ItemInCell !=nil)
+    
+	if(cell.ItemInCell !=nil)
     {
 		GameItem * rotatedShape = cell.ItemInCell;
+		//rotatedShape.transform = spawnedShapeRotateTransform;
 		switch (gravityDirection) {
 			case left:
-				rotatedShape.transform = CGAffineTransformRotate(cell.ItemInCell.transform, rotate_xDegrees(90));
+				rotatedShape.transform = CGAffineTransformIdentity;
+				spawnedShapeRotateTransform = CGAffineTransformRotate(cell.ItemInCell.transform, rotate_xDegrees(90));
+				rotatedShape.transform = spawnedShapeRotateTransform;
 				break;
 			case right:
-				rotatedShape.transform = CGAffineTransformRotate(cell.ItemInCell.transform, rotate_xDegrees(270));
+				rotatedShape.transform = CGAffineTransformIdentity;
+				spawnedShapeRotateTransform = CGAffineTransformRotate(cell.ItemInCell.transform, rotate_xDegrees(270));
+				rotatedShape.transform = spawnedShapeRotateTransform;
 				break;
 			case up:
-				rotatedShape.transform = CGAffineTransformRotate(cell.ItemInCell.transform, rotate_xDegrees(180));
+				rotatedShape.transform = CGAffineTransformIdentity;
+				spawnedShapeRotateTransform = CGAffineTransformRotate(cell.ItemInCell.transform, rotate_xDegrees(180));
+				rotatedShape.transform = spawnedShapeRotateTransform;
 				break;
 			case down:
 				rotatedShape.transform = CGAffineTransformIdentity;
+				spawnedShapeRotateTransform = CGAffineTransformIdentity;
+				rotatedShape.transform = spawnedShapeRotateTransform;
 				break;
+				
 				
 		}
 		

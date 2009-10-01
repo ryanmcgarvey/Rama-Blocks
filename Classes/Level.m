@@ -41,7 +41,6 @@
         [self updateProbability];
     }
 }
-
 -(void)removeItem:(GameItem *) item{
     
     if([item isKindOfClass:[Shape class]])
@@ -51,8 +50,7 @@
         [self updateProbability];
     }
 }
--(void)removeItems:(NSMutableArray *) items
-{
+-(void)removeItems:(NSMutableArray *) items{
     for(GameItem * item in items)
     {
         if([item isKindOfClass:[Shape class]])
@@ -63,7 +61,6 @@
         }
     }
 }
-
 -(void)updateProbability{
     int total = totalShapes[Triangle] + totalShapes[Square] + totalShapes[Pentagon] + totalShapes[Hexagon] + totalShapes[Circle];
 	
@@ -84,11 +81,9 @@
 		
     }
 }
-
 -(void)updateView{
     
 }
-
 -(ShapeType)createShapeFromCollection{
     //return Circle;
     float probabilityCheck = (float)((uint)arc4random())/0xFFFFFFFF;  

@@ -91,7 +91,7 @@
     GameState * gameState;
 	DrawingView *drawingView; 
 	PowerItem *powerItem;
-
+	Gravity gravity;
 	
 	CGFloat touchDistanceToItemC;
 	
