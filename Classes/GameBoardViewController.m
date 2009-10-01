@@ -662,13 +662,16 @@
     lockFeedBackC.center = CGPointMake(lockSet.center.x - 100, lockSet.center.y);
 
     guessView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"lockFeedBack.png"]];
-	
-    
-
     
 	scoreLabel.text = [NSString stringWithFormat:@"%d" , score];
 	scoreLabel.center = CGPointMake(64,31);
+	
 	buttonMenu.center = CGPointMake(305,24);
+	buttonMenu.backgroundColor = [UIColor clearColor];
+	//UIImageView * buttonMenuBackGround = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 100, 100)];
+	//buttonMenuBackGround.image = [UIImage imageNamed:@"MenuCard.png"];
+	//buttonMenu.image = [UIImage imageNamed:@"MenuCard.png"];
+	//[buttonMenu addSubview:buttonMenuBackGround];
 	
 	upgradeButton.frame = CGRectMake(0, 0, 40, 40);
 	discardButton.frame = CGRectMake(0, 0, 40, 40);
