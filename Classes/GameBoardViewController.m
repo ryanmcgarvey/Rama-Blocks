@@ -1069,54 +1069,54 @@
 	
 }
 -(BOOL)subtractScoreForRecipe{
-	if (score >= 100 && currentLevel.difficulty == 1){
-		score = score - 100;
+	if (score >= 0 && currentLevel.difficulty == 1){
+		//score = score - 100;
 		scoreLabel.text = [NSString stringWithFormat:@"%d" , score];
 		return TRUE;
 	}
 	if (score > 300 && currentLevel.difficulty == 2){
-		score = score - 300;
+		//score = score - 300;
 		scoreLabel.text = [NSString stringWithFormat:@"%d" , score];
 		return TRUE;
 	}
 	if (score > 600 && currentLevel.difficulty == 3){
-		score = score - 600;
+		//score = score - 600;
 		scoreLabel.text = [NSString stringWithFormat:@"%d" , score];
 		return TRUE;
 	}
 	if (score > 1000 && currentLevel.difficulty == 4){
-		score = score - 1000;
+		//score = score - 1000;
 		scoreLabel.text = [NSString stringWithFormat:@"%d" , score];
 		return TRUE;
 	}
 	if (score > 1500 && currentLevel.difficulty == 5){
-		score = score - 1500;
+		//score = score - 1500;
 		scoreLabel.text = [NSString stringWithFormat:@"%d" , score];
 		return TRUE;
 	}
 	if (score > 2500 && currentLevel.difficulty == 6){
-		score = score - 2500;    
+		//score = score - 2500;    
 		scoreLabel.text = [NSString stringWithFormat:@"%d" , score];
 		return TRUE;
 		
 	}
 	if (score > 3750 && currentLevel.difficulty == 7){
-		score = score - 3750;
+		//score = score - 3750;
 		scoreLabel.text = [NSString stringWithFormat:@"%d" , score];
 		return TRUE;
 	}
 	if (score > 5000 && currentLevel.difficulty == 8){
-		score = score - 5000;
+		//score = score - 5000;
 		scoreLabel.text = [NSString stringWithFormat:@"%d" , score];
 		return TRUE;
 	}
 	if (score > 7000 && currentLevel.difficulty == 9){
-		score = score - 7000;
+		//score = score - 7000;
 		scoreLabel.text = [NSString stringWithFormat:@"%d" , score];
 		return TRUE;
 	}
 	if (score > 10000 && currentLevel.difficulty == 10){
-		score = score - 10000;
+		//score = score - 10000;
 		scoreLabel.text = [NSString stringWithFormat:@"%d" , score];
 		return TRUE;
 	}
