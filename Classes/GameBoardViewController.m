@@ -99,9 +99,9 @@
 	SpawnedPair.ItemC = drawingView;
 	SpawnedPair.ItemC.alpha = 0.25f;
 	
-	SpawnedPair.ItemA.ItemView.contentMode = UIViewContentModeScaleAspectFit;
-	SpawnedPair.ItemB.ItemView.contentMode = UIViewContentModeScaleAspectFit;
-	SpawnedPair.ItemC.ItemView.contentMode = UIViewContentModeScaleAspectFit;
+	//SpawnedPair.ItemA.ItemView.contentMode = UIViewContentModeScaleAspectFit;
+	//SpawnedPair.ItemB.ItemView.contentMode = UIViewContentModeScaleAspectFit;
+	//SpawnedPair.ItemC.ItemView.contentMode = UIViewContentModeScaleAspectFit;
 	
 	nextPair.ItemA.transform = spawnedShapeRotateTransform;
 	nextPair.ItemB.transform = spawnedShapeRotateTransform;
@@ -122,8 +122,7 @@
 	
 }
 
-- (void)resetTap:(NSTimer *)tapTimer 
-{
+- (void)resetTap:(NSTimer *)tapTimer {
 	GameItem *tappedShape = (GameItem *)[tapTimer userInfo];
 	tappedShape.tapped = 0;
 }
@@ -142,7 +141,7 @@
 	
     powerItem = [[PowerItem alloc]init];
 	backGroundToLoad = @"gameBoardGrid.png";
-
+	
 	discardCount = 0;
 	transformCount = 0;
 	didShuffle = FALSE;
@@ -157,7 +156,7 @@
 	
 	rightPix = 30;
 	upPix = 0;
-
+	
     spawnedShapeRotateTransform = CGAffineTransformIdentity;
 	
     CurrentDevice = [UIDevice currentDevice];
@@ -168,7 +167,7 @@
 	
 	currentLevel = [[Level alloc] init:[gameState.currentLevel intValue]];
     
-
+	
     [self SetupBackground: currentLevel.difficulty];
 	
     [self SetupUI];
@@ -202,10 +201,10 @@
 	
 	recipeLabel.hidden = TRUE;
 	
-
+	
 	itemCollection = [[ItemCollection alloc] init:NUMBER_OF_ROWS :NUMBER_OF_COLUMNS :SHAPE_WIDTH :SHAPE_WIDTH: currentLevel];
 	
-
+	
     SpawnedPair = [ItemPair new];
     
 	nextPair = [ItemPair new];
@@ -243,17 +242,6 @@
 		
 		[SpawnedPair Reset];
 		
-		SpawnedPair.ItemA.ItemView.contentMode = UIViewContentModeScaleAspectFit;
-		SpawnedPair.ItemB.ItemView.contentMode = UIViewContentModeScaleAspectFit;
-		SpawnedPair.ItemC.ItemView.contentMode = UIViewContentModeScaleAspectFit;
-		/*
-		SpawnedPair.ItemA.ItemView.alpha = 0.0f;
-		SpawnedPair.ItemB.ItemView.alpha = 0.0f;
-		SpawnedPair.ItemC.ItemView.alpha = 0.0f;
-		
-		nextPair.ItemA.ItemView.alpha = 0.0f;
-		nextPair.ItemB.ItemView.alpha = 0.0f;
-		*/
 		[self.view addSubview:SpawnedPair.ItemC];
 		[self.view addSubview:SpawnedPair.ItemB];
 		[self.view addSubview:SpawnedPair.ItemA];
@@ -282,21 +270,21 @@
 	
 	
 	/*
-	[UIView beginAnimations:nil context:nil]; 
-	[UIView setAnimationDuration:3.0f];
-	
-	backGroundCloudsA.alpha = 1;
-	backGroundCloudsB.alpha = 1;
-	backGroundStars.alpha = 1;
-	SpawnedPair.ItemA.ItemView.alpha = 1;
-	SpawnedPair.ItemB.ItemView.alpha = 1;
-	SpawnedPair.ItemC.ItemView.alpha = 1;
-	
-	nextPair.ItemA.ItemView.alpha = 1;
-	nextPair.ItemB.ItemView.alpha = 1;
-	
-	[blocks autorelease];
-	[UIView commitAnimations];
+	 [UIView beginAnimations:nil context:nil]; 
+	 [UIView setAnimationDuration:3.0f];
+	 
+	 backGroundCloudsA.alpha = 1;
+	 backGroundCloudsB.alpha = 1;
+	 backGroundStars.alpha = 1;
+	 SpawnedPair.ItemA.ItemView.alpha = 1;
+	 SpawnedPair.ItemB.ItemView.alpha = 1;
+	 SpawnedPair.ItemC.ItemView.alpha = 1;
+	 
+	 nextPair.ItemA.ItemView.alpha = 1;
+	 nextPair.ItemB.ItemView.alpha = 1;
+	 
+	 [blocks autorelease];
+	 [UIView commitAnimations];
 	 */
 	spawnedShapeRotateTransform = CGAffineTransformIdentity;
 }
@@ -370,7 +358,7 @@
 	backGroundCloudsB.center = CGPointMake(backGroundCloudsB.center.x - 640,backGroundCloudsB.center.y);
 	[UIView commitAnimations];
 	movingTimer = [NSTimer scheduledTimerWithTimeInterval: 60.1f target:self selector:@selector(moveCloudsOne) userInfo:nil repeats: NO];
-
+	
 }
 
 -(void)didRotate:(NSNotification *)notification{
@@ -492,7 +480,7 @@
             nextPair.ItemB.transform = spawnedShapeRotateTransform;
 			statsView.transform = spawnedShapeRotateTransform;
             break;
-			 
+			
     }
     
     SpawnedPair.ItemA.center = CGPointMake(spawnX,spawnY);
@@ -503,11 +491,11 @@
     nextPair.ItemB.center = CGPointMake(spawnNextX + rightPix,spawnNextY + upPix);
     
     [itemCollection SetGravity:gravity];
-        
+	
     //[backGround.image release];
     
     backGround.image = [UIImage imageNamed:backGroundToLoad];
-
+	
     [backGroundToLoad release];
     [self.view addSubview:backGround];
     [self.view sendSubviewToBack:backGround];
@@ -531,15 +519,15 @@
     nextPair.ItemB.transform = spawnedShapeRotateTransform;
 	statsView.transform = spawnedShapeRotateTransform;
 	
-    [self.view bringSubviewToFront:SpawnedPair.ItemA];
-    [self.view bringSubviewToFront:SpawnedPair.ItemB];
+    //[self.view bringSubviewToFront:SpawnedPair.ItemA];
+    //[self.view bringSubviewToFront:SpawnedPair.ItemB];
 }
 
 /*****************************************************
  Helpers
  *****************************************************/
 -(void) SetupBackground :(int) difficulty{
-      
+	
     if(backGround != nil){
         [backGround removeFromSuperview];
         [backGround release];
@@ -558,7 +546,7 @@
     backGroundStars.contentMode = UIViewContentModeTopLeft;
     backGroundStars.image = [UIImage imageNamed:@"BigBackground.png"];
     backGroundStars.userInteractionEnabled = FALSE;
-
+	
     if(backGroundCloudsA != nil){
         [backGroundCloudsA removeFromSuperview];
         [backGroundCloudsA release];
@@ -569,7 +557,7 @@
     backGroundCloudsA.contentMode = UIViewContentModeTopLeft;
     backGroundCloudsA.image = [UIImage imageNamed:@"magentaClouds.png"];
     backGroundCloudsA.userInteractionEnabled = FALSE;
-
+	
     if(backGroundCloudsB != nil){
         [backGroundCloudsB removeFromSuperview];
         [backGroundCloudsB release];
@@ -580,8 +568,8 @@
     backGroundCloudsB.image = [UIImage imageNamed:@"orangeClouds.png"];
     backGroundCloudsB.userInteractionEnabled = FALSE;
     backGroundCloudsB.center = CGPointMake(backGroundCloudsB.center.x - 640,backGroundCloudsB.center.y - 160);
-
-
+	
+	
     switch (difficulty) {
         case 1:
             backGroundCloudsA.image = [UIImage imageNamed:@"magentaClouds.png"];
@@ -626,20 +614,20 @@
         default:
             break;
     }
-  
-
-
-
+	
+	
+	
+	
 }
 
 -(void) SetupUI{
 	
     
-
+	
     powerBack = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 100, 100)];
     powerBack.center = CGPointMake(spawnX + 15,spawnY);
     powerBack.userInteractionEnabled = FALSE;
-
+	
     lockSet = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"lockTab.png"]];
     lockSet.center = CGPointMake(lockSet.center.x, lockSet.center.y - 180);
     closeLock.center = CGPointMake(closeLock.center.x, closeLock.center.y - 180);
@@ -649,19 +637,19 @@
 	recipeLabel.center = CGPointMake(160, 155);
 	recipeLabel.backgroundColor = [UIColor clearColor];
 	recipeLabel.textColor = [UIColor yellowColor];
-
+	
     lockFeedBackA = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 100, 100)];
     lockFeedBackA.image = [UIImage imageNamed:@"lockFeedBack.png"];
     lockFeedBackA.center = CGPointMake(lockSet.center.x, lockSet.center.y);
-
+	
     lockFeedBackB = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 100, 100)];
     lockFeedBackB.image = [UIImage imageNamed:@"lockFeedBack.png"];
     lockFeedBackB.center = CGPointMake(lockSet.center.x + 100, lockSet.center.y);
-
+	
     lockFeedBackC = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 100, 100)];
     lockFeedBackC.image = [UIImage imageNamed:@"lockFeedBack.png"];
     lockFeedBackC.center = CGPointMake(lockSet.center.x - 100, lockSet.center.y);
-
+	
     guessView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"lockFeedBack.png"]];
     
 	scoreLabel.text = [NSString stringWithFormat:@"%d" , score];
@@ -685,8 +673,8 @@
 	discardButton.center = CGPointMake(294,116);
 	bombButton.center = CGPointMake(76,116);
 	reshuffleButton.center = CGPointMake(245,116);
-
-
+	
+	
 }
 
 /*****************************************************
@@ -709,12 +697,12 @@
 	Rama_BlocksAppDelegate * appDelegate =  (Rama_BlocksAppDelegate *)[[UIApplication sharedApplication] delegate];
 	appDelegate.isMoving = YES;
     GameItem * touchedGuessItem;
-   
+	
 	if (lockMode == FALSE) {
 		
 		if([[touch view] isKindOfClass: [GameItem class]] && appDelegate.isBombing == NO && appDelegate.isUpgrading == NO){
             GameItem * touchedItem = (GameItem *)[touch view];
-           
+			
             touchedItem.tapped++;
             TouchTimer = [NSTimer scheduledTimerWithTimeInterval:TAP_WAIT_TIME target:self selector:@selector(resetTap:) userInfo:touchedItem repeats:NO];
             
@@ -753,7 +741,7 @@
 				SpawnedPair.ItemC.hidden = FALSE;
 				powerBack.image = nil;
 				[self setButtons];
-				                
+				
                 
             }
             
@@ -790,11 +778,11 @@
     
     
 	if([[touch view] isMemberOfClass:[DrawingView class]] && [touch view] != backGround && touchDistanceToItemC < 55.0f && lockMode == FALSE && appDelegate.isBombing == NO){
-            
+		
 		[SpawnedPair airMove:[touch locationInView:[self view]]];
 		SpawnedPair.ItemC.alpha = 1;
 		[itemCollection DrawShadowForItemPair:SpawnedPair];
-            
+		
     }
     if (lockMode == TRUE && appDelegate.isMoving == TRUE) {
         GameItem * touchedGuessItem;
@@ -824,20 +812,20 @@
                 SpawnedPair.ItemC = nil;
                 [self SpawnShapes];
                 return;
- 	
-	
-}else
-{
-	[self ResetShapePair:SpawnedPair];
-	return;
-}
-}
-
-if([[touch view] isKindOfClass: [GameItem class]]){
-	GameItem * item = (GameItem *)[touch view];
-	Shape * itemShape = (Shape *)[touch view];
-	
-	    if(SpawnedPair.ItemA.IsPaired && [self isTouchWithinRange: startTouchPosition from: SpawnedPair.ItemC.center] < 50.0f && [[touch view] isKindOfClass: [GameItem class]]){
+				
+				
+			}else
+			{
+				[self ResetShapePair:SpawnedPair];
+				return;
+			}
+		}
+		
+		if([[touch view] isKindOfClass: [GameItem class]]){
+			GameItem * item = (GameItem *)[touch view];
+			Shape * itemShape = (Shape *)[touch view];
+			
+			if(SpawnedPair.ItemA.IsPaired && [self isTouchWithinRange: startTouchPosition from: SpawnedPair.ItemC.center] < 50.0f && [[touch view] isKindOfClass: [GameItem class]]){
                 
 				
                 if (item.tapped == 1) 
@@ -860,7 +848,7 @@ if([[touch view] isKindOfClass: [GameItem class]]){
                     {
                         [self changeScore:itemShape];
                     }
-
+					
                 }
                 
             }
@@ -911,42 +899,42 @@ if([[touch view] isKindOfClass: [GameItem class]]){
 	
 	[NSTimer release];
 }
-    
--(void)changeScore:(Shape *) itemShape {
 
-        if(itemShape.shapeType == Square){
-            score = score + 50;
-            scoreLabel.text = [NSString stringWithFormat:@"%d" , score];
-			[self checkLevel];
-            return;
-        }
-        if(itemShape.shapeType == Pentagon){
-            score = score + 250;
-            scoreLabel.text = [NSString stringWithFormat:@"%d" , score];
-            [self checkLevel];
-            return;
-        }
-        if(itemShape.shapeType == Hexagon){
-            score = score + 1500;
-            scoreLabel.text = [NSString stringWithFormat:@"%d" , score];
-            [self checkLevel];
-            return;
-        }
-        if(itemShape.shapeType == Circle){
-            score = score + 7000;
-            scoreLabel.text = [NSString stringWithFormat:@"%d" , score];
-			[self checkLevel];
-            return;
-        }
-        if(itemShape.shapeType == Vortex){
-            score = score + 40000;
-            scoreLabel.text = [NSString stringWithFormat:@"%d" , score];
-			[self checkLevel];
-            return;
-        }
-        return;
+-(void)changeScore:(Shape *) itemShape {
+	
+	if(itemShape.shapeType == Square){
+		score = score + 50;
+		scoreLabel.text = [NSString stringWithFormat:@"%d" , score];
+		[self checkLevel];
+		return;
+	}
+	if(itemShape.shapeType == Pentagon){
+		score = score + 250;
+		scoreLabel.text = [NSString stringWithFormat:@"%d" , score];
+		[self checkLevel];
+		return;
+	}
+	if(itemShape.shapeType == Hexagon){
+		score = score + 1500;
+		scoreLabel.text = [NSString stringWithFormat:@"%d" , score];
+		[self checkLevel];
+		return;
+	}
+	if(itemShape.shapeType == Circle){
+		score = score + 7000;
+		scoreLabel.text = [NSString stringWithFormat:@"%d" , score];
+		[self checkLevel];
+		return;
+	}
+	if(itemShape.shapeType == Vortex){
+		score = score + 40000;
+		scoreLabel.text = [NSString stringWithFormat:@"%d" , score];
+		[self checkLevel];
+		return;
+	}
+	return;
 }   
-    
+
 -(void)checkLevel{
 	if (score > 1000 && currentLevel.difficulty == 1){
 		[self changeLevel];
@@ -1069,7 +1057,7 @@ if([[touch view] isKindOfClass: [GameItem class]]){
     
 	[self SaveState];
 	
-
+	
 	
 	
 	currentLevelLabel.text = [NSString stringWithFormat:@"%@" , gameState.currentLevel ];
@@ -1079,6 +1067,60 @@ if([[touch view] isKindOfClass: [GameItem class]]){
 	statsView.hidden = FALSE;
 	//[itemCollection removeBlocksForDifficulty];
 	
+}
+-(BOOL)subtractScoreForRecipe{
+	if (score >= 100 && currentLevel.difficulty == 1){
+		score = score - 100;
+		scoreLabel.text = [NSString stringWithFormat:@"%d" , score];
+		return TRUE;
+	}
+	if (score > 300 && currentLevel.difficulty == 2){
+		score = score - 300;
+		scoreLabel.text = [NSString stringWithFormat:@"%d" , score];
+		return TRUE;
+	}
+	if (score > 600 && currentLevel.difficulty == 3){
+		score = score - 600;
+		scoreLabel.text = [NSString stringWithFormat:@"%d" , score];
+		return TRUE;
+	}
+	if (score > 1000 && currentLevel.difficulty == 4){
+		score = score - 1000;
+		scoreLabel.text = [NSString stringWithFormat:@"%d" , score];
+		return TRUE;
+	}
+	if (score > 1500 && currentLevel.difficulty == 5){
+		score = score - 1500;
+		scoreLabel.text = [NSString stringWithFormat:@"%d" , score];
+		return TRUE;
+	}
+	if (score > 2500 && currentLevel.difficulty == 6){
+		score = score - 2500;    
+		scoreLabel.text = [NSString stringWithFormat:@"%d" , score];
+		return TRUE;
+		
+	}
+	if (score > 3750 && currentLevel.difficulty == 7){
+		score = score - 3750;
+		scoreLabel.text = [NSString stringWithFormat:@"%d" , score];
+		return TRUE;
+	}
+	if (score > 5000 && currentLevel.difficulty == 8){
+		score = score - 5000;
+		scoreLabel.text = [NSString stringWithFormat:@"%d" , score];
+		return TRUE;
+	}
+	if (score > 7000 && currentLevel.difficulty == 9){
+		score = score - 7000;
+		scoreLabel.text = [NSString stringWithFormat:@"%d" , score];
+		return TRUE;
+	}
+	if (score > 10000 && currentLevel.difficulty == 10){
+		score = score - 10000;
+		scoreLabel.text = [NSString stringWithFormat:@"%d" , score];
+		return TRUE;
+	}
+	return FALSE;
 }
 
 -(IBAction)ClickReset{
@@ -1299,168 +1341,91 @@ if([[touch view] isKindOfClass: [GameItem class]]){
 
 -(IBAction)ClickButtonCheckRecipe{
 	NSMutableArray * correctRecipe = [[NSMutableArray alloc] initWithCapacity:3];
-	if(shapeA.shapeType == shapeB.shapeType && shapeB.shapeType == shapeC.shapeType){
-		if(shapeA.colorType == shapeB.colorType && shapeB.colorType == shapeC.colorType){	
-			if(shapeA.shapeType == Square){
-				discardCount++;
-				
-				//all squares same color
-				NSLog(@"1 extra discard");
-				recipeLabel.text = [NSString stringWithFormat:@"You built 1 extra discard"];
-				recipeLabel.hidden = FALSE;
-				[correctRecipe addObject:cellA];
-				[correctRecipe addObject:cellB];
-				[correctRecipe addObject:cellC];
-				[itemCollection RemoveFromCellsAndRefactor: correctRecipe];
-				[self ClickButtonCloseLockTab];
-			}
-			if(shapeA.shapeType == Pentagon){
-				bombCount++;
-				//all pentagons same color
-				NSLog(@"1 extra bomb");
-				recipeLabel.text = [NSString stringWithFormat:@"You built 1 extra bomb"];
-				recipeLabel.hidden = FALSE;
-				[correctRecipe addObject:cellA];
-				[correctRecipe addObject:cellB];
-				[correctRecipe addObject:cellC];
-				[itemCollection RemoveFromCellsAndRefactor: correctRecipe];
-				[self ClickButtonCloseLockTab];
-			}
-			if(shapeA.shapeType == Hexagon){
-				discardCount = discardCount + 2;
-				NSLog(@"2 extra discards");
-				recipeLabel.text = [NSString stringWithFormat:@"You built 2 extra discards"];
-				recipeLabel.hidden = FALSE;
-				[correctRecipe addObject:cellA];
-				[correctRecipe addObject:cellB];
-				[correctRecipe addObject:cellC];
-				[itemCollection RemoveFromCellsAndRefactor: correctRecipe];
-				[self ClickButtonCloseLockTab];
-				//all hexs same color
-			}
-			if(shapeA.shapeType == Circle){
-				NSLog(@"destroy all of that color on the board");
-				recipeLabel.text = [NSString stringWithFormat:@"You destroyed all of that color on the board"];
-				recipeLabel.hidden = FALSE;
-				[correctRecipe addObject:cellA];
-				[correctRecipe addObject:cellB];
-				[correctRecipe addObject:cellC];
-				[itemCollection RemoveFromCellsAndRefactor: correctRecipe];
-				[powerItem makeCollection: itemCollection];
-				[powerItem makeFilter: shapeA];
-				[self ClickButtonCloseLockTab];
-				//all circle same color
-			}
-		}
-		if(shapeA.colorType != shapeB.colorType && shapeA.colorType != shapeC.colorType && shapeB.colorType != shapeC.colorType){
-			if(shapeA.shapeType == Square){
-				upgradeCount++;
-				NSLog(@"1 piece instant upgrade");
-				recipeLabel.text = [NSString stringWithFormat:@"You built 1 piece instant upgrade"];
-				recipeLabel.hidden = FALSE;
-				[correctRecipe addObject:cellA];
-				[correctRecipe addObject:cellB];
-				[correctRecipe addObject:cellC];
-				[itemCollection RemoveFromCellsAndRefactor: correctRecipe];
-				[self ClickButtonCloseLockTab];
-				//all squares dif color
-			}
-			if(shapeA.shapeType == Pentagon){
-				NSLog(@"2 piece instant upgrade");
-				recipeLabel.text = [NSString stringWithFormat:@"You built 2 piece instant upgrades"];
-				recipeLabel.hidden = FALSE;
-				[correctRecipe addObject:cellA];
-				[correctRecipe addObject:cellB];
-				[correctRecipe addObject:cellC];
-				upgradeCount = upgradeCount + 2;
-				[itemCollection RemoveFromCellsAndRefactor: correctRecipe];
-				[self ClickButtonCloseLockTab];
-				//all pentagons dif color
-			}
-			if(shapeA.shapeType == Hexagon){
-				reshuffleCount++;
-				NSLog(@"1 reshuffle");
-				recipeLabel.text = [NSString stringWithFormat:@"You built 1 reshuffle"];
-				recipeLabel.hidden = FALSE;
-				[correctRecipe addObject:cellA];
-				[correctRecipe addObject:cellB];
-				[correctRecipe addObject:cellC];
-				[itemCollection RemoveFromCellsAndRefactor: correctRecipe];
-				[self ClickButtonCloseLockTab];
-				//all hexs dif color
-			}
-			if(shapeA.shapeType == Circle){
-				bombCount = bombCount + 4;
-				NSLog(@"4 extra bombs");
-				recipeLabel.text = [NSString stringWithFormat:@"You built 4 extra bombs"];
-				recipeLabel.hidden = FALSE;
-				[correctRecipe addObject:cellA];
-				[correctRecipe addObject:cellB];
-				[correctRecipe addObject:cellC];
-				[itemCollection RemoveFromCellsAndRefactor: correctRecipe];
-				[self ClickButtonCloseLockTab];
-				//all circles dif color
-			}	
-		}
-	}
-	if(shapeA.colorType == shapeB.colorType && shapeB.shapeType == shapeC.colorType){
-		if(shapeA.shapeType == Square || shapeB.shapeType == Square || shapeC.shapeType == Square){
-			if(shapeA.shapeType == Pentagon || shapeB.shapeType == Pentagon || shapeC.shapeType == Pentagon){
-				if(shapeA.shapeType == Hexagon || shapeB.shapeType == Hexagon || shapeC.shapeType == Hexagon){
-					//Square, pentagon, hexagon of same color
-					NSLog(@"3 piece instant upgrade");
-					recipeLabel.text = [NSString stringWithFormat:@"You built 3 instant upgrades"];
-					recipeLabel.hidden = FALSE;
-					upgradeCount = upgradeCount + 3;
-					[correctRecipe addObject:cellA];
-					[correctRecipe addObject:cellB];
-					[correctRecipe addObject:cellC];
-					[itemCollection RemoveFromCellsAndRefactor: correctRecipe];
-					[self ClickButtonCloseLockTab];
-				}
-			}
-		}
-		if(shapeA.shapeType == Triangle || shapeB.shapeType == Triangle || shapeC.shapeType == Triangle){
-			if(shapeA.shapeType == Square || shapeB.shapeType == Square || shapeC.shapeType == Square){
-				if(shapeA.shapeType == Pentagon || shapeB.shapeType == Pentagon || shapeC.shapeType == Pentagon){
-					bombCount = bombCount + 2;
-					//Triangle, square, pentagon of same color
-					NSLog(@"2 bombs");
-					recipeLabel.text = [NSString stringWithFormat:@"You built 2 bombs"];
+	BOOL scoreCheck = [self subtractScoreForRecipe];
+	
+	if(scoreCheck == TRUE){
+		
+		if(shapeA.shapeType == shapeB.shapeType && shapeB.shapeType == shapeC.shapeType){
+			if(shapeA.colorType == shapeB.colorType && shapeB.colorType == shapeC.colorType){	
+				if(shapeA.shapeType == Square){
+					discardCount++;
+					
+					//all squares same color
+					NSLog(@"1 extra discard");
+					recipeLabel.text = [NSString stringWithFormat:@"You built 1 extra discard"];
 					recipeLabel.hidden = FALSE;
 					[correctRecipe addObject:cellA];
 					[correctRecipe addObject:cellB];
 					[correctRecipe addObject:cellC];
 					[itemCollection RemoveFromCellsAndRefactor: correctRecipe];
-					[self ClickButtonCloseLockTab];
+					//[self ClickButtonCloseLockTab];
+					
 				}
-			}
-		}
-		if(shapeA.shapeType == Pentagon || shapeB.shapeType == Pentagon || shapeC.shapeType == Pentagon){
-			if(shapeA.shapeType == Hexagon || shapeB.shapeType == Hexagon || shapeC.shapeType == Hexagon){
-				if(shapeA.shapeType == Circle || shapeB.shapeType == Circle || shapeC.shapeType == Circle){
+				if(shapeA.shapeType == Pentagon){
+					bombCount++;
+					//all pentagons same color
+					NSLog(@"1 extra bomb");
+					recipeLabel.text = [NSString stringWithFormat:@"You built 1 extra bomb"];
+					recipeLabel.hidden = FALSE;
+					[correctRecipe addObject:cellA];
+					[correctRecipe addObject:cellB];
+					[correctRecipe addObject:cellC];
+					[itemCollection RemoveFromCellsAndRefactor: correctRecipe];
+					//[self ClickButtonCloseLockTab];
+				}
+				if(shapeA.shapeType == Hexagon){
+					discardCount = discardCount + 2;
+					NSLog(@"2 extra discards");
+					recipeLabel.text = [NSString stringWithFormat:@"You built 2 extra discards"];
+					recipeLabel.hidden = FALSE;
+					[correctRecipe addObject:cellA];
+					[correctRecipe addObject:cellB];
+					[correctRecipe addObject:cellC];
+					[itemCollection RemoveFromCellsAndRefactor: correctRecipe];
+					//[self ClickButtonCloseLockTab];
+					//all hexs same color
+				}
+				if(shapeA.shapeType == Circle){
+					NSLog(@"destroy all of that color on the board");
+					recipeLabel.text = [NSString stringWithFormat:@"You destroyed all of that color on the board"];
+					recipeLabel.hidden = FALSE;
+					[correctRecipe addObject:cellA];
+					[correctRecipe addObject:cellB];
+					[correctRecipe addObject:cellC];
+					[itemCollection RemoveFromCellsAndRefactor: correctRecipe];
 					[powerItem makeCollection: itemCollection];
-					[powerItem stopGravity:nil];
-					//Pentagon, Hexagon, Circle of same color
-					//30 seconds no-gravity
-					NSLog(@"30 seconds no gravity ");
-					recipeLabel.text = [NSString stringWithFormat:@"You stopped gravity for 30 seconds, HURRY!"];
+					[powerItem makeFilter: shapeA];
+					//[self ClickButtonCloseLockTab];
+					//all circle same color
+				}
+			}
+			if(shapeA.colorType != shapeB.colorType && shapeA.colorType != shapeC.colorType && shapeB.colorType != shapeC.colorType){
+				if(shapeA.shapeType == Square){
+					upgradeCount++;
+					NSLog(@"1 piece instant upgrade");
+					recipeLabel.text = [NSString stringWithFormat:@"You built 1 piece instant upgrade"];
 					recipeLabel.hidden = FALSE;
 					[correctRecipe addObject:cellA];
 					[correctRecipe addObject:cellB];
 					[correctRecipe addObject:cellC];
 					[itemCollection RemoveFromCellsAndRefactor: correctRecipe];
-					[self ClickButtonCloseLockTab];
+					//[self ClickButtonCloseLockTab];
+					//all squares dif color
 				}
-			}
-		}
-	}
-	if(shapeA.colorType != shapeB.colorType && shapeA.colorType != shapeC.colorType && shapeB.colorType != shapeC.colorType){
-		if(shapeA.shapeType == Square || shapeB.shapeType == Square || shapeC.shapeType == Square){
-			if(shapeA.shapeType == Pentagon || shapeB.shapeType == Pentagon || shapeC.shapeType == Pentagon){
-				if(shapeA.shapeType == Hexagon || shapeB.shapeType == Hexagon || shapeC.shapeType == Hexagon){
+				if(shapeA.shapeType == Pentagon){
+					NSLog(@"2 piece instant upgrade");
+					recipeLabel.text = [NSString stringWithFormat:@"You built 2 piece instant upgrades"];
+					recipeLabel.hidden = FALSE;
+					[correctRecipe addObject:cellA];
+					[correctRecipe addObject:cellB];
+					[correctRecipe addObject:cellC];
+					upgradeCount = upgradeCount + 2;
+					[itemCollection RemoveFromCellsAndRefactor: correctRecipe];
+					//[self ClickButtonCloseLockTab];
+					//all pentagons dif color
+				}
+				if(shapeA.shapeType == Hexagon){
 					reshuffleCount++;
-					//Square, pentagon, hexagon dif color
 					NSLog(@"1 reshuffle");
 					recipeLabel.text = [NSString stringWithFormat:@"You built 1 reshuffle"];
 					recipeLabel.hidden = FALSE;
@@ -1468,40 +1433,124 @@ if([[touch view] isKindOfClass: [GameItem class]]){
 					[correctRecipe addObject:cellB];
 					[correctRecipe addObject:cellC];
 					[itemCollection RemoveFromCellsAndRefactor: correctRecipe];
-					[self ClickButtonCloseLockTab];
+					//[self ClickButtonCloseLockTab];
+					//all hexs dif color
 				}
+				if(shapeA.shapeType == Circle){
+					bombCount = bombCount + 4;
+					NSLog(@"4 extra bombs");
+					recipeLabel.text = [NSString stringWithFormat:@"You built 4 extra bombs"];
+					recipeLabel.hidden = FALSE;
+					[correctRecipe addObject:cellA];
+					[correctRecipe addObject:cellB];
+					[correctRecipe addObject:cellC];
+					[itemCollection RemoveFromCellsAndRefactor: correctRecipe];
+					//[self ClickButtonCloseLockTab];
+					//all circles dif color
+				}	
 			}
 		}
-		if(shapeA.shapeType == Triangle || shapeB.shapeType == Triangle || shapeC.shapeType == Triangle){
+		if(shapeA.colorType == shapeB.colorType && shapeB.shapeType == shapeC.colorType){
 			if(shapeA.shapeType == Square || shapeB.shapeType == Square || shapeC.shapeType == Square){
 				if(shapeA.shapeType == Pentagon || shapeB.shapeType == Pentagon || shapeC.shapeType == Pentagon){
-					discardCount = discardCount + 2;
-					//Triangle, square, pentagon dif color
-					NSLog(@"3 discards");
-					recipeLabel.text = [NSString stringWithFormat:@"You built 3 discards"];
-					recipeLabel.hidden = FALSE;
-					[correctRecipe addObject:cellA];
-					[correctRecipe addObject:cellB];
-					[correctRecipe addObject:cellC];
-					[itemCollection RemoveFromCellsAndRefactor: correctRecipe];
-					[self ClickButtonCloseLockTab];
+					if(shapeA.shapeType == Hexagon || shapeB.shapeType == Hexagon || shapeC.shapeType == Hexagon){
+						//Square, pentagon, hexagon of same color
+						NSLog(@"3 piece instant upgrade");
+						recipeLabel.text = [NSString stringWithFormat:@"You built 3 instant upgrades"];
+						recipeLabel.hidden = FALSE;
+						upgradeCount = upgradeCount + 3;
+						[correctRecipe addObject:cellA];
+						[correctRecipe addObject:cellB];
+						[correctRecipe addObject:cellC];
+						[itemCollection RemoveFromCellsAndRefactor: correctRecipe];
+						//[self ClickButtonCloseLockTab];
+					}
+				}
+			}
+			if(shapeA.shapeType == Triangle || shapeB.shapeType == Triangle || shapeC.shapeType == Triangle){
+				if(shapeA.shapeType == Square || shapeB.shapeType == Square || shapeC.shapeType == Square){
+					if(shapeA.shapeType == Pentagon || shapeB.shapeType == Pentagon || shapeC.shapeType == Pentagon){
+						bombCount = bombCount + 2;
+						//Triangle, square, pentagon of same color
+						NSLog(@"2 bombs");
+						recipeLabel.text = [NSString stringWithFormat:@"You built 2 bombs"];
+						recipeLabel.hidden = FALSE;
+						[correctRecipe addObject:cellA];
+						[correctRecipe addObject:cellB];
+						[correctRecipe addObject:cellC];
+						[itemCollection RemoveFromCellsAndRefactor: correctRecipe];
+						//[self ClickButtonCloseLockTab];
+					}
+				}
+			}
+			if(shapeA.shapeType == Pentagon || shapeB.shapeType == Pentagon || shapeC.shapeType == Pentagon){
+				if(shapeA.shapeType == Hexagon || shapeB.shapeType == Hexagon || shapeC.shapeType == Hexagon){
+					if(shapeA.shapeType == Circle || shapeB.shapeType == Circle || shapeC.shapeType == Circle){
+						[powerItem makeCollection: itemCollection];
+						[powerItem stopGravity:nil];
+						//Pentagon, Hexagon, Circle of same color
+						//30 seconds no-gravity
+						NSLog(@"30 seconds no gravity ");
+						recipeLabel.text = [NSString stringWithFormat:@"You stopped gravity for 30 seconds, HURRY!"];
+						recipeLabel.hidden = FALSE;
+						[correctRecipe addObject:cellA];
+						[correctRecipe addObject:cellB];
+						[correctRecipe addObject:cellC];
+						[itemCollection RemoveFromCellsAndRefactor: correctRecipe];
+						//[self ClickButtonCloseLockTab];
+					}
 				}
 			}
 		}
-		if(shapeA.shapeType == Pentagon || shapeB.shapeType == Pentagon || shapeC.shapeType == Pentagon){
-			if(shapeA.shapeType == Hexagon || shapeB.shapeType == Hexagon || shapeC.shapeType == Hexagon){
-				if(shapeA.shapeType == Circle || shapeB.shapeType == Circle || shapeC.shapeType == Circle){
-					bombCount = bombCount + 2;
-					//Pentagon, hexagon, circle dif color
-					//30 seconds no-gravity
-					NSLog(@"2 extra bombs");
-					recipeLabel.text = [NSString stringWithFormat:@"You built 2 extra bombs"];
-					recipeLabel.hidden = FALSE;
-					[correctRecipe addObject:cellA];
-					[correctRecipe addObject:cellB];
-					[correctRecipe addObject:cellC];
-					[itemCollection RemoveFromCellsAndRefactor: correctRecipe];
-					[self ClickButtonCloseLockTab];
+		if(shapeA.colorType != shapeB.colorType && shapeA.colorType != shapeC.colorType && shapeB.colorType != shapeC.colorType){
+			if(shapeA.shapeType == Square || shapeB.shapeType == Square || shapeC.shapeType == Square){
+				if(shapeA.shapeType == Pentagon || shapeB.shapeType == Pentagon || shapeC.shapeType == Pentagon){
+					if(shapeA.shapeType == Hexagon || shapeB.shapeType == Hexagon || shapeC.shapeType == Hexagon){
+						reshuffleCount++;
+						//Square, pentagon, hexagon dif color
+						NSLog(@"1 reshuffle");
+						recipeLabel.text = [NSString stringWithFormat:@"You built 1 reshuffle"];
+						recipeLabel.hidden = FALSE;
+						[correctRecipe addObject:cellA];
+						[correctRecipe addObject:cellB];
+						[correctRecipe addObject:cellC];
+						[itemCollection RemoveFromCellsAndRefactor: correctRecipe];
+						//[self ClickButtonCloseLockTab];
+					}
+				}
+			}
+			if(shapeA.shapeType == Triangle || shapeB.shapeType == Triangle || shapeC.shapeType == Triangle){
+				if(shapeA.shapeType == Square || shapeB.shapeType == Square || shapeC.shapeType == Square){
+					if(shapeA.shapeType == Pentagon || shapeB.shapeType == Pentagon || shapeC.shapeType == Pentagon){
+						discardCount = discardCount + 2;
+						//Triangle, square, pentagon dif color
+						NSLog(@"3 discards");
+						recipeLabel.text = [NSString stringWithFormat:@"You built 3 discards"];
+						recipeLabel.hidden = FALSE;
+						[correctRecipe addObject:cellA];
+						[correctRecipe addObject:cellB];
+						[correctRecipe addObject:cellC];
+						[itemCollection RemoveFromCellsAndRefactor: correctRecipe];
+						//[self ClickButtonCloseLockTab];
+					}
+				}
+			}
+			if(shapeA.shapeType == Pentagon || shapeB.shapeType == Pentagon || shapeC.shapeType == Pentagon){
+				if(shapeA.shapeType == Hexagon || shapeB.shapeType == Hexagon || shapeC.shapeType == Hexagon){
+					if(shapeA.shapeType == Circle || shapeB.shapeType == Circle || shapeC.shapeType == Circle){
+						bombCount = bombCount + 2;
+						//Pentagon, hexagon, circle dif color
+						//30 seconds no-gravity
+						NSLog(@"2 extra bombs");
+						recipeLabel.text = [NSString stringWithFormat:@"You built 2 extra bombs"];
+						recipeLabel.hidden = FALSE;
+						[correctRecipe addObject:cellA];
+						[correctRecipe addObject:cellB];
+						[correctRecipe addObject:cellC];
+						[itemCollection RemoveFromCellsAndRefactor: correctRecipe];
+						//[self ClickButtonCloseLockTab];
+						
+					}
 				}
 			}
 		}
@@ -1536,7 +1585,7 @@ if([[touch view] isKindOfClass: [GameItem class]]){
 	}
 	[self setButtons];
 	[correctRecipe autorelease];
-	
+	[self ClickButtonCloseLockTab];
 }
 
 /*****************************************************
@@ -1567,9 +1616,9 @@ if([[touch view] isKindOfClass: [GameItem class]]){
 	[backGround release];
     [backGroundCloudsA release];
     [backGroundStars release];
-
+	
 	[backGroundCloudsB release];
-
+	
     [lockFeedBackA  release];
 	[lockFeedBackB  release];
 	[lockFeedBackC release];

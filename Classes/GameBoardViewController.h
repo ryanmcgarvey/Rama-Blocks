@@ -55,11 +55,11 @@
 	IBOutlet UILabel * timeLabel;
 	IBOutlet UILabel * recipeLabel;
 	
-    UIButton * buttonResume;
-    UIButton * buttonOptions;
-    UIButton * buttonMainMenu;
-    UIButton * buttonMenu;
-    UIButton * checkLock;
+    IBOutlet UIButton * buttonResume;
+    IBOutlet UIButton * buttonOptions;
+    IBOutlet UIButton * buttonMainMenu;
+    IBOutlet UIButton * buttonMenu;
+    IBOutlet UIButton * checkLock;
     IBOutlet UIButton * closeLock;
 	IBOutlet UIButton * lockButton;
 	IBOutlet UIButton * checkRecipe;
@@ -190,7 +190,7 @@
 
 -(void)checkLevel;
 -(void)changeLevel;
-
+-(BOOL)subtractScoreForRecipe;
 //HELPERS
 -(void) SetupBackground:(int)difficulty;
 -(void) SetupUI;
