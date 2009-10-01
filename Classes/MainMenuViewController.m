@@ -25,7 +25,7 @@
 		backGroundMenu = [[UIImageView alloc]init];
 		backGround = [[UIImageView alloc]init];
 		
-		zoomBack = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 320, 480)]; 
+		zoomBack = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 640, 960)]; 
 		zoomBack.image = [UIImage imageNamed:@"BigBackground.png"];
 		zoomBack.alpha = 0.3f;
 		

@@ -1148,7 +1148,6 @@
 	nextPair = nil;
 	TouchTimer = nil;
 	
-	
 	[self viewDidLoad];
 	
     NSLog(@"Reset View");
@@ -1342,7 +1341,7 @@
 -(IBAction)ClickButtonCheckRecipe{
 	NSMutableArray * correctRecipe = [[NSMutableArray alloc] initWithCapacity:3];
 	BOOL scoreCheck = [self subtractScoreForRecipe];
-	
+	recipeLabel.text = [NSString stringWithFormat:@"incorrect"];
 	if(scoreCheck == TRUE){
 		
 		if(shapeA.shapeType == shapeB.shapeType && shapeB.shapeType == shapeC.shapeType){
@@ -1524,7 +1523,7 @@
 					if(shapeA.shapeType == Pentagon || shapeB.shapeType == Pentagon || shapeC.shapeType == Pentagon){
 						discardCount = discardCount + 2;
 						//Triangle, square, pentagon dif color
-						NSLog(@"3 discards");
+						NSLog(@"2 discards");
 						recipeLabel.text = [NSString stringWithFormat:@"You built 3 discards"];
 						recipeLabel.hidden = FALSE;
 						[correctRecipe addObject:cellA];
@@ -1555,6 +1554,8 @@
 			}
 		}
 	}
+	recipeLabel.hidden = FALSE;
+	
 	shapeA = nil;
 	shapeB = nil;
 	shapeC = nil;
