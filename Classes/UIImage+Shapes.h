@@ -30,5 +30,6 @@ typedef enum enum_ColorType {
 @interface UIImage (Shapes)
 
 + (UIImage *)imageWithColorAndShape:(ColorType)colorType : (ShapeType)shapeType;
++ (UIImage *)LargeImageWithColorAndShape: (ColorType)colorType : (ShapeType)shapeType;
 
 @end
