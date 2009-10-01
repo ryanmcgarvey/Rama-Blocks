@@ -648,7 +648,7 @@
 	
 	recipeLabel.center = CGPointMake(160, 155);
 	recipeLabel.backgroundColor = [UIColor clearColor];
-	recipeLabel.textColor = [UIColor purpleColor];
+	recipeLabel.textColor = [UIColor yellowColor];
 
     lockFeedBackA = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 100, 100)];
     lockFeedBackA.image = [UIImage imageNamed:@"lockFeedBack.png"];
@@ -948,7 +948,7 @@ if([[touch view] isKindOfClass: [GameItem class]]){
 }   
     
 -(void)checkLevel{
-	if (score > 100 && currentLevel.difficulty == 1){
+	if (score > 1000 && currentLevel.difficulty == 1){
 		[self changeLevel];
 		[backGroundCloudsA.image release];
 		[backGroundCloudsB.image release];
@@ -957,7 +957,7 @@ if([[touch view] isKindOfClass: [GameItem class]]){
 		
 		return;
 	}
-	if (score > 300 && currentLevel.difficulty == 2){
+	if (score > 3000 && currentLevel.difficulty == 2){
 		[self changeLevel];
 		[backGroundCloudsA.image release];
 		[backGroundCloudsB.image release];
@@ -966,7 +966,7 @@ if([[touch view] isKindOfClass: [GameItem class]]){
 		
 		return;
 	}
-	if (score > 600 && currentLevel.difficulty == 3){
+	if (score > 6000 && currentLevel.difficulty == 3){
 		[self changeLevel];
 		[backGroundCloudsA.image release];
 		[backGroundCloudsB.image release];
@@ -975,7 +975,7 @@ if([[touch view] isKindOfClass: [GameItem class]]){
 		
 		return;
 	}
-	if (score > 1000 && currentLevel.difficulty == 4){
+	if (score > 10000 && currentLevel.difficulty == 4){
 		[self changeLevel];
 		[backGroundCloudsA.image release];
 		[backGroundCloudsB.image release];
