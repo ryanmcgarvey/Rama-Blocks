@@ -490,7 +490,7 @@
             SpawnedPair.ShaddowB.transform = spawnedShapeRotateTransform;
             nextPair.ItemA.transform = spawnedShapeRotateTransform;
             nextPair.ItemB.transform = spawnedShapeRotateTransform;
-
+			statsView.transform = spawnedShapeRotateTransform;
             break;
 			 
     }
@@ -529,7 +529,8 @@
     SpawnedPair.ShaddowB.transform = spawnedShapeRotateTransform;
     nextPair.ItemA.transform = spawnedShapeRotateTransform;
     nextPair.ItemB.transform = spawnedShapeRotateTransform;
-	 
+	statsView.transform = spawnedShapeRotateTransform;
+	
     [self.view bringSubviewToFront:SpawnedPair.ItemA];
     [self.view bringSubviewToFront:SpawnedPair.ItemB];
 }
@@ -1074,7 +1075,7 @@ if([[touch view] isKindOfClass: [GameItem class]]){
 	currentLevelLabel.text = [NSString stringWithFormat:@"%@" , gameState.currentLevel ];
 	movesLabel.text = [NSString stringWithFormat:@"%@" , gameState.currentBoard.numberOfMovies ];
 	transformsLabel.text = [NSString stringWithFormat:@"%@" , gameState.currentBoard.numberOfTransforms];
-	timeLabel.text = [NSString stringWithFormat:@"%@" , gameState.currentBoard.timePlayed ];
+	//timeLabel.text = [NSString stringWithFormat:@"%@" , gameState.currentBoard.timePlayed ];
 	statsView.hidden = FALSE;
 	//[itemCollection removeBlocksForDifficulty];
 	
