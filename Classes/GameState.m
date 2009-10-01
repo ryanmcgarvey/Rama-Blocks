@@ -2,8 +2,8 @@
 //  GameState.m
 //  Rama Blocks
 //
-//  Created by Chad Gapac on 9/25/09.
-//  Copyright 2009 __MyCompanyName__. All rights reserved.
+//  Created by Ryan McGarvey on 10/1/09.
+//  Copyright 2009 Simplical. All rights reserved.
 //
 
 #import "GameState.h"
@@ -13,8 +13,8 @@
 
 @implementation GameState 
 
-@dynamic sfxVolume;
 @dynamic currentLevel;
+@dynamic sfxVolume;
 @dynamic highestLevel;
 @dynamic musicVolume;
 @dynamic currentBoard;

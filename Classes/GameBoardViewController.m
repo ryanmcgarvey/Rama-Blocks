@@ -37,6 +37,11 @@
         
         gameState.currentBoard.timePlayed = [NSNumber numberWithDouble:[gameState.currentBoard.timePlayed doubleValue] + totalTime];
 		gameState.currentBoard.numberOfAttempts = [NSNumber numberWithInt:score];
+        
+        gameState.currentBoard.discardCount = [NSNumber numberWithInt:discardCount];
+		gameState.currentBoard.bombCount = [NSNumber numberWithInt:bombCount];
+        gameState.currentBoard.reshuffleCount = [NSNumber numberWithInt:reshuffleCount];
+		gameState.currentBoard.upgradeCount = [NSNumber numberWithInt:upgradeCount];
     }
 }
 
@@ -240,6 +245,11 @@
 		
 		[itemCollection UpdateState];
 		
+        discardCount = [gameState.currentBoard.discardCount intValue];
+        bombCount = [gameState.currentBoard.bombCount intValue];
+        reshuffleCount = [gameState.currentBoard.reshuffleCount intValue];
+        upgradeCount = [gameState.currentBoard.upgradeCount intValue];
+        
 		[SpawnedPair Reset];
 		
 		[self.view addSubview:SpawnedPair.ItemC];

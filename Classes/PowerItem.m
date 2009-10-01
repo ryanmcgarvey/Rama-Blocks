@@ -20,7 +20,6 @@
 
 - (void)makeCollection:(ItemCollection *)collection{
 	itemCollection = collection;
-	
 }
 
 -(void)stopGravity:(GameItem *)item{
@@ -36,8 +35,6 @@
 	
 	[gravityArray release];
 	[NSTimer release];
-	
-	
 }
 
 -(void)returnGravity{
@@ -108,7 +105,7 @@
 			if(removeCell.ItemInCell != nil){
 				[shuffleArray addObject:removeCell.ItemInCell];
 			}
-			}
+        }
 	}
 	
 	int i,j;

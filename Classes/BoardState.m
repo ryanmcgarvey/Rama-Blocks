@@ -2,8 +2,8 @@
 //  BoardState.m
 //  Rama Blocks
 //
-//  Created by Chad Gapac on 9/25/09.
-//  Copyright 2009 __MyCompanyName__. All rights reserved.
+//  Created by Ryan McGarvey on 10/1/09.
+//  Copyright 2009 Simplical. All rights reserved.
 //
 
 #import "BoardState.h"
@@ -13,11 +13,15 @@
 
 @implementation BoardState 
 
-@dynamic numberOfAttempts;
-@dynamic numberOfMovies;
-@dynamic numberOfTransforms;
 @dynamic Active;
 @dynamic timePlayed;
+@dynamic discardCount;
+@dynamic numberOfAttempts;
+@dynamic reshuffleCount;
+@dynamic bombCount;
+@dynamic upgradeCount;
+@dynamic numberOfMovies;
+@dynamic numberOfTransforms;
 @dynamic owningGameState;
 @dynamic items;
 

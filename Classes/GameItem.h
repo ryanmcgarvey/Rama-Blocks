@@ -14,6 +14,8 @@ typedef enum enum_ItemType {
 	DrawingItem
 } TypeItem;
 
+
+
 @interface GameItem : UIView {
 @public;
 		UIImageView *ItemView;
