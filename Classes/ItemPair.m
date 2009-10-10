@@ -80,6 +80,7 @@
 	GameItem * itemA = ItemA;
 	GameItem * itemB = ItemB;
 	GameItem * itemC = ItemC;
+    tempCount++;
 	Rama_BlocksAppDelegate * appDelegate =  (Rama_BlocksAppDelegate *)[[UIApplication sharedApplication] delegate];
 	
 	if(appDelegate.isMoving == YES){
@@ -94,6 +95,8 @@
 	
 	
 	[self checkBounds];
+    
+    NSLog(@"count: %d"), tempCount;
 
 	}
 	

@@ -784,10 +784,8 @@
 - (void)touchesMoved:(NSSet *)touches withEvent:(UIEvent *)event {
 	UITouch *touch = [[event allTouches] anyObject];
 	Rama_BlocksAppDelegate * appDelegate =  (Rama_BlocksAppDelegate *)[[UIApplication sharedApplication] delegate];
-	currentTouchPosition = [touch locationInView:self.view];
     
-    
-	if([[touch view] isMemberOfClass:[DrawingView class]] && [touch view] != backGround && touchDistanceToItemC < 55.0f && lockMode == FALSE && appDelegate.isBombing == NO){
+	if([[touch view] isMemberOfClass:[DrawingView class]] && lockMode == FALSE && appDelegate.isBombing == NO){
 		
 		[SpawnedPair airMove:[touch locationInView:[self view]]];
 		SpawnedPair.ItemC.alpha = 1;

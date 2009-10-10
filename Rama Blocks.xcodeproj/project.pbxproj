@@ -175,6 +175,8 @@
 		FC4870AE105ED96200E2C37F /* lockFeedBack.png in Resources */ = {isa = PBXBuildFile; fileRef = FC4870AD105ED96200E2C37F /* lockFeedBack.png */; };
 		FC4CADC31026101E00C6F863 /* RamaIcon.png in Resources */ = {isa = PBXBuildFile; fileRef = FC4CADC21026101E00C6F863 /* RamaIcon.png */; };
 		FC79C872102F76BA0041930A /* dist.plist in Resources */ = {isa = PBXBuildFile; fileRef = FC79C871102F76BA0041930A /* dist.plist */; };
+		FCA7B3391080E07400206B45 /* Phase.m in Sources */ = {isa = PBXBuildFile; fileRef = FCA7B3381080E07400206B45 /* Phase.m */; };
+		FCA7B33D1080E30100206B45 /* Line.m in Sources */ = {isa = PBXBuildFile; fileRef = FCA7B33C1080E30100206B45 /* Line.m */; };
 		FCC5570310756EE5009540E8 /* GameState.m in Sources */ = {isa = PBXBuildFile; fileRef = FCC556FC10756EE5009540E8 /* GameState.m */; };
 		FCC5570410756EE5009540E8 /* ItemState.m in Sources */ = {isa = PBXBuildFile; fileRef = FCC556FE10756EE5009540E8 /* ItemState.m */; };
 		FCC5570510756EE5009540E8 /* LevelStatistics.m in Sources */ = {isa = PBXBuildFile; fileRef = FCC5570010756EE5009540E8 /* LevelStatistics.m */; };
@@ -372,6 +374,10 @@
 		FC4870AD105ED96200E2C37F /* lockFeedBack.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = lockFeedBack.png; sourceTree = "<group>"; };
 		FC4CADC21026101E00C6F863 /* RamaIcon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = RamaIcon.png; sourceTree = "<group>"; };
 		FC79C871102F76BA0041930A /* dist.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = dist.plist; sourceTree = "<group>"; };
+		FCA7B3371080E07400206B45 /* Phase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Phase.h; sourceTree = "<group>"; };
+		FCA7B3381080E07400206B45 /* Phase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Phase.m; sourceTree = "<group>"; };
+		FCA7B33B1080E30100206B45 /* Line.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Line.h; sourceTree = "<group>"; };
+		FCA7B33C1080E30100206B45 /* Line.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Line.m; sourceTree = "<group>"; };
 		FCC556FB10756EE5009540E8 /* GameState.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GameState.h; sourceTree = "<group>"; };
 		FCC556FC10756EE5009540E8 /* GameState.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GameState.m; sourceTree = "<group>"; };
 		FCC556FD10756EE5009540E8 /* ItemState.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ItemState.h; sourceTree = "<group>"; };
@@ -786,9 +792,21 @@
 			path = Classes;
 			sourceTree = "<group>";
 		};
+		FCA7B33A1080E29700206B45 /* Phases */ = {
+			isa = PBXGroup;
+			children = (
+				FCA7B3371080E07400206B45 /* Phase.h */,
+				FCA7B3381080E07400206B45 /* Phase.m */,
+				FCA7B33B1080E30100206B45 /* Line.h */,
+				FCA7B33C1080E30100206B45 /* Line.m */,
+			);
+			name = Phases;
+			sourceTree = "<group>";
+		};
 		FCEF1555102117B200A71C1C /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				FCA7B33A1080E29700206B45 /* Phases */,
 				FCEF156710211DC900A71C1C /* Items */,
 				FCEF156910211DEA00A71C1C /* Collections */,
 			);
@@ -1134,6 +1152,8 @@
 				FCC5570410756EE5009540E8 /* ItemState.m in Sources */,
 				FCC5570510756EE5009540E8 /* LevelStatistics.m in Sources */,
 				FCC5570610756EE5009540E8 /* BoardState.m in Sources */,
+				FCA7B3391080E07400206B45 /* Phase.m in Sources */,
+				FCA7B33D1080E30100206B45 /* Line.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
