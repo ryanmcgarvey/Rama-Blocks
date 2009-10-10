@@ -161,6 +161,9 @@
 	
 	rightPix = 30;
 	upPix = 0;
+    
+    bombCount = 2;
+    [self setButtons];
 	
     spawnedShapeRotateTransform = CGAffineTransformIdentity;
 	
@@ -795,7 +798,7 @@
     if (lockMode == TRUE && appDelegate.isMoving == TRUE) {
         GameItem * touchedGuessItem;
         touchedGuessItem = (GameItem *)[touch view];
-        guessView.center = CGPointMake([touch locationInView:self.view].x - 55, [touch locationInView:self.view].y - 55);
+        guessView.center = CGPointMake([touch locationInView:self.view].x, [touch locationInView:self.view].y);
     }
 	
 }
@@ -1270,14 +1273,22 @@
 	}
 }
 -(IBAction)ClickButtonBomb{
-	if(bombCount > 0){
     Rama_BlocksAppDelegate * appDelegate =  (Rama_BlocksAppDelegate *)[[UIApplication sharedApplication] delegate];
-    appDelegate.isBombing = YES;
-    powerBack.image = [UIImage imageNamed:@"bombIcon.png"];
-    SpawnedPair.ItemA.hidden = TRUE;
-    SpawnedPair.ItemB.hidden = TRUE;
-    SpawnedPair.ItemC.hidden = TRUE;
+	if(bombCount > 0 && appDelegate.isBombing == NO){
+        appDelegate.isBombing = YES;
+        powerBack.image = [UIImage imageNamed:@"bombIcon.png"];
+        SpawnedPair.ItemA.hidden = TRUE;
+        SpawnedPair.ItemB.hidden = TRUE;
+        SpawnedPair.ItemC.hidden = TRUE;
 	}
+    else {
+        appDelegate.isBombing = NO;
+        SpawnedPair.ItemA.hidden = FALSE;
+        SpawnedPair.ItemB.hidden = FALSE;
+        SpawnedPair.ItemC.hidden = FALSE;
+        powerBack.image = nil;
+    }
+
 }
 -(IBAction)ClickButtonShuffle{
 	Rama_BlocksAppDelegate * appDelegate =  (Rama_BlocksAppDelegate *)[[UIApplication sharedApplication] delegate];
