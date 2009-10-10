@@ -431,7 +431,6 @@
 	 [self.view bringSubviewToFront:zoomBack];
 	 
 	 backGround.bounds = CGRectMake(0, 0, 640, 960);
-	 backGround.contentMode = UIViewContentModeScaleToFill;
 	 zoomBack.alpha = 1;
 	 
 	 [UIView commitAnimations];
