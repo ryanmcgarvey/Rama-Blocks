@@ -1270,14 +1270,14 @@
 	}
 }
 -(IBAction)ClickButtonBomb{
-	//if(bombCount > 0){
+	if(bombCount > 0){
     Rama_BlocksAppDelegate * appDelegate =  (Rama_BlocksAppDelegate *)[[UIApplication sharedApplication] delegate];
     appDelegate.isBombing = YES;
     powerBack.image = [UIImage imageNamed:@"bombIcon.png"];
     SpawnedPair.ItemA.hidden = TRUE;
     SpawnedPair.ItemB.hidden = TRUE;
     SpawnedPair.ItemC.hidden = TRUE;
-	//}
+	}
 }
 -(IBAction)ClickButtonShuffle{
 	Rama_BlocksAppDelegate * appDelegate =  (Rama_BlocksAppDelegate *)[[UIApplication sharedApplication] delegate];

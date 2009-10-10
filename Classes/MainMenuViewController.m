@@ -140,7 +140,7 @@
         
     }
 	[UIView beginAnimations:nil context:nil]; 
-	[UIView setAnimationDuration:45.0f];
+	[UIView setAnimationDuration:5.0f];
 	backGround.center = CGPointMake(backGround.center.x - 280, backGround.center.y - 300);
 	
 	[UIView commitAnimations];
@@ -431,7 +431,7 @@
 	 [self.view bringSubviewToFront:zoomBack];
 	 
 	 backGround.bounds = CGRectMake(0, 0, 640, 960);
-	 backGround.contentMode = UIViewContentModeScaleToFill;
+	 //backGround.contentMode = UIViewContentModeScaleToFill;
 	 zoomBack.alpha = 1;
 	 
 	 [UIView commitAnimations];
