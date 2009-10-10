@@ -935,12 +935,13 @@
 	NSLog(@"adding");	
 }
 
--(Cell *)GetCell:(int)row : (int)column{
+-(Cell *)GetCell:(int)row : (int)column
+{
 	if(row >= 0 && row < RowLength && column >= 0 && column < ColumnLength)
 		return cells[(row) * ColumnLength + column];
 	return nil;
-	
 }
+
 -(Cell *)GetCell:(GameItem *)item{
 	return [self GetCell:item.Row :item.Column];
 }

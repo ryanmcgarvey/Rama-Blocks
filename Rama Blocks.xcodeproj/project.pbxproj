@@ -291,7 +291,6 @@
 		C280961B10440A7E00240716 /* redpiece3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = redpiece3.png; sourceTree = "<group>"; };
 		C280961C10440A7E00240716 /* redpiece2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = redpiece2.png; sourceTree = "<group>"; };
 		C280961D10440A7E00240716 /* redpiece4.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = redpiece4.png; sourceTree = "<group>"; };
-		C28096761044101E00240716 /* scrap.applescript */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.applescript; path = scrap.applescript; sourceTree = "<group>"; };
 		C2809B1310447C6D00240716 /* yellowpiece2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = yellowpiece2.png; sourceTree = "<group>"; };
 		C2809B1410447C6D00240716 /* yellowpiece1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = yellowpiece1.png; sourceTree = "<group>"; };
 		C2809B1510447C6D00240716 /* yellowpiece4.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = yellowpiece4.png; sourceTree = "<group>"; };
@@ -430,7 +429,6 @@
 			isa = PBXGroup;
 			children = (
 				FCEF156D102128C700A71C1C /* Helpers */,
-				C28096761044101E00240716 /* scrap.applescript */,
 				FCEF1555102117B200A71C1C /* Models */,
 				FCEF156810211DDF00A71C1C /* Delegates */,
 				FCEF1572102129E800A71C1C /* Frameworks */,

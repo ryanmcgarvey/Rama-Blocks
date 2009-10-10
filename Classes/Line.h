@@ -7,10 +7,28 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "Phase.h"
+#import "ItemCollection.h"
+#import "Shape.h"
 
 
-//@interface Line : Phase {
+@interface Line : Phase {
 
-//}
+    NSArray * shapes;
+    
+    Shape * anchorShape;
+    NSMutableArray * anchorCells;
+    
+    
+}
+-(id)init:(ItemCollection *) _collection:(Level *) _level:(NSArray *) description;
+
+-(BOOL)SetAnchors;
+
+-(BOOL)IsShapeInCell:(Shape *)shape:(Cell *)cell;
+
+-(BOOL)CheckSolution:(Cell *) cell;
+
+-(BOOL)CheckSolutionForDirection:(Cell *)cell:(int)rowDirection:(int)colDirection;
 
 @end

@@ -10,17 +10,10 @@
 
 
 @implementation Phase
-/*
--(id)ReadyPhase{
-    self = [super init];
-    collection = _collection;
-    level = _level;
-    return self;
-}
 
--(BOOL)CheckPhase:(ItemCollection *) _collection:(Level *) _level:(NSArray *) description{
+-(BOOL)CheckPhase{
     return FALSE;
 }
-*/
+
 
 @end

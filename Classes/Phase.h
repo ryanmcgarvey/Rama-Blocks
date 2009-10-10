@@ -7,17 +7,14 @@
 //
 
 #import <Foundation/Foundation.h>
-
+#import "Level.h"
+#import "ItemCollection.h"
 
 @interface Phase : NSObject {
-
-    
+    Level * level;
+    ItemCollection * collection;
 }
 
--(id)ReadyPhase;
-
-//-(BOOL)CheckPhase:(ItemCollection *) collection:(Level *) level:(NSArray *) description;
-
-
+-(BOOL)CheckPhase;
 
 @end
