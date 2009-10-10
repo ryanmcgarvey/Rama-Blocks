@@ -181,6 +181,7 @@
 		FCC5570410756EE5009540E8 /* ItemState.m in Sources */ = {isa = PBXBuildFile; fileRef = FCC556FE10756EE5009540E8 /* ItemState.m */; };
 		FCC5570510756EE5009540E8 /* LevelStatistics.m in Sources */ = {isa = PBXBuildFile; fileRef = FCC5570010756EE5009540E8 /* LevelStatistics.m */; };
 		FCC5570610756EE5009540E8 /* BoardState.m in Sources */ = {isa = PBXBuildFile; fileRef = FCC5570210756EE5009540E8 /* BoardState.m */; };
+		FCC7B97E1081289700DB4A1D /* Set.m in Sources */ = {isa = PBXBuildFile; fileRef = FCC7B97D1081289700DB4A1D /* Set.m */; };
 		FCEF155A102118A800A71C1C /* GameItem.m in Sources */ = {isa = PBXBuildFile; fileRef = FCEF1559102118A800A71C1C /* GameItem.m */; };
 		FCEF155D102118F200A71C1C /* Shape.m in Sources */ = {isa = PBXBuildFile; fileRef = FCEF155C102118F200A71C1C /* Shape.m */; };
 		FCEF15601021195F00A71C1C /* PowerItem.m in Sources */ = {isa = PBXBuildFile; fileRef = FCEF155F1021195F00A71C1C /* PowerItem.m */; };
@@ -385,6 +386,8 @@
 		FCC5570010756EE5009540E8 /* LevelStatistics.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LevelStatistics.m; sourceTree = "<group>"; };
 		FCC5570110756EE5009540E8 /* BoardState.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BoardState.h; sourceTree = "<group>"; };
 		FCC5570210756EE5009540E8 /* BoardState.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BoardState.m; sourceTree = "<group>"; };
+		FCC7B97C1081289700DB4A1D /* Set.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Set.h; sourceTree = "<group>"; };
+		FCC7B97D1081289700DB4A1D /* Set.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Set.m; sourceTree = "<group>"; };
 		FCEF1558102118A800A71C1C /* GameItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GameItem.h; sourceTree = "<group>"; };
 		FCEF1559102118A800A71C1C /* GameItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GameItem.m; sourceTree = "<group>"; };
 		FCEF155B102118F200A71C1C /* Shape.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Shape.h; sourceTree = "<group>"; };
@@ -797,6 +800,8 @@
 				FCA7B3381080E07400206B45 /* Phase.m */,
 				FCA7B33B1080E30100206B45 /* Line.h */,
 				FCA7B33C1080E30100206B45 /* Line.m */,
+				FCC7B97C1081289700DB4A1D /* Set.h */,
+				FCC7B97D1081289700DB4A1D /* Set.m */,
 			);
 			name = Phases;
 			sourceTree = "<group>";
@@ -1152,6 +1157,7 @@
 				FCC5570610756EE5009540E8 /* BoardState.m in Sources */,
 				FCA7B3391080E07400206B45 /* Phase.m in Sources */,
 				FCA7B33D1080E30100206B45 /* Line.m in Sources */,
+				FCC7B97E1081289700DB4A1D /* Set.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

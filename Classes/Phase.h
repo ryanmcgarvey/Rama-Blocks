@@ -17,4 +17,6 @@
 
 -(BOOL)CheckPhase;
 
+-(BOOL)IsShapeInCell:(Shape *)shape:(Cell *)cell;
+
 @end

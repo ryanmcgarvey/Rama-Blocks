@@ -14,7 +14,7 @@
 
 @interface Line : Phase {
 
-    NSArray * shapes;
+    NSDictionary * shapes;
     
     Shape * anchorShape;
     NSMutableArray * anchorCells;
@@ -24,8 +24,6 @@
 -(id)init:(ItemCollection *) _collection:(Level *) _level:(NSArray *) description;
 
 -(BOOL)SetAnchors;
-
--(BOOL)IsShapeInCell:(Shape *)shape:(Cell *)cell;
 
 -(BOOL)CheckSolution:(Cell *) cell;
 

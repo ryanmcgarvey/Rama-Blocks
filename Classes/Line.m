@@ -88,15 +88,6 @@
      return ([anchorCells count] > 0);
 }
 
--(BOOL)IsShapeInCell:(Shape *)shape:(Cell *)cell{
-    
-    if ([cell.ItemInCell isKindOfClass:[Shape class]] ) 
-    {
-        Shape * cellShape = (Shape *)(cell.ItemInCell);
-        return (shape.colorType == cellShape.colorType &&
-                shape.shapeType == cellShape.shapeType);
-    }
-    return FALSE;
-}
+
 
 @end
