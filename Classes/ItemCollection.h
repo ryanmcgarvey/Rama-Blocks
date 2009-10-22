@@ -38,6 +38,19 @@ typedef enum enum_Gravity {
 	int ColumnLength;
 	int RowPixelLength;
 	int ColumnPixelLength;
+	
+	NSMutableSet * phaseSetRed;
+	NSMutableSet * phaseSetYellow;
+	NSMutableSet * phaseSetPurple;
+	NSMutableSet * phaseSetGreen;
+	NSMutableSet * phaseSetBlue;
+	
+	NSMutableSet * phaseSetTriangle;
+	NSMutableSet * phaseSetSquare;
+	NSMutableSet * phaseSetPentagon;
+	NSMutableSet * phaseSetHexagon;
+	NSMutableSet * phaseSetCircle;
+	
     Gravity gravityDirection;
     Level * currentLevel;
     GameState * gameState;
@@ -60,6 +73,11 @@ typedef enum enum_Gravity {
 -(void)removeBlocksForDifficulty;
 -(NSMutableArray *)fillBlocksForDifficulty;
 -(void)cleanBoard;
+
+-(BOOL)checkPiece:(int)difficulty;
+-(BOOL)checkPieceForPhase1:(int) row :(int) column;
+-(BOOL)checkPieceForPhase2:(int) row :(int) column;
+-(BOOL)checkPieceForPhase3:(int) row :(int) column;
 
 -(BOOL)DrawShadowForItemPair: (ItemPair *)itemPair;
 -(BOOL)AddItemPair: (ItemPair *)itemPair;

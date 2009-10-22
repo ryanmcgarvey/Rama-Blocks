@@ -158,6 +158,7 @@
 	spawnNextX = SPAWN_LOCATION_X;
 	spawnNextY = SPAWN_LOCATION_Y - 78;
 	
+	bombCount = 2;
 	
 	rightPix = 30;
 	upPix = 0;
@@ -701,7 +702,7 @@
 
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
 	UITouch *touch = [[event allTouches] anyObject];
-	statsView.hidden = TRUE;
+	//statsView.hidden = TRUE;
 	recipeLabel.hidden = TRUE;
 	startTouchPosition = [touch locationInView:self.view];
 	Rama_BlocksAppDelegate * appDelegate =  (Rama_BlocksAppDelegate *)[[UIApplication sharedApplication] delegate];
@@ -787,7 +788,8 @@
 	currentTouchPosition = [touch locationInView:self.view];
     
     
-	if([[touch view] isMemberOfClass:[DrawingView class]] && [touch view] != backGround && touchDistanceToItemC < 55.0f && lockMode == FALSE && appDelegate.isBombing == NO){
+	if([[touch view] isMemberOfClass:[DrawingView class]] && [touch view] != backGround && touchDistanceToItemC < 55.0f && lockMode == FALSE
+	   && appDelegate.isBombing == NO && menuView.hidden == TRUE){
 		
 		[SpawnedPair airMove:[touch locationInView:[self view]]];
 		SpawnedPair.ItemC.alpha = 1;
@@ -821,6 +823,7 @@
                 [SpawnedPair.ItemC removeFromSuperview];
                 SpawnedPair.ItemC = nil;
                 [self SpawnShapes];
+				[self checkLevel];
                 return;
 				
 				
@@ -851,8 +854,7 @@
                 }
             }else
             {
-                if(item.tapped > 0)
-                {
+                if(item.tapped > 0 && menuView.hidden == TRUE){
                     item.tapped = 0;
                     if([itemCollection TransformItem:item])
                     {
@@ -946,7 +948,7 @@
 }   
 
 -(void)checkLevel{
-	if (score > 1000 && currentLevel.difficulty == 1){
+	if ([itemCollection checkPiece:currentLevel.difficulty] && currentLevel.difficulty == 1){
 		[self changeLevel];
 		[backGroundCloudsA.image release];
 		[backGroundCloudsB.image release];
@@ -955,7 +957,7 @@
 		
 		return;
 	}
-	if (score > 3000 && currentLevel.difficulty == 2){
+	if ([itemCollection checkPiece:currentLevel.difficulty] && currentLevel.difficulty == 2){
 		[self changeLevel];
 		[backGroundCloudsA.image release];
 		[backGroundCloudsB.image release];
@@ -964,7 +966,7 @@
 		
 		return;
 	}
-	if (score > 6000 && currentLevel.difficulty == 3){
+	if ([itemCollection checkPiece:currentLevel.difficulty] && currentLevel.difficulty == 3){
 		[self changeLevel];
 		[backGroundCloudsA.image release];
 		[backGroundCloudsB.image release];
@@ -1075,8 +1077,12 @@
 	transformsLabel.text = [NSString stringWithFormat:@"%@" , gameState.currentBoard.numberOfTransforms];
 	//timeLabel.text = [NSString stringWithFormat:@"%@" , gameState.currentBoard.timePlayed ];
 	statsView.hidden = FALSE;
+	[NSTimer scheduledTimerWithTimeInterval:5.1f target:self selector:@selector(removeStats) userInfo:nil repeats:NO];
 	//[itemCollection removeBlocksForDifficulty];
 	
+}
+-(void)removeStats{
+	statsView.hidden = TRUE;
 }
 -(BOOL)subtractScoreForRecipe{
 	if (score >= 0 && currentLevel.difficulty == 1){
@@ -1272,14 +1278,27 @@
 	}
 }
 -(IBAction)ClickButtonBomb{
-	//if(bombCount > 0){
-    Rama_BlocksAppDelegate * appDelegate =  (Rama_BlocksAppDelegate *)[[UIApplication sharedApplication] delegate];
-    appDelegate.isBombing = YES;
-    powerBack.image = [UIImage imageNamed:@"bombIcon.png"];
-    SpawnedPair.ItemA.hidden = TRUE;
-    SpawnedPair.ItemB.hidden = TRUE;
-    SpawnedPair.ItemC.hidden = TRUE;
-	//}
+	Rama_BlocksAppDelegate * appDelegate =  (Rama_BlocksAppDelegate *)[[UIApplication sharedApplication] delegate];
+		
+	if(appDelegate.isBombing == YES){
+		appDelegate.isBombing = NO;
+		SpawnedPair.ItemA.hidden = FALSE;
+		SpawnedPair.ItemB.hidden = FALSE;
+		SpawnedPair.ItemC.hidden = FALSE;
+		powerBack.image = nil;
+		[self setButtons];
+		return;
+	}
+	
+	if(bombCount > 0){
+		appDelegate.isBombing = YES;
+		powerBack.image = [UIImage imageNamed:@"bombIcon.png"];
+		SpawnedPair.ItemA.hidden = TRUE;
+		SpawnedPair.ItemB.hidden = TRUE;
+		SpawnedPair.ItemC.hidden = TRUE;
+		return;
+	}
+	
 }
 -(IBAction)ClickButtonShuffle{
 	Rama_BlocksAppDelegate * appDelegate =  (Rama_BlocksAppDelegate *)[[UIApplication sharedApplication] delegate];

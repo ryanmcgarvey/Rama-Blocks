@@ -190,6 +190,7 @@
 
 -(void)checkLevel;
 -(void)changeLevel;
+-(void)removeStats;
 -(BOOL)subtractScoreForRecipe;
 //HELPERS
 -(void) SetupBackground:(int)difficulty;
