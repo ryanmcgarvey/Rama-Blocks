@@ -896,7 +896,8 @@ numberOfTransforms = [gameState.currentBoard.numberOfTransforms intValue];}
 }
 
 -(void)ApplyGravity{
-    int row;int column;
+    
+	int row;int column;
 	Rama_BlocksAppDelegate * appDelegate =  (Rama_BlocksAppDelegate *)[[UIApplication sharedApplication] delegate];
 	Cell * cell;
     if(appDelegate.allowGravity == TRUE){

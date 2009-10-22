@@ -255,6 +255,7 @@
 	
 	startTime = CFAbsoluteTimeGetCurrent();
 	spawnedShapeRotateTransform = CGAffineTransformIdentity;
+	
 }
 
 -(void)setButtons{
@@ -947,14 +948,15 @@
 						[self.view bringSubviewToFront:scorePopUp];
                     }
 					[UIView beginAnimations:nil context:nil]; 
-					[UIView setAnimationDuration:2.0f];
-					[UIView setAnimationDelegate:self];
-					
+					[UIView setAnimationDuration:2.5f];
+					[UIView setAnimationCurve: UIViewAnimationCurveEaseOut];
+					[UIView setAnimationTransition:110 forView: backGroundGrid cache:YES];
+					[UIView commitAnimations];
 					scorePopUp.bounds = CGRectMake(0, 0, 300, 300);
-					scorePopUp.center = CGPointMake(160, 320);
+					scorePopUp.center = CGPointMake(72, 25);
 					scorePopUp.alpha = 0;
 					
-					[UIView commitAnimations];
+					
                 }
             }
         }
@@ -994,6 +996,7 @@
         [guessView removeFromSuperview];
     }
 	[NSTimer release];
+	
 }
 
 -(void)changeScore:(Shape *) itemShape {
