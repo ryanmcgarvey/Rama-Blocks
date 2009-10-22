@@ -31,7 +31,7 @@
     MainMenuViewController * mainMenu;
     GameState * gameState;
     UIWindow *window;
-
+	
 	BOOL isMoving;
 	BOOL isAttaching;
 	BOOL isFiltering;
@@ -39,7 +39,10 @@
 	BOOL isUpgrading;
 	BOOL allowGravity;
 	BOOL yShift;
-
+	
+	UIImageView   *animatedSimplical;
+	
+	
 }
 
 @property (nonatomic, retain) IBOutlet UIWindow *window;
@@ -59,6 +62,7 @@
 
 - (NSString *)applicationDocumentsDirectory;
 
+-(void)beginRamaBlocks;
 
 -(GameState *)FetchGameState;
 -(SoundEffects *)FetchAudio;

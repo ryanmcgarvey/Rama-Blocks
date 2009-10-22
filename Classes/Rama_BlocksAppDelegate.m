@@ -6,6 +6,7 @@
 //  Copyright Simplical 2009. All rights reserved.
 //
 
+
 #import "Rama_BlocksAppDelegate.h"
 #import "GameItem.h"
 
@@ -14,16 +15,61 @@
 @synthesize window;
 @synthesize isMoving, isAttaching, isFiltering, isUpgrading, allowGravity, level, yShift, isBombing;
 
-- (void)applicationDidFinishLaunching:(UIApplication *)application {
-    
-    gameState = [self FetchGameState];
+
+
+- (void)applicationDidFinishLaunching:(UIApplication *)application{
+	
+	animatedSimplical = [[UIImageView alloc] initWithFrame:window.frame];
+	
+	animatedSimplical.animationImages = [NSArray arrayWithObjects:    
+										 [UIImage imageNamed:@"simp1.png"],
+										 [UIImage imageNamed:@"simp2.png"],
+										 [UIImage imageNamed:@"simp3.png"],
+										 [UIImage imageNamed:@"simp4.png"],
+										 [UIImage imageNamed:@"simp5.png"],
+										 [UIImage imageNamed:@"simp6.png"],
+										 [UIImage imageNamed:@"simp7.png"],
+										 [UIImage imageNamed:@"simp8.png"],
+										 [UIImage imageNamed:@"simp9.png"],
+										 [UIImage imageNamed:@"simp10.png"],
+										 [UIImage imageNamed:@"simp9.png"], 
+										 [UIImage imageNamed:@"simp8.png"],
+										 [UIImage imageNamed:@"simp7.png"],
+										 [UIImage imageNamed:@"simp6.png"],
+										 [UIImage imageNamed:@"simp5.png"],
+										 [UIImage imageNamed:@"simp4.png"],
+										 [UIImage imageNamed:@"simp3.png"],
+										 [UIImage imageNamed:@"simp2.png"],
+										 [UIImage imageNamed:@"simp1.png"],nil];
+	
+	animatedSimplical.animationDuration = 1.0;
+	
+	animatedSimplical.animationRepeatCount = -1;
+	
+	[animatedSimplical startAnimating];
+	
+	[window addSubview:animatedSimplical];
+	[window makeKeyAndVisible];
+	
+	[self performSelector:@selector(stopAnimation) withObject:nil afterDelay:7];
+	
+}
+
+- (void)stopAnimation{
+	[animatedSimplical stopAnimating];
+	[self beginRamaBlocks];
+}
+
+-(void)beginRamaBlocks{
+	
+	gameState = [self FetchGameState];
     mainMenu = [[MainMenuViewController alloc] initWithNibName:@"MainMenuViewController" bundle:nil];
     [[UIApplication sharedApplication] setStatusBarHidden:YES animated:NO];
-
+	
     [window addSubview:mainMenu.view];
 	[window makeKeyAndVisible];
 	
-	isMoving = NO;
+	//isMoving = NO;
 	isAttaching = NO;
 	isFiltering = NO;
 	isUpgrading = NO;
@@ -32,7 +78,10 @@
 	yShift = NO;
 	
 	level = [[Level alloc] init:[gameState.currentLevel intValue]];
+	
 }
+
+
 -(SoundEffects *)FetchAudio{
     if(audio == nil){
         audio = [SoundEffects new];
@@ -46,7 +95,7 @@
     {
         
         [self managedObjectContext];
-    
+		
         NSError *fetchError = nil;
         NSArray *fetchResults;
         
@@ -79,7 +128,7 @@
             
             for(int i = 0; i < NUMBER_OF_ROWS * NUMBER_OF_COLUMNS; i++)
             {
-            
+				
                 ItemState * item = [NSEntityDescription
                                     insertNewObjectForEntityForName:@"ItemState" 
                                     inManagedObjectContext:managedObjectContext];
@@ -110,8 +159,8 @@
             [gameState.currentBoard addItemsObject:item];
             
             item = [NSEntityDescription
-                                insertNewObjectForEntityForName:@"ItemState" 
-                                inManagedObjectContext:managedObjectContext];
+					insertNewObjectForEntityForName:@"ItemState" 
+					inManagedObjectContext:managedObjectContext];
             item.index = [NSNumber numberWithInt:1];
             item.ItemType = [NSNumber numberWithInt:SpawnItem];
             [gameState.currentBoard addItemsObject:item];
@@ -139,15 +188,15 @@
     NSPredicate *predicate = [NSPredicate predicateWithFormat:
                               @"(owningBoardState == %@) and (ItemType == %d) ", gameState.currentBoard, ShapeItem ];
     
-                              
+	
     NSFetchRequest *request = [[[NSFetchRequest alloc] init] autorelease];
     
-
+	
     
     [request setEntity:entityDescription];
     [request setPredicate:predicate];
     [request setSortDescriptors: [NSArray arrayWithObject:sortDescriptor]];
-
+	
     
     fetchResults = [managedObjectContext 
                     executeFetchRequest:request 
@@ -167,7 +216,7 @@
     NSEntityDescription *entityDescription = [NSEntityDescription
                                               entityForName:@"ItemState" 
                                               inManagedObjectContext:managedObjectContext];
-
+	
     
     NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc]
                                         initWithKey:@"index" ascending:YES];
@@ -227,8 +276,8 @@
 -(LevelStatistics *)CreatePlayedLevel{
     [self managedObjectContext];
     LevelStatistics * stat = [NSEntityDescription
-                        insertNewObjectForEntityForName:@"LevelStatistics" 
-                        inManagedObjectContext:managedObjectContext];
+							  insertNewObjectForEntityForName:@"LevelStatistics" 
+							  inManagedObjectContext:managedObjectContext];
     
     return stat;
 }
@@ -392,4 +441,3 @@
     
 }
 @end
-
