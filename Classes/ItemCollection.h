@@ -63,11 +63,14 @@ typedef enum enum_Gravity {
 	
 	int maxY;
 	
+	int multiplier;
+	
     
 	
 }
 
 @property(assign)Gravity gravityDirection;
+@property(readwrite, assign)int multiplier;
 
 -(id)init: (int) rows : (int) columns : (int)rowPixelLength : (int)columnPixelLength : (Level *)level;
 -(void)removeBlocksForDifficulty;

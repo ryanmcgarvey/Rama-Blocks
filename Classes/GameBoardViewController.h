@@ -29,6 +29,8 @@
     IBOutlet UIView * menuView;
 	IBOutlet UIView * statsView;
     IBOutlet UIImageView *backGround;
+	UIImageView *backGroundGrid;
+	UIImageView *backGroundTransition;
 	UIImageView *backGroundStars;
 	UIImageView *backGroundCloudsA;
 	UIImageView *backGroundCloudsB;
@@ -54,6 +56,7 @@
     IBOutlet UILabel * transformsLabel;
 	IBOutlet UILabel * timeLabel;
 	IBOutlet UILabel * recipeLabel;
+	IBOutlet UILabel * scorePopUp;
 	
     IBOutlet UIButton * buttonResume;
     IBOutlet UIButton * buttonOptions;
@@ -190,6 +193,8 @@
 
 -(void)checkLevel;
 -(void)changeLevel;
+-(void)animateLevelChange;
+
 -(void)removeStats;
 -(BOOL)subtractScoreForRecipe;
 //HELPERS

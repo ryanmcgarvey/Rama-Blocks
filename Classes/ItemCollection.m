@@ -10,7 +10,7 @@
 #import "Rama_BlocksAppDelegate.h"
 
 @implementation ItemCollection
-@synthesize gravityDirection;
+@synthesize gravityDirection, multiplier;
 
 -(id)init: (int) rows : (int) columns : (int)rowPixelLength : (int)columnPixelLength : (Level *) level{	
 	
@@ -603,7 +603,7 @@
         {
             [transFormGroup removeObject:cell];
             [self animateTransform: transFormGroup];
-			
+			multiplier = [transFormGroup count] - 2;
 			
 			[NSTimer timerWithTimeInterval:1 invocation:animateInvocation repeats:NO];
 			[NSTimer release];
