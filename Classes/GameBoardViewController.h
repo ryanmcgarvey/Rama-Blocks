@@ -29,25 +29,23 @@
     IBOutlet UIView * menuView;
 	IBOutlet UIView * statsView;
     IBOutlet UIImageView *backGround;
+	IBOutlet UIImageView *discardCountImage;
+	IBOutlet UIImageView *bombCountImage;
+	IBOutlet UIImageView *reshuffleCountImage;
+	IBOutlet UIImageView *upgradeCountImage;
+	IBOutlet UIImageView *lockSet;
+	
 	UIImageView *backGroundGrid;
 	UIImageView *backGroundTransition;
 	UIImageView *backGroundStars;
 	UIImageView *backGroundCloudsA;
 	UIImageView *backGroundCloudsB;
-	IBOutlet UIImageView *lockSet;
     UIImageView *lockFeedBackA;
 	UIImageView *lockFeedBackB;
 	UIImageView *lockFeedBackC;
     UIImageView * guessView;
 	UIImageView * powerBack;
-    IBOutlet UIImageView *discardCountImage;
-	IBOutlet UIImageView *bombCountImage;
-	IBOutlet UIImageView *reshuffleCountImage;
-	IBOutlet UIImageView *upgradeCountImage;
-	
-	UIImage * cloudA;
-	UIImage * cloudB;
-	
+    
     IBOutlet UILabel * attemptsString;
 	IBOutlet UILabel * scoreLabel;
 	
@@ -74,7 +72,6 @@
 	
     UIDevice * CurrentDevice;
     NSString * backGroundToLoad;
-    NSMutableArray * experimentArray;
 	
 	Shape * touchedGuessItemShape;
 	
@@ -96,11 +93,7 @@
 	PowerItem *powerItem;
 	Gravity gravity;
 	
-	CGFloat touchDistanceToItemC;
-	
 	CGPoint startTouchPosition;
-	CGPoint currentTouchPosition;
-	CGPoint menuViewCenter;
     
     CFTimeInterval startTime;
     NSTimer *TouchTimer;
@@ -120,8 +113,6 @@
 	int spawnY;
 	int spawnNextX;
 	int spawnNextY;
-	int rightPix;
-	int upPix;
 	
     BOOL lockMode;
 	
@@ -135,27 +126,7 @@
 @property (readwrite, assign)int upgradeCount;
 @property (readwrite, assign)int score;
 
-@property (nonatomic, retain) UIButton * buttonMenu;
-@property (nonatomic, retain) UIButton * buttonResume;
-@property (nonatomic, retain) UIButton * buttonOptions;
-@property (nonatomic, retain) UIButton * buttonMainMenu;
-@property (nonatomic, retain) UIButton * checkLock;
-@property (nonatomic, retain) UIButton * closeLock;
-@property (nonatomic, retain) UIButton * checkRecipe;
-@property (nonatomic, retain) UIButton * discardButton;
-@property (nonatomic, retain) UIButton * bombButton;
-@property (nonatomic, retain) UIButton * reshuffleButton;
-@property (nonatomic, retain) UIButton * upgradeButton;
-
-@property (nonatomic, retain) UIView * menuView;
 @property (readwrite, retain) DrawingView *drawingView;
-
-@property (nonatomic, retain) UILabel * attemptsString;
-@property (nonatomic, retain) UILabel * scoreLabel;
-
-@property (readwrite, assign) CGPoint startTouchPosition;
-@property (readwrite, assign) CGPoint currentTouchPosition;
-@property (readwrite, assign) CGFloat touchDistanceToItemC;
 
 @property (readwrite, assign)CGAffineTransform spawnedShapeRotateTransform;
 

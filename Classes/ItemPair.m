@@ -15,8 +15,8 @@
 
 
 -(id)init{
-
-
+	
+	
     
     ShaddowA = [[UIImageView alloc]initWithFrame:CGRectMake(0.0f, 0.0f, SHAPE_WIDTH, SHAPE_WIDTH)];
     ShaddowB = [[UIImageView alloc]initWithFrame:CGRectMake(0.0f, 0.0f, SHAPE_WIDTH, SHAPE_WIDTH)];
@@ -28,14 +28,13 @@
     return(ItemA.center.y > GRID_Y && ItemB.center.y > GRID_Y);
 }
 
-
 - (void)rotate:(GameItem *)touched{
     Orientation = ++Orientation % 4;
 	GameItem * rotating;
-
+	
 	
 	rotating = ItemB;
-		
+	
 	switch (Orientation) 
 	{
 		case 0:
@@ -54,14 +53,14 @@
 			rotating.center = CGPointMake(touched.center.x - (SHAPE_WIDTH/2), touched.center.y + (SHAPE_WIDTH/2));
 			touched.center = CGPointMake(touched.center.x - (SHAPE_WIDTH/2), touched.center.y - (SHAPE_WIDTH/2));
 			break;
-		
+			
 		default:
 			break;
 	}
-
-
+	
+	
 }
-                
+
 -(void)Reset{
     Orientation = 0;
 }
@@ -80,7 +79,6 @@
 	GameItem * itemA = ItemA;
 	GameItem * itemB = ItemB;
 	GameItem * itemC = ItemC;
-    tempCount++;
 	Rama_BlocksAppDelegate * appDelegate =  (Rama_BlocksAppDelegate *)[[UIApplication sharedApplication] delegate];
 	
 	if(appDelegate.isMoving == YES){
@@ -93,13 +91,10 @@
 	itemA.center = CGPointMake(location.x + distanceToItemA.x, location.y + distanceToItemA.y);
 	itemB.center = CGPointMake(location.x + distanceToItemB.x, location.y + distanceToItemB.y);
 	
-	
 	[self checkBounds];
-    
-    NSLog(@"count: %d"), tempCount;
+	return;
+}
 
-	}
-	
 -(void)setShadow:(CGPoint)ShaddowALoc:(CGPoint)ShaddowBLoc{
     Rama_BlocksAppDelegate * appDelegate =  (Rama_BlocksAppDelegate *)[[UIApplication sharedApplication] delegate];
 	if(appDelegate.allowGravity == TRUE){
@@ -114,7 +109,7 @@
 		ShaddowA.alpha = 0.0f;
 		ShaddowB.alpha = 0.0f;
 	}
-        
+	
 }
 
 - (BOOL)checkBounds{
@@ -170,7 +165,7 @@
 		}
 	}
     return TRUE;
-	 
+	
 }
 
 - (void)setItemA:(GameItem *) itemA {

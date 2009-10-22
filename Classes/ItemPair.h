@@ -30,8 +30,8 @@
 	CGPoint distanceToItemB;
 	CGPoint distanceToItemC;
 	
-	int tempCount;
-
+	
+	
 }
 
 

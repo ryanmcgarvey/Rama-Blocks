@@ -29,82 +29,15 @@
 	int row = 0;
 	int column = 0;
     
-	for (row = 0; row < RowLength; row++) 
-	{
-		for (column =0; column < ColumnLength; column++) 
-		{
+	for (row = 0; row < RowLength; row++) {
+		for (column =0; column < ColumnLength; column++) {
 			float x = (GRID_LEFT_EDGE + (SHAPE_WIDTH / 2)) + (ColumnPixelLength * column);
 			float y = (  MAX_Y  - (RowPixelLength * row) - (SHAPE_WIDTH / 2) );
 			CGPoint point = CGPointMake( x , y );
 			cells[(row * ColumnLength) + column] = [[Cell alloc] initWithData: point : row : column];
 		}
 	}
-    
 	return self;
-}
-
--(NSMutableArray *)fillBlocksForDifficulty{
-	
-	int row;
-	int column;
-	
-	NSMutableArray * blocks = [[NSMutableArray alloc] initWithCapacity:NUMBER_OF_ROWS * NUMBER_OF_COLUMNS];
-	
-	for (row = 0; row < RowLength; row++) 
-	{
-		for (column =0; column < ColumnLength; column++) 
-		{
-			Cell * cell = [self GetCell: row : column];
-			Shape * shape = [[[Shape alloc] initWithInfo: Red : Block : cell.Center]retain]; 
-			//[self SetItemToCell:shape : cell];
-			//[self.view addSubview:shape];
-			if(column < currentLevel.columnsBlockedLow || row < currentLevel.rowsBlockedLow){ 
-				[blocks addObject:shape];
-				[self SetItemToCell:shape : cell];
-			}
-			if(column > currentLevel.columnsBlockedHigh || row < currentLevel.rowsBlockedLow){ 
-				[blocks addObject:shape];
-				[self SetItemToCell:shape : cell];
-			}
-			if(row > currentLevel.rowsBlockedHigh){ 
-				[blocks addObject:shape];
-				[self SetItemToCell:shape : cell];
-			}
-		}
-		
-	}
-	
-	//[blocks autorelease];
-	//[blocksToRemove autorelease];
-	return blocks;
-}
-
--(void)removeBlocksForDifficulty{
-	
-	int row;
-	int column;
-	
-	NSMutableArray * blocksToRemove = [[NSMutableArray alloc] initWithCapacity:NUMBER_OF_ROWS * NUMBER_OF_COLUMNS];
-	
-	for (row = 0; row < RowLength; row++) 
-	{
-		for (column =0; column < ColumnLength; column++) 
-		{
-			Cell * cell = [self GetCell: row : column];
-			Shape * shape = (Shape *) cell.ItemInCell; 
-			if(column >= currentLevel.columnsBlockedLow && column <= currentLevel.columnsBlockedHigh && shape.shapeType == Block){ 
-				if(row <= currentLevel.rowsBlockedHigh && row >= currentLevel.rowsBlockedLow){
-					[blocksToRemove addObject:cell];
-				}
-			}
-			
-		}
-		
-	}
-	
-	[self RemoveFromCellsAndRefactor: blocksToRemove];
-	
-	//[blocksToRemove autorelease];
 }
 
 -(void)cleanBoard{
@@ -138,168 +71,173 @@
 					if([self checkPieceForPhase1: row : column] == TRUE){
 						return TRUE;
 					}
+					break;
 				case 2:
 					if([self checkPieceForPhase2: row : column] == TRUE){
 						return TRUE;
 					}
+					break;
 				case 3:
 					if([self checkPieceForPhase3: row : column] == TRUE){
 						return TRUE;
 					}
+					break;
 			}
 		}
 		
 	}
 	return FALSE;
 }
-	//squares of all dif colors in succession
+//squares of all dif colors in succession
 -(BOOL)checkPieceForPhase1:(int) row :(int) column{
 	Cell * cell = [self GetCell: row : column];
 	Shape * shape = (Shape *) cell.ItemInCell; 
 	Cell * neighbor = nil;
 	Shape * neighborShape = (Shape *)neighbor.ItemInCell;
-	Cell * doNotInclude = nil;
-	ColorType  doNotIncludeColor;
+	ColorType  doNotIncludeColorA;
+	ColorType  doNotIncludeColorB;
 	
-	if(cell.ItemInCell != nil){
+	if(cell.ItemInCell != nil && shape.shapeType == Square){
 		neighbor = [self GetCell:cell.Row + 1 : cell.Column];
 		neighborShape = (Shape *)neighbor.ItemInCell;
-		if(shape.shapeType == neighborShape.shapeType && shape.colorType != neighborShape.colorType && neighbor.ItemInCell != nil
-			&& shape.shapeType == Square)
-		{
-			doNotIncludeColor = shape.colorType;
+		doNotIncludeColorB = shape.colorType;
+		if(shape.shapeType == neighborShape.shapeType && shape.colorType != neighborShape.colorType && neighborShape.colorType != doNotIncludeColorB){
+			
 			cell = [self GetCell:cell.Row + 1 : cell.Column];
 			shape = (Shape *) cell.ItemInCell; 
+			doNotIncludeColorA = shape.colorType;
+			
 			neighbor = [self GetCell:cell.Row + 1 : cell.Column];
 			neighborShape = (Shape *)neighbor.ItemInCell;
 			
-			if(shape.shapeType == neighborShape.shapeType && shape.colorType != neighborShape.colorType && neighbor.ItemInCell
-			   && neighborShape.colorType != doNotIncludeColor && neighbor.ItemInCell != nil)
-			{
+			if(shape.shapeType == neighborShape.shapeType && shape.colorType != neighborShape.colorType
+			   && neighborShape.colorType != doNotIncludeColorA && neighborShape.colorType != doNotIncludeColorB){
 				return TRUE;
 			}
 			
 			neighbor = [self GetCell:cell.Row  : cell.Column + 1];
 			neighborShape = (Shape *)neighbor.ItemInCell;
 			
-			if(shape.shapeType == neighborShape.shapeType && shape.colorType != neighborShape.colorType && neighbor.ItemInCell
-			   && neighborShape.colorType != doNotIncludeColor && neighbor.ItemInCell != nil)
-			{
+			if(shape.shapeType == neighborShape.shapeType && shape.colorType != neighborShape.colorType
+			   && neighborShape.colorType != doNotIncludeColorA && neighborShape.colorType != doNotIncludeColorB){
 				return TRUE;
 			}
 			
 			neighbor = [self GetCell:cell.Row  : cell.Column - 1];
 			neighborShape = (Shape *)neighbor.ItemInCell;
 			
-			if(shape.shapeType == neighborShape.shapeType && shape.colorType != neighborShape.colorType && neighbor.ItemInCell
-			   && neighborShape.colorType != doNotIncludeColor && neighbor.ItemInCell != nil)			{
+			if(shape.shapeType == neighborShape.shapeType && shape.colorType != neighborShape.colorType
+			   && neighborShape.colorType != doNotIncludeColorA && neighborShape.colorType != doNotIncludeColorB){
 				return TRUE;
 			}
 		}
+		
+		cell = [self GetCell: row : column];
 		neighbor = [self GetCell:cell.Row - 1 : cell.Column];
 		neighborShape = (Shape *)neighbor.ItemInCell;
-		if(shape.shapeType == neighborShape.shapeType && shape.colorType != neighborShape.colorType && neighbor.ItemInCell != nil
-		   && shape.shapeType == Square)
-		{
-			doNotIncludeColor = shape.colorType;
-			doNotInclude = [self GetCell: row : column];;
-			cell = [self GetCell:cell.Row - 1 : cell.Column];;
+		if(shape.shapeType == neighborShape.shapeType && shape.colorType != neighborShape.colorType && neighborShape.colorType != doNotIncludeColorB){
+			
+			cell = [self GetCell:cell.Row - 1 : cell.Column];
 			shape = (Shape *) cell.ItemInCell;
+			doNotIncludeColorA = shape.colorType;
+			
 			neighbor = [self GetCell:cell.Row - 1 : cell.Column];
 			neighborShape = (Shape *)neighbor.ItemInCell;
 			
-			if(shape.shapeType == neighborShape.shapeType && shape.colorType != neighborShape.colorType && neighbor.ItemInCell
-			   && neighborShape.colorType != doNotIncludeColor && neighbor.ItemInCell != nil)			{
+			if(shape.shapeType == neighborShape.shapeType && shape.colorType != neighborShape.colorType
+			   && neighborShape.colorType != doNotIncludeColorA && neighborShape.colorType != doNotIncludeColorB){
 				return TRUE;
 			}
 			
 			neighbor = [self GetCell:cell.Row  : cell.Column + 1];
 			neighborShape = (Shape *)neighbor.ItemInCell;
 			
-			if(shape.shapeType == neighborShape.shapeType && shape.colorType != neighborShape.colorType && neighbor.ItemInCell
-			   && neighborShape.colorType != doNotIncludeColor && neighbor.ItemInCell != nil)			{
+			if(shape.shapeType == neighborShape.shapeType && shape.colorType != neighborShape.colorType
+			   && neighborShape.colorType != doNotIncludeColorA && neighborShape.colorType != doNotIncludeColorB){
 				return TRUE;
 			}
 			
 			neighbor = [self GetCell:cell.Row  : cell.Column - 1];
 			neighborShape = (Shape *)neighbor.ItemInCell;
 			
-			if(shape.shapeType == neighborShape.shapeType && shape.colorType != neighborShape.colorType && neighbor.ItemInCell
-			   && neighborShape.colorType != doNotIncludeColor && neighbor.ItemInCell != nil)			{
+			if(shape.shapeType == neighborShape.shapeType && shape.colorType != neighborShape.colorType
+			   && neighborShape.colorType != doNotIncludeColorA && neighborShape.colorType != doNotIncludeColorB){
 				return TRUE;
 			}
 		}
+		
+		cell = [self GetCell: row : column];
 		neighbor = [self GetCell:cell.Row  : cell.Column + 1];
 		neighborShape = (Shape *)neighbor.ItemInCell;
-		if(shape.shapeType == neighborShape.shapeType && shape.colorType != neighborShape.colorType && neighbor.ItemInCell != nil
-		   && shape.shapeType == Square)
-		{
-			doNotIncludeColor = shape.colorType;
-			doNotInclude = [self GetCell: row : column];;
-			cell = [self GetCell:cell.Row  : cell.Column + 1];;
+		if(shape.shapeType == neighborShape.shapeType && shape.colorType != neighborShape.colorType && neighborShape.colorType != doNotIncludeColorB){
+			
+			cell = [self GetCell:cell.Row : cell.Column + 1];
 			shape = (Shape *) cell.ItemInCell;
+			doNotIncludeColorA = shape.colorType;
+			
 			neighbor = [self GetCell:cell.Row + 1 : cell.Column];
 			neighborShape = (Shape *)neighbor.ItemInCell;
 			
-			if(shape.shapeType == neighborShape.shapeType && shape.colorType != neighborShape.colorType && neighbor.ItemInCell
-			   && neighborShape.colorType != doNotIncludeColor && neighbor.ItemInCell != nil)			{
+			if(shape.shapeType == neighborShape.shapeType && shape.colorType != neighborShape.colorType
+			   && neighborShape.colorType != doNotIncludeColorA && neighborShape.colorType != doNotIncludeColorB){
 				return TRUE;
 			}
 			
 			neighbor = [self GetCell:cell.Row - 1 : cell.Column];
 			neighborShape = (Shape *)neighbor.ItemInCell;
 			
-			if(shape.shapeType == neighborShape.shapeType && shape.colorType != neighborShape.colorType && neighbor.ItemInCell
-			   && neighborShape.colorType != doNotIncludeColor && neighbor.ItemInCell != nil)			{
+			if(shape.shapeType == neighborShape.shapeType && shape.colorType != neighborShape.colorType
+			   && neighborShape.colorType != doNotIncludeColorA && neighborShape.colorType != doNotIncludeColorB){
 				return TRUE;
 			}
 			
 			neighbor = [self GetCell:cell.Row  : cell.Column + 1];
 			neighborShape = (Shape *)neighbor.ItemInCell;
 			
-			if(shape.shapeType == neighborShape.shapeType && shape.colorType != neighborShape.colorType && neighbor.ItemInCell
-			   && neighborShape.colorType != doNotIncludeColor && neighbor.ItemInCell != nil)			{
+			if(shape.shapeType == neighborShape.shapeType && shape.colorType != neighborShape.colorType
+			   && neighborShape.colorType != doNotIncludeColorA && neighborShape.colorType != doNotIncludeColorB){
 				return TRUE;
 			}
 		}
+		cell = [self GetCell: row : column];
 		neighbor = [self GetCell:cell.Row  : cell.Column - 1];
 		neighborShape = (Shape *)neighbor.ItemInCell;
-		if(shape.shapeType == neighborShape.shapeType && shape.colorType != neighborShape.colorType && neighbor.ItemInCell != nil
-		   && shape.shapeType == Square)
+		if(shape.shapeType == neighborShape.shapeType && shape.colorType != neighborShape.colorType && neighborShape.colorType != doNotIncludeColorB)
 		{
-			doNotIncludeColor = shape.colorType;
-			doNotInclude = [self GetCell: row : column];;
-			cell = [self GetCell:cell.Row  : cell.Column - 1];;
+			
+			cell = [self GetCell:cell.Row  : cell.Column - 1];
 			shape = (Shape *) cell.ItemInCell;
+			doNotIncludeColorA = shape.colorType;
+			
 			neighbor = [self GetCell:cell.Row + 1 : cell.Column];
 			neighborShape = (Shape *)neighbor.ItemInCell;
 			
-			if(shape.shapeType == neighborShape.shapeType && shape.colorType != neighborShape.colorType && neighbor.ItemInCell
-			   && neighborShape.colorType != doNotIncludeColor && neighbor.ItemInCell != nil)			{
+			if(shape.shapeType == neighborShape.shapeType && shape.colorType != neighborShape.colorType
+			   && neighborShape.colorType != doNotIncludeColorA && neighborShape.colorType != doNotIncludeColorB){
 				return TRUE;
 			}
 			
 			neighbor = [self GetCell:cell.Row - 1 : cell.Column];
 			neighborShape = (Shape *)neighbor.ItemInCell;
 			
-			if(shape.shapeType == neighborShape.shapeType && shape.colorType != neighborShape.colorType && neighbor.ItemInCell
-			   && neighborShape.colorType != doNotIncludeColor && neighbor.ItemInCell != nil)			{
+			if(shape.shapeType == neighborShape.shapeType && shape.colorType != neighborShape.colorType
+			   && neighborShape.colorType != doNotIncludeColorA && neighborShape.colorType != doNotIncludeColorB){
 				return TRUE;
 			}
 			
 			neighbor = [self GetCell:cell.Row  : cell.Column - 1];
 			neighborShape = (Shape *)neighbor.ItemInCell;
 			
-			if(shape.shapeType == neighborShape.shapeType && shape.colorType != neighborShape.colorType && neighbor.ItemInCell
-			   && neighborShape.colorType != doNotIncludeColor && neighbor.ItemInCell != nil)			{
+			if(shape.shapeType == neighborShape.shapeType && shape.colorType != neighborShape.colorType
+			   && neighborShape.colorType != doNotIncludeColorA && neighborShape.colorType != doNotIncludeColorB){
 				return TRUE;
 			}
 		}
 	}
-
+	
 	return FALSE;
 }
-	//3 squares same color anywhere
+//3 squares same color anywhere
 -(BOOL)checkPieceForPhase2:(int) row :(int) column{
 	Cell * cell = [self GetCell: row : column];
 	Shape * shape = (Shape *) cell.ItemInCell; 
@@ -355,7 +293,7 @@
 	}
 	return FALSE;
 }
-	//2 pentagons any color anywhere
+//2 pentagons any color anywhere
 -(BOOL)checkPieceForPhase3:(int) row :(int) column{
 	Cell * cell = [self GetCell: row : column];
 	Shape * shape = (Shape *) cell.ItemInCell;
@@ -378,18 +316,16 @@
 
 -(void)UpdateState{
     numberOfMoves = [gameState.currentBoard.numberOfMovies intValue];
-    numberOfTransforms = [gameState.currentBoard.numberOfTransforms intValue];}
+numberOfTransforms = [gameState.currentBoard.numberOfTransforms intValue];}
 
 -(void)SaveState {
     Rama_BlocksAppDelegate * appDelegate =  (Rama_BlocksAppDelegate *)[[UIApplication sharedApplication] delegate];
     NSArray * items = [appDelegate FetchCollectionItemStates];
     
-    for(int i = 0; i < NUMBER_OF_ROWS * NUMBER_OF_COLUMNS; i++)
-    {
+    for(int i = 0; i < NUMBER_OF_ROWS * NUMBER_OF_COLUMNS; i++){
 		Cell * cell = cells[i];
 		ItemState * itemState = [items objectAtIndex:i];
-		if(cell.ItemInCell != nil && [cell.ItemInCell isKindOfClass:[Shape class]])
-		{
+		if(cell.ItemInCell != nil && [cell.ItemInCell isKindOfClass:[Shape class]]){
 			Shape * shape = (Shape *) cell.ItemInCell;
 			itemState.shapeType = 
 			[NSNumber numberWithInt:shape.shapeType];
@@ -402,7 +338,6 @@
 			itemState.colorType = [NSNumber numberWithInt:-1];
 		}
     }
-   
     gameState.currentBoard.numberOfMovies = [NSNumber numberWithInt:numberOfMoves];
     gameState.currentBoard.numberOfTransforms = [NSNumber numberWithInt:numberOfTransforms];
 }
@@ -423,32 +358,25 @@
 	// Which column is each item in
 	rowA = (int)(GRID_Y_BOTTOM - 6 - itemPair.ItemA.center.y + (SHAPE_WIDTH / 2)) / (int)SHAPE_WIDTH;
 	rowB = (int)(GRID_Y_BOTTOM - 6 -itemPair.ItemB.center.y + (SHAPE_WIDTH / 2)) / (int)SHAPE_WIDTH;
-	if(rowA >= NUMBER_OF_ROWS)
-    {
+	if(rowA >= NUMBER_OF_ROWS){
         rowA = NUMBER_OF_ROWS - 1;
     }
-    if(rowB >= NUMBER_OF_ROWS)
-    {
+    if(rowB >= NUMBER_OF_ROWS){
         rowB = NUMBER_OF_ROWS - 1;
     }
-    
     
 	cellA = [self GetCell:rowA:columnA];
 	cellB = [self GetCell:rowB:columnB];
 	
-	if(cellA == cellB)
-    {
-		if(itemPair.ItemA.center.y > itemPair.ItemB.center.y)
-        {
+	if(cellA == cellB){
+		if(itemPair.ItemA.center.y > itemPair.ItemB.center.y){
 			cellA = [self GetCell:cellA.Row -1 : cellA.Column];
 		}
-        else
-        {
+        else{
 			cellB = [self GetCell:cellB.Row -1 : cellB.Column];
 		}
 	}
-	if(!([self CheckCellToSet:cellA] && [self CheckCellToSet:cellB]))
-    {
+	if(!([self CheckCellToSet:cellA] && [self CheckCellToSet:cellB])){
 		NSLog(@"Collision, undoing shit");
 		return FALSE;
 	}
@@ -460,55 +388,45 @@
     
     cellA = [self FindCellToFallTo:itemPair.ItemA];
     cellB = [self FindCellToFallTo:itemPair.ItemB];
-    if(cellA == cellB)
-    {
+    if(cellA == cellB){
         switch (gravityDirection) {
             case down:
-                if(itemPair.ItemA.center.y < itemPair.ItemB.center.y)
-                {
+                if(itemPair.ItemA.center.y < itemPair.ItemB.center.y){
                     cellA = [self GetCell:cellA.Row + 1 : cellA.Column];
                 }
-                else
-                {
+                else{
                     cellB = [self GetCell:cellB.Row + 1 : cellB.Column];
                 }
                 break;
             case up:
-                if(itemPair.ItemA.center.y > itemPair.ItemB.center.y)
-                {
+                if(itemPair.ItemA.center.y > itemPair.ItemB.center.y){
                     cellA = [self GetCell:cellA.Row - 1 : cellA.Column];
                 }
-                else
-                {
+                else{
                     cellB = [self GetCell:cellB.Row - 1 : cellB.Column];
                 }
                 break;
             case left:
-                if(itemPair.ItemA.center.x > itemPair.ItemB.center.x)
-                {
+                if(itemPair.ItemA.center.x > itemPair.ItemB.center.x){
                     cellA = [self GetCell:cellA.Row : cellA.Column + 1];
                 }
-                else
-                {
+                else{
                     cellB = [self GetCell:cellB.Row : cellB.Column + 1];
                 }
                 break;
 				
             case right:
 				
-                if(itemPair.ItemA.center.x < itemPair.ItemB.center.x)
-                {
+                if(itemPair.ItemA.center.x < itemPair.ItemB.center.x){
                     cellA = [self GetCell:cellA.Row : cellA.Column - 1];
                 }
-                else
-                {
+                else{
                     cellB = [self GetCell:cellB.Row : cellB.Column - 1];
                 }
                 break;
         }
 		
 	}
-    
     [itemPair setShadow:cellA.Center : cellB.Center];
     
     return TRUE;
@@ -979,7 +897,7 @@
 
 -(void)ApplyGravity{
     int row;int column;
-	 Rama_BlocksAppDelegate * appDelegate =  (Rama_BlocksAppDelegate *)[[UIApplication sharedApplication] delegate];
+	Rama_BlocksAppDelegate * appDelegate =  (Rama_BlocksAppDelegate *)[[UIApplication sharedApplication] delegate];
 	Cell * cell;
     if(appDelegate.allowGravity == TRUE){
 		switch (gravityDirection) {
@@ -1035,10 +953,10 @@
 					}
 				}
 				return;
-			//case zero:
-			//	return;
-			//default:
-			//	break;
+				//case zero:
+				//	return;
+				//default:
+				//	break;
 		}
 	}
     [cell release];
@@ -1071,20 +989,15 @@
 				spawnedShapeRotateTransform = CGAffineTransformIdentity;
 				rotatedShape.transform = spawnedShapeRotateTransform;
 				break;
-				
-				
 		}
 		
         Cell * cellToMoveTo = [self FindCellToFallTo:cell.ItemInCell];
-        if(cellToMoveTo == nil || cellToMoveTo.ItemInCell != nil)
-        {
+        if(cellToMoveTo == nil || cellToMoveTo.ItemInCell != nil){
             return;
         }
 		
-		
         [self SetItemToCell:cell.ItemInCell :cellToMoveTo];
 		
-        //[cell.ItemInCell release];
         cell.ItemInCell = nil;
     }
 }
@@ -1141,24 +1054,19 @@
 }
 
 -(void)SetItemToCell:(GameItem *)item : (Cell *) cell{
-   
     if(cell.ItemInCell != nil){
-        
         [cell.ItemInCell release];
     }
 	cell.ItemInCell = item;
     
 	[UIView beginAnimations:nil context:nil]; 
 	[UIView setAnimationDuration:0.15];
-
-    
+	
     item.center = cell.Center;
     [UIView commitAnimations];
     
-    
 	item.Row = cell.Row;
 	item.Column = cell.Column;
-
 }
 
 -(void)setShuffledArray:(NSMutableArray *)shuffledPieces{
@@ -1179,20 +1087,17 @@
 				[self SetItemToCell:shuffleShape :placedCell];				
 			}
 			i++;
-			
-			
 		}
 	}
 	NSLog(@"adding");	
 }
 
--(Cell *)GetCell:(int)row : (int)column
-{
+-(Cell *)GetCell:(int)row : (int)column{
 	if(row >= 0 && row < RowLength && column >= 0 && column < ColumnLength)
 		return cells[(row) * ColumnLength + column];
 	return nil;
+	
 }
-
 -(Cell *)GetCell:(GameItem *)item{
 	return [self GetCell:item.Row :item.Column];
 }
