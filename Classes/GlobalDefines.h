@@ -8,9 +8,9 @@
  */
 
 #define GRID_X 0.f
-#define GRID_Y 160.0f
+#define GRID_Y 157.0f
 
-#define GRID_LEFT_EDGE 11.0f
+#define GRID_LEFT_EDGE 9.5f
 #define GRID_RIGHT_EDGE 310.0f
 
 #define GRID_WIDTH 301.0f
