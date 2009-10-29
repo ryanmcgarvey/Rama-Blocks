@@ -51,7 +51,7 @@
 	[window addSubview:animatedSimplical];
 	[window makeKeyAndVisible];
 	
-	[self performSelector:@selector(stopAnimation) withObject:nil afterDelay:1];
+	[self performSelector:@selector(stopAnimation) withObject:nil afterDelay:2];
 	
 }
 
@@ -63,6 +63,7 @@
 -(void)beginRamaBlocks{
 	
 	gameState = [self FetchGameState];
+	
     mainMenu = [[MainMenuViewController alloc] initWithNibName:@"MainMenuViewController" bundle:nil];
     [[UIApplication sharedApplication] setStatusBarHidden:YES animated:NO];
 	

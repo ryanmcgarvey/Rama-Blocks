@@ -26,8 +26,8 @@
 		backGround = [[UIImageView alloc]init];
 		
 		zoomBack = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 320, 480)]; 
-		zoomBack.image = [UIImage imageNamed:@"BigBackground.png"];
-		zoomBack.alpha = 0.3f;
+		//zoomBack.image = [UIImage imageNamed:@"BigBackground.png"];
+		//zoomBack.alpha = 0.3f;
 		
 		levelNumbers = [[UIImageView alloc] initWithFrame:CGRectMake(321, -50, 290, 360)]; 
 		levelNumbers.image = [UIImage imageNamed:@"NumberGrid.png"];
@@ -130,6 +130,11 @@
 		
 		self.view.contentMode = UIViewContentModeCenter;
 		
+		buttonGraphic.alpha = 0;
+		titleGraphic.alpha = 0;
+		behindButtonGraphic.alpha = 0;
+		backGroundMenu.alpha = 0;
+		
     }
     
     return self;
@@ -138,17 +143,30 @@
 - (void)viewWillAppear:(BOOL)animate{
     
 	[UIView beginAnimations:nil context:nil]; 
-	[UIView setAnimationDuration:45.0f];
-	backGround.center = CGPointMake(backGround.center.x - 280, backGround.center.y - 300);
-	
+	[UIView setAnimationDuration:30.0f];
+	[UIView setAnimationRepeatAutoreverses:YES];
+	[UIView setAnimationRepeatCount:100];
+	[UIView setAnimationCurve:UIViewAnimationCurveLinear];
+	//backGround.center = CGPointMake(backGround.center.x - 5, backGround.center.y - 5);
+	backGround.bounds = CGRectMake(0, 0, 640, 960);
 	[UIView commitAnimations];
     [super viewWillAppear:animate];
+	
+	[UIView beginAnimations:nil context:nil]; 
+	[UIView setAnimationDuration:0.5f];
+	[UIView setAnimationCurve:UIViewAnimationCurveLinear];
+	
+	buttonGraphic.alpha = 1;
+	titleGraphic.alpha = 1;
+	behindButtonGraphic.alpha = 1;
+	backGroundMenu.alpha = 1;
+	
+	[UIView commitAnimations];
 }
 
 - (void)viewDidLoad {
 	levelVerify.alpha = 0;
 	levelVerify.center = CGPointMake(160,240);
-	
 }
 
 - (void)didReceiveMemoryWarning {
@@ -197,6 +215,7 @@
 	[UIView beginAnimations:nil context:nil]; 
 	[UIView setAnimationDuration:1.0f];
 	[UIView setAnimationDelegate:self];
+	[UIView setAnimationCurve:UIViewAnimationCurveLinear];
 	[UIView setAnimationDidStopSelector:@selector(animateBoard)];
 	buttonGraphic.center = CGPointMake(buttonGraphic.center.x - 320,buttonGraphic.center.y);
 	titleGraphic.center = CGPointMake(titleGraphic.center.x,titleGraphic.center.y - 320);
@@ -206,7 +225,14 @@
 }
 
 - (void)actualLoadGameBoard{
-	backGround.center = CGPointMake(backGround.center.x + 280, backGround.center.y + 300);
+	
+	[UIView beginAnimations:nil context:nil]; 
+	[UIView setAnimationDuration:0.2f];
+	[UIView setAnimationCurve:UIViewAnimationCurveLinear];
+	
+	backGround.bounds = CGRectMake(0, 0, 320, 480);
+	
+	[UIView commitAnimations];
 	
 	UIViewController * controller = [[GameBoardViewController alloc] initWithNibName:@"GameBoardViewController" bundle:nil];
 	controller.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
@@ -216,28 +242,30 @@
 	[controller release];
 }
 
-- (IBAction)loadGameBoard:(id)sender {
-	 if([gameState.currentBoard.Active boolValue]){
-		 levelVerify.alpha = 1;
-	 }else{
-		 gameState.currentBoard.numberOfAttempts = [NSNumber numberWithInt:0];
+-(IBAction)loadGameBoard:(id)sender {
+	
+	if([gameState.currentBoard.Active boolValue]){
+		levelVerify.alpha = 1;
+	}else{
+		gameState.currentBoard.numberOfAttempts = [NSNumber numberWithInt:0];
 		 
-		 buttonCenter = buttonGraphic.center;
-		 titleCenter = titleGraphic.center;
-		 behindButtonCenter = behindButtonGraphic.center;
-		 backGroundCenter = backGround.center;
-		 levelVerify.alpha = 0;
-		 
-		 [UIView beginAnimations:nil context:nil]; 
-		 [UIView setAnimationDuration:1.0f];
-		 [UIView setAnimationDelegate:self];
-		 [UIView setAnimationDidStopSelector:@selector(animateBoard)];
-		 buttonGraphic.center = CGPointMake(buttonGraphic.center.x - 320,buttonGraphic.center.y);
-		 titleGraphic.center = CGPointMake(titleGraphic.center.x,titleGraphic.center.y - 320);
-		 behindButtonGraphic.center = CGPointMake(behindButtonGraphic.center.x+ 320,behindButtonGraphic.center.y);
-		 
-		 [UIView commitAnimations];
-	 }
+		buttonCenter = buttonGraphic.center;
+		titleCenter = titleGraphic.center;
+		behindButtonCenter = behindButtonGraphic.center;
+		backGroundCenter = backGround.center;
+		levelVerify.alpha = 0;
+		
+		[UIView beginAnimations:nil context:nil]; 
+		[UIView setAnimationDuration:0.7f];
+		[UIView setAnimationDelegate:self];
+		[UIView setAnimationDidStopSelector:@selector(animateBoard)];
+		[UIView setAnimationCurve:UIViewAnimationCurveLinear];
+		buttonGraphic.center = CGPointMake(buttonGraphic.center.x - 320,buttonGraphic.center.y);
+		titleGraphic.center = CGPointMake(titleGraphic.center.x,titleGraphic.center.y - 320);
+		behindButtonGraphic.center = CGPointMake(behindButtonGraphic.center.x+ 320,behindButtonGraphic.center.y);
+		
+		[UIView commitAnimations];
+	}
 		 
  }
  
@@ -422,48 +450,53 @@
  
 -(void)animateButtons{
 	 
-	 [UIView beginAnimations:nil context:nil]; 
-	 [UIView setAnimationDuration:2.0f];
-	 [UIView setAnimationDelegate:self];
+	[UIView beginAnimations:nil context:nil]; 
+	[UIView setAnimationDuration:1.0f];
+	[UIView setAnimationDelegate:self];
+	[UIView setAnimationCurve:UIViewAnimationCurveLinear];
 	 
-	 levelNumbers.center = CGPointMake(321, -50);
-	 levelSelectText.center = CGPointMake(160, -50);
-	 levelSelectGrayBox.center = CGPointMake(-50, 500);	
+	levelNumbers.center = CGPointMake(321, -50);
+	levelSelectText.center = CGPointMake(160, -50);
+	levelSelectGrayBox.center = CGPointMake(-50, 500);	
+	
+	levelNumbers.alpha = 0;
+	levelSelectText.alpha = 0;
+	levelSelectGrayBox.alpha = 0;	
+	
+	level1.center = CGPointMake(level1.center.x - 320,level1.center.y - 250);
+	level2.center = CGPointMake(level2.center.x - 320,level2.center.y - 250);
+	level3.center = CGPointMake(level3.center.x - 320,level3.center.y - 250);
+	level4.center = CGPointMake(level4.center.x - 320,level4.center.y - 250);
+	level5.center = CGPointMake(level5.center.x - 320,level5.center.y - 250);
+	level6.center = CGPointMake(level6.center.x - 320,level6.center.y - 250);
+	level7.center = CGPointMake(level7.center.x - 320,level7.center.y - 250);
+	level8.center = CGPointMake(level8.center.x - 320,level8.center.y - 250);
+	level9.center = CGPointMake(level9.center.x - 320,level9.center.y - 250);
+	level10.center = CGPointMake(level10.center.x - 320,level10.center.y - 250);
+	/*
+	level11.center = CGPointMake(level11.center.x - 320,level11.center.y - 250);
+	level12.center = CGPointMake(level12.center.x - 320,level12.center.y - 250);
+	level13.center = CGPointMake(level13.center.x - 320,level13.center.y - 250);
+	level14.center = CGPointMake(level14.center.x - 320,level14.center.y - 250);
+	level15.center = CGPointMake(level15.center.x - 320,level15.center.y - 250);
+	level16.center = CGPointMake(level16.center.x - 320,level16.center.y - 250);
+	level17.center = CGPointMake(level17.center.x - 320,level17.center.y - 250);
+	level18.center = CGPointMake(level18.center.x - 320,level18.center.y - 250);
+	level19.center = CGPointMake(level19.center.x - 320,level19.center.y - 250);
+	level20.center = CGPointMake(level20.center.x - 320,level20.center.y - 250);
+	level21.center = CGPointMake(level21.center.x - 320,level21.center.y - 250);
+	*/
 	 
-	 level1.center = CGPointMake(level1.center.x - 320,level1.center.y - 250);
-	 level2.center = CGPointMake(level2.center.x - 320,level2.center.y - 250);
-	 level3.center = CGPointMake(level3.center.x - 320,level3.center.y - 250);
-	 level4.center = CGPointMake(level4.center.x - 320,level4.center.y - 250);
-	 level5.center = CGPointMake(level5.center.x - 320,level5.center.y - 250);
-	 level6.center = CGPointMake(level6.center.x - 320,level6.center.y - 250);
-	 level7.center = CGPointMake(level7.center.x - 320,level7.center.y - 250);
-	 level8.center = CGPointMake(level8.center.x - 320,level8.center.y - 250);
-	 level9.center = CGPointMake(level9.center.x - 320,level9.center.y - 250);
-	 level10.center = CGPointMake(level10.center.x - 320,level10.center.y - 250);
-	 /*
-	 level11.center = CGPointMake(level11.center.x - 320,level11.center.y - 250);
-	 level12.center = CGPointMake(level12.center.x - 320,level12.center.y - 250);
-	 level13.center = CGPointMake(level13.center.x - 320,level13.center.y - 250);
-	 level14.center = CGPointMake(level14.center.x - 320,level14.center.y - 250);
-	 level15.center = CGPointMake(level15.center.x - 320,level15.center.y - 250);
-	 level16.center = CGPointMake(level16.center.x - 320,level16.center.y - 250);
-	 level17.center = CGPointMake(level17.center.x - 320,level17.center.y - 250);
-	 level18.center = CGPointMake(level18.center.x - 320,level18.center.y - 250);
-	 level19.center = CGPointMake(level19.center.x - 320,level19.center.y - 250);
-	 level20.center = CGPointMake(level20.center.x - 320,level20.center.y - 250);
-	 level21.center = CGPointMake(level21.center.x - 320,level21.center.y - 250);
-	 */
+	[self.view addSubview:zoomBack];
+	[self.view bringSubviewToFront:zoomBack];
 	 
-	 [self.view addSubview:zoomBack];
-	 [self.view bringSubviewToFront:zoomBack];
-	 
-	 backGround.bounds = CGRectMake(0, 0, 640, 960);
-	 zoomBack.alpha = 1;
-	 
-	 [UIView commitAnimations];
-	 
-	 [NSTimer scheduledTimerWithTimeInterval:2.1f target:self selector:@selector(actualLoadGameBoard) userInfo:nil repeats:NO];
-	 [NSTimer scheduledTimerWithTimeInterval:6 target:self selector:@selector(restoreCenters) userInfo:nil repeats:NO];
+	//backGround.bounds = CGRectMake(0, 0, 320, 480);
+	zoomBack.alpha = 1;
+
+	[UIView commitAnimations];
+
+	[NSTimer scheduledTimerWithTimeInterval:2.1f target:self selector:@selector(actualLoadGameBoard) userInfo:nil repeats:NO];
+	[NSTimer scheduledTimerWithTimeInterval:6 target:self selector:@selector(restoreCenters) userInfo:nil repeats:NO];
  
  
  }
@@ -502,6 +535,10 @@
 	 [levelNumbers removeFromSuperview];
 	 [levelSelectText removeFromSuperview];
 	 [levelSelectGrayBox removeFromSuperview];
+	
+	levelNumbers.alpha = 1;
+	levelSelectText.alpha = 1;
+	levelSelectGrayBox.alpha = 1;
 	 
  
  }
