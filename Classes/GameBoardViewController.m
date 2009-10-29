@@ -174,6 +174,8 @@
 	[self.view sendSubviewToBack:backGroundCloudsB];
 	[self.view addSubview:backGroundStars];
 	[self.view sendSubviewToBack:backGroundStars];
+	[self.view addSubview:backGround];
+	
 	[self.view addSubview:powerBack];
 	[self.view addSubview:buttonMenu];
 	[self.view addSubview:checkLock];
@@ -183,12 +185,14 @@
     [self.view addSubview:lockFeedBackA];
 	[self.view addSubview:lockFeedBackB];
 	[self.view addSubview:lockFeedBackC];
-    [self.view sendSubviewToBack:buttonMenu];
-	[self.view addSubview:backGround];
-	[self.view bringSubviewToFront:backGround];
 	[self.view addSubview:backGroundTransition];
 	[self.view addSubview:backGroundGrid];
+	
 	[self.view bringSubviewToFront:backGroundGrid];
+    [self.view sendSubviewToBack:buttonMenu];
+	[self.view bringSubviewToFront:backGround];
+	
+	
 	[self.view bringSubviewToFront:powerBack];
     
 	menuView.center = CGPointMake(160,240);
@@ -249,6 +253,12 @@
 		gameState.currentBoard.Active = [NSNumber numberWithBool:YES];
 	}
 	
+	SpawnedPair.ItemA.ItemView.alpha = 0;
+	SpawnedPair.ItemB.ItemView.alpha = 0;
+	SpawnedPair.ItemC.ItemView.alpha = 0;
+	nextPair.ItemA.ItemView.alpha = 0;
+	nextPair.ItemB.ItemView.alpha = 0;
+	
 	[self didRotate:nil];
 	
 	[itemCollection ApplyGravity];
@@ -257,6 +267,35 @@
 	
 	startTime = CFAbsoluteTimeGetCurrent();
 	spawnedShapeRotateTransform = CGAffineTransformIdentity;
+	
+	[UIView beginAnimations:nil context:nil]; 
+	[UIView setAnimationDuration:2.0f];
+	[UIView setAnimationDelegate:self];
+	
+	scoreLabel.alpha = 1;
+	discardCountImage.alpha = 1;
+	bombCountImage.alpha = 1;
+	reshuffleCountImage.alpha = 1;
+	upgradeCountImage.alpha = 1;
+	backGround.alpha = 1;
+	powerBack.alpha = 1;
+	buttonMenu.alpha = 1;
+	checkLock.alpha = 1;
+    lockSet.alpha = 1;
+    closeLock.alpha = 1;
+	checkRecipe.alpha = 1;
+    lockFeedBackA.alpha = 1;
+	lockFeedBackB.alpha = 1;
+	lockFeedBackC.alpha = 1;
+	backGroundGrid.alpha = 1;
+	//backGroundCloudsA.alpha = 1;
+	SpawnedPair.ItemA.ItemView.alpha = 1;
+	SpawnedPair.ItemB.ItemView.alpha = 1;
+	SpawnedPair.ItemC.ItemView.alpha = 1;
+	nextPair.ItemA.ItemView.alpha = 1;
+	nextPair.ItemB.ItemView.alpha = 1;
+	
+	[UIView commitAnimations];
 	
  }
 
@@ -763,6 +802,24 @@
         default:
             break;
     }
+	
+	scoreLabel.alpha = 0;
+	discardCountImage.alpha = 0;
+	bombCountImage.alpha = 0;
+	reshuffleCountImage.alpha = 0;
+	upgradeCountImage.alpha = 0;
+	backGround.alpha = 0;
+	powerBack.alpha = 0;
+	buttonMenu.alpha = 0;
+	checkLock.alpha = 0;
+    lockSet.alpha = 0;
+    closeLock.alpha = 0;
+	checkRecipe.alpha = 0;
+    lockFeedBackA.alpha = 0;
+	lockFeedBackB.alpha = 0;
+	lockFeedBackC.alpha = 0;
+	backGroundGrid.alpha = 0;
+	//backGroundCloudsA.alpha = 0;
 }
 
 -(void) SetupUI{
@@ -953,23 +1010,23 @@
 						[self.view addSubview:scorePopUp];
 						[self.view bringSubviewToFront:scorePopUp];
                     }
-					
+					/*
 					[UIView beginAnimations:nil context:nil]; 
 					[UIView setAnimationDuration:2.5f];
 					[UIView setAnimationCurve: UIViewAnimationCurveEaseOut];
 					[UIView setAnimationTransition:110 forView: backGroundGrid cache:YES];
 					[UIView commitAnimations];
-					/*
+					*/
 					[UIView beginAnimations:nil context:nil]; 
 					[UIView setAnimationDuration:2.0f];
-					[UIView setAnimationTransition:110 forView: scorePopUp cache:YES];
+					//[UIView setAnimationTransition:110 forView: scorePopUp cache:YES];
 					[UIView setAnimationCurve: UIViewAnimationCurveEaseInOut];
 					scorePopUp.bounds = CGRectMake(0, 0, 100, 100);
 					scorePopUp.center = CGPointMake(160, 240);
 					scorePopUp.alpha = 0;
 					
 					[UIView commitAnimations];
-					 */
+					 
                 }
             }
         }
@@ -1113,63 +1170,63 @@
 
 -(void)animateLevelChange{
 	[backGroundCloudsA.image release];
-	[backGroundCloudsB.image release];
+	//[backGroundCloudsB.image release];
 	
 	switch (CurrentDevice.orientation) {
         case UIInterfaceOrientationLandscapeRight:
             if (currentLevel.difficulty == 1){
 				backGroundCloudsA.image = [UIImage imageNamed:@"redClouds.png"];
-				backGroundCloudsB.image = [UIImage imageNamed:@"blueClouds.png"];
+				//backGroundCloudsB.image = [UIImage imageNamed:@"blueClouds.png"];
 				backGroundGrid.image = [UIImage imageNamed:@"orangesidegrid.png"];
 			}
             if (currentLevel.difficulty == 2){
 				backGroundCloudsA.image = [UIImage imageNamed:@"redClouds.png"];
-				backGroundCloudsB.image = [UIImage imageNamed:@"blueClouds.png"];
+				//backGroundCloudsB.image = [UIImage imageNamed:@"blueClouds.png"];
 				backGroundGrid.image = [UIImage imageNamed:@"greensidegrid.png"];
 			}
 			if (currentLevel.difficulty == 3){
 				backGroundCloudsA.image = [UIImage imageNamed:@"cyanClouds.png"];
-				backGroundCloudsB.image = [UIImage imageNamed:@"yellowClouds.png"];
+				//backGroundCloudsB.image = [UIImage imageNamed:@"yellowClouds.png"];
 				backGroundGrid.image = [UIImage imageNamed:@"violetsidegrid.png"];
 			}
 			if (currentLevel.difficulty == 4){
 				backGroundCloudsA.image = [UIImage imageNamed:@"greenClouds.png"];
-				backGroundCloudsB.image = [UIImage imageNamed:@"violetClouds.png"];
+				//backGroundCloudsB.image = [UIImage imageNamed:@"violetClouds.png"];
 				backGroundGrid.image = [UIImage imageNamed:@"cyansidegrid.png"];
 			}
 			if (currentLevel.difficulty == 5){
 				backGroundCloudsA.image = [UIImage imageNamed:@"cyanBlueClouds.png"];
-				backGroundCloudsB.image = [UIImage imageNamed:@"orangeClouds.png"];
+				//backGroundCloudsB.image = [UIImage imageNamed:@"orangeClouds.png"];
 				backGroundGrid.image = [UIImage imageNamed:@"purplesidegrid.png"];
 			}
 			if (currentLevel.difficulty == 6){
 				backGroundCloudsA.image = [UIImage imageNamed:@"yellowClouds.png"];
-				backGroundCloudsB.image = [UIImage imageNamed:@"magentaClouds.png"];
+				//backGroundCloudsB.image = [UIImage imageNamed:@"magentaClouds.png"];
 				backGroundGrid.image = [UIImage imageNamed:@"bluesidegrid.png"];
 			}
 			if (currentLevel.difficulty == 7){
 				backGroundCloudsA.image = [UIImage imageNamed:@"redClouds.png"];
-				backGroundCloudsB.image = [UIImage imageNamed:@"greenClouds.png"];    
+				//backGroundCloudsB.image = [UIImage imageNamed:@"greenClouds.png"];    
 				backGroundGrid.image = [UIImage imageNamed:@"cyansidegrid.png"];
 			}
 			if (currentLevel.difficulty == 8){
 				backGroundCloudsA.image = [UIImage imageNamed:@"blueClouds.png"];
-				backGroundCloudsB.image = [UIImage imageNamed:@"violetClouds.png"];
+				//backGroundCloudsB.image = [UIImage imageNamed:@"violetClouds.png"];
 				backGroundGrid.image = [UIImage imageNamed:@"redsidegrid.png"];
 			}
 			if (currentLevel.difficulty == 9){
 				backGroundCloudsA.image = [UIImage imageNamed:@"cyanBlueClouds.png"];
-				backGroundCloudsB.image = [UIImage imageNamed:@"greenClouds.png"];
+				//backGroundCloudsB.image = [UIImage imageNamed:@"greenClouds.png"];
 				backGroundGrid.image = [UIImage imageNamed:@"pinksidegrid.png"];
 			}
 			if (currentLevel.difficulty == 10){
 				backGroundCloudsA.image = [UIImage imageNamed:@"cyanClouds.png"];
-				backGroundCloudsB.image = [UIImage imageNamed:@"yellowClouds.png"];
+				//backGroundCloudsB.image = [UIImage imageNamed:@"yellowClouds.png"];
 				backGroundGrid.image = [UIImage imageNamed:@"greensidegrid.png"];
 			}
 			if (currentLevel.difficulty == 11){
 				backGroundCloudsA.image = [UIImage imageNamed:@"magentaClouds.png"];
-				backGroundCloudsB.image = [UIImage imageNamed:@"orangeClouds.png"];
+				//backGroundCloudsB.image = [UIImage imageNamed:@"orangeClouds.png"];
 				backGroundGrid.image = [UIImage imageNamed:@"greensidegrid.png"];
 			}
 			break;
@@ -1177,57 +1234,57 @@
 			backGroundTransition.transform = CGAffineTransformIdentity;
 			if (currentLevel.difficulty == 1){
 				backGroundCloudsA.image = [UIImage imageNamed:@"redClouds.png"];
-				backGroundCloudsB.image = [UIImage imageNamed:@"blueClouds.png"];
+				//backGroundCloudsB.image = [UIImage imageNamed:@"blueClouds.png"];
 				backGroundGrid.image = [UIImage imageNamed:@"orangesidegrid.png"];
 			}
             if (currentLevel.difficulty == 2){
 				backGroundCloudsA.image = [UIImage imageNamed:@"redClouds.png"];
-				backGroundCloudsB.image = [UIImage imageNamed:@"blueClouds.png"];
+				//backGroundCloudsB.image = [UIImage imageNamed:@"blueClouds.png"];
 				backGroundGrid.image = [UIImage imageNamed:@"greensidegrid.png"];
 			}
 			if (currentLevel.difficulty == 3){
 				backGroundCloudsA.image = [UIImage imageNamed:@"cyanClouds.png"];
-				backGroundCloudsB.image = [UIImage imageNamed:@"yellowClouds.png"];
+				//backGroundCloudsB.image = [UIImage imageNamed:@"yellowClouds.png"];
 				backGroundGrid.image = [UIImage imageNamed:@"violetsidegrid.png"];
 			}
 			if (currentLevel.difficulty == 4){
 				backGroundCloudsA.image = [UIImage imageNamed:@"greenClouds.png"];
-				backGroundCloudsB.image = [UIImage imageNamed:@"violetClouds.png"];
+				//backGroundCloudsB.image = [UIImage imageNamed:@"violetClouds.png"];
 				backGroundGrid.image = [UIImage imageNamed:@"cyansidegrid.png"];
 			}
 			if (currentLevel.difficulty == 5){
 				backGroundCloudsA.image = [UIImage imageNamed:@"cyanBlueClouds.png"];
-				backGroundCloudsB.image = [UIImage imageNamed:@"orangeClouds.png"];
+				//backGroundCloudsB.image = [UIImage imageNamed:@"orangeClouds.png"];
 				backGroundGrid.image = [UIImage imageNamed:@"purplesidegrid.png"];
 			}
 			if (currentLevel.difficulty == 6){
 				backGroundCloudsA.image = [UIImage imageNamed:@"yellowClouds.png"];
-				backGroundCloudsB.image = [UIImage imageNamed:@"magentaClouds.png"];
+				//backGroundCloudsB.image = [UIImage imageNamed:@"magentaClouds.png"];
 				backGroundGrid.image = [UIImage imageNamed:@"bluesidegrid.png"];
 			}
 			if (currentLevel.difficulty == 7){
 				backGroundCloudsA.image = [UIImage imageNamed:@"redClouds.png"];
-				backGroundCloudsB.image = [UIImage imageNamed:@"greenClouds.png"];    
+				//backGroundCloudsB.image = [UIImage imageNamed:@"greenClouds.png"];    
 				backGroundGrid.image = [UIImage imageNamed:@"cyansidegrid.png"];
 			}
 			if (currentLevel.difficulty == 8){
 				backGroundCloudsA.image = [UIImage imageNamed:@"blueClouds.png"];
-				backGroundCloudsB.image = [UIImage imageNamed:@"violetClouds.png"];
+				//backGroundCloudsB.image = [UIImage imageNamed:@"violetClouds.png"];
 				backGroundGrid.image = [UIImage imageNamed:@"redsidegrid.png"];
 			}
 			if (currentLevel.difficulty == 9){
 				backGroundCloudsA.image = [UIImage imageNamed:@"cyanBlueClouds.png"];
-				backGroundCloudsB.image = [UIImage imageNamed:@"greenClouds.png"];
+				//backGroundCloudsB.image = [UIImage imageNamed:@"greenClouds.png"];
 				backGroundGrid.image = [UIImage imageNamed:@"pinksidegrid.png"];
 			}
 			if (currentLevel.difficulty == 10){
 				backGroundCloudsA.image = [UIImage imageNamed:@"cyanClouds.png"];
-				backGroundCloudsB.image = [UIImage imageNamed:@"yellowClouds.png"];
+				//backGroundCloudsB.image = [UIImage imageNamed:@"yellowClouds.png"];
 				backGroundGrid.image = [UIImage imageNamed:@"greensidegrid.png"];
 			}
 			if (currentLevel.difficulty == 11){
 				backGroundCloudsA.image = [UIImage imageNamed:@"magentaClouds.png"];
-				backGroundCloudsB.image = [UIImage imageNamed:@"orangeClouds.png"];
+				//backGroundCloudsB.image = [UIImage imageNamed:@"orangeClouds.png"];
 				backGroundGrid.image = [UIImage imageNamed:@"greensidegrid.png"];
 			}
 			break; 
@@ -1235,57 +1292,57 @@
 			backGroundTransition.transform = CGAffineTransformIdentity;
 			if (currentLevel.difficulty == 1){
 				backGroundCloudsA.image = [UIImage imageNamed:@"redClouds.png"];
-				backGroundCloudsB.image = [UIImage imageNamed:@"blueClouds.png"];
+				//backGroundCloudsB.image = [UIImage imageNamed:@"blueClouds.png"];
 				backGroundGrid.image = [UIImage imageNamed:@"orangegrid.png"];
 			}
             if (currentLevel.difficulty == 2){
 				backGroundCloudsA.image = [UIImage imageNamed:@"redClouds.png"];
-				backGroundCloudsB.image = [UIImage imageNamed:@"blueClouds.png"];
+				//backGroundCloudsB.image = [UIImage imageNamed:@"blueClouds.png"];
 				backGroundGrid.image = [UIImage imageNamed:@"greengrid.png"];
 			}
 			if (currentLevel.difficulty == 3){
 				backGroundCloudsA.image = [UIImage imageNamed:@"cyanClouds.png"];
-				backGroundCloudsB.image = [UIImage imageNamed:@"yellowClouds.png"];
+				//backGroundCloudsB.image = [UIImage imageNamed:@"yellowClouds.png"];
 				backGroundGrid.image = [UIImage imageNamed:@"violetgrid.png"];
 			}
 			if (currentLevel.difficulty == 4){
 				backGroundCloudsA.image = [UIImage imageNamed:@"greenClouds.png"];
-				backGroundCloudsB.image = [UIImage imageNamed:@"violetClouds.png"];
+				//backGroundCloudsB.image = [UIImage imageNamed:@"violetClouds.png"];
 				backGroundGrid.image = [UIImage imageNamed:@"cyangrid.png"];
 			}
 			if (currentLevel.difficulty == 5){
 				backGroundCloudsA.image = [UIImage imageNamed:@"cyanBlueClouds.png"];
-				backGroundCloudsB.image = [UIImage imageNamed:@"orangeClouds.png"];
+				//backGroundCloudsB.image = [UIImage imageNamed:@"orangeClouds.png"];
 				backGroundGrid.image = [UIImage imageNamed:@"purplegrid.png"];
 			}
 			if (currentLevel.difficulty == 6){
 				backGroundCloudsA.image = [UIImage imageNamed:@"yellowClouds.png"];
-				backGroundCloudsB.image = [UIImage imageNamed:@"magentaClouds.png"];
+				//backGroundCloudsB.image = [UIImage imageNamed:@"magentaClouds.png"];
 				backGroundGrid.image = [UIImage imageNamed:@"bluegrid.png"];
 			}
 			if (currentLevel.difficulty == 7){
 				backGroundCloudsA.image = [UIImage imageNamed:@"redClouds.png"];
-				backGroundCloudsB.image = [UIImage imageNamed:@"greenClouds.png"];    
+				//backGroundCloudsB.image = [UIImage imageNamed:@"greenClouds.png"];    
 				backGroundGrid.image = [UIImage imageNamed:@"cyangrid.png"];
 			}
 			if (currentLevel.difficulty == 8){
 				backGroundCloudsA.image = [UIImage imageNamed:@"blueClouds.png"];
-				backGroundCloudsB.image = [UIImage imageNamed:@"violetClouds.png"];
+				//backGroundCloudsB.image = [UIImage imageNamed:@"violetClouds.png"];
 				backGroundGrid.image = [UIImage imageNamed:@"redgrid.png"];
 			}
 			if (currentLevel.difficulty == 9){
 				backGroundCloudsA.image = [UIImage imageNamed:@"cyanBlueClouds.png"];
-				backGroundCloudsB.image = [UIImage imageNamed:@"greenClouds.png"];
+				//backGroundCloudsB.image = [UIImage imageNamed:@"greenClouds.png"];
 				backGroundGrid.image = [UIImage imageNamed:@"pinkgrid.png"];
 			}
 			if (currentLevel.difficulty == 10){
 				backGroundCloudsA.image = [UIImage imageNamed:@"cyanClouds.png"];
-				backGroundCloudsB.image = [UIImage imageNamed:@"yellowClouds.png"];
+				//backGroundCloudsB.image = [UIImage imageNamed:@"yellowClouds.png"];
 				backGroundGrid.image = [UIImage imageNamed:@"greengrid.png"];
 			}
 			if (currentLevel.difficulty == 11){
 				backGroundCloudsA.image = [UIImage imageNamed:@"magentaClouds.png"];
-				backGroundCloudsB.image = [UIImage imageNamed:@"orangeClouds.png"];
+				//backGroundCloudsB.image = [UIImage imageNamed:@"orangeClouds.png"];
 				backGroundGrid.image = [UIImage imageNamed:@"greengrid.png"];
 			}
 			break; 
@@ -1293,57 +1350,57 @@
 			backGroundTransition.transform = CGAffineTransformIdentity;
 			if (currentLevel.difficulty == 1){
 				backGroundCloudsA.image = [UIImage imageNamed:@"redClouds.png"];
-				backGroundCloudsB.image = [UIImage imageNamed:@"blueClouds.png"];
+				//backGroundCloudsB.image = [UIImage imageNamed:@"blueClouds.png"];
 				backGroundGrid.image = [UIImage imageNamed:@"orangegrid.png"];
 			}
             if (currentLevel.difficulty == 2){
 				backGroundCloudsA.image = [UIImage imageNamed:@"redClouds.png"];
-				backGroundCloudsB.image = [UIImage imageNamed:@"blueClouds.png"];
+				//backGroundCloudsB.image = [UIImage imageNamed:@"blueClouds.png"];
 				backGroundGrid.image = [UIImage imageNamed:@"greengrid.png"];
 			}
 			if (currentLevel.difficulty == 3){
 				backGroundCloudsA.image = [UIImage imageNamed:@"cyanClouds.png"];
-				backGroundCloudsB.image = [UIImage imageNamed:@"yellowClouds.png"];
+				//backGroundCloudsB.image = [UIImage imageNamed:@"yellowClouds.png"];
 				backGroundGrid.image = [UIImage imageNamed:@"violetgrid.png"];
 			}
 			if (currentLevel.difficulty == 4){
 				backGroundCloudsA.image = [UIImage imageNamed:@"greenClouds.png"];
-				backGroundCloudsB.image = [UIImage imageNamed:@"violetClouds.png"];
+				//backGroundCloudsB.image = [UIImage imageNamed:@"violetClouds.png"];
 				backGroundGrid.image = [UIImage imageNamed:@"cyangrid.png"];
 			}
 			if (currentLevel.difficulty == 5){
 				backGroundCloudsA.image = [UIImage imageNamed:@"cyanBlueClouds.png"];
-				backGroundCloudsB.image = [UIImage imageNamed:@"orangeClouds.png"];
+				//backGroundCloudsB.image = [UIImage imageNamed:@"orangeClouds.png"];
 				backGroundGrid.image = [UIImage imageNamed:@"purplegrid.png"];
 			}
 			if (currentLevel.difficulty == 6){
 				backGroundCloudsA.image = [UIImage imageNamed:@"yellowClouds.png"];
-				backGroundCloudsB.image = [UIImage imageNamed:@"magentaClouds.png"];
+				//backGroundCloudsB.image = [UIImage imageNamed:@"magentaClouds.png"];
 				backGroundGrid.image = [UIImage imageNamed:@"bluegrid.png"];
 			}
 			if (currentLevel.difficulty == 7){
 				backGroundCloudsA.image = [UIImage imageNamed:@"redClouds.png"];
-				backGroundCloudsB.image = [UIImage imageNamed:@"greenClouds.png"];    
+				//backGroundCloudsB.image = [UIImage imageNamed:@"greenClouds.png"];    
 				backGroundGrid.image = [UIImage imageNamed:@"cyangrid.png"];
 			}
 			if (currentLevel.difficulty == 8){
 				backGroundCloudsA.image = [UIImage imageNamed:@"blueClouds.png"];
-				backGroundCloudsB.image = [UIImage imageNamed:@"violetClouds.png"];
+				//backGroundCloudsB.image = [UIImage imageNamed:@"violetClouds.png"];
 				backGroundGrid.image = [UIImage imageNamed:@"redgrid.png"];
 			}
 			if (currentLevel.difficulty == 9){
 				backGroundCloudsA.image = [UIImage imageNamed:@"cyanBlueClouds.png"];
-				backGroundCloudsB.image = [UIImage imageNamed:@"greenClouds.png"];
+				//backGroundCloudsB.image = [UIImage imageNamed:@"greenClouds.png"];
 				backGroundGrid.image = [UIImage imageNamed:@"pinkgrid.png"];
 			}
 			if (currentLevel.difficulty == 10){
 				backGroundCloudsA.image = [UIImage imageNamed:@"cyanClouds.png"];
-				backGroundCloudsB.image = [UIImage imageNamed:@"yellowClouds.png"];
+				//backGroundCloudsB.image = [UIImage imageNamed:@"yellowClouds.png"];
 				backGroundGrid.image = [UIImage imageNamed:@"greengrid.png"];
 			}
 			if (currentLevel.difficulty == 11){
 				backGroundCloudsA.image = [UIImage imageNamed:@"magentaClouds.png"];
-				backGroundCloudsB.image = [UIImage imageNamed:@"orangeClouds.png"];
+				//backGroundCloudsB.image = [UIImage imageNamed:@"orangeClouds.png"];
 				backGroundGrid.image = [UIImage imageNamed:@"greengrid.png"];
 			}
             break;            
@@ -1351,57 +1408,57 @@
 			backGroundTransition.transform = CGAffineTransformIdentity;
 			if (currentLevel.difficulty == 1){
 				backGroundCloudsA.image = [UIImage imageNamed:@"redClouds.png"];
-				backGroundCloudsB.image = [UIImage imageNamed:@"blueClouds.png"];
+				//backGroundCloudsB.image = [UIImage imageNamed:@"blueClouds.png"];
 				backGroundGrid.image = [UIImage imageNamed:@"orangegrid.png"];
 			}
             if (currentLevel.difficulty == 2){
 				backGroundCloudsA.image = [UIImage imageNamed:@"redClouds.png"];
-				backGroundCloudsB.image = [UIImage imageNamed:@"blueClouds.png"];
+				//backGroundCloudsB.image = [UIImage imageNamed:@"blueClouds.png"];
 				backGroundGrid.image = [UIImage imageNamed:@"greengrid.png"];
 			}
 			if (currentLevel.difficulty == 3){
 				backGroundCloudsA.image = [UIImage imageNamed:@"cyanClouds.png"];
-				backGroundCloudsB.image = [UIImage imageNamed:@"yellowClouds.png"];
+				//backGroundCloudsB.image = [UIImage imageNamed:@"yellowClouds.png"];
 				backGroundGrid.image = [UIImage imageNamed:@"violetgrid.png"];
 			}
 			if (currentLevel.difficulty == 4){
 				backGroundCloudsA.image = [UIImage imageNamed:@"greenClouds.png"];
-				backGroundCloudsB.image = [UIImage imageNamed:@"violetClouds.png"];
+				//backGroundCloudsB.image = [UIImage imageNamed:@"violetClouds.png"];
 				backGroundGrid.image = [UIImage imageNamed:@"cyangrid.png"];
 			}
 			if (currentLevel.difficulty == 5){
 				backGroundCloudsA.image = [UIImage imageNamed:@"cyanBlueClouds.png"];
-				backGroundCloudsB.image = [UIImage imageNamed:@"orangeClouds.png"];
+				//backGroundCloudsB.image = [UIImage imageNamed:@"orangeClouds.png"];
 				backGroundGrid.image = [UIImage imageNamed:@"purplegrid.png"];
 			}
 			if (currentLevel.difficulty == 6){
 				backGroundCloudsA.image = [UIImage imageNamed:@"yellowClouds.png"];
-				backGroundCloudsB.image = [UIImage imageNamed:@"magentaClouds.png"];
+				//backGroundCloudsB.image = [UIImage imageNamed:@"magentaClouds.png"];
 				backGroundGrid.image = [UIImage imageNamed:@"bluegrid.png"];
 			}
 			if (currentLevel.difficulty == 7){
 				backGroundCloudsA.image = [UIImage imageNamed:@"redClouds.png"];
-				backGroundCloudsB.image = [UIImage imageNamed:@"greenClouds.png"];    
+				//backGroundCloudsB.image = [UIImage imageNamed:@"greenClouds.png"];    
 				backGroundGrid.image = [UIImage imageNamed:@"cyangrid.png"];
 			}
 			if (currentLevel.difficulty == 8){
 				backGroundCloudsA.image = [UIImage imageNamed:@"blueClouds.png"];
-				backGroundCloudsB.image = [UIImage imageNamed:@"violetClouds.png"];
+				//backGroundCloudsB.image = [UIImage imageNamed:@"violetClouds.png"];
 				backGroundGrid.image = [UIImage imageNamed:@"redgrid.png"];
 			}
 			if (currentLevel.difficulty == 9){
 				backGroundCloudsA.image = [UIImage imageNamed:@"cyanBlueClouds.png"];
-				backGroundCloudsB.image = [UIImage imageNamed:@"greenClouds.png"];
+				//backGroundCloudsB.image = [UIImage imageNamed:@"greenClouds.png"];
 				backGroundGrid.image = [UIImage imageNamed:@"pinkgrid.png"];
 			}
 			if (currentLevel.difficulty == 10){
 				backGroundCloudsA.image = [UIImage imageNamed:@"cyanClouds.png"];
-				backGroundCloudsB.image = [UIImage imageNamed:@"yellowClouds.png"];
+				//backGroundCloudsB.image = [UIImage imageNamed:@"yellowClouds.png"];
 				backGroundGrid.image = [UIImage imageNamed:@"greengrid.png"];
 			}
 			if (currentLevel.difficulty == 11){
 				backGroundCloudsA.image = [UIImage imageNamed:@"magentaClouds.png"];
-				backGroundCloudsB.image = [UIImage imageNamed:@"orangeClouds.png"];
+				//backGroundCloudsB.image = [UIImage imageNamed:@"orangeClouds.png"];
 				backGroundGrid.image = [UIImage imageNamed:@"greengrid.png"];
 			}
             break;
@@ -1513,7 +1570,7 @@
 }
 -(IBAction)ClickButtonMainMenu{
 	//gameState.currentBoard.Active = [NSNumber numberWithBool:NO];
-    [self dismissModalViewControllerAnimated:NO];
+    [self dismissModalViewControllerAnimated:YES];
 }
 -(IBAction)ClickButtonLockTab{
     lockMode = TRUE;

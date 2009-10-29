@@ -51,7 +51,7 @@
 	[window addSubview:animatedSimplical];
 	[window makeKeyAndVisible];
 	
-	[self performSelector:@selector(stopAnimation) withObject:nil afterDelay:3];
+	[self performSelector:@selector(stopAnimation) withObject:nil afterDelay:1];
 	
 }
 

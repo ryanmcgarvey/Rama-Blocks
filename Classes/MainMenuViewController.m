@@ -16,7 +16,7 @@
 @synthesize zoomBack, backGroundMenu, backGround;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil{
-    
+	
     if (self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil]) {
         Rama_BlocksAppDelegate * appDelegate =  (Rama_BlocksAppDelegate *)[[UIApplication sharedApplication] delegate];
         gameState = [[appDelegate FetchGameState] retain];
@@ -25,7 +25,7 @@
 		backGroundMenu = [[UIImageView alloc]init];
 		backGround = [[UIImageView alloc]init];
 		
-		zoomBack = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 640, 960)]; 
+		zoomBack = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 320, 480)]; 
 		zoomBack.image = [UIImage imageNamed:@"BigBackground.png"];
 		zoomBack.alpha = 0.3f;
 		
@@ -129,16 +129,14 @@
 		[self.view addSubview:levelSelectGrayBox];
 		
 		self.view.contentMode = UIViewContentModeCenter;
+		
     }
     
     return self;
 }
+
 - (void)viewWillAppear:(BOOL)animate{
-    if([gameState.currentBoard.Active boolValue])
-    {
-		
-        
-    }
+    
 	[UIView beginAnimations:nil context:nil]; 
 	[UIView setAnimationDuration:45.0f];
 	backGround.center = CGPointMake(backGround.center.x - 280, backGround.center.y - 300);
@@ -146,6 +144,7 @@
 	[UIView commitAnimations];
     [super viewWillAppear:animate];
 }
+
 - (void)viewDidLoad {
 	levelVerify.alpha = 0;
 	levelVerify.center = CGPointMake(160,240);
@@ -159,7 +158,6 @@
 - (void)viewDidUnload {
 	
 }
-
 
 - (void)dealloc {
     [super dealloc];
@@ -188,6 +186,7 @@
 
 - (IBAction)newGame{
 	gameState.currentBoard.Active = FALSE;
+	gameState.currentBoard.numberOfAttempts = [NSNumber numberWithInt:0];
 	
 	buttonCenter = buttonGraphic.center;
 	titleCenter = titleGraphic.center;
@@ -208,14 +207,21 @@
 
 - (void)actualLoadGameBoard{
 	backGround.center = CGPointMake(backGround.center.x + 280, backGround.center.y + 300);
-	[self presentModalViewController:[[GameBoardViewController alloc] initWithNibName:@"GameBoardViewController" bundle:nil] animated:NO];
+	
+	UIViewController * controller = [[GameBoardViewController alloc] initWithNibName:@"GameBoardViewController" bundle:nil];
+	controller.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
+	
+	[self presentModalViewController:controller animated:YES];
+	
+	[controller release];
 }
 
-
- - (IBAction)loadGameBoard:(id)sender {
+- (IBAction)loadGameBoard:(id)sender {
 	 if([gameState.currentBoard.Active boolValue]){
 		 levelVerify.alpha = 1;
 	 }else{
+		 gameState.currentBoard.numberOfAttempts = [NSNumber numberWithInt:0];
+		 
 		 buttonCenter = buttonGraphic.center;
 		 titleCenter = titleGraphic.center;
 		 behindButtonCenter = behindButtonGraphic.center;
@@ -235,7 +241,6 @@
 		 
  }
  
-
 -(void)animateBoard{
 	[UIView beginAnimations:nil context:nil]; 
 	[UIView setAnimationDuration:1.5f];
@@ -415,10 +420,7 @@
 	
 }
  
- 
- -(void)animateButtons{
-	 
-	 
+-(void)animateButtons{
 	 
 	 [UIView beginAnimations:nil context:nil]; 
 	 [UIView setAnimationDuration:2.0f];
@@ -461,12 +463,12 @@
 	 [UIView commitAnimations];
 	 
 	 [NSTimer scheduledTimerWithTimeInterval:2.1f target:self selector:@selector(actualLoadGameBoard) userInfo:nil repeats:NO];
-	 [NSTimer scheduledTimerWithTimeInterval:5 target:self selector:@selector(restoreCenters) userInfo:nil repeats:NO];
+	 [NSTimer scheduledTimerWithTimeInterval:6 target:self selector:@selector(restoreCenters) userInfo:nil repeats:NO];
  
  
  }
  
- -(void)restoreCenters{
+-(void)restoreCenters{
 	 buttonGraphic.center = buttonCenter;
 	 titleGraphic.center = titleCenter;
 	 backGround.center = backGroundCenter;
@@ -504,7 +506,6 @@
  
  }
  
-
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
 	UITouch *touch = [[event allTouches] anyObject];
 	UIImageView * touchedItem = (UIImageView *)[touch view];
