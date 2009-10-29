@@ -128,6 +128,8 @@
 /*****************************************************
  UIController Delegates
  *****************************************************/
+
+
 -(void)viewDidLoad {   
     Rama_BlocksAppDelegate * appDelegate =  (Rama_BlocksAppDelegate *)[[UIApplication sharedApplication] delegate];
 	gameState = [appDelegate FetchGameState];
@@ -256,7 +258,7 @@
 	startTime = CFAbsoluteTimeGetCurrent();
 	spawnedShapeRotateTransform = CGAffineTransformIdentity;
 	
-}
+ }
 
 -(void)setButtons{
 	NSString *discardString = [NSString stringWithFormat:@"%dDiscard.png", discardCount]; 
@@ -279,37 +281,40 @@
 -(void)moveCloudsOne{
 	[movingTimer invalidate];
 	[UIView beginAnimations:nil context:nil]; 
-	[UIView setAnimationDuration:60.0f];
+	[UIView setAnimationDuration:40.0f];
 	[UIView setAnimationDelegate:self];
 	[UIView setAnimationDidStopSelector:@selector(animateBoard)];
 	backGroundCloudsA.center = CGPointMake(backGroundCloudsA.center.x - 640,backGroundCloudsA.center.y - 160);
 	backGroundCloudsB.center = CGPointMake(backGroundCloudsB.center.x + 640,backGroundCloudsB.center.y + 160);
+	backGroundStars.bounds = CGRectMake(0, 0, 640, 960);
 	[UIView commitAnimations];
-	movingTimer = [NSTimer scheduledTimerWithTimeInterval: 60.1f target:self selector:@selector(moveCloudsTwo) userInfo:nil repeats: NO];
+	movingTimer = [NSTimer scheduledTimerWithTimeInterval: 40.1f target:self selector:@selector(moveCloudsTwo) userInfo:nil repeats: NO];
 }
 
 -(void)moveCloudsTwo{
 	[movingTimer invalidate];
 	[UIView beginAnimations:nil context:nil]; 
-	[UIView setAnimationDuration:60.0f];
+	[UIView setAnimationDuration:40.0f];
 	[UIView setAnimationDelegate:self];
 	[UIView setAnimationDidStopSelector:@selector(animateBoard)];
 	backGroundCloudsA.center = CGPointMake(backGroundCloudsA.center.x + 640,backGroundCloudsA.center.y);
 	backGroundCloudsB.center = CGPointMake(backGroundCloudsB.center.x - 640,backGroundCloudsB.center.y);
+	backGroundStars.bounds = CGRectMake(0, 0, 340, 480);
 	[UIView commitAnimations];
-	movingTimer = [NSTimer scheduledTimerWithTimeInterval: 60.1f target:self selector:@selector(moveCloudsThree) userInfo:nil repeats: NO];
+	movingTimer = [NSTimer scheduledTimerWithTimeInterval: 40.1f target:self selector:@selector(moveCloudsThree) userInfo:nil repeats: NO];
 }
 
 -(void)moveCloudsThree{
 	[movingTimer invalidate];
 	[UIView beginAnimations:nil context:nil]; 
-	[UIView setAnimationDuration:60.0f];
+	[UIView setAnimationDuration:40.0f];
 	[UIView setAnimationDelegate:self];
 	[UIView setAnimationDidStopSelector:@selector(animateBoard)];
 	backGroundCloudsA.center = CGPointMake(backGroundCloudsA.center.x - 640,backGroundCloudsA.center.y + 160);
 	backGroundCloudsB.center = CGPointMake(backGroundCloudsB.center.x + 640,backGroundCloudsB.center.y - 160);
+	backGroundStars.bounds = CGRectMake(0, 0, 640, 960);
 	[UIView commitAnimations];
-	movingTimer = [NSTimer scheduledTimerWithTimeInterval: 60.1f target:self selector:@selector(moveCloudsFour) userInfo:nil repeats: NO];
+	movingTimer = [NSTimer scheduledTimerWithTimeInterval: 40.1f target:self selector:@selector(moveCloudsFour) userInfo:nil repeats: NO];
 }
 
 -(void)moveCloudsFour{
@@ -320,8 +325,9 @@
 	[UIView setAnimationDidStopSelector:@selector(animateBoard)];
 	backGroundCloudsA.center = CGPointMake(backGroundCloudsA.center.x + 640,backGroundCloudsA.center.y);
 	backGroundCloudsB.center = CGPointMake(backGroundCloudsB.center.x - 640,backGroundCloudsB.center.y);
+	backGroundStars.bounds = CGRectMake(0, 0, 340, 480);
 	[UIView commitAnimations];
-	movingTimer = [NSTimer scheduledTimerWithTimeInterval: 60.1f target:self selector:@selector(moveCloudsOne) userInfo:nil repeats: NO];
+	movingTimer = [NSTimer scheduledTimerWithTimeInterval: 40.1f target:self selector:@selector(moveCloudsOne) userInfo:nil repeats: NO];
 }
 
 -(void)didRotate:(NSNotification *)notification{
@@ -684,10 +690,10 @@
         [backGroundStars removeFromSuperview];
         [backGroundStars release];
     }
-    backGroundStars = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 960, 640)];
+    backGroundStars = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 320, 480)];
     backGroundStars.clipsToBounds = YES;
     backGroundStars.autoresizesSubviews = NO;
-    backGroundStars.contentMode = UIViewContentModeTopLeft;
+    backGroundStars.contentMode = UIViewContentModeScaleToFill;
     backGroundStars.image = [UIImage imageNamed:@"BigBackground.png"];
     backGroundStars.userInteractionEnabled = FALSE;
     
@@ -709,50 +715,50 @@
     backGroundCloudsB = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 960, 640)];
     backGroundCloudsB.clipsToBounds = YES;
     backGroundCloudsB.autoresizesSubviews = NO;
-    backGroundCloudsB.image = [UIImage imageNamed:@"orangeClouds.png"];
+    backGroundCloudsB.image = [UIImage imageNamed:@"BigBackground2.png"];
     backGroundCloudsB.userInteractionEnabled = FALSE;
     backGroundCloudsB.center = CGPointMake(backGroundCloudsB.center.x - 640,backGroundCloudsB.center.y - 160);
 	
     switch (difficulty) {
         case 1:
             backGroundCloudsA.image = [UIImage imageNamed:@"magentaClouds.png"];
-            backGroundCloudsB.image = [UIImage imageNamed:@"orangeClouds.png"];
+            backGroundCloudsB.image = [UIImage imageNamed:@"BigBackground2.png"];
             break;
         case 2:
 			backGroundCloudsA.image = [UIImage imageNamed:@"redClouds.png"];
-			backGroundCloudsB.image = [UIImage imageNamed:@"blueClouds.png"];
+			backGroundCloudsB.image = [UIImage imageNamed:@"BigBackground2.png"];
             break;
         case 3:
 			backGroundCloudsA.image = [UIImage imageNamed:@"cyanClouds.png"];
-			backGroundCloudsB.image = [UIImage imageNamed:@"yellowClouds.png"];
+			backGroundCloudsB.image = [UIImage imageNamed:@"BigBackground2.png"];
             break;
         case 4:
 			backGroundCloudsA.image = [UIImage imageNamed:@"greenClouds.png"];
-			backGroundCloudsB.image = [UIImage imageNamed:@"violetClouds.png"];
+			backGroundCloudsB.image = [UIImage imageNamed:@"BigBackground2.png"];
             break;
         case 5:
 			backGroundCloudsA.image = [UIImage imageNamed:@"cyanBlueClouds.png"];
-			backGroundCloudsB.image = [UIImage imageNamed:@"orangeClouds.png"];
+			backGroundCloudsB.image = [UIImage imageNamed:@"BigBackground2.png"];
             break;
         case 6:
 			backGroundCloudsA.image = [UIImage imageNamed:@"yellowClouds.png"];
-			backGroundCloudsB.image = [UIImage imageNamed:@"magentaClouds.png"];
+			backGroundCloudsB.image = [UIImage imageNamed:@"BigBackground2.png"];
             break;
         case 7:
 			backGroundCloudsA.image = [UIImage imageNamed:@"redClouds.png"];
-			backGroundCloudsB.image = [UIImage imageNamed:@"greenClouds.png"];
+			backGroundCloudsB.image = [UIImage imageNamed:@"BigBackground2.png"];
             break;
         case 8:
 			backGroundCloudsA.image = [UIImage imageNamed:@"blueClouds.png"];
-			backGroundCloudsB.image = [UIImage imageNamed:@"violetClouds.png"];
+			backGroundCloudsB.image = [UIImage imageNamed:@"BigBackground2.png"];
             break;
         case 9:
 			backGroundCloudsA.image = [UIImage imageNamed:@"cyanBlueClouds.png"];
-			backGroundCloudsB.image = [UIImage imageNamed:@"greenClouds.png"];
+			backGroundCloudsB.image = [UIImage imageNamed:@"BigBackground2.png"];
             break;
         case 10:
 			backGroundCloudsA.image = [UIImage imageNamed:@"cyanClouds.png"];
-			backGroundCloudsB.image = [UIImage imageNamed:@"yellowClouds.png"];
+			backGroundCloudsB.image = [UIImage imageNamed:@"BigBackground2.png"];
             break;
         default:
             break;
@@ -1417,6 +1423,7 @@
 -(void)removeStats{
 	statsView.hidden = TRUE;
 }
+
 -(BOOL)subtractScoreForRecipe{
 	if (score >= 0 && currentLevel.difficulty == 1){
 		scoreLabel.text = [NSString stringWithFormat:@"%d" , score];

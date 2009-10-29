@@ -196,6 +196,8 @@
 		C2F48597109A27CD0024B7CE /* RamaIcon.png in Resources */ = {isa = PBXBuildFile; fileRef = C2F48596109A27CD0024B7CE /* RamaIcon.png */; };
 		C2F4859B109A28AB0024B7CE /* MediaPlayer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C2F4859A109A28AB0024B7CE /* MediaPlayer.framework */; };
 		C2F485A8109A297E0024B7CE /* test.m4v in Resources */ = {isa = PBXBuildFile; fileRef = C2F485A7109A297E0024B7CE /* test.m4v */; };
+		C2F485DB109A325F0024B7CE /* BigBackground2.png in Resources */ = {isa = PBXBuildFile; fileRef = C2F485DA109A325F0024B7CE /* BigBackground2.png */; };
+		C2F4864C109A38660024B7CE /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C2F4864B109A38660024B7CE /* QuartzCore.framework */; };
 		FC0B6B7910252C6000F1BD5E /* SoundEffects.m in Sources */ = {isa = PBXBuildFile; fileRef = FC0B6B7810252C6000F1BD5E /* SoundEffects.m */; };
 		FC0B6B7C10252E0A00F1BD5E /* SoundPlayer.m in Sources */ = {isa = PBXBuildFile; fileRef = FC0B6B7B10252E0A00F1BD5E /* SoundPlayer.m */; };
 		FC0B6B8B102531B600F1BD5E /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FC0B6B8A102531B600F1BD5E /* AVFoundation.framework */; };
@@ -423,6 +425,8 @@
 		C2F48596109A27CD0024B7CE /* RamaIcon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = RamaIcon.png; sourceTree = "<group>"; };
 		C2F4859A109A28AB0024B7CE /* MediaPlayer.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MediaPlayer.framework; path = System/Library/Frameworks/MediaPlayer.framework; sourceTree = SDKROOT; };
 		C2F485A7109A297E0024B7CE /* test.m4v */ = {isa = PBXFileReference; lastKnownFileType = file; path = test.m4v; sourceTree = "<group>"; };
+		C2F485DA109A325F0024B7CE /* BigBackground2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = BigBackground2.png; sourceTree = "<group>"; };
+		C2F4864B109A38660024B7CE /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		FC0B6B7710252C6000F1BD5E /* SoundEffects.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SoundEffects.h; sourceTree = "<group>"; };
 		FC0B6B7810252C6000F1BD5E /* SoundEffects.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SoundEffects.m; sourceTree = "<group>"; };
 		FC0B6B7A10252E0A00F1BD5E /* SoundPlayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SoundPlayer.h; sourceTree = "<group>"; };
@@ -489,6 +493,7 @@
 				28D801B40F44B63D00FB423F /* CoreData.framework in Frameworks */,
 				FC0B6B8B102531B600F1BD5E /* AVFoundation.framework in Frameworks */,
 				C2F4859B109A28AB0024B7CE /* MediaPlayer.framework in Frameworks */,
+				C2F4864C109A38660024B7CE /* QuartzCore.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -545,6 +550,7 @@
 		29B97323FDCFA39411CA2CEA /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				C2F4864B109A38660024B7CE /* QuartzCore.framework */,
 				C2F4859A109A28AB0024B7CE /* MediaPlayer.framework */,
 				FC0B6B8A102531B600F1BD5E /* AVFoundation.framework */,
 				1DF5F4DF0D08C38300B7A737 /* UIKit.framework */,
@@ -747,6 +753,7 @@
 				FC4870AD105ED96200E2C37F /* lockFeedBack.png */,
 				FC487027105EC70300E2C37F /* lockTab.png */,
 				C2B00C15106C2D5E003A472B /* BigBackground.png */,
+				C2F485DA109A325F0024B7CE /* BigBackground2.png */,
 				C2BD29811049019E007F05CB /* upsideDownBack.png */,
 				C2A3A02B1090175600011AC4 /* gameBoardGrid.png */,
 				C2E26EC2104982080031A17B /* ItemC.png */,
@@ -1286,6 +1293,7 @@
 				C2A888631090DE7F00B7AF7F /* simp10.png in Resources */,
 				C2F48597109A27CD0024B7CE /* RamaIcon.png in Resources */,
 				C2F485A8109A297E0024B7CE /* test.m4v in Resources */,
+				C2F485DB109A325F0024B7CE /* BigBackground2.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

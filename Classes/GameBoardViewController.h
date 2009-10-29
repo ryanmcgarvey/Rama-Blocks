@@ -9,6 +9,7 @@
 
 #import <UIKit/UIKit.h>
 #import <Foundation/NSTimer.h>
+#import <QuartzCore/QuartzCore.h>
 #import "Shape.h"
 #import "ItemPair.h"
 #import "ItemCollection.h"
