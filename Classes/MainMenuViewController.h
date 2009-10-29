@@ -27,12 +27,16 @@
     IBOutlet UIButton * OptionsButton;
     IBOutlet UIButton * TutorialButton;
     IBOutlet UIButton * LevelSelectButton;
+	IBOutlet UIButton * continueGame;
+	IBOutlet UIButton * newGame;
 	
 	IBOutlet UIImageView *buttonGraphic;
 	IBOutlet UIImageView *titleGraphic;
 	IBOutlet UIImageView *behindButtonGraphic;
 	IBOutlet UIImageView *backGroundMenu;
 	IBOutlet UIImageView *backGround;
+	
+	IBOutlet UIView *levelVerify;
 	
 	UIImageView *zoomBack;
 	UIImageView *levelNumbers;
@@ -85,10 +89,12 @@
 @property (nonatomic, retain) UIImageView *backGround;
 
 
-- (IBAction)loadGameBoard:(id)sender;
-- (IBAction)loadTutorial:(id)sender;
-- (IBAction)loadOptions:(id)sender;
+-(IBAction)loadGameBoard:(id)sender;
+-(IBAction)loadTutorial:(id)sender;
+-(IBAction)loadOptions:(id)sender;
 -(IBAction)loadLevelSelect:(id)sender;
+-(IBAction)continueGame;
+-(IBAction)newGame;
 
 -(void)animateButtons;
 -(void)restoreCenters;

@@ -147,7 +147,8 @@
     [super viewWillAppear:animate];
 }
 - (void)viewDidLoad {
-	
+	levelVerify.alpha = 0;
+	levelVerify.center = CGPointMake(160,240);
 	
 }
 
@@ -180,6 +181,30 @@
 	
 }
 
+- (IBAction)continueGame{
+	[self actualLoadGameBoard];
+	levelVerify.alpha = 0;
+}
+
+- (IBAction)newGame{
+	gameState.currentBoard.Active = FALSE;
+	
+	buttonCenter = buttonGraphic.center;
+	titleCenter = titleGraphic.center;
+	behindButtonCenter = behindButtonGraphic.center;
+	backGroundCenter = backGround.center;
+	levelVerify.alpha = 0;
+	
+	[UIView beginAnimations:nil context:nil]; 
+	[UIView setAnimationDuration:1.0f];
+	[UIView setAnimationDelegate:self];
+	[UIView setAnimationDidStopSelector:@selector(animateBoard)];
+	buttonGraphic.center = CGPointMake(buttonGraphic.center.x - 320,buttonGraphic.center.y);
+	titleGraphic.center = CGPointMake(titleGraphic.center.x,titleGraphic.center.y - 320);
+	behindButtonGraphic.center = CGPointMake(behindButtonGraphic.center.x+ 320,behindButtonGraphic.center.y);
+	
+	[UIView commitAnimations];
+}
 
 - (void)actualLoadGameBoard{
 	backGround.center = CGPointMake(backGround.center.x + 280, backGround.center.y + 300);
@@ -189,14 +214,13 @@
 
  - (IBAction)loadGameBoard:(id)sender {
 	 if([gameState.currentBoard.Active boolValue]){
-		 
-		 [self actualLoadGameBoard];
-	 
+		 levelVerify.alpha = 1;
 	 }else{
 		 buttonCenter = buttonGraphic.center;
 		 titleCenter = titleGraphic.center;
 		 behindButtonCenter = behindButtonGraphic.center;
 		 backGroundCenter = backGround.center;
+		 levelVerify.alpha = 0;
 		 
 		 [UIView beginAnimations:nil context:nil]; 
 		 [UIView setAnimationDuration:1.0f];
@@ -208,6 +232,7 @@
 		 
 		 [UIView commitAnimations];
 	 }
+		 
  }
  
 

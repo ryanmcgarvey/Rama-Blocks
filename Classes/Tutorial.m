@@ -25,6 +25,16 @@
 // Implement viewDidLoad to do additional setup after loading the view, typically from a nib.
 - (void)viewDidLoad {
     [super viewDidLoad];
+	
+	NSBundle *bundle = [NSBundle mainBundle];
+	
+	NSString *moviePath = [bundle pathForResource:@"test" ofType:@"m4v"];
+	NSURL *movieURL = [[NSURL fileURLWithPath:moviePath] retain];
+	MPMoviePlayerController *theMovie = [[MPMoviePlayerController alloc] initWithContentURL:movieURL];
+	theMovie.scalingMode = MPMovieScalingModeAspectFill;
+	
+	[theMovie play];
+	
 }
 
 

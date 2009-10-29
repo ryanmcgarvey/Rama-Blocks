@@ -947,16 +947,23 @@
 						[self.view addSubview:scorePopUp];
 						[self.view bringSubviewToFront:scorePopUp];
                     }
+					
 					[UIView beginAnimations:nil context:nil]; 
 					[UIView setAnimationDuration:2.5f];
 					[UIView setAnimationCurve: UIViewAnimationCurveEaseOut];
 					[UIView setAnimationTransition:110 forView: backGroundGrid cache:YES];
 					[UIView commitAnimations];
-					scorePopUp.bounds = CGRectMake(0, 0, 300, 300);
-					scorePopUp.center = CGPointMake(72, 25);
+					/*
+					[UIView beginAnimations:nil context:nil]; 
+					[UIView setAnimationDuration:2.0f];
+					[UIView setAnimationTransition:110 forView: scorePopUp cache:YES];
+					[UIView setAnimationCurve: UIViewAnimationCurveEaseInOut];
+					scorePopUp.bounds = CGRectMake(0, 0, 100, 100);
+					scorePopUp.center = CGPointMake(160, 240);
 					scorePopUp.alpha = 0;
 					
-					
+					[UIView commitAnimations];
+					 */
                 }
             }
         }
@@ -1498,7 +1505,7 @@
     [self presentModalViewController:[[Options alloc] initWithNibName:@"Options" bundle:nil] animated:YES];
 }
 -(IBAction)ClickButtonMainMenu{
-	gameState.currentBoard.Active = [NSNumber numberWithBool:NO];
+	//gameState.currentBoard.Active = [NSNumber numberWithBool:NO];
     [self dismissModalViewControllerAnimated:NO];
 }
 -(IBAction)ClickButtonLockTab{
