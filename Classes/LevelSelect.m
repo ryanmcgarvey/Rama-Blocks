@@ -19,9 +19,6 @@
     Rama_BlocksAppDelegate * appDelegate =  (Rama_BlocksAppDelegate *)[[UIApplication sharedApplication] delegate];
     gameState = [[appDelegate FetchGameState] retain];
     levelSelect.value = [gameState.currentLevel floatValue];
-    
-
-    recapText.text = [NSString stringWithFormat:@"Number of Attempts: %d", [gameState.currentBoard.numberOfAttempts intValue]];
 
     [self ChangeLevel];
     [super viewDidLoad];
@@ -33,43 +30,9 @@
     
     int level = levelSelect.value;
     
-    if(level > [gameState.highestLevel intValue])
-    {
-        
+    if(level > [gameState.highestLevel intValue]){
         level = [gameState.highestLevel intValue];
         levelSelect.value = level;
-    }
-    switch (level) {
-        case 0:
-            //levelLabel.text = @"Very Easy";
-            break;
-        case 1:
-            //levelLabel.text = @"Easy";
-            break;
-        case 2:
-            //levelLabel.text = @"Sorta Easy";
-            break;
-        case 3:
-            //levelLabel.text = @"Not So Easy";
-            break;
-        case 4:
-            //levelLabel.text = @"Sorta Hard";
-            break;
-        case 5:
-            //levelLabel.text = @"Hard";
-            break;
-        case 6:
-            //levelLabel.text = @"Very Hard";
-            break;
-        case 7:
-            //levelLabel.text = @"Impossible";
-            break;
-        case 8:
-            //levelLabel.text = @"Good luck";
-            break;
-        case 9:
-            //levelLabel.text = @"You're not gonna get this far";
-            break;
     }
     
     gameState.currentLevel = [NSNumber numberWithInt:level];
@@ -85,15 +48,10 @@
     
     LevelStatistics * latest = [levels lastObject];
     
-    recapText.text = [NSString stringWithFormat:
-                      @"Number of Attempts: %d \n\
- Number of Transforms: %d \n\
- Number of Moves: %d \n\
- Time: %f", 
                       [latest.numerOfAttempts intValue],
                       [latest.numberOfTransforms intValue],
                       [latest.numberOfMoves intValue],
-                      [latest.timeToComplete doubleValue]];
+                      [latest.timeToComplete doubleValue];
     levelSelect.value = [gameState.currentLevel intValue];
     [self ChangeLevel];
     
