@@ -7,7 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
-
+#import "Phase.h"
 
 @interface Set : Phase {
 

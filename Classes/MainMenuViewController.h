@@ -92,7 +92,6 @@
 -(IBAction)loadGameBoard:(id)sender;
 -(IBAction)loadTutorial:(id)sender;
 -(IBAction)loadOptions:(id)sender;
--(IBAction)loadLevelSelect:(id)sender;
 -(IBAction)continueGame;
 -(IBAction)newGame;
 

@@ -16,7 +16,6 @@
 @synthesize zoomBack, backGroundMenu, backGround;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil{
-	
     if (self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil]) {
         Rama_BlocksAppDelegate * appDelegate =  (Rama_BlocksAppDelegate *)[[UIApplication sharedApplication] delegate];
         gameState = [[appDelegate FetchGameState] retain];
@@ -141,7 +140,6 @@
 }
 
 - (void)viewWillAppear:(BOOL)animate{
-    
 	[UIView beginAnimations:nil context:nil]; 
 	[UIView setAnimationDuration:30.0f];
 	[UIView setAnimationRepeatAutoreverses:YES];
@@ -187,14 +185,6 @@
 
 - (IBAction)loadTutorial:(id)sender {
 	[self presentModalViewController:[[Tutorial alloc] initWithNibName:@"Tutorial" bundle:nil] animated:YES];	
-}
-
-- (IBAction)loadLevelSelect:(id)sender{
-	
-	
-	[self presentModalViewController:[[LevelSelect alloc] initWithNibName:@"LevelSelect" bundle:nil] animated:YES];
-	
-	
 }
 
 - (IBAction)continueGame{
@@ -283,89 +273,70 @@
 	level1.center = CGPointMake(level1.center.x + 320,level1.center.y + 250);
 	level1.tag = 1;
 	level1.userInteractionEnabled = TRUE;
-	if(level1.tag > [gameState.highestLevel intValue])
-	{
+	if(level1.tag > [gameState.highestLevel intValue]){
 		level1.alpha = 0.5f;
 		level1.userInteractionEnabled = FALSE;
 	}
-	
 	level2.center = CGPointMake(level2.center.x + 320,level2.center.y + 250);
 	level2.tag = 2;
 	level2.userInteractionEnabled = TRUE;
-	if(level2.tag > [gameState.highestLevel intValue])
-	{
+	if(level2.tag > [gameState.highestLevel intValue]){
 		level2.alpha = 0.5f;
 		level2.userInteractionEnabled = FALSE;
 	}
-	
 	level3.center = CGPointMake(level3.center.x + 320,level3.center.y + 250);
 	level3.tag = 3;
 	level3.userInteractionEnabled = TRUE;
-	if(level3.tag > [gameState.highestLevel intValue])
-	{
+	if(level3.tag > [gameState.highestLevel intValue]){
 		level3.alpha = 0.5f;
 		level3.userInteractionEnabled = FALSE;
 	}
-	
 	level4.center = CGPointMake(level4.center.x + 320,level4.center.y + 250);
 	level4.tag = 4;
 	level4.userInteractionEnabled = TRUE;
-	if(level4.tag > [gameState.highestLevel intValue])
-	{
+	if(level4.tag > [gameState.highestLevel intValue]){
 		level4.alpha = 0.5f;
 		level4.userInteractionEnabled = FALSE;
 	}
-	
 	level5.center = CGPointMake(level5.center.x + 320,level5.center.y + 250);
 	level5.tag = 5;
 	level5.userInteractionEnabled = TRUE;
-	if(level5.tag > [gameState.highestLevel intValue])
-	{
+	if(level5.tag > [gameState.highestLevel intValue]){
 		level5.alpha = 0.5f;
 		level5.userInteractionEnabled = FALSE;
 	}
-	
 	level6.center = CGPointMake(level6.center.x + 320,level6.center.y + 250);
 	level6.tag = 6;
 	level6.userInteractionEnabled = TRUE;
-	if(level6.tag > [gameState.highestLevel intValue])
-	{
+	if(level6.tag > [gameState.highestLevel intValue]){
 		level6.alpha = 0.5f;
 		level6.userInteractionEnabled = FALSE;
 	}
-	
 	level7.center = CGPointMake(level7.center.x + 320,level7.center.y + 250);
 	level7.tag = 7;
 	level7.userInteractionEnabled = TRUE;
-	if(level7.tag > [gameState.highestLevel intValue])
-	{
+	if(level7.tag > [gameState.highestLevel intValue]){
 		level7.alpha = 0.5f;
 		level7.userInteractionEnabled = FALSE;
 	}
-	
 	level8.center = CGPointMake(level8.center.x + 320,level8.center.y + 250);
 	level8.tag = 8;
 	level8.userInteractionEnabled = TRUE;
-	if(level8.tag > [gameState.highestLevel intValue])
-	{
+	if(level8.tag > [gameState.highestLevel intValue]){
 		level8.alpha = 0.5f;
 		level8.userInteractionEnabled = FALSE;
 	}
-	
 	level9.center = CGPointMake(level9.center.x + 320,level9.center.y + 250);
 	level9.tag = 9;
 	level9.userInteractionEnabled = TRUE;
-	if(level9.tag > [gameState.highestLevel intValue])
-	{
+	if(level9.tag > [gameState.highestLevel intValue]){
 		level9.alpha = 0.5f;
 		level9.userInteractionEnabled = FALSE;
 	}
-	
 	level10.center = CGPointMake(level10.center.x + 320,level10.center.y + 250);
 	level10.tag = 10;
 	level10.userInteractionEnabled = TRUE;
-	if(level10.tag > [gameState.highestLevel intValue])
-	{
+	if(level10.tag > [gameState.highestLevel intValue]){
 		level10.alpha = 0.5f;
 		level10.userInteractionEnabled = FALSE;
 	}
@@ -441,15 +412,10 @@
 	[self.view addSubview:levelSelectText];
 	[self.view addSubview:levelSelectGrayBox];
 	
-	
 	[UIView commitAnimations];
-	
-	
-	
 }
  
 -(void)animateButtons{
-	 
 	[UIView beginAnimations:nil context:nil]; 
 	[UIView setAnimationDuration:1.0f];
 	[UIView setAnimationDelegate:self];
@@ -497,8 +463,6 @@
 
 	[NSTimer scheduledTimerWithTimeInterval:2.1f target:self selector:@selector(actualLoadGameBoard) userInfo:nil repeats:NO];
 	[NSTimer scheduledTimerWithTimeInterval:6 target:self selector:@selector(restoreCenters) userInfo:nil repeats:NO];
- 
- 
  }
  
 -(void)restoreCenters{
@@ -539,26 +503,19 @@
 	levelNumbers.alpha = 1;
 	levelSelectText.alpha = 1;
 	levelSelectGrayBox.alpha = 1;
-	 
- 
  }
  
-- (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
+-(void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
 	UITouch *touch = [[event allTouches] anyObject];
 	UIImageView * touchedItem = (UIImageView *)[touch view];
 	
 	if(touchedItem.tag != 0){
 		int level = touchedItem.tag;
-		
 		if(level <= [gameState.highestLevel intValue]){
-		
 			gameState.currentLevel = [NSNumber numberWithInt:level];
 			[self animateButtons];
 		}
-		
 	}
-	
 }
-
 
 @end

@@ -13,7 +13,7 @@
 @implementation Rama_BlocksAppDelegate
 
 @synthesize window;
-@synthesize isMoving, isAttaching, isFiltering, isUpgrading, allowGravity, level, yShift, isBombing;
+@synthesize isMoving, isAttaching, isFiltering, isUpgrading, allowGravity, level, isBombing;
 
 
 
@@ -61,7 +61,6 @@
 }
 
 -(void)beginRamaBlocks{
-	
 	gameState = [self FetchGameState];
 	
     mainMenu = [[MainMenuViewController alloc] initWithNibName:@"MainMenuViewController" bundle:nil];
@@ -76,10 +75,8 @@
 	isUpgrading = NO;
 	isBombing = NO;
 	allowGravity = YES;
-	yShift = NO;
 	
 	level = [[Level alloc] init:[gameState.currentLevel intValue]];
-	
 }
 
 

@@ -44,10 +44,8 @@
 	int row = 0;
 	int column = 0;
     
-	for (row = 0; row <= NUMBER_OF_ROWS; row++) 
-	{
-		for (column =0; column <= NUMBER_OF_COLUMNS; column++) 
-		{
+	for (row = 0; row <= NUMBER_OF_ROWS; row++){
+		for (column =0; column <= NUMBER_OF_COLUMNS; column++){
 			Cell *removeCell = [self GetCell:row :column];
 			[removeCell.ItemInCell removeFromSuperview];
 			removeCell.ItemInCell = nil;
@@ -62,10 +60,8 @@
 	int row;
 	int column;
 	
-	for (row = 0; row < RowLength; row++) 
-	{
-		for (column =0; column < ColumnLength; column++) 
-		{
+	for (row = 0; row < RowLength; row++){
+		for (column =0; column < ColumnLength; column++){
 			switch (difficulty) {
 				case 1:
 					if([self checkPieceForPhase1: row : column] == TRUE){
@@ -84,7 +80,6 @@
 					break;
 			}
 		}
-		
 	}
 	return FALSE;
 }
@@ -428,7 +423,6 @@ numberOfTransforms = [gameState.currentBoard.numberOfTransforms intValue];}
 		
 	}
     [itemPair setShadow:cellA.Center : cellB.Center];
-    
     return TRUE;
 }
 
@@ -456,23 +450,20 @@ numberOfTransforms = [gameState.currentBoard.numberOfTransforms intValue];}
 	cellA = [self GetCell:rowA:columnA];
 	cellB = [self GetCell:rowB:columnB];
 	
-	if(cellA == cellB)
-    {
-		if(itemPair.ItemA.center.y > itemPair.ItemB.center.y)
-        {
+	if(cellA == cellB){
+		if(itemPair.ItemA.center.y > itemPair.ItemB.center.y){
 			cellA = [self GetCell:cellA.Row -1 : cellA.Column];
 		}
-        else
-        {
+        else{
 			cellB = [self GetCell:cellB.Row -1 : cellB.Column];
 		}
 	}
-	if(!([self CheckCellToSet:cellA] && [self CheckCellToSet:cellB]))
-    {
+	if(!([self CheckCellToSet:cellA] && [self CheckCellToSet:cellB])){
 		NSLog(@"Collision, undoing shit");
 		return FALSE;
 	}
 	numberOfMoves ++;
+	
 	[self SetItemToCell:itemPair.ItemA :cellA];
 	[self SetItemToCell:itemPair.ItemB :cellB];
 	
@@ -512,20 +503,17 @@ numberOfTransforms = [gameState.currentBoard.numberOfTransforms intValue];}
 	[animateInvocation setTarget:self];
 	[animateInvocation setArgument:&transFormGroup atIndex:2];
 	
-    if([item isKindOfClass: [Shape class]])
-    {
+    if([item isKindOfClass: [Shape class]]){
         Shape * shape = (Shape *)item;
         
         Cell * cell = [self GetCell:item];
-        if([transFormGroup count] > 2)
-        {
+        if([transFormGroup count] > 2){
             [transFormGroup removeObject:cell];
             [self animateTransform: transFormGroup];
 			multiplier = [transFormGroup count] - 2;
 			
 			[NSTimer timerWithTimeInterval:1 invocation:animateInvocation repeats:NO];
 			[NSTimer release];
-			
 			
 			if(shape.shapeType != NUMBER_OF_SHAPES){
 				[shape TransForm];
@@ -538,11 +526,9 @@ numberOfTransforms = [gameState.currentBoard.numberOfTransforms intValue];}
 			}
 			
             [currentLevel addItem:shape];
-            //[self CheckTransform:item];
             couldTransform = TRUE;
             numberOfTransforms ++;
         }
-		
         [transFormGroup removeAllObjects];
 		transFormGroup = nil;
 		[transFormGroup release];
@@ -896,68 +882,51 @@ numberOfTransforms = [gameState.currentBoard.numberOfTransforms intValue];}
 }
 
 -(void)ApplyGravity{
-    
 	int row;int column;
 	Rama_BlocksAppDelegate * appDelegate =  (Rama_BlocksAppDelegate *)[[UIApplication sharedApplication] delegate];
 	Cell * cell;
     if(appDelegate.allowGravity == TRUE){
 		switch (gravityDirection) {
 			case left:
-				for(row = 0; row < NUMBER_OF_ROWS; row++)
-				{
-					for(column = 0; column < NUMBER_OF_COLUMNS; column ++)
-					{
+				for(row = 0; row < NUMBER_OF_ROWS; row++){
+					for(column = 0; column < NUMBER_OF_COLUMNS; column ++){
 						cell = [self GetCell:row : column];
 						if(cell.ItemInCell != 0 && cell.ItemInCell.IsAnchored == NO){
 							[self ApplyGravityToCell:cell];
-							
 						}
 					}
 				}
 				return;
 			case right:
-				for(row = 0; row < NUMBER_OF_ROWS; row++)
-				{
-					for(column = NUMBER_OF_COLUMNS - 1; column >= 0; column --)
-					{
+				for(row = 0; row < NUMBER_OF_ROWS; row++){
+					for(column = NUMBER_OF_COLUMNS - 1; column >= 0; column --){
 						cell = [self GetCell:row : column];
 						if(cell.ItemInCell != 0 && cell.ItemInCell.IsAnchored == NO){
 							[self ApplyGravityToCell:cell];
-							
 						}
 					}
 				}
 				return;
 			case down:
-				for(column = 0; column < NUMBER_OF_COLUMNS; column ++)
-				{
-					for(row = 0; row < NUMBER_OF_ROWS; row++)
-					{
+				for(column = 0; column < NUMBER_OF_COLUMNS; column ++){
+					for(row = 0; row < NUMBER_OF_ROWS; row++){
 						cell = [self GetCell:row : column];
 						if(cell.ItemInCell != 0 && cell.ItemInCell.IsAnchored == NO){
 							[self ApplyGravityToCell:cell];
-							
 						}
 					}
 				}
 				return;
 			case up:
-				for(column = 0; column < NUMBER_OF_COLUMNS; column ++)
-				{
-					for(row = NUMBER_OF_ROWS -1 ; row >= 0; row--)
-					{
+				for(column = 0; column < NUMBER_OF_COLUMNS; column ++){
+					for(row = NUMBER_OF_ROWS -1 ; row >= 0; row--){
 						cell = [self GetCell:row : column];
 						if(cell.ItemInCell != 0 && cell.ItemInCell.IsAnchored == NO){
 							[self ApplyGravityToCell:cell];
-							
 						}
 					}
 				}
 				return;
-				//case zero:
-				//	return;
-				//default:
-				//	break;
 		}
 	}
     [cell release];
@@ -965,10 +934,8 @@ numberOfTransforms = [gameState.currentBoard.numberOfTransforms intValue];}
 
 -(void)ApplyGravityToCell:(Cell *)cell{
     
-	if(cell.ItemInCell !=nil)
-    {
+	if(cell.ItemInCell !=nil){
 		GameItem * rotatedShape = cell.ItemInCell;
-		//rotatedShape.transform = spawnedShapeRotateTransform;
 		switch (gravityDirection) {
 			case left:
 				rotatedShape.transform = CGAffineTransformIdentity;
@@ -996,7 +963,6 @@ numberOfTransforms = [gameState.currentBoard.numberOfTransforms intValue];}
         if(cellToMoveTo == nil || cellToMoveTo.ItemInCell != nil){
             return;
         }
-		
         [self SetItemToCell:cell.ItemInCell :cellToMoveTo];
 		
         cell.ItemInCell = nil;
@@ -1007,36 +973,31 @@ numberOfTransforms = [gameState.currentBoard.numberOfTransforms intValue];}
     Cell * cell = nil;
     int column;
     int row;
-    switch (gravityDirection) 
-    {
+    switch (gravityDirection){
         case left:
             column = item.Column;
-            while(cell.ItemInCell == nil && column >= 0)
-            {
+            while(cell.ItemInCell == nil && column >= 0){
                 column--;
                 cell = [self GetCell:item.Row : column];
             }
             return [self GetCell:item.Row : column + 1];
         case right:
             column = item.Column;
-            while(cell.ItemInCell == nil && column < NUMBER_OF_COLUMNS)
-            {
+            while(cell.ItemInCell == nil && column < NUMBER_OF_COLUMNS){
                 column++;
                 cell = [self GetCell:item.Row : column];
             }
             return [self GetCell:item.Row : column - 1];            
         case down:
             row = item.Row;
-            while(cell.ItemInCell == nil && row >= 0)
-            {
+            while(cell.ItemInCell == nil && row >= 0){
                 row--;
                 cell = [self GetCell:row : item.Column];
             }
             return [self GetCell:row +1 : item.Column];
         case up:
             row = item.Row;
-            while(cell.ItemInCell == nil && row < NUMBER_OF_ROWS)
-            {
+            while(cell.ItemInCell == nil && row < NUMBER_OF_ROWS){
                 row++;
                 cell = [self GetCell:row : item.Column];
             }
@@ -1071,7 +1032,6 @@ numberOfTransforms = [gameState.currentBoard.numberOfTransforms intValue];}
 }
 
 -(void)setShuffledArray:(NSMutableArray *)shuffledPieces{
-    
 	int i = 0;
 	int row;
 	int column;
@@ -1099,6 +1059,7 @@ numberOfTransforms = [gameState.currentBoard.numberOfTransforms intValue];}
 	return nil;
 	
 }
+
 -(Cell *)GetCell:(GameItem *)item{
 	return [self GetCell:item.Row :item.Column];
 }
@@ -1115,9 +1076,7 @@ numberOfTransforms = [gameState.currentBoard.numberOfTransforms intValue];}
 }
 
 - (void)dealloc {
-    
-    for(int i = 0; i <NUMBER_OF_ROWS * NUMBER_OF_COLUMNS; i++)
-    {
+    for(int i = 0; i <NUMBER_OF_ROWS * NUMBER_OF_COLUMNS; i++){
         free(cells[i]);
     }
     free(cells);

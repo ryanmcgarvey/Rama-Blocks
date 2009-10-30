@@ -105,13 +105,10 @@
 	[self.view addSubview:SpawnedPair.ItemC];
     [self.view addSubview:SpawnedPair.ItemA];
     [self.view addSubview:SpawnedPair.ItemB];
-	
 	[self.view addSubview:nextPair.ItemA];
     [self.view addSubview:nextPair.ItemB];
-	
 	[self.view bringSubviewToFront: SpawnedPair.ItemA];
 	[self.view bringSubviewToFront: SpawnedPair.ItemB];
-    
     [self.view addSubview:SpawnedPair.ShaddowA];
     [self.view addSubview:SpawnedPair.ShaddowB];
 }
@@ -120,6 +117,7 @@
 	GameItem *tappedShape = (GameItem *)[tapTimer userInfo];
 	tappedShape.tapped = 0;
 }
+
 -(void)ResetShapePair:(ItemPair *)pair{
 	pair.ItemA.center = CGPointMake((spawnX), spawnY);
 	pair.ItemB.center = CGPointMake((spawnX + SHAPE_WIDTH), spawnY);
@@ -128,7 +126,6 @@
 /*****************************************************
  UIController Delegates
  *****************************************************/
-
 
 -(void)viewDidLoad {   
     Rama_BlocksAppDelegate * appDelegate =  (Rama_BlocksAppDelegate *)[[UIApplication sharedApplication] delegate];
@@ -175,7 +172,6 @@
 	[self.view addSubview:backGroundStars];
 	[self.view sendSubviewToBack:backGroundStars];
 	[self.view addSubview:backGround];
-	
 	[self.view addSubview:powerBack];
 	[self.view addSubview:buttonMenu];
 	[self.view addSubview:checkLock];
@@ -187,7 +183,6 @@
 	[self.view addSubview:lockFeedBackC];
 	[self.view addSubview:backGroundTransition];
 	[self.view addSubview:backGroundGrid];
-	
 	[self.view bringSubviewToFront:backGroundGrid];
     [self.view sendSubviewToBack:buttonMenu];
 	[self.view bringSubviewToFront:backGround];
@@ -210,7 +205,6 @@
 	nextPair.ItemB = [[Shape alloc] initWithInfo:[currentLevel createRandomColor]: [currentLevel createShapeFromCollection] : CGPointMake(20,20)];
 	
 	if([gameState.currentBoard.Active boolValue]){
-		
         NSArray * spawnedItems = [appDelegate FetchSpawnedItems];
         ItemState * itemA = [spawnedItems objectAtIndex:0];
         ItemState * itemB = [spawnedItems objectAtIndex:1];
@@ -221,9 +215,7 @@
 		
 		for(ItemState * item in [appDelegate FetchCollectionItemStates]){
 			if([item.shapeType intValue] != -1 && [item.colorType intValue] != -1){
-				
 				Shape * shape = [[[Shape alloc] initWithInfo:[item.colorType intValue] :[item.shapeType intValue] : CGPointMake(spawnX,spawnY)]retain];
-				
 				Cell * cell = [itemCollection GetCell:[item.Row intValue] : [item.Column intValue]];
 				[itemCollection SetItemToCell:shape : cell];
 				[self.view addSubview:shape];
@@ -252,7 +244,6 @@
         [self SpawnShapes];
 		gameState.currentBoard.Active = [NSNumber numberWithBool:YES];
 	}
-	
 	SpawnedPair.ItemA.ItemView.alpha = 0;
 	SpawnedPair.ItemB.ItemView.alpha = 0;
 	SpawnedPair.ItemC.ItemView.alpha = 0;
@@ -296,7 +287,6 @@
 	nextPair.ItemB.ItemView.alpha = 1;
 	
 	[UIView commitAnimations];
-	
  }
 
 -(void)setButtons{
@@ -724,7 +714,6 @@
     backGround = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 320, 480)];
     backGround.image = [UIImage imageNamed:@"gameBoardGrid.png"];
     self.view.backgroundColor = [UIColor blackColor];
-    
     if(backGroundStars != nil){
         [backGroundStars removeFromSuperview];
         [backGroundStars release];
@@ -735,7 +724,6 @@
     backGroundStars.contentMode = UIViewContentModeScaleToFill;
     backGroundStars.image = [UIImage imageNamed:@"BigBackground.png"];
     backGroundStars.userInteractionEnabled = FALSE;
-    
 	if(backGroundCloudsA != nil){
         [backGroundCloudsA removeFromSuperview];
         [backGroundCloudsA release];
@@ -746,7 +734,6 @@
     backGroundCloudsA.contentMode = UIViewContentModeTopLeft;
     backGroundCloudsA.image = [UIImage imageNamed:@"magentaClouds.png"];
     backGroundCloudsA.userInteractionEnabled = FALSE;
-	
     if(backGroundCloudsB != nil){
         [backGroundCloudsB removeFromSuperview];
         [backGroundCloudsB release];
@@ -757,7 +744,6 @@
     backGroundCloudsB.image = [UIImage imageNamed:@"BigBackground2.png"];
     backGroundCloudsB.userInteractionEnabled = FALSE;
     backGroundCloudsB.center = CGPointMake(backGroundCloudsB.center.x - 640,backGroundCloudsB.center.y - 160);
-	
     switch (difficulty) {
         case 1:
             backGroundCloudsA.image = [UIImage imageNamed:@"magentaClouds.png"];
@@ -802,7 +788,6 @@
         default:
             break;
     }
-	
 	scoreLabel.alpha = 0;
 	discardCountImage.alpha = 0;
 	bombCountImage.alpha = 0;
@@ -878,7 +863,6 @@
  *****************************************************/
 
 -(CGFloat)isTouchWithinRange:(CGPoint)touch from:(CGPoint)center{
-	
 	float x = center.x - touch.x;
 	float y = center.y - touch.y;
 	
@@ -916,7 +900,6 @@
 				SpawnedPair.ItemC.hidden = FALSE;
 				powerBack.image = nil;
 				[self setButtons];
-                
             }
             if(appDelegate.isFiltering == YES){
                 appDelegate.isFiltering = NO;
@@ -926,7 +909,6 @@
 				SpawnedPair.ItemC.hidden = FALSE;
 				powerBack.image = nil;
 				[self setButtons];
-                
             }
             if(appDelegate.isUpgrading == YES){
                 Cell * cell = [itemCollection GetCell:touchedItem.Row :touchedItem.Column];
@@ -939,13 +921,10 @@
 				[self setButtons];
             }
         }
-    }
-    
-    else {
+    }else {
         if([[touch view] isKindOfClass: [Shape class]]){
             touchedGuessItem = (GameItem *)[touch view];
 			touchedGuessItemShape = (Shape *)touchedGuessItem;
-            
 			guessView.image = touchedGuessItem.ItemView.image;
 			guessView.center = CGPointMake([touch locationInView:self.view].x - 25, [touch locationInView:self.view].y - 25);
 			[self.view addSubview:guessView];
@@ -965,8 +944,6 @@
 		[itemCollection DrawShadowForItemPair:SpawnedPair];
     }
     if (lockMode == TRUE && appDelegate.isMoving == TRUE){
-        GameItem * touchedGuessItem;
-        touchedGuessItem = (GameItem *)[touch view];
         guessView.center = CGPointMake([touch locationInView:self.view].x - 55, [touch locationInView:self.view].y - 55);
     }
 }
@@ -993,7 +970,7 @@
 		if([[touch view] isKindOfClass: [GameItem class]]){
 			GameItem * item = (GameItem *)[touch view];
 			Shape * itemShape = (Shape *)[touch view];
-			if(SpawnedPair.ItemA.IsPaired && [self isTouchWithinRange: startTouchPosition from: SpawnedPair.ItemC.center] < 50.0f && [[touch view] isKindOfClass: [GameItem class]]){
+			if(SpawnedPair.ItemA.IsPaired && [self isTouchWithinRange: startTouchPosition from: SpawnedPair.ItemC.center] < 35.0f){
                 if (item.tapped == 1){
                     item.tapped = 0;
                     [SpawnedPair rotate:SpawnedPair.ItemA];
@@ -1019,14 +996,12 @@
 					*/
 					[UIView beginAnimations:nil context:nil]; 
 					[UIView setAnimationDuration:2.0f];
-					//[UIView setAnimationTransition:110 forView: scorePopUp cache:YES];
 					[UIView setAnimationCurve: UIViewAnimationCurveEaseInOut];
 					scorePopUp.bounds = CGRectMake(0, 0, 100, 100);
 					scorePopUp.center = CGPointMake(160, 240);
 					scorePopUp.alpha = 0;
 					
 					[UIView commitAnimations];
-					 
                 }
             }
         }
@@ -1559,7 +1534,6 @@
     menuView.hidden = FALSE;
     menuView.userInteractionEnabled = TRUE;
 	[self.view bringSubviewToFront:menuView];
-	
     NSLog(@"Button Clicked");
 }
 -(IBAction)ClickButtonResume {
@@ -1569,7 +1543,6 @@
     [self presentModalViewController:[[Options alloc] initWithNibName:@"Options" bundle:nil] animated:YES];
 }
 -(IBAction)ClickButtonMainMenu{
-	//gameState.currentBoard.Active = [NSNumber numberWithBool:NO];
     [self dismissModalViewControllerAnimated:YES];
 }
 -(IBAction)ClickButtonLockTab{
@@ -1748,7 +1721,6 @@
 					[correctRecipe addObject:cellC];
 					[itemCollection RemoveFromCellsAndRefactor: correctRecipe];
 					//[self ClickButtonCloseLockTab];
-					
 				}
 				if(shapeA.shapeType == Pentagon){
 					bombCount++;

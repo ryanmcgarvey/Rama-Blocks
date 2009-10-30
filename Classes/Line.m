@@ -11,7 +11,7 @@
 
 @implementation Line
 
-
+/*
 -(id)init:(ItemCollection *) _collection:(Level *) _level:(NSArray *) description{
     self = [super init];
     collection = _collection;
@@ -88,6 +88,6 @@
      return ([anchorCells count] > 0);
 }
 
-
+*/
 
 @end

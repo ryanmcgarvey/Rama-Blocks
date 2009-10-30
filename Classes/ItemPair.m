@@ -15,13 +15,8 @@
 
 
 -(id)init{
-	
-	
-    
     ShaddowA = [[UIImageView alloc]initWithFrame:CGRectMake(0.0f, 0.0f, SHAPE_WIDTH, SHAPE_WIDTH)];
     ShaddowB = [[UIImageView alloc]initWithFrame:CGRectMake(0.0f, 0.0f, SHAPE_WIDTH, SHAPE_WIDTH)];
-	
-    
     return self;
 }
 -(BOOL)IsInGrid{
@@ -31,12 +26,9 @@
 - (void)rotate:(GameItem *)touched{
     Orientation = ++Orientation % 4;
 	GameItem * rotating;
-	
-	
 	rotating = ItemB;
 	
-	switch (Orientation) 
-	{
+	switch (Orientation){
 		case 0:
 			rotating.center = CGPointMake(touched.center.x + (SHAPE_WIDTH/2), touched.center.y + (SHAPE_WIDTH/2));
 			touched.center = CGPointMake(touched.center.x - (SHAPE_WIDTH/2), touched.center.y + (SHAPE_WIDTH/2));
@@ -53,12 +45,9 @@
 			rotating.center = CGPointMake(touched.center.x - (SHAPE_WIDTH/2), touched.center.y + (SHAPE_WIDTH/2));
 			touched.center = CGPointMake(touched.center.x - (SHAPE_WIDTH/2), touched.center.y - (SHAPE_WIDTH/2));
 			break;
-			
 		default:
 			break;
 	}
-	
-	
 }
 
 -(void)Reset{
@@ -66,7 +55,6 @@
 }
 
 -(CGPoint)moveObjectDistance:(CGPoint)touch from:(CGPoint)center{
-	
 	float x = center.x - touch.x;
 	float y = center.y - touch.y;
 	
@@ -109,11 +97,9 @@
 		ShaddowA.alpha = 0.0f;
 		ShaddowB.alpha = 0.0f;
 	}
-	
 }
 
 - (BOOL)checkBounds{
-    
 	if( (ItemA.center.x > (GRID_RIGHT_EDGE - (SHAPE_WIDTH/2))) || // Shape A is close to the right edge
 	   (ItemB.center.x > (GRID_RIGHT_EDGE - (SHAPE_WIDTH/2))) || (ItemC.center.x > (GRID_RIGHT_EDGE - 15)) )  // Shape B is close to the right edge
 	{
@@ -165,7 +151,6 @@
 		}
 	}
     return TRUE;
-	
 }
 
 - (void)setItemA:(GameItem *) itemA {

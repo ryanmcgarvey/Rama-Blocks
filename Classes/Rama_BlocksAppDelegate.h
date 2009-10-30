@@ -19,7 +19,6 @@
 
 @interface Rama_BlocksAppDelegate : NSObject <UIApplicationDelegate> {
     
-    
     NSManagedObjectModel *managedObjectModel;
     NSManagedObjectContext *managedObjectContext;	    
     NSPersistentStoreCoordinator *persistentStoreCoordinator;
@@ -38,10 +37,8 @@
 	BOOL isBombing;
 	BOOL isUpgrading;
 	BOOL allowGravity;
-	BOOL yShift;
 	
 	UIImageView   *animatedSimplical;
-	
 	
 }
 
@@ -53,7 +50,6 @@
 @property (readwrite, assign) BOOL isBombing;
 @property (readwrite, assign) BOOL isAttaching;
 @property (readwrite, assign) BOOL isUpgrading;
-@property (readwrite, assign) BOOL yShift;
 @property (nonatomic, retain, readonly) NSManagedObjectModel *managedObjectModel;
 @property (nonatomic, retain, readonly) NSManagedObjectContext *managedObjectContext;
 @property (nonatomic, retain, readonly) NSPersistentStoreCoordinator *persistentStoreCoordinator;

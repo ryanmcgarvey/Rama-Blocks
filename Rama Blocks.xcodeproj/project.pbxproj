@@ -813,6 +813,7 @@
 		C2A888251090DD0D00B7AF7F /* Load Animation */ = {
 			isa = PBXGroup;
 			children = (
+				C2A886C11090C66300B7AF7F /* Default.png */,
 				C2A888501090DE7F00B7AF7F /* simp1.png */,
 				C2A888511090DE7F00B7AF7F /* simp2.png */,
 				C2A888521090DE7F00B7AF7F /* simp3.png */,
@@ -1031,7 +1032,6 @@
 			children = (
 				C2F48596109A27CD0024B7CE /* RamaIcon.png */,
 				C2A888251090DD0D00B7AF7F /* Load Animation */,
-				C2A886C11090C66300B7AF7F /* Default.png */,
 				C280961710440A4B00240716 /* Transforms */,
 				C2A236871043A52A0095019B /* Powerups */,
 				C2A236831043A52A0095019B /* GameBoardGraphics */,
@@ -1373,10 +1373,12 @@
 		C01FCF4F08A954540054247B /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				APPLY_RULES_IN_COPY_FILES = NO;
 				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
 				CODE_SIGN_ENTITLEMENTS = dist.plist;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				GCC_C_LANGUAGE_STANDARD = c99;
+				GCC_THUMB_SUPPORT = NO;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				PREBINDING = NO;
@@ -1388,10 +1390,12 @@
 		C01FCF5008A954540054247B /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				APPLY_RULES_IN_COPY_FILES = NO;
 				ARCHS = "$(ARCHS_UNIVERSAL_IPHONE_OS)";
 				CODE_SIGN_ENTITLEMENTS = dist.plist;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				GCC_C_LANGUAGE_STANDARD = c99;
+				GCC_THUMB_SUPPORT = NO;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				PREBINDING = NO;
